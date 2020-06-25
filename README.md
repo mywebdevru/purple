@@ -1,3 +1,8 @@
+<p align="center"> Welcome to </p>
+<p align="center"> PURPLE TEAM PROJECT </p>
+<p align="center"> You can read about our OFF ROAD social network in </p>
+<p align="center"><a href="https://trello.com/b/r15iGj9t/purple-project">Trello board</a> </p>
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
