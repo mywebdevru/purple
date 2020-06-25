@@ -58,3 +58,9 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+/*
+|--------------------------------------------------------------------------
+| Looks like its your first pull request in this project! Dont make it last.
+|--------------------------------------------------------------------------
+*/
