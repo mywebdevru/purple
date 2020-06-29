@@ -1,10 +1,10 @@
 <?php
 
-use App\User;
+use App\UsersVehicles;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class UsersTableSeeder extends Seeder
+class UsersVehiclesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 500)->create();
+        factory(UsersVehicles::class, App\User::all()->count()*2)->create();
     }
 }
