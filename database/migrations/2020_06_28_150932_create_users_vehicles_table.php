@@ -21,6 +21,7 @@ class CreateUsersVehiclesTable extends Migration
             $table->year('vehicle_bd')->nullable(true);
             $table->text('description')->nullable(true);
             $table->string('avatar', 150)->default('');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 
