@@ -22,5 +22,18 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('ruslan'),
             ]);
         }
+
+        $user = User::where('email', 'x3mart@purple.team')->first();
+
+        if(!$user) {
+            User::create([
+                'name' => 'Вячеслав',
+                'surname' => 'Морозов',
+                'email' => 'x3mart@purple.team',
+                'password' => Hash::make('123'),
+            ]);
+        }
+
+        factory(User::class, 500)->create();
     }
 }
