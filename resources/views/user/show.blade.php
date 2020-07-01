@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="en">
-
+<!-- Testing. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Профиль пользователя Username / 4x4</title>
     <!-- Подключаю скрипты и CDN на всякий случай -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Локальные стили, чтобы точно всё работало -->
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
-    <div class="navbar-wrapper">
-        <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="">
+        <div class="navbar navbar-light-bg-light navbar-expand-md">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button>
                     <a class="navbar-brand" href="/"><img src="https://github.com/mywebdevru/purple/raw/dev/4x4.png" alt="LOGO" class="logo-4x4"></a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Лента</a></li>
-                        <li><a href="#">Мой профиль</a></li>
-                        <li><a href="#">Клубы</a></li>
-                        <li><span class="badge badge-important">6</span><a href="#" data-toggle="modal" data-target="#notifyModal"><i class="fa fa-bell-o fa-lg" aria-hidden="true"></i></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#msgModal"><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i></a></li>
+                <div class="navbar-collapse collapse" id="#navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Лента</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Мой профиль</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Клубы</a></li>
+                        <li class="nav-item"><span class="badge badge-important">6</span><a class="nav-link" href="#" data-toggle="modal" data-target="#notifyModal"><i class="fa fa-bell-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#msgModal"><i class="fa fa-envelope-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -42,7 +42,7 @@
                                     John Doe
                                 </span>
                                 <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-right mt-4">
                                 <li>
                                     <div class="navbar-content">
                                         <div class="row">
@@ -85,15 +85,14 @@
             </div>
         </div>
     </div>
-    <div class="mainbody container-fluid">
+    <div class="mainbody container-fluid mt-4">
         <div class="row">
-            <div style="padding-top:50px;"> </div>
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="media">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="">
                             <div align="center">
-                                <img class="thumbnail img-responsive" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="300px" height="300px">
+                                <img class="thumbnail img-responsive" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="100%">
                             </div>
                             <div class="media-body">
                                 <hr>
@@ -117,9 +116,9 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h1 class="panel-title pull-left" style="font-size:30px;">Джон Доу</h1> <button class="btn btn-primary ml-2">Управление профилем</button><br>
+                <div class="card card-default">
+                    <div class="card-body">
+                        <h1 class="card-title pull-left" style="font-size:30px;">Джон Доу</h1> <button class="btn btn-primary ml-2">Управление профилем</button><br>
                         <hr>
                         <span class="pull-left">
                             <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Посты</a>
@@ -134,8 +133,8 @@
                     </div>
                 </div>
                 <hr>
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-body">
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
@@ -160,8 +159,8 @@
                     </div>
                 </div>
                 <!-- Simple post content example. -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -216,8 +215,8 @@
                     </div>
                 </div>
                 <!-- Reshare Example -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -243,8 +242,8 @@
                         </span>
                         <hr>
                         <div class="post-content">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
+                            <div class="card card-default">
+                                <div class="card-body">
                                     <div class="pull-left">
                                         <a href="#">
                                             <img class="media-object img-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -285,8 +284,8 @@
                     </div>
                 </div>
                 <!-- Sample post content with picture. -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -342,8 +341,8 @@
                     </div>
                 </div>
                 <!-- Sample post content with comments. -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -391,8 +390,8 @@
                             <a class="btn btn-default btn-xs"><i class="fa fa-bars" aria-hidden="true"></i> Показать еще комментарии</a>
                             <hr>
                             <div class="post-content">
-                                <div class="panel-default">
-                                    <div class="panel-body">
+                                <div class="card-default">
+                                    <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
                                                 <img class="media-object img-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
@@ -410,8 +409,8 @@
                             </div>
                             <hr>
                             <div class="post-content">
-                                <div class="panel-default">
-                                    <div class="panel-body">
+                                <div class="card-default">
+                                    <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
                                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
@@ -429,8 +428,8 @@
                             </div>
                             <hr>
                             <div class="post-content">
-                                <div class="panel-default">
-                                    <div class="panel-body">
+                                <div class="card-default">
+                                    <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
                                                 <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
@@ -477,7 +476,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important subscribed"><i class="fa fa-plus"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important subscribed"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -498,7 +497,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important liked"><i class="fa fa-heart"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important liked"><i class="fa fa-heart bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -511,7 +510,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important commented"><i class="fa fa-comment"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important commented"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -524,7 +523,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important liked"><i class="fa fa-comment"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important liked"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -537,7 +536,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important reposted"><i class="fa fa-retweet" aria-hidden="true"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important reposted"><i class="fa fa-retweet bt4fix-fa-icons-notif" aria-hidden="true"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -550,7 +549,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important accepted"><i class="fa fa-plus"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important accepted"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -563,7 +562,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important accepted"><i class="fa fa-check"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important accepted"><i class="fa fa-check bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -778,6 +777,9 @@
     </div>
     <!-- Все нужные жс -->
     <script type="text/javascript" src="/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 
 </html>
