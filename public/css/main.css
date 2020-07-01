@@ -74,7 +74,7 @@
 }
 
 body {
-    background-color: #e8e8e8;
+    background-color: #f0f0f0;
 }
 
 .logo-4x4 {
@@ -259,4 +259,17 @@ label {
 .settings-block {
     margin: 1em;
     cursor: pointer;
+}
+
+.bt4fix-fa-icons-blacked {
+    color: grey !important;
+}
+
+.bt4fix-fa-icons-notif {
+    color: white !important;
+}
+
+.navbar-expand-md {
+    width: 100%;
+    background-color: #f0f0f0;
 }
