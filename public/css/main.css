@@ -1,0 +1,262 @@
+.mainbody {
+    background: #f0f0f0;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper .container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-wrapper .navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-content {
+    width: 320px;
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+.navbar-content:before,
+.navbar-content:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 15px !important;
+}
+
+.navbar-footer {
+    background-color: #DDD;
+}
+
+.navbar-footer-content {
+    padding: 15px 15px 15px 15px;
+}
+
+.dropdown-menu {
+    padding: 0px;
+    overflow: hidden;
+}
+
+.brand_network {
+    color: #9D9D9D;
+    float: left;
+    position: absolute;
+    left: 70px;
+    top: 30px;
+    font-size: smaller;
+}
+
+.post-content {
+    margin-left: 58px;
+}
+
+.badge-important {
+    margin-top: 3px;
+    margin-left: 25px;
+    position: absolute;
+}
+
+body {
+    background-color: #e8e8e8;
+}
+
+.logo-4x4 {
+    width: 30px !important;
+}
+
+.times-fix {
+    margin-top: -20px !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5em;
+}
+
+.mt-2 {
+    margin-top: 0.5em;
+}
+
+.ml-2 {
+    margin-left: 0.5em;
+}
+
+.mr-2 {
+    margin-right: 0.5em;
+}
+
+.notifytime {
+    color: lightgray;
+}
+
+.subscribed {
+    background-color: #007bff !important;
+}
+
+.liked {
+    background-color: #dc3545 !important;
+}
+
+.accepted {
+    background-color: #28a745 !important;
+}
+
+.commented {
+    background-color: #6c757d !important;
+}
+
+.reposted {
+    background-color: #ffc107 !important;
+}
+
+.accepted-text {
+    color: #28a745;
+}
+
+.declined-text {
+    color: #dc3545;
+}
+
+.alert {
+    padding: 10px;
+    color: white;
+}
+
+.abouthead {
+    padding-left: 0.5em;
+    margin-top: 0;
+}
+
+input[type=file] {
+    display: block !important;
+    right: 1px;
+    top: 1px;
+    height: 34px;
+    opacity: 0;
+    width: 100%;
+    background: none;
+    position: absolute;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.control-fileupload {
+    display: block;
+    border: 1px solid #d6d7d6;
+    background: #FFF;
+    border-radius: 4px;
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    padding: 0px 10px 2px 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+&:before,
+input,
+label {
+    cursor: pointer !important;
+}
+
+/* File upload button */
+&:before {
+    /* inherit from boostrap btn styles */
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #cccccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: color 0.2s ease;
+
+    /* add more custom styles*/
+    content: 'Browse';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    right: 2px;
+    line-height: 20px;
+    text-align: center;
+}
+
+&:hover,
+&:focus {
+    &:before {
+        color: #333333;
+        background-color: #e6e6e6;
+        color: #333333;
+        text-decoration: none;
+        background-position: 0 -15px;
+        transition: background-position 0.2s ease-out;
+    }
+}
+
+label {
+    line-height: 24px;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+    margin-right: 90px;
+    margin-bottom: 0px;
+    cursor: text;
+}
+
+.attach {
+    margin-left: 2em;
+    cursor: pointer;
+}
+
+.form-post:hover {
+    display: flow-root;
+    transition: 2s;
+
+}
+
+#charlimitinfo {
+    text-align: right;
+    display: block;
+}
+
+.mail-block {
+    margin: 1em;
+    cursor: pointer;
+}
+
+.settings-block {
+    margin: 1em;
+    cursor: pointer;
+}
