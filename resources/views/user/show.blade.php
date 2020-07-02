@@ -36,7 +36,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
+                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
                                 </span>
                                 <span class="user-name">
                                     John Doe
@@ -138,7 +138,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                                 </a>
                             </div>
                             <div class="media-body form-post">
@@ -163,7 +163,7 @@
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
                         <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
@@ -205,7 +205,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -219,7 +219,7 @@
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
                         <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
@@ -246,7 +246,7 @@
                                 <div class="card-body">
                                     <div class="pull-left">
                                         <a href="#">
-                                            <img class="media-object img-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                            <img class="media-object rounded-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                                         </a>
                                     </div>
                                     <h4><a href="#" style="text-decoration:none;"><strong>✪ SтeғOғғιcιel ✪ ツ</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 15 часов назад</i></a></small></small></h4>
@@ -274,7 +274,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -288,7 +288,7 @@
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
                         <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
@@ -331,7 +331,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -345,7 +345,7 @@
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
                         <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
@@ -394,7 +394,7 @@
                                     <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
-                                                <img class="media-object img-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
+                                                <img class="media-object rounded-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
                                             </a>
                                         </div>
                                         <h4><a href="#" style="text-decoration:none;"><strong>✪ SтeғOғғιcιel ✪ ツ</strong></a></h4>
@@ -413,7 +413,7 @@
                                     <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
-                                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
+                                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
                                             </a>
                                         </div>
                                         <h4><a href="#" style="text-decoration:none;"><strong>Mi Chleen</strong></a></h4>
@@ -432,7 +432,7 @@
                                     <div class="card-body">
                                         <div class="pull-left">
                                             <a href="#">
-                                                <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
+                                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
                                             </a>
                                         </div>
                                         <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a></h4>
@@ -449,7 +449,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -476,7 +476,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important subscribed"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important subscribed"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -497,7 +497,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important liked"><i class="fa fa-heart bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important liked"><i class="fa fa-heart bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -510,7 +510,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important commented"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important commented"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -523,7 +523,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important liked"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important liked"><i class="fa fa-comment bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -536,7 +536,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important reposted"><i class="fa fa-retweet bt4fix-fa-icons-notif" aria-hidden="true"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important reposted"><i class="fa fa-retweet bt4fix-fa-icons-notif" aria-hidden="true"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -549,7 +549,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important accepted"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important accepted"><i class="fa fa-plus bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
@@ -562,7 +562,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
-                                <span class="badge badge-important accepted"><i class="fa fa-check bt4fix-fa-icons-notif"></i></span><img class="media-object img-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <span class="badge badge-important accepted"><i class="fa fa-check bt4fix-fa-icons-notif"></i></span><img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
                         <div class="col-sm-10 text-left">
