@@ -1,5 +1,9 @@
 <!doctype html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+<!-- Testing. -->
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -117,7 +121,11 @@
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="card card-default">
                     <div class="card-body">
+<<<<<<< HEAD
                         <h1 class="card-title pull-left" style="font-size:30px;">Джон Доу</h1> <button class="btn btn-primary ml-4">Управление профилем</button><br>
+=======
+                        <h1 class="card-title pull-left" style="font-size:30px;">Джон Доу</h1> <button class="btn btn-primary ml-2">Управление профилем</button><br>
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                         <hr>
                         <span class="pull-left">
                             <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Посты</a>
@@ -132,7 +140,11 @@
                     </div>
                 </div>
                 <hr>
+<<<<<<< HEAD
                 <div class="card card-default mb-4">
+=======
+                <div class="card card-default">
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                     <div class="card-body">
                         <div class="media">
                             <div class="pull-left">
@@ -158,7 +170,11 @@
                     </div>
                 </div>
                 <!-- Simple post content example. -->
+<<<<<<< HEAD
                 <div class="card card-default mb-4">
+=======
+                <div class="card card-default">
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
@@ -214,7 +230,11 @@
                     </div>
                 </div>
                 <!-- Reshare Example -->
+<<<<<<< HEAD
                 <div class="card card-default mb-4">
+=======
+                <div class="card card-default">
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
@@ -283,7 +303,11 @@
                     </div>
                 </div>
                 <!-- Sample post content with picture. -->
+<<<<<<< HEAD
                 <div class="card card-default mb-4">
+=======
+                <div class="card card-default">
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
@@ -340,7 +364,11 @@
                     </div>
                 </div>
                 <!-- Sample post content with comments. -->
+<<<<<<< HEAD
                 <div class="card card-default mb-4">
+=======
+                <div class="card card-default">
+>>>>>>> a0c5148c33f2ef609bed131efadc48b99ad044d9
                     <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
