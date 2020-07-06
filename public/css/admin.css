@@ -10928,3 +10928,8 @@ a.text-dark:focus {
   }
 }
 
+.user-list-table.table th,
+.user-list-table.table td {
+  vertical-align: middle;
+}
+

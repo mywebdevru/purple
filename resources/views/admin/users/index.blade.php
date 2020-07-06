@@ -15,7 +15,7 @@
         </div>
         <div class="card-body">
             @if($users->count())
-                <table class="table">
+                <table class="table user-list-table">
                     <thead>
                     <tr>
                         <th>Аватар</th>
