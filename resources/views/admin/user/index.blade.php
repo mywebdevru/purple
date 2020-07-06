@@ -42,6 +42,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                {{ $users->links() }}
             @else
                 <h6 class="text-center">Пользователи не найдены</h6>
             @endif
