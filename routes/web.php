@@ -27,3 +27,7 @@ Route::resource('user', 'User\ProfileController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::resource('users', 'UsersController');
 });
+
+Route::get('edit-profile', function () {
+    return view('user/user_profile');
+});
