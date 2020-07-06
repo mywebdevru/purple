@@ -15,12 +15,12 @@ class CreateUsersVehiclesTable extends Migration
     {
         Schema::create('users_vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('type', 20)->default('');
-            $table->string('brand', 40)->default('');
-            $table->string('model', 40)->default('');
+            $table->string('type', 20)->nullable(true)->default('');
+            $table->string('brand', 40)->nullable(true)->default('');
+            $table->string('model', 40)->nullable(true)->default('');
             $table->year('vehicle_bd')->nullable(true);
             $table->text('description')->nullable(true);
-            $table->string('avatar', 150)->default('');
+            $table->string('avatar', 150)->nullable(true)->default('');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
