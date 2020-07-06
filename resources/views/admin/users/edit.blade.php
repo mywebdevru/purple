@@ -5,7 +5,7 @@
 ?>
 
 @extends('layouts.admin')
-<h1>Редактирование пользователя</h1>
-@section('content')
 
+@section('content')
+    <h1>Редактирование пользователя</h1>
 @endsection

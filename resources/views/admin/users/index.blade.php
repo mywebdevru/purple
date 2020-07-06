@@ -32,7 +32,12 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{ route('users.edit', $user->id)}}"
+                                   class="btn btn-info btn-sm"
+                                   role="button">Редактирование
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
