@@ -55,6 +55,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="">
+                                    My profile
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -73,9 +77,54 @@
     </nav>
 
     <main class="py-4">
-        @yield('content')
+        <div class="container">
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @elseif(session()->has('warning'))
+                <div class="alert alert-warning">
+                    {{ session()->get('warning') }}
+                </div>
+            @elseif(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+            @auth
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="list-group mb-5">
+                            @if('admin')
+                                <li class="list-group-item">
+                                    <a href="">Пользователи</a>
+                                </li>
+                            @endif
+                            <li class="list-group-item">
+                                <a href="">Посты</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">Маршруты</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">Клубы</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        @yield('content')
+                    </div>
+                </div>
+            @else
+                @yield('content')
+            @endauth
+        </div>
     </main>
 </div>
+
+<!-- Scripts -->
+
+@yield('scripts')
 </body>
 </html>
 
