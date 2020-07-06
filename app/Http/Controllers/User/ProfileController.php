@@ -79,9 +79,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $users)
+    public function update(Request $request, User $users, $user)
     {
-        //
+        $data = $request->except('_token');
+        $save = $users->find($user)->fill($data)->save();
+        return redirect()->route('user.show', ['user' => $user]);
     }
 
     /**

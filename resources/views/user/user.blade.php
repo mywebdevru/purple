@@ -547,7 +547,9 @@
 
 <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="user.update" method="POST">
+    <form  method="POST">
+            @method('PUT')
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="aboutModalLabel">Обо мне</h5>
@@ -561,19 +563,19 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="profeditName">Имя</label>
-                                <input type="name" class="form-control" id="profeditName" aria-describedby="profnameHelp" placeholder="Ваше имя">
+                                <input type="name" name="name" class="form-control" value="{{ $data->name ?? $data->name}}" }} id="profeditName" aria-describedby="profnameHelp" placeholder="Ваше имя">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="profeditsurName">Фамилия</label>
-                                <input type="surname" class="form-control" id="profeditsurName" placeholder="Ваша Фамилия">
+                                <input type="surname" name="surname" class="form-control" id="profeditsurName" value="{{ $data->surname ?? $data->surname}}" }} placeholder="Ваша Фамилия">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="emailName">Email</label>
-                                <input type="email" class="form-control" id="emailName" placeholder="ex@purple.mail">
+                                <input type="email" name="email" value="{{ $data->email ?? $data->email}}" }} class="form-control" id="emailName" placeholder="ex@purple.mail">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -584,12 +586,12 @@
                         </div>
                         <div class="col-sm-6">
                             <label>Дата рождения</label>
-                            <input type="date" class="form-control" id="date" name="date" placeholder="16.01.2003">
+                            <input type="date" name="birth_date" value="{{ $data->birth_date ?? $data->birth_date}}" }} class="form-control" id="date" name="date" placeholder="16.01.2003">
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="cityName">Город</label>
-                                <input type="text" class="form-control" id="cityName" placeholder="Москва">
+                                <input type="text" name="city" value="{{ $data->city ?? $data->city}}" }} class="form-control" id="cityName" placeholder="Москва">
                             </div>
                         </div>
                         <div class="col-sm-12 mb-2">
