@@ -14,13 +14,13 @@ class AddNewColumnsFromProjectDescriptionToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('surname', 30)->default('');
-            $table->string('avatar', 150)->default('');
-            $table->string('gender', 10)->default('в смятении');
-            $table->string('birth_date', 20)->default('это было давно');
-            $table->string('country', 150)->default('Человек мира');
-            $table->string('city', 150)->default('');
-            $table->string('creed', 150)->default('Всегда!')->comment('Девиз по жизни');
+            $table->string('surname', 30)->nullable(true)->default('');
+            $table->string('avatar', 150)->nullable(true)->default('');
+            $table->string('gender', 10)->nullable(true)->default('в смятении');
+            $table->string('birth_date', 20)->nullable(true)->default('это было давно');
+            $table->string('country', 150)->nullable(true)->default('Человек мира');
+            $table->string('city', 150)->nullable(true)->default('');
+            $table->string('creed', 150)->nullable(true)->default('Всегда!')->comment('Девиз по жизни');
         });
     }
 
