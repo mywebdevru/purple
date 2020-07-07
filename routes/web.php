@@ -31,3 +31,4 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth
 Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
+
