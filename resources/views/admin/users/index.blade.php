@@ -33,7 +33,7 @@
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id)}}"
+                                <a href="{{ route('admin.users.edit', $user->id)}}"
                                    class="btn btn-info btn-sm"
                                    role="button">Редактирование
                                 </a>
