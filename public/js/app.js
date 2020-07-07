@@ -49850,9 +49850,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/skazkin/git_projects/purple/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/skazkin/git_projects/purple/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/skazkin/git_projects/purple/resources/sass/admin.sass */"./resources/sass/admin.sass");
+__webpack_require__(/*! C:\Users\moskv\OneDrive\Рабочий стол\Проекты\lara\purple\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\moskv\OneDrive\Рабочий стол\Проекты\lara\purple\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\moskv\OneDrive\Рабочий стол\Проекты\lara\purple\resources\sass\admin.sass */"./resources/sass/admin.sass");
 
 
 /***/ })

@@ -10928,3 +10928,247 @@ a.text-dark:focus {
   }
 }
 
+.attach {
+  margin-left: 2em;
+  cursor: pointer;
+}
+
+.form-post:hover {
+  display: flow-root;
+  transition: 2s;
+}
+
+#charlimitinfo {
+  text-align: right;
+  display: block;
+}
+
+.post-content {
+  margin-left: 58px;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+.mainbody {
+  background: #f0f0f0;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navbar-content {
+  width: 320px;
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.navbar-content:before,
+.navbar-content:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: 15px !important;
+}
+
+.navbar-footer {
+  background-color: #DDD;
+}
+
+.navbar-footer-content {
+  padding: 15px 15px 15px 15px;
+}
+
+.navbar-expand-md {
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
+.img-circle {
+  border-radius: 9999px;
+}
+
+.dropdown-menu {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.logo-4x4 {
+  width: 30px;
+}
+
+.brand_network {
+  color: #9D9D9D;
+  float: left;
+  position: absolute;
+  left: 70px;
+  top: 30px;
+  font-size: smaller;
+}
+
+.badge-important {
+  margin-top: 3px;
+  margin-left: 25px;
+  position: absolute;
+}
+
+.times-fix {
+  margin-top: -20px !important;
+}
+
+.notifytime {
+  color: lightgray;
+}
+
+.bt4fix-fa-icons-blacked {
+  color: grey !important;
+}
+
+.bt4fix-fa-icons-notif {
+  color: white !important;
+}
+
+.logo-4x4 {
+  width: 30px !important;
+}
+
+.subscribed {
+  background-color: #007bff !important;
+}
+
+.liked {
+  background-color: #dc3545 !important;
+}
+
+.accepted {
+  background-color: #28a745 !important;
+}
+
+.commented {
+  background-color: #6c757d !important;
+}
+
+.reposted {
+  background-color: #ffc107 !important;
+}
+
+.accepted-text {
+  color: #28a745;
+}
+
+.declined-text {
+  color: #dc3545;
+}
+
+.alert {
+  padding: 10px;
+  color: white;
+}
+
+.abouthead {
+  padding-left: 0.5em;
+  margin-top: 0;
+}
+
+.control-fileupload {
+  display: block;
+  border: 1px solid #d6d7d6;
+  background: #FFF;
+  border-radius: 4px;
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  padding: 0px 10px 2px 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+label {
+  line-height: 24px;
+  color: #999999;
+  font-size: 14px;
+  font-weight: normal;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
+  margin-right: 90px;
+  margin-bottom: 0px;
+  cursor: text;
+}
+
+input[type=file] {
+  display: block !important;
+  right: 1px;
+  top: 1px;
+  height: 34px;
+  opacity: 0;
+  width: 100%;
+  background: none;
+  position: absolute;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.editBox {
+  width: 100%;
+  min-height: 20px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 2px solid #E8F3FF;
+}
+
+.btnSave,
+.btnDiscard {
+  padding: 6px 30px 6px 35px;
+}
+
+.block {
+  float: left;
+  margin: 20px 0;
+}
+
+.p_input__style {
+  width: 19em;
+  min-height: 20px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 2px solid #E8F3FF;
+}
+
+.mail-block {
+  margin: 1em;
+  cursor: pointer;
+}
+
+.settings-block {
+  margin: 1em;
+  cursor: pointer;
+}
+
