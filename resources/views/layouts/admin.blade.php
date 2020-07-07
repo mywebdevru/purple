@@ -98,11 +98,9 @@
                 <div class="row">
                     <div class="col-md-4">
                         <ul class="list-group mb-5">
-                            @if('admin')
-                                <li class="list-group-item">
-                                    <a href="">Пользователи</a>
-                                </li>
-                            @endif
+                            <li class="list-group-item">
+                                <a href="{{ route('admin.users.index') }}">Пользователи</a>
+                            </li>
                             <li class="list-group-item">
                                 <a href="">Посты</a>
                             </li>
