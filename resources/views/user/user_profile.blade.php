@@ -11,7 +11,6 @@
     <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Локальные стили, чтобы точно всё работало -->
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
