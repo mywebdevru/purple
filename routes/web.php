@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::resource('user', 'User\ProfileController');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::resource('users', 'UsersController');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 });
 
 Route::get('edit-profile', function () {
