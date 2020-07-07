@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
+use App\Friends;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class FriendsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('admin.users.index')->with('users', User::paginate(12));
+        //
     }
 
     /**
@@ -42,34 +43,33 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Friends  $friends
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Friends $friends)
     {
-        dd($user);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Request $request
-     * @param User $user
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  \App\Friends  $friends
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, User $user)
+    public function edit(Friends $friends)
     {
-        return view('admin.users.edit')->with('user', $user);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Friends  $friends
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Friends $friends)
     {
         //
     }
@@ -77,10 +77,10 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Friends  $friends
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Friends $friends)
     {
         //
     }

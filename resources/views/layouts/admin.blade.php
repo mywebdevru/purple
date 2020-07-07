@@ -20,6 +20,7 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
     @yield('css')
+
 </head>
 <body>
 <div id="app">
