@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Профиль пользователя Username / 4x4</title>
+    <title>Редактирование профиля</title>
     <!-- Подключаю скрипты и CDN на всякий случай -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -20,7 +20,7 @@
         <div class="navbar navbar-light-bg-light navbar-expand-md">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/"><img src="https://github.com/mywebdevru/purple/raw/dev/4x4.png" alt="LOGO" class="logo-4x4"></a>
+                    <a class="navbar-brand" href="/"><img src="/img/4x4.png" alt="LOGO" class="logo-4x4"></a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -48,9 +48,9 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
-                                                <p class="text-center small mt-2">
+                                                <!-- <p class="text-center small mt-2">
                                                     <a href="#" data-toggle="modal" data-target="#profpicModal"><i class="fa fa-upload"></i> Новое фото</a>
-                                                </p>
+                                                </p> -->
                                             </div>
                                             <div class="col-md-7">
                                                 <span>John Doe</span>
@@ -58,8 +58,8 @@
                                                     purple@mail.ru</p>
                                                 <div class="divider">
                                                 </div>
-                                                <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Профиль</a>
-                                                <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a>
+                                                <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Редактировать</a>
+                                                <!-- <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a> -->
                                                 <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#setsModal"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Поддержка</a>
                                             </div>
@@ -93,32 +93,46 @@
                         <div class="">
                             <div align="center">
                                 <img class="thumbnail img-responsive" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="100%">
+                                <p class="text-center small mt-2">
+                                    <a href="#" data-toggle="modal" data-target="#profpicModal"><i class="fa fa-upload"></i> Новое фото</a>
+                                </p>
                             </div>
                             <div class="media-body">
                                 <hr>
                                 <h3><strong>Девиз по жизни</strong></h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
                                 <hr>
                                 <h3><strong>Автомобиль</strong></h3>
-                                <p>Рено логан</p>
+                                <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Рено логан</p>
                                 <hr>
                                 <h3><strong>Город</strong></h3>
-                                <p>Москва</p>
+                                <select class="p_input__style" id="city">
+                                    <option disabled selected> Выберите город</option>
+                                    <option  label="Москва"> Москва</option>
+                                    <option  label="Санкт-Петербург"> Санкт-Петербург</option>
+                                    <option  label="Самара"> Самара</option>
+                                    <option  label="Ростов-на-Дону"> Ростов-на-Дону</option>
+                                </select>
                                 <hr>
                                 <h3><strong>Пол</strong></h3>
-                                <p>Мужской</p>
+                                <select class="p_input__style" id="gender">
+                                    <option disabled selected> Выберите пол</option>
+                                    <option  label="Мужской"> Мужской</option>
+                                    <option  label="Женский"> Женский</option>                                    
+                                </select>
                                 <hr>
                                 <h3><strong>Родился</strong></h3>
-                                <p>13 Января 2020</p>
+                                <input class="p_input__style" type="date" name="calendar">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <p>Для редактировании нажми два раза на текст</p>
                 <div class="card card-default">
                     <div class="card-body">
-                        <h1 class="card-title pull-left" style="font-size:30px;">Джон Доу</h1> <button class="btn btn-primary ml-4">Управление профилем</button><br>
+                        <h1 class="card-title pull-left change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ" style="font-size:30px;">Джон Доу</h1><br>
                         <hr>
                         <span class="pull-left">
                             <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Посты</a>
@@ -136,327 +150,38 @@
                 <div class="card card-default mb-4">
                     <div class="card-body">
                         <div class="media">
-                            <div class="pull-left">
-                                <a href="#">
-                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                                </a>
-                            </div>
-                            <div class="media-body form-post">
-                                <textarea class="form-control form-rows" id="comment" onclick="view('hidden1'); return false" rows="1" cols="20" placeholder="Добавить пост..."></textarea>
-                                <span id="charlimitinfo"></span>
-                                <div class="upload-item__area"></div>
-                                <div id="hidden1" style="display: none;">
-                                    <button class="btn btn-primary mt-2">Отправить</button>
-                                    <i class="fa fa-image fa-lg attach" id="attach1" title="Прикрепить ФОТО"></i>
-                                    <i class="fa fa-film fa-lg attach" id="attach2" title="Прикрепить ВИДЕО"></i>
-                                    <i class="fa fa-file-word-o fa-lg attach" id="attach3" title="Прикрепить ДОКУМЕНТ"></i>
-                                    <i class="fa fa-map-o fa-lg attach" id="attach4" title="Прикрепить ГЕОМЕТКУ"></i>
-                                    <i class="fa fa-newspaper-o fa-lg attach" id="attach5" title="Выбрать ТЕМАТИКУ"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Simple post content example. -->
-                <div class="card card-default mb-4">
-                    <div class="card-body">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                            </a>
-                        </div>
-                        <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
-                        <span>
-                            <div class="navbar-right">
-                                <div class="dropdown">
-                                    <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                        <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </span>
-                        <hr>
-                        <div class="post-content">
-                            <p>Simple post content example.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                        </div>
-                        <hr>
-                        <div>
-                            <div class="pull-right btn-group-xs">
-                                <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Лайк</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Поделиться</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
-                            </div>
-                            <div class="pull-left">
-                                <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Для всех</p>
-                            </div>
-                            <br>
-                        </div>
-                        <hr>
-                        <div class="media">
-                            <div class="pull-left">
-                                <a href="#">
-                                    <img class="media-object rounded-circle  mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
+                            <div class="media-body">                                
+                                <hr>
+                                <h3><strong>Телефон</strong></h3>                                
+                                    <input type="text" id="phone" class="p_input__style" placeholder="8(800)0000000" required oninput="" pattern="[0-9]{11,}" />
+                                <hr>
+                                <h3><strong>E-Mail</strong></h3>
+                                    <input type="text" id="email" class="p_input__style" placeholder="mail@mail.ru" required oninput="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                <hr>
+                                <h3><strong>Наличие иного транспорта для путешествий</strong></h3>
+                                    <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                <hr>
+                                <h3><strong>Навыки (виды транспорта, умения, способности и пр.)</strong></h3>
+                                    <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                <hr> 
+                                <h3><strong>Места которые посетил</strong></h3>
+                                    <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                <hr>
+                                <h3><strong>Места которые хочу посетить</strong></h3>
+                                    <p class="change_text" title="НАЖМИ ДВА РАЗА ДЛЯ РЕДАКТИРОВАНИЯ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                <hr>
+                                <h3><strong>Семейное положение</strong></h3>
+                                    <select class="family p_input__style">
+                                        <option disabled selected> Семейное положение</option>
+                                        <option  label="В браке"> В браке</option>
+                                        <option  label="Не в браке"> Не в браке</option>                                    
+                                    </select>
+                                <hr>
+                                <button class="btn btn-primary ml-4">Сохранить</button>                                                                                                
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Reshare Example -->
-                <div class="card card-default mb-4">
-                    <div class="card-body">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                            </a>
-                        </div>
-                        <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
-                        <span>
-                            <div class="navbar-right">
-                                <div class="dropdown">
-                                    <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                        <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </span>
-                        <hr>
-                        <div class="post-content">
-                            <div class="card card-default">
-                                <div class="card-body">
-                                    <div class="pull-left">
-                                        <a href="#">
-                                            <img class="media-object rounded-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                                        </a>
-                                    </div>
-                                    <h4><a href="#" style="text-decoration:none;"><strong>✪ SтeғOғғιcιel ✪ ツ</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 15 часов назад</i></a></small></small></h4>
-                                    <hr>
-                                    <div class="post-content">
-                                        Reshare post example.
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div>
-                            <div class="pull-right btn-group-xs">
-                                <a class="btn btn-default btn-xs"><i class="fa fa-heart declined-text" aria-hidden="true"></i> Лайк</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
-                            </div>
-                            <div class="pull-left">
-                                <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Для всех</p>
-                            </div>
-                            <br>
-                        </div>
-                        <hr>
-                        <div class="media">
-                            <div class="pull-left">
-                                <a href="#">
-                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <textarea class="form-control mr-4" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sample post content with picture. -->
-                <div class="card card-default mb-4">
-                    <div class="card-body">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                            </a>
-                        </div>
-                        <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
-                        <span>
-                            <div class="navbar-right">
-                                <div class="dropdown">
-                                    <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                        <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </span>
-                        <hr>
-                        <div class="post-content">
-                            <p>Sample post content with picture.</p>
-                            <img class="img-responsive" src="https://media.giphy.com/media/j1QQj6To9Pbxu/giphy.gif">
-                            <p><br><a href="/tags/christmas" class="tag">#Christmas</a> <a href="/tags/caturday" class="tag">#Caturday</a></p>
-                        </div>
-                        <hr>
-                        <div>
-                            <div class="pull-right btn-group-xs">
-                                <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Лайк</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Поделиться</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
-                            </div>
-                            <div class="pull-left">
-                                <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Для всех <strong>с мобильного</strong></p>
-                            </div>
-                            <br>
-                        </div>
-                        <hr>
-                        <div class="media">
-                            <div class="pull-left">
-                                <a href="#">
-                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">a>
-                            </div>
-                            <div class="media-body">
-                                <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sample post content with comments. -->
-                <div class="card card-default mb-4">
-                    <div class="card-body">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                            </a>
-                        </div>
-                        <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
-                        <span>
-                            <div class="navbar-right">
-                                <div class="dropdown">
-                                    <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                        <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </span>
-                        <hr>
-                        <div class="post-content">
-                            <p>Sample post content with comments.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                        </div>
-                        <hr>
-                        <div>
-                            <div class="pull-right btn-group-xs">
-                                <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Лайк</a>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
-                            </div>
-                            <div class="pull-left">
-                                <p class="text-muted" style="margin-left:5px;"><i class="fa fa-user-secret" aria-hidden="true"></i> Ограниченый доступ</p>
-                            </div>
-                            <br>
-                        </div>
-                        <hr>
-                        <div>
-                            <a class="btn btn-default btn-xs"><i class="fa fa-bars" aria-hidden="true"></i> Показать еще комментарии</a>
-                            <hr>
-                            <div class="post-content">
-                                <div class="card-default">
-                                    <div class="card-body">
-                                        <div class="pull-left">
-                                            <a href="#">
-                                                <img class="media-object rounded-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
-                                            </a>
-                                        </div>
-                                        <h4><a href="#" style="text-decoration:none;"><strong>✪ SтeғOғғιcιel ✪ ツ</strong></a></h4>
-                                        <hr>
-                                        <div class="post-content">
-                                            Comment example.<br><br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at arcu sapien. Donec laoreet, nisl quis tempor hendrerit, libero augue blandit turpis, in dignissim odio mauris eu tortor. Ut hendrerit ipsum elit, a elementum nulla ultrices eu. In posuere mollis efficitur. Maecenas justo turpis, tristique sit amet ultricies quis, molestie eget ex. Nam vestibulum consequat tincidunt. Morbi vitae placerat sapien. Phasellus quis mi tincidunt sem scelerisque tincidunt. Ut viverra porttitor sagittis. Phasellus aliquam auctor purus, id sollicitudin mauris pulvinar ac. Vivamus vel erat nec orci ultricies iaculis quis sit amet augue. Vestibulum aliquam felis lorem, interdum porttitor sapien sodales ac. Maecenas id ullamcorper risus. Suspendisse id dui sed urna rutrum pharetra. Nam eu lectus et orci vestibulum bibendum. Mauris et pulvinar dui, ac facilisis leo.
-                                            <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 12 минут назад</i></a></small></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="post-content">
-                                <div class="card-default">
-                                    <div class="card-body">
-                                        <div class="pull-left">
-                                            <a href="#">
-                                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
-                                            </a>
-                                        </div>
-                                        <h4><a href="#" style="text-decoration:none;"><strong>Mi Chleen</strong></a></h4>
-                                        <hr>
-                                        <div class="post-content">
-                                            Another comment.<br><br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at arcu sapien. Donec laoreet, nisl quis tempor hendrerit, libero augue blandit turpis, in dignissim odio mauris eu tortor. Ut hendrerit ipsum elit, a elementum nulla ultrices eu. In posuere mollis efficitur. Maecenas justo turpis, tristique sit amet ultricies quis, molestie eget ex. Nam vestibulum consequat tincidunt. Morbi vitae placerat sapien. Phasellus quis mi tincidunt sem scelerisque tincidunt. Ut viverra porttitor sagittis. Phasellus aliquam auctor purus, id sollicitudin mauris pulvinar ac. Vivamus vel erat nec orci ultricies iaculis quis sit amet augue. Vestibulum aliquam felis lorem, interdum porttitor sapien sodales ac. Maecenas id ullamcorper risus. Suspendisse id dui sed urna rutrum pharetra. Nam eu lectus et orci vestibulum bibendum. Mauris et pulvinar dui, ac facilisis leo.
-                                            <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 9 минут назад</i></a></small></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="post-content">
-                                <div class="card-default">
-                                    <div class="card-body">
-                                        <div class="pull-left">
-                                            <a href="#">
-                                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
-                                            </a>
-                                        </div>
-                                        <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a></h4>
-                                        <hr>
-                                        <div class="post-content">
-                                            Yet another post.<br><br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at arcu sapien. Donec laoreet, nisl quis tempor hendrerit, libero augue blandit turpis, in dignissim odio mauris eu tortor. Ut hendrerit ipsum elit, a elementum nulla ultrices eu. In posuere mollis efficitur. Maecenas justo turpis, tristique sit amet ultricies quis, molestie eget ex. Nam vestibulum consequat tincidunt. Morbi vitae placerat sapien. Phasellus quis mi tincidunt sem scelerisque tincidunt. Ut viverra porttitor sagittis. Phasellus aliquam auctor purus, id sollicitudin mauris pulvinar ac. Vivamus vel erat nec orci ultricies iaculis quis sit amet augue. Vestibulum aliquam felis lorem, interdum porttitor sapien sodales ac. Maecenas id ullamcorper risus. Suspendisse id dui sed urna rutrum pharetra. Nam eu lectus et orci vestibulum bibendum. Mauris et pulvinar dui, ac facilisis leo.
-                                            <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 минуты назад</i></a></small></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <a href="#">
-                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>                       
             </div>
         </div>
     </div>

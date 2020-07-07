@@ -17,10 +17,24 @@ class UsersTableSeeder extends Seeder
 
         if(!$user) {
             User::create([
-                'name' => 'Rus Skazkin',
-                'email' => 'ruslan@purple.team',
+                'name' => 'Rus',
+                'surname' => 'Skazkin',
+                'email' => 'ruslan@skazkin.su',
                 'password' => Hash::make('ruslan'),
             ]);
         }
+
+        $user = User::where('email', 'x3mart@purple.team')->first();
+
+        if(!$user) {
+            User::create([
+                'name' => 'Вячеслав',
+                'surname' => 'Морозов',
+                'email' => 'x3mart@purple.team',
+                'password' => Hash::make('123'),
+            ]);
+        }
+
+        factory(User::class, 100)->create();
     }
 }

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'surname', 'avatar', 'country', 'city', 'creed', 'birth_date', 'gender',
     ];
 
     /**
@@ -36,4 +36,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * Get the vehicles of user.
+     */
+    public function usersVehicles()
+    {
+        return $this->hasMany('App\UsersVehicles');
+    }
+
+    public function friends1()
+    {
+        return $this->hasMany('App\Friends', 'user1_id');
+    }
+    public function friends2()
+    {
+        return $this->hasMany('App\Friends', 'user2_id');
+    }
 }
