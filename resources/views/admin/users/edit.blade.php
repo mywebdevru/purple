@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             @include('admin.partials.errors')
-            <form action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data">
+            <form action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data" method="POST">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
@@ -39,7 +39,7 @@
                             <img src="{{ Gravatar::src($user->email) }}" alt="" width="40" style="border-radius: 50%">
                         </div>
                     @endif
-                    <input type="file" id="avatar" name="avatar" class="form-control">
+                    <input type="file" id="avatar" name="avatar" class="form-control-file">
                 </div>
                 <div class="form-group">
                     <label for="gender">Пол</label>
@@ -68,6 +68,23 @@
                            id="birth_date"
                            class="form-control"
                            value="{{ $user->birth_date }}">
+                </div>
+                <div class="form-group">
+                    <label for="country">Страна</label>
+                    <input type="text" name="county" id="country" value="{{ $user->country }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="city">Город</label>
+                    <input type="text" name="city" id="city" value="{{ $user->city }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="city">Кредо</label>
+                    <input type="text" name="creed" id="creed" value="{{ $user->creed }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        Сохранить
+                    </button>
                 </div>
             </form>
         </div>
