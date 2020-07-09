@@ -71,14 +71,14 @@
                 </div>
                 <div class="form-group">
                     <label for="country">Страна</label>
-                    <input type="text" name="county" id="country" value="{{ $user->country }}" class="form-control">
+                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="city">Город</label>
                     <input type="text" name="city" id="city" value="{{ $user->city }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="city">Кредо</label>
+                    <label for="creed">Кредо</label>
                     <input type="text" name="creed" id="creed" value="{{ $user->creed }}" class="form-control">
                 </div>
                 <div class="form-group">
