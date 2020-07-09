@@ -26,7 +26,10 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($this->user),
+            ],
             /*|unique:users,email,' . $this->user,*/
             'surname'  => 'required',
             'avatar' => 'image|dimensions:min_width=100,min_height=100,max_width=800,max_height=800',
