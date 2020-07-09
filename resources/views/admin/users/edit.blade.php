@@ -7,5 +7,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Редактирование пользователя</h1>
+    <div class="card card-default">
+        <div class="card-header">
+            Редактирование профиля пользователя
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
 @endsection
