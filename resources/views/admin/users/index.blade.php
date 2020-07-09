@@ -28,7 +28,13 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td><img src="{{ Gravatar::src($user->email) }}" alt="" width="40" style="border-radius: 50%"></td>
+                            <td>
+                                @if(empty($user->avatar))
+                                    <img src="{{ Gravatar::src($user->email) }}" alt="" width="40" style="border-radius: 50%">
+                                @else
+                                    <img src="{{ asset('storage/' . $user->avatar) }}" width="40" alt="">
+                                @endif
+                            </td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
