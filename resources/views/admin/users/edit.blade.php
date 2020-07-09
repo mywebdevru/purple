@@ -44,6 +44,11 @@
                 <div class="form-group">
                     <label for="gender">Пол</label>
                     <select name="gender" id="gender" class="form-control">
+                        <option value="В смятении"
+                                @if($user->gender == 'В смятении')
+                                selected
+                            @endif>В смятении
+                        </option>
                         <option value="Мужчина"
                                 @if($user->gender == 'Мужчина')
                                     selected
@@ -61,7 +66,8 @@
                     <input type="text"
                            name="birth_date"
                            id="birth_date"
-                           class="form-control">
+                           class="form-control"
+                           value="{{ $user->birth_date }}">
                 </div>
             </form>
         </div>
@@ -69,14 +75,17 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    {{--<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>--}}
     <script>
-        flatpickr('#published_at', {
-            enableTime: true,
-            enableSeconds: true
-        });
-        $(document).ready(function() {
-            $('.tags-selector').select2();
+        flatpickr('#birth_date', {
+            altInput: true,
+            altFormat: "j M Y",
+            dateFormat: "Y-m-d",
+            locale: flatpickrRU,
         });
     </script>
+@endsection
+@section('css')
+   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
 @endsection
