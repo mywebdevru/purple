@@ -93,59 +93,59 @@
     @yield('content')
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>
-    {{-- <script type="text/javascript" > --}}
+    {{-- <script type="text/javascript" >
 
-            // class AdminMaker {
-            //     constructor(buttonsSelector) {
-            //         this.selector = buttonsSelector;
-            //         this.buttons = this._getButtons();
-            //         this.answer = null;
-            //         this._listenForClick();
-            //     }
+            class AdminMaker {
+                constructor(buttonsSelector) {
+                    this.selector = buttonsSelector;
+                    this.buttons = this._getButtons();
+                    this.answer = null;
+                    this._listenForClick();
+                }
 
-            //     _getButtons(){
-            //         return document.querySelector(this.selector)
-            //     }
-            //     _listenForClick(){
-            //         console.log('start');
-            //             this.buttons.addEventListener('click', e =>{
-            //                 this._changeAdminStatus();
-            //             });
-            //     }
-            //     _changeAdminStatus(){
-            //         let settings = this._makeRequestSettings();
-            //         (async () => {
-            //             const response = await fetch('/user/friendship_delete', settings);
-            //             const answer = await response.json();
-            //             console.log(answer);
-            //             this._changeUserStatusOnSite(answer);
-            //         }) ();
-            //     }
-            //     _makeRequestSettings(){
-            //         let data = {
-            //             'user_id': {{ $data->id }},
-            //             'friend_id':12,
-            //             'friendship' : 'reject'
-            //         };
-            //         let settings = {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Accept': 'application/json',
-            //                 'Content-Type': 'application/json',
-            //                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            //                 // 'Authorization':'Bearer '+ js_vars.api_token
-            //                 },
-            //             body: JSON.stringify(data),
-            //             }
-            //         return settings
-            //     }
-            //     _changeUserStatusOnSite(answer) {
-            //         console.log('ehf')
+                _getButtons(){
+                    return document.querySelector(this.selector)
+                }
+                _listenForClick(){
+                    console.log('start');
+                        this.buttons.addEventListener('click', e =>{
+                            this._changeAdminStatus();
+                        });
+                }
+                _changeAdminStatus(){
+                    let settings = this._makeRequestSettings();
+                    (async () => {
+                        const response = await fetch('/user/friendship_delete', settings);
+                        const answer = await response.json();
+                        console.log(answer);
+                        this._changeUserStatusOnSite(answer);
+                    }) ();
+                }
+                _makeRequestSettings(){
+                    let data = {
+                        'user_id': {{ $data->id }},
+                        'friend_id':12,
+                        'friendship' : 'reject'
+                    };
+                    let settings = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            // 'Authorization':'Bearer '+ js_vars.api_token
+                            },
+                        body: JSON.stringify(data),
+                        }
+                    return settings
+                }
+                _changeUserStatusOnSite(answer) {
+                    console.log('ehf')
 
-            //     }
-            // }
+                }
+            }
 
 
-            // let admin = new AdminMaker('#friend');
-        // </script>
+            let admin = new AdminMaker('#friend');
+        </script> --}}
 </body>
