@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'User\ProfileController');
+Route::post('user/friendship_request', 'User\FriendshipRequestController@store');
+Route::post('user/friendship_reject', 'User\FriendshipRequestController@destroy');
+Route::post('user/friendship_confirm', 'User\FriendsController@store');
+Route::post('user/friendship_delete', 'User\FriendsController@destroy');
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::resource('users', 'UsersController');

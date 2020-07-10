@@ -4,10 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Friends extends Model
+class FriendshipRequest extends Model
 {
-    public $timestamps = true;
-
      /**
      * The attributes that are mass assignable.
      *
@@ -19,10 +17,10 @@ class Friends extends Model
 
 
     /**
-     * Get the user who have this fiend.
+     * Get the user who have this vehicle.
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App/User');
     }
 }

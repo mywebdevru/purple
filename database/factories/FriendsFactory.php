@@ -9,8 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Friends::class, function (Faker $faker) {
     return [
-        'user1_id' => rand(1, App\User::all()->count()),
-        'user2_id' => rand(1, App\User::all()->count()),
-        'pending' => Arr::random([null, true])
+        'user_id' => rand(1, App\User::all()->count()),
+        'friend_id' => rand(1, App\User::all()->count()),
     ];
 });

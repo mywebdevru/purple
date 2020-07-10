@@ -47,18 +47,21 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $users, $user)
+    public function show(User $user)
     {
-        $data = $users->find($user);
-        if (!$data){
-            return redirect()->route('home');
-        }
-        $vehicles = $data->usersVehicles;
-        $friends1 = $data->friends1()->whereNull('pending')->pluck('user2_id');
-        $friends2 = $data->friends2()->whereNull('pending')->pluck('user1_id');
-        $merged = $friends1->merge($friends2);
-        $friends = $users->whereIn('id', $merged)->select('name', 'surname')->get();
-        return view('user.user',['data' => $data, 'vehicles' => $vehicles, 'friends' => $friends]);
+        // $data = $users->find($user);
+        // if (!$user){
+        //     return redirect()->route('home');
+        // }
+        // $fr = $user->load('friends.user');
+        // foreach ($fr as $f) {
+        //     dump($f);
+        // }
+        // dd($fr->friends1->user2);
+        $vehicles = $user->usersVehicles()->select('type', 'brand', 'model', 'vehicle_bd', 'description')->get();
+        $friends_id = $user->friends()->pluck('friend_id');
+        $friends = User::whereIn('id', $friends_id)->select('name', 'surname', 'avatar')->get();
+        return view('user.user',['data' => $user, 'vehicles' => $vehicles, 'friends' => $friends]);
     }
 
     /**
@@ -79,10 +82,10 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $users, $user)
+    public function update(Request $request, User $user)
     {
         $data = $request->except('_token');
-        $save = $users->find($user)->fill($data)->save();
+        $save = $user->fill($data)->save();
         return redirect()->route('user.show', ['user' => $user]);
     }
 

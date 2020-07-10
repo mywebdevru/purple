@@ -16,9 +16,10 @@
                             <p>{{ $data->creed }}</p>
                             <hr>
                             @if (count($vehicles) > 0)
+                            {{-- @dd($vehicles) --}}
                                 @foreach ($vehicles as $vehicle)
                                     <h3><strong>{{ $vehicle->type }}</strong></h3>
-                                    <p>{{ $vehicle->brand }} {{ $vehicle->model }}</p>
+                                    <p>{{ $vehicle->brand }} {{ $vehicle->model }} {{ $vehicle->vehicle_bd }} года</p>
                                     <p>{{ $vehicle->description }}</p>
                                     <hr>
                                 @endforeach
@@ -58,7 +59,8 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="card card-default">
                 <div class="card-body">
-                    <h1 class="card-title pull-left" style="font-size:30px;">{{ $data->name }} {{ $data->surname }}</h1> <button class="btn btn-primary ml-2">Управление профилем</button><br>
+                    <h1 class="card-title pull-left" style="font-size:30px;">{{ $data->name }} {{ $data->surname }}</h1>
+                    <button class="btn btn-primary ml-2" id="friend">Управление профилем</button><br>
                     <hr>
                     <span class="pull-left">
                         <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Посты</a>
