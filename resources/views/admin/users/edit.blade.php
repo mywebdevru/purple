@@ -100,6 +100,26 @@
             locale: flatpickrRU,
         });
     </script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=467f68a5-dab6-4c12-9b28-13d2745d2d99" type="text/javascript"></script>
+    <script>
+        $('#city').on('click', () => {
+            ymaps.ready(init);
+            function init() {
+                const suggestView = new ymaps.SuggestView('city');
+                suggestView.events.add('select', function (e) {
+                    let location = e.get('item').value;
+                    let locationArr = _.split(location, ',');
+                    let city = _.trim(_.last(locationArr));
+                    let country = _.trim(_.first(locationArr));
+                    $('#city').val(city);
+                    $('#country').val(country);
+                    suggestView.destroy();
+                });
+            }
+        });
+
+
+    </script>
 @endsection
 @section('css')
 @endsection
