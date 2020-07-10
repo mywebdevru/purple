@@ -46,13 +46,18 @@ class User extends Authenticatable
         return $this->hasMany('App\UsersVehicles');
     }
 
-    public function friends1()
+    public function friends()
     {
-        return $this->hasMany('App\Friends', 'user1_id');
+        return $this->hasMany('App\Friends');
     }
-    public function friends2()
+
+    public function friendshipRequest()
     {
-        return $this->hasMany('App\Friends', 'user2_id');
+        return $this->hasMany('App\FriendshipRequest');
+    }
+    public function friendshipRequest2()
+    {
+        return $this->hasMany('App\FriendshipRequest', 'friend_id');
     }
 
     public function removeAvatar()
