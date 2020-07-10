@@ -9,15 +9,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    @yield('css')
+
 </head>
 <body>
 <div id="app">
@@ -95,11 +95,9 @@
                 <div class="row">
                     <div class="col-md-4">
                         <ul class="list-group mb-5">
-                            @if('admin')
-                                <li class="list-group-item">
-                                    <a href="">Пользователи</a>
-                                </li>
-                            @endif
+                            <li class="list-group-item">
+                                <a href="{{ route('admin.users.index') }}">Пользователи</a>
+                            </li>
                             <li class="list-group-item">
                                 <a href="">Посты</a>
                             </li>
@@ -123,7 +121,7 @@
 </div>
 
 <!-- Scripts -->
-
+<script src="{{ asset('js/admin.js') }}"></script>
 @yield('scripts')
 </body>
 </html>
