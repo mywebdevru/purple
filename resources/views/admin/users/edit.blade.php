@@ -70,12 +70,12 @@
                            value="{{ $user->birth_date }}">
                 </div>
                 <div class="form-group">
-                    <label for="country">Страна</label>
-                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
-                </div>
-                <div class="form-group">
                     <label for="city">Город</label>
                     <input type="text" name="city" id="city" value="{{ $user->city }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="country">Страна</label>
+                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="creed">Кредо</label>
@@ -92,8 +92,6 @@
 @endsection
 
 @section('scripts')
-    {{--<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>--}}
     <script>
         flatpickr('#birth_date', {
             altInput: true,
@@ -102,7 +100,26 @@
             locale: flatpickrRU,
         });
     </script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=467f68a5-dab6-4c12-9b28-13d2745d2d99" type="text/javascript"></script>
+    <script>
+        $('#city').on('click', () => {
+            ymaps.ready(init);
+            function init() {
+                const suggestView = new ymaps.SuggestView('city');
+                suggestView.events.add('select', function (e) {
+                    let location = e.get('item').value;
+                    let locationArr = _.split(location, ',');
+                    let city = _.trim(_.last(locationArr));
+                    let country = _.trim(_.first(locationArr));
+                    $('#city').val(city);
+                    $('#country').val(country);
+                    suggestView.destroy();
+                });
+            }
+        });
+
+
+    </script>
 @endsection
 @section('css')
-   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
 @endsection

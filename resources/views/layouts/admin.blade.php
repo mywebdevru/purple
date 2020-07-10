@@ -93,7 +93,7 @@
             @endif
             @auth
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <ul class="list-group mb-5">
                             <li class="list-group-item">
                                 <a href="{{ route('admin.users.index') }}">Пользователи</a>
@@ -109,7 +109,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         @yield('content')
                     </div>
                 </div>
