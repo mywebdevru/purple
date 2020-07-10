@@ -70,12 +70,12 @@
                            value="{{ $user->birth_date }}">
                 </div>
                 <div class="form-group">
-                    <label for="country">Страна</label>
-                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
-                </div>
-                <div class="form-group">
                     <label for="city">Город</label>
                     <input type="text" name="city" id="city" value="{{ $user->city }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="country">Страна</label>
+                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="creed">Кредо</label>
