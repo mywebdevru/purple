@@ -92,8 +92,6 @@
 @endsection
 
 @section('scripts')
-    {{--<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>--}}
     <script>
         flatpickr('#birth_date', {
             altInput: true,
@@ -104,5 +102,4 @@
     </script>
 @endsection
 @section('css')
-   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
 @endsection
