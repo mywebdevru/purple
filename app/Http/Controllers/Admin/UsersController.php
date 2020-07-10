@@ -90,11 +90,15 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->forceDelete();
+
+        session()->flash('success', 'Запись пользователя ' . $user->name . ' упешно удалена');
+
+        return redirect()->back();
     }
 }

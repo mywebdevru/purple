@@ -43,6 +43,16 @@
                                    class="btn btn-info btn-sm"
                                    role="button">Редактирование
                                 </a>
+                                <form class="d-inline-block" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        type="submit"
+                                        role="button">
+                                        Удаление
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
