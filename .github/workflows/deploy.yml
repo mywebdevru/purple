@@ -9,7 +9,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
       - name: pull changes from github
         uses: appleboy/ssh-action@master
         with:
