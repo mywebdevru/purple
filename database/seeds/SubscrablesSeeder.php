@@ -13,6 +13,6 @@ class SubscrablesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Subscrable::class, (User::all()->count())/5)->create();
+        factory(Subscrable::class, User::all()->count()*3)->create();
     }
 }

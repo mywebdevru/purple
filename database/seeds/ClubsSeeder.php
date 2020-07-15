@@ -13,6 +13,6 @@ class ClubsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Clubs::class, (User::all()->count())/5)->create();
+        factory(Clubs::class, 20)->create();
     }
 }
