@@ -29,9 +29,14 @@ Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->na
 //Route::delete('user/friendship_delete', 'User\FriendsController@destroy');
 Route::resource('post', 'Post\PostController');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth', ], function (){
-    Route::resource('users', 'UsersController', ['as' => 'admin']);
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+Route::group([
+    'namespace' => 'Admin',
+    'prefix' => 'admin',
+    'middleware' => 'auth',
+    'as' => 'admin.'
+], function () {
+    Route::resource('users', 'UsersController');
+    Route::get('/', [AdminController::class, 'index'])->name('index');
 });
 
 Route::get('edit-profile', function () {
