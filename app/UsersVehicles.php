@@ -17,6 +17,10 @@ class UsersVehicles extends Model
         'type', 'brand', 'model', 'vehicle_bd', 'user_id', 'description', 'avatar',
     ];
 
+    protected $appends = [
+        'full_vehicle_name',
+    ];
+
 
     /**
      * Get the user who have this vehicle.
@@ -24,5 +28,9 @@ class UsersVehicles extends Model
     public function user()
     {
         return $this->belongsTo('App/User');
+    }
+
+    public function getFullVehicleNameAttribute() {
+        return "{$this->brand} {$this->model} {$this->vehicle_bd} года";
     }
 }

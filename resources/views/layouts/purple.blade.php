@@ -41,10 +41,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="{{ $data->name }} {{ $data->surname }}" alt="{{ $data->name }} {{ $data->surname }}" width="30px" height="30px">
+                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="{{ $data->full_name }}" alt="{{ $data->full_name }}" width="30px" height="30px">
                                 </span>
                                 <span class="user-name">
-                                    {{ $data->name }} {{ $data->surname }}
+                                    {{ $data->full_name }}
                                 </span>
                                 <b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right mt-4">
@@ -58,7 +58,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-md-7">
-                                                <span>{{ $data->name }} {{ $data->surname }}</span>
+                                                <span>{{ $data->full_name }}</span>
                                                 <p class="text-muted small">
                                                     {{ $data->email }}</p>
                                                 <div class="divider">

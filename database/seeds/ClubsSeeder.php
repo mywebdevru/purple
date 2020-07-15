@@ -1,10 +1,10 @@
 <?php
 
-use App\Friends;
 use Illuminate\Database\Seeder;
+use App\Clubs;
 use App\User;
 
-class FriendsSeeder extends Seeder
+class ClubsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class FriendsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Friends::class, User::all()->count()*3)->create();
+        factory(Clubs::class, 20)->create();
     }
 }

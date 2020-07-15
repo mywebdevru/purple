@@ -15,11 +15,71 @@
                             <h3><strong>Девиз по жизни</strong></h3>
                             <p>{{ $data->creed }}</p>
                             <hr>
-                            @if (count($vehicles) > 0)
+                            <h3><strong>Друзья</strong> всего - {{ count($data->friends) }}</h3>
+                            @if (count($data->friends) > 0)
+                                @foreach ($data->friends as $friend)
+                                    <p>{{ $friend->user->full_name }}</p>
+                                    <hr>
+                                @endforeach
+                            @else
+                                <p>
+                                    Ищу друзей :)
+                                </p>
+                                <hr>
+                            @endif
+                            {{-- @dd($data) --}}
+                            <h3><strong>С вами хотят подружиться</strong> всего - {{ count($data->requestedFriendships) }}</h3>
+                            @if (count($data->requestedFriendships) > 0)
+                                @foreach ($data->requestedFriendships as $friend)
+                                    <p>{{ $friend->user->full_name }}</p>
+                                    <div class="row">
+                                        <form class="mx-3"  action="{{ route('user.friendship_confirm', ['user' => $data->id]) }}" method="POST">
+                                            @method('PUT')
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $friend->user_id }}">
+                                            <input type="hidden" name="friend_id" value="{{$data->id}}">
+                                            <button type="submit" class="btn btn-success">Принять</button>
+                                        </form>
+                                        <form action="{{ route('user.friendship_reject', ['user' => $data->id]) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $friend->user_id }}">
+                                            <input type="hidden" name="friend_id" value="{{$data->id}}">
+                                            <button type="submit" class="btn btn-danger">Отклонить</button>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                            @else
+                                <p>
+                                    Новых запросов на дружбу пока нет.
+                                </p>
+                                <hr>
+                            @endif
+                            <h3><strong>Вы хотите дружить </strong> всего - {{ count($data->friendshipRequests) }}</h3>
+                            @if (count($data->friendshipRequests) > 0)
+                                @foreach ($data->friendshipRequests as $friend)
+                                    <p>{{ $friend->friend->full_name }}</p>
+                                    <form  action="{{ route('user.friendship_reject', ['user' => $data->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{$data->id}}">
+                                        <input type="hidden" name="friend_id" value="{{ $friend->friend_id }}">
+                                        <button type="submit" class="btn btn-danger">Я передумал(а)</button>
+                                    </form>
+                                    <hr>
+                                @endforeach
+                            @else
+                                <p>
+                                    Новых запросов на дружбу пока нет.
+                                </p>
+                                <hr>
+                            @endif
+                            @if (count($data->usersVehicles) > 0)
                             {{-- @dd($vehicles) --}}
-                                @foreach ($vehicles as $vehicle)
+                                @foreach ($data->usersVehicles as $vehicle)
                                     <h3><strong>{{ $vehicle->type }}</strong></h3>
-                                    <p>{{ $vehicle->brand }} {{ $vehicle->model }} {{ $vehicle->vehicle_bd }} года</p>
+                                    <p>{{ $vehicle->full_vehicle_name }}</p>
                                     <p>{{ $vehicle->description }}</p>
                                     <hr>
                                 @endforeach
@@ -38,19 +98,6 @@
                             <hr>
                             <h3><strong>Родился</strong></h3>
                             <p>{{ $data->birth_date }}</p>
-                            {{-- @dd($friends); --}}
-                            <h3><strong>Друзья</strong> всего - {{ count($friends) }}</h3>
-                            @if (count($friends) > 0)
-                                @foreach ($friends as $friend)
-                                    <p>{{ $friend->name }} {{ $friend->surname }}</p>
-                                    <hr>
-                                @endforeach
-                            @else
-                                <p>
-                                    Ищу друзей :)
-                                </p>
-                                <hr>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -59,13 +106,14 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="card card-default">
                 <div class="card-body">
-                    <h1 class="card-title pull-left" style="font-size:30px;">{{ $data->name }} {{ $data->surname }}</h1>
+                    <h1 class="card-title pull-left" style="font-size:30px;">{{ $data->full_name }}</h1>
                     <button class="btn btn-primary ml-2" id="friend">Управление профилем</button><br>
                     <hr>
                     <span class="pull-left">
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Посты</a>
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Фотографии <span class="badge">42</span></a>
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-camera" aria-hidden="true"></i> Видео <span class="badge">42</span></a>
+                    <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Мои посты {{ $data->posts_count }}</a>
+                    <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Мои подписки {{ $data->subscribes_to_clubs_count + $data->subscribes_to_users_count +$data->subscribes_to_groups_count}}</a>
+                    <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Фотографии <span class="badge">42</span></a>
+                    <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-camera" aria-hidden="true"></i> Видео <span class="badge">42</span></a>
                     </span>
                     <span class="pull-right">
                         <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-at" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Упомянуть в посте"></i></a>
@@ -84,7 +132,13 @@
                             </a>
                         </div>
                         <div class="media-body form-post">
-                            <textarea class="form-control form-rows" id="comment" onclick="view('hidden1'); return false" rows="1" cols="20" placeholder="Добавить пост..."></textarea>
+                            <form action="{{ route('post.update', ['post' => $data->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <textarea name="text" class="form-control form-rows" id="comment" onclick="view('hidden1'); return false" rows="1" cols="20" placeholder="Добавить пост..."></textarea>
+                                <input type="hidden" name="model" value="App\User">
+                                <button type="submit" class="btn btn-primary mt-2">Отправить</button>
+                            </form>
                             <span id="charlimitinfo"></span>
                             <div class="upload-item__area"></div>
                             <div id="hidden1" style="display: none;">
@@ -102,59 +156,62 @@
             </div>
             <!-- Simple post content example. -->
             <div class="card card-default">
-                <div class="card-body">
-                    <div class="pull-left">
-                        <a href="#">
-                            <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </a>
-                    </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>Джон Доу</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 минуты назад</i></a></small></small></h4>
-                    <span>
-                        <div class="navbar-right">
-                            <div class="dropdown">
-                                <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                    <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </span>
-                    <hr>
-                    <div class="post-content">
-                        <p>Simple post content example.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="pull-right btn-group-xs">
-                            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Лайк</a>
-                            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Поделиться</a>
-                            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
-                        </div>
-                        <div class="pull-left">
-                            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Для всех</p>
-                        </div>
-                        <br>
-                    </div>
-                    <hr>
-                    <div class="media">
+                @foreach ($posts as $post)
+                    <div class="card-body">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
+                        <h4><a href="#" style="text-decoration:none;"><strong>{{ $post->author ? $post->author : $data->full_name}}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->created_at }}</i></a></small></small></h4>
+                        <span>
+                            <div class="navbar-right">
+                                <div class="dropdown">
+                                    <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                        <li><a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Редактировать</a></li>
+                                        <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Скрыть</a></li>
+                                        <li><a href="#"><i class="fa fa-fw fa-eye" aria-hidden="true"></i> Уведомления для этого поста</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Удалить</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </span>
+                        <hr>
+                        <div class="post-content">
+                            <p>Simple post content example.</p>
+                            <p>{{ $post->text }}</p>
+                        </div>
+                        <hr>
+                        <div>
+                            <div class="pull-right btn-group-xs">
+                                <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Лайк</a>
+                                <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Поделиться</a>
+                                <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Комментировать</a>
+                            </div>
+                            <div class="pull-left">
+                                <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Для всех</p>
+                            </div>
+                            <br>
+                        </div>
+                        <hr>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#">
+                                    <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
             </div>
             <!-- Reshare Example -->
             <div class="card card-default">
