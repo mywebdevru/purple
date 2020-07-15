@@ -13,7 +13,7 @@ class CreateClubsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Clubs', function (Blueprint $table) {
+        Schema::create('clubs', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
             $table->string('avatar', 150)->nullable(true)->default('');
@@ -33,6 +33,6 @@ class CreateClubsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Clubs');
+        Schema::dropIfExists('clubs');
     }
 }
