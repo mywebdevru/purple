@@ -29,7 +29,7 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'city' => $faker->city,
         'country' => $faker->country,
-        'gender' =>  Arr::random(['Мужчина', 'Девушка']),
+        'gender' =>  Arr::random(['Мужчина', 'Женщина']),
         'birth_date' =>$faker->date(),
     ];
 });

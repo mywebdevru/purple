@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Friends;
+use App\Clubs;
 use App\Http\Controllers\User\FriendsController ;
 use Illuminate\Http\Request;
 
@@ -49,19 +50,32 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        // $data = $users->find($user);
-        // if (!$user){
-        //     return redirect()->route('home');
-        // }
-        // $fr = $user->load('friends.user');
-        // foreach ($fr as $f) {
-        //     dump($f);
-        // }
-        // dd($fr->friends1->user2);
-        $vehicles = $user->usersVehicles()->select('type', 'brand', 'model', 'vehicle_bd', 'description')->get();
-        $friends_id = $user->friends()->pluck('friend_id');
-        $friends = User::whereIn('id', $friends_id)->select('name', 'surname', 'avatar')->get();
-        return view('user.user',['data' => $user, 'vehicles' => $vehicles, 'friends' => $friends]);
+        $clubsPosts= collect([]);
+        $usersPosts= collect([]);
+        $userPosts = $user->posts; //Собственные посты
+        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups'); //Счетчики своих постов и подписок
+        $subscribesPosts = $user->load('subscribesToClubs.posts', 'subscribesToUsers.posts', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+        foreach ($subscribesPosts->subscribesToClubs as $subscribe){
+            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){ //Условие выбора по дате сделано для примера
+                $post['author'] = 'Клуб '. $subscribe->name;
+                $clubsPosts->push($post);
+            }
+        }
+        foreach ($subscribesPosts->subscribesToGroups as $subscribe){
+            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
+                $post['author'] = 'Группа '. $subscribe->name;
+                $clubsPosts->push($post);
+            }
+        }
+        foreach ($subscribesPosts->subscribesToUsers as $subscribe){
+            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
+                $post['author'] = $subscribe->full_name;
+                $usersPosts->push($post);
+            }
+        }
+        $posts = $clubsPosts->merge($usersPosts)->merge($userPosts)->sortByDesc('updated_at');
+        // dd($user->toArray());
+        return view('user.user',['data' => $user, 'posts' => $posts]);
     }
 
     /**

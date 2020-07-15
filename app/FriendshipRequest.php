@@ -21,6 +21,11 @@ class FriendshipRequest extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App/User');
+        return $this->belongsTo('App\User');
+    }
+
+    public function friend()
+    {
+        return $this->belongsTo('App\User', 'friend_id');
     }
 }
