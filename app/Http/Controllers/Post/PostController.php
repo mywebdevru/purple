@@ -71,8 +71,8 @@ class PostController extends Controller
     public function update(Request $request, Posts $posts, $post)
     {
         $post = $request->model::find($post)->posts()->create(['text' => $request->text]);
-        // $post = $request->model::find($post)->posts()->attach($post);
-        dd($post);
+        // dd($post);
+        return back();
     }
 
     /**
