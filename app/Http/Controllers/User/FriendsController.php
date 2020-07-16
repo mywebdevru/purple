@@ -100,10 +100,8 @@ class FriendsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Friends  $friends
-     * @param  \App\Subscrable $subcrable
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Friends $friend
+     * @return void
      */
     public function destroy(Friends $friends, Request $request, Subscrable $subcrable)
     {
@@ -115,4 +113,11 @@ class FriendsController extends Controller
         }
         return response()->json(['success' => 'Вы больше не друзья!']);
     }
+
+    /*public function destroy(Friends $friend)
+    {
+        dump($friend);
+        $secondRecord = Friends::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
+        dd($secondRecord);
+    }*/
 }

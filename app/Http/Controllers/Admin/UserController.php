@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,12 +43,12 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user)
     {
-        dd($user);
+        return view('admin.users.show')->with('user', $user)->with('friends', $user->friends);
     }
 
     /**
@@ -97,7 +97,7 @@ class UsersController extends Controller
     {
         $user->forceDelete();
 
-        session()->flash('success', 'Запись пользователя ' . $user->name . ' упешно удалена');
+        session()->flash('success', 'Запись пользователя ' . $user->full_name . ' упешно удалена');
 
         return redirect()->back();
     }
