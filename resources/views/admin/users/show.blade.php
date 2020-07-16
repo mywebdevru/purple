@@ -30,6 +30,29 @@
                         {{ $user->created_at->diffForHumans() }} / {{ $user->updated_at->diffForHumans() }}
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">Пол</th>
+                    <td>{{ $user->gender }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Дата рождения</th>
+                    <td>
+                        {{ $user->birth_date ? $user->birth_date->isoFormat('D MMM YYYY')  : 'Не указана' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                </tr>
+
                 </tbody>
             </table>
         </div>

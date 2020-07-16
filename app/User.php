@@ -100,6 +100,8 @@ class User extends Authenticatable
         'full_name',
     ];
 
+    protected $dates = ['birth_date'];
+
      /**
      * Get the vehicles of user.
      */
