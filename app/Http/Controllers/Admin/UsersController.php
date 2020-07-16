@@ -48,7 +48,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show')->with('user', $user);
+        return view('admin.users.show')->with('user', $user)->with('friends', $user->friends);
     }
 
     /**

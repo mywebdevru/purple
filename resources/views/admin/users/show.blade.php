@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $user \App\User
+ * @var $friends \App\Friends []
  */
 ?>
 
@@ -45,14 +46,30 @@
                     <td>{{ $user->location }}</td>
                 </tr>
                 <tr>
-                    <th scope="row"></th>
-                    <td></td>
+                    <th scope="row">Девиз</th>
+                    <td>{{ $user->creed }}</td>
                 </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Друзья</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($friends as $friend)
+                        <tr>
+                            <td>
+                                {{ $friend->user->full_name }}
+                            </td>
+                            <td>
 
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>
