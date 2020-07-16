@@ -35,7 +35,7 @@ Route::group([
     'middleware' => 'auth',
     'as' => 'admin.'
 ], function () {
-    Route::resource('users', 'UsersController');
+    Route::resource('users', 'UserController');
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
 
