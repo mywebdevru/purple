@@ -1,8 +1,8 @@
-<?php
+@php
 /**
  * @var $user \App\User
  */
-?>
+@endphp
 
 @extends('layouts.admin')
 

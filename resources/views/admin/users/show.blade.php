@@ -1,9 +1,9 @@
-<?php
+@php
 /**
  * @var $user \App\User
  * @var $friends \App\Friends []
  */
-?>
+@endphp
 
 @extends('layouts.admin')
 
