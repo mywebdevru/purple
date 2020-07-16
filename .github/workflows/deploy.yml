@@ -23,4 +23,5 @@ jobs:
             composer dump-autoload
             php artisan migrate:reset
             php artisan migrate --seed
+            npm i
             npm run dev
