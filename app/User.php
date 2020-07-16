@@ -19,10 +19,10 @@ use Illuminate\Support\Str;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $birth_date
  * @property string|null $surname
  * @property string|null $avatar
  * @property string $gender
- * @property string|null $birth_date
  * @property string|null $country
  * @property string|null $city
  * @property string|null $creed Девиз по жизни
