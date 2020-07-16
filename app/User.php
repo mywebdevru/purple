@@ -31,6 +31,7 @@ use Illuminate\Support\Str;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $friendshipRequests
  * @property-read int|null $friendship_requests_count
  * @property-read mixed $full_name
+ * @property-read mixed $location
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Posts[] $posts
@@ -97,7 +98,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name',
+        'full_name', 'location'
     ];
 
     protected $dates = ['birth_date'];
@@ -178,6 +179,11 @@ class User extends Authenticatable
 
     public function getFullNameAttribute() {
         return "{$this->name} {$this->surname}";
+    }
+
+    public function getLocationAttribute()
+    {
+        return "$this->city, $this->country";
     }
 
 

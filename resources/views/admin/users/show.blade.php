@@ -41,8 +41,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"></th>
-                    <td></td>
+                    <th scope="row">Откуда</th>
+                    <td>{{ $user->location }}</td>
                 </tr>
                 <tr>
                     <th scope="row"></th>
