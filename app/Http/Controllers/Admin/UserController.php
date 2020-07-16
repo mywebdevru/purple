@@ -97,7 +97,7 @@ class UserController extends Controller
     {
         $user->forceDelete();
 
-        session()->flash('success', 'Запись пользователя ' . $user->name . ' упешно удалена');
+        session()->flash('success', 'Запись пользователя ' . $user->full_name . ' упешно удалена');
 
         return redirect()->back();
     }

@@ -69,6 +69,7 @@
                             </td>
                         </tr>
                     @empty
+                        У пользователя пока нет друзей
                     @endforelse
                 </tbody>
             </table>
