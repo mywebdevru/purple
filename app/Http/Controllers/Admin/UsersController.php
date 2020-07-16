@@ -43,12 +43,12 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user)
     {
-        dd($user);
+        return view('admin.users.show')->with('user', $user);
     }
 
     /**
