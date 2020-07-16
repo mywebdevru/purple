@@ -65,7 +65,16 @@
                                 {{ $friend->user->full_name }}
                             </td>
                             <td>
-
+                                <form class="d-inline-block" action="{{ route('friend.delete', $friend->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        type="submit"
+                                        role="button">
+                                        Удаление
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty

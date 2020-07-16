@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\FriendsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::resource('user', 'User\ProfileController');
 Route::delete('user/friendship_reject/{user}', 'User\FriendshipRequestController@destroy')->name('user.friendship_reject');
 Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->name('user.friendship_confirm');
 //Route::delete('user/friendship_delete', 'User\FriendsController@destroy');
+Route::delete('friend/{friend}', [FriendsController::class, 'destroy'])->name('friend.delete');
 Route::resource('post', 'Post\PostController');
 
 Route::group([
