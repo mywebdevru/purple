@@ -39,9 +39,14 @@
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
+                                <a href="{{ route('admin.user.show', $user->id) }}"
+                                   class="btn btn-success btn-sm"
+                                   role="button">
+                                    <i class="far fa-eye"></i>
+                                </a>
                                 <a href="{{ route('admin.user.edit', $user->id)}}"
                                    class="btn btn-info btn-sm"
-                                   role="button">Редактирование
+                                   role="button"><i class="far fa-edit"></i>
                                 </a>
                                 <form class="d-inline-block" action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
                                     @csrf
@@ -50,7 +55,7 @@
                                         class="btn btn-danger btn-sm"
                                         type="submit"
                                         role="button">
-                                        Удаление
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
                             </td>
