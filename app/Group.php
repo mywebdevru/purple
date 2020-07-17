@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description Описание
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Posts[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Post[] $posts
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @property-read int|null $users_count
@@ -51,10 +51,10 @@ class Group extends Model
     }
 
     /**
-     * Get the Group's's Posts.
+     * Get the Group's's Post.
      */
     public function posts()
     {
-        return $this->morphToMany('App\Posts', 'postable');
+        return $this->morphToMany('App\Post', 'postable');
     }
 }

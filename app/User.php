@@ -34,7 +34,7 @@ use Illuminate\Support\Str;
  * @property-read mixed $location
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Posts[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Post[] $posts
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $requestedFriendships
  * @property-read int|null $requested_friendships_count
@@ -165,11 +165,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's Posts.
+     * Get the user's Post.
      */
     public function posts()
     {
-        return $this->morphToMany('App\Posts', 'postable');
+        return $this->morphToMany('App\Post', 'postable');
     }
 
     public function removeAvatar()

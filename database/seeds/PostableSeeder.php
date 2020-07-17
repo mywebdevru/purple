@@ -1,7 +1,7 @@
 <?php
 
 use App\Postable;
-use App\Posts;
+use App\Post;
 use Illuminate\Database\Seeder;
 
 class PostableSeeder extends Seeder
@@ -13,6 +13,6 @@ class PostableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Postable::class, Posts::all()->count())->create();
+        factory(Postable::class, Post::all()->count())->create();
     }
 }

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Posts
+ * App\Post
  *
  * @property int $id
  * @property string|null $text
@@ -17,16 +17,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $user
  * @property-read int|null $user_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Posts whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Posts extends Model
+class Post extends Model
 {
         /**
      * The attributes that are mass assignable.
