@@ -32,6 +32,10 @@ class CreateUserVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_vehicles');
+        Schema::table('user_vehicles', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+
+        Schema::dropIfExists('user_vehicles');
     }
 }
