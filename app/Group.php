@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Groups
+ * App\Group
  *
  * @property int $id
  * @property string $name
@@ -18,19 +18,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereCreed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Groups whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereCreed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Groups extends Model
+class Group extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -43,7 +43,7 @@ class Groups extends Model
 
 
     /**
-     * Get the users who have subscribe to this Groups.
+     * Get the users who have subscribe to this Group.
      */
     public function users()
     {

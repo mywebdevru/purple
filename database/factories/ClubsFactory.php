@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Clubs;
+use App\Club;
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Clubs::class, function (Faker $faker) {
+$factory->define(Club::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'city' => $faker->city,

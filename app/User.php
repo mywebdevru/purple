@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
  * @property string|null $country
  * @property string|null $city
  * @property string|null $creed Девиз по жизни
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Friends[] $friends
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Friend[] $friends
  * @property-read int|null $friends_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $friendshipRequests
  * @property-read int|null $friendship_requests_count
@@ -38,13 +38,13 @@ use Illuminate\Support\Str;
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $requestedFriendships
  * @property-read int|null $requested_friendships_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Clubs[] $subscribesToClubs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $subscribesToClubs
  * @property-read int|null $subscribes_to_clubs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Groups[] $subscribesToGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Group[] $subscribesToGroups
  * @property-read int|null $subscribes_to_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $subscribesToUsers
  * @property-read int|null $subscribes_to_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\UsersVehicles[] $usersVehicles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\UserVehicle[] $usersVehicles
  * @property-read int|null $users_vehicles_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
@@ -108,7 +108,7 @@ class User extends Authenticatable
      */
     public function usersVehicles()
     {
-        return $this->hasMany('App\UsersVehicles');
+        return $this->hasMany('App\UserVehicle');
     }
 
     /**
@@ -116,7 +116,7 @@ class User extends Authenticatable
      */
     public function friends()
     {
-        return $this->hasMany('App\Friends');
+        return $this->hasMany('App\Friend');
     }
 
     /**
@@ -141,19 +141,19 @@ class User extends Authenticatable
     // }
 
     /**
-     * Get the user's Clubs subscribes.
+     * Get the user's Club subscribes.
      */
     public function subscribesToClubs()
     {
-        return $this->morphedByMany('App\Clubs', 'subscrable');
+        return $this->morphedByMany('App\Club', 'subscrable');
     }
 
      /**
-     * Get the user's Groups subscribes.
+     * Get the user's Group subscribes.
      */
     public function subscribesToGroups()
     {
-        return $this->morphedByMany('App\Groups', 'subscrable');
+        return $this->morphedByMany('App\Group', 'subscrable');
     }
 
     /**

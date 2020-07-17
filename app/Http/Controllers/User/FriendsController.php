@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Friends;
+use App\Friend;
 use App\FriendshipRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Subscrable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FriendsController extends Controller
 {
@@ -34,22 +35,22 @@ class FriendsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Friends  $friends
+     * @param  \App\Friend  $friends
      * @param  \App\Subscrable $subcrable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Friends $friends, Subscrable $subcrable, $user)
+    public function store(Request $request, Friend $friends, Subscrable $subcrable, $user)
     {
         if (!!$request->user_id && !!$request->friend_id) {
             $result1 = $friends->create(
-                ['user_id' => $request->user_id,'friend_id' => $request->friend_id] // add record to Friends table
+                ['user_id' => $request->user_id,'friend_id' => $request->friend_id] // add record to Friend table
             );
             $result1_2 = $subcrable->create(
                 ['user_id' => $request->user_id,'subscrable_id' => $request->friend_id, 'subscrable_type' => 'App\User' ] // subscribe each other
             );
             $result2 = $friends->create(
-                ['user_id' => $request->friend_id,'friend_id' => $request->user_id] // add record to Friends table
+                ['user_id' => $request->friend_id,'friend_id' => $request->user_id] // add record to Friend table
             );
             $result2_2 = $subcrable->create(
                 ['user_id' => $request->friend_id,'subscrable_id' => $request->user_id, 'subscrable_type' => 'App\User' ] // subscribe each other
@@ -66,10 +67,10 @@ class FriendsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Friends  $friends
+     * @param  \App\Friend  $friends
      * @return \Illuminate\Http\Response
      */
-    public function show(Friends $friends)
+    public function show(Friend $friends)
     {
         //
     }
@@ -77,10 +78,10 @@ class FriendsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Friends  $friends
+     * @param  \App\Friend  $friends
      * @return \Illuminate\Http\Response
      */
-    public function edit(Friends $friends)
+    public function edit(Friend $friends)
     {
         //
     }
@@ -89,10 +90,10 @@ class FriendsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Friends  $friends
+     * @param  \App\Friend  $friends
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Friends $friends)
+    public function update(Request $request, Friend $friends)
     {
         //
     }
@@ -100,10 +101,10 @@ class FriendsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Friends $friend
-     * @return void
+     * @param Friend $friend
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Friends $friends, Request $request, Subscrable $subcrable)
+    /*public function destroy(Friend $friends, Request $request, Subscrable $subcrable)
     {
         if (!!$request->user_id && !!$request->friend_id == 'request') {
             $friends->where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->delete();
@@ -112,12 +113,25 @@ class FriendsController extends Controller
             $subcrable->where('user_id', $request->friend_id)->where('subscrable_id', $request->user_id)->delete();
         }
         return response()->json(['success' => 'Вы больше не друзья!']);
-    }
-
-    /*public function destroy(Friends $friend)
-    {
-        dump($friend);
-        $secondRecord = Friends::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
-        dd($secondRecord);
     }*/
+
+    public function destroy(Friend $friend)
+    {
+        $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
+        $userSubscribe = Subscrable::where([['user_id', '=', $friend->user_id], ['subscrable_id', '=', $friend->friend_id]])->first();
+        $friendSubscribe = Subscrable::where([['user_id', '=', $friend->friend_id], ['subscrable_id', '=', $friend->user_id]])->first();
+        if(!$friend || !$secondRecord || !$userSubscribe || !$friendSubscribe) {
+            abort(404);
+        }
+        DB::transaction(function () use ($friend, $secondRecord, $userSubscribe, $friendSubscribe) {
+            $secondRecord->forceDelete();
+            $userSubscribe->forceDelete();
+            $friendSubscribe->forceDelete();
+            $friend->forceDelete();
+        });
+
+        session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
+
+        return redirect(route('admin.users.index'));
+    }
 }

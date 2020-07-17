@@ -1,6 +1,6 @@
 <?php
 
-use App\Groups;
+use App\Group;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +13,6 @@ class GroupsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Groups::class, 20)->create();
+        factory(Group::class, 20)->create();
     }
 }
