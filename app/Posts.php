@@ -39,7 +39,7 @@ class Posts extends Model
 
     // public function postables()
     // {
-    //     return $this->hasMany('App\Postables');
+    //     return $this->hasMany('App\Postable');
     // }
 
     public function clubs()
