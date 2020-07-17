@@ -1,8 +1,8 @@
-<?php
+@php
 /**
  * @var $users \App\User []
  */
-?>
+@endphp
 
 
 @extends('layouts.admin')
@@ -39,11 +39,11 @@
                             <td>{{ $user->surname }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <a href="{{ route('admin.users.edit', $user->id)}}"
+                                <a href="{{ route('admin.user.edit', $user->id)}}"
                                    class="btn btn-info btn-sm"
                                    role="button">Редактирование
                                 </a>
-                                <form class="d-inline-block" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                <form class="d-inline-block" action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button
