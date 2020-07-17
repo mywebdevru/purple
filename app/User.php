@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
  * @property string|null $country
  * @property string|null $city
  * @property string|null $creed Девиз по жизни
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Friends[] $friends
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Friend[] $friends
  * @property-read int|null $friends_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $friendshipRequests
  * @property-read int|null $friendship_requests_count
@@ -116,7 +116,7 @@ class User extends Authenticatable
      */
     public function friends()
     {
-        return $this->hasMany('App\Friends');
+        return $this->hasMany('App\Friend');
     }
 
     /**
