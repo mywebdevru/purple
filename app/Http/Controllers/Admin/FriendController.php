@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Friend;
 use App\Http\Controllers\Controller;
+use App\Subscrable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FriendController extends Controller
 {
@@ -77,10 +79,25 @@ class FriendController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Friend  $friend
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Friend $friend)
     {
-        //
+        $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
+        $userSubscribe = Subscrable::where([['user_id', '=', $friend->user_id], ['subscrable_id', '=', $friend->friend_id]])->first();
+        $friendSubscribe = Subscrable::where([['user_id', '=', $friend->friend_id], ['subscrable_id', '=', $friend->user_id]])->first();
+        if(!$friend || !$secondRecord || !$userSubscribe || !$friendSubscribe) {
+            abort(404);
+        }
+        DB::transaction(function () use ($friend, $secondRecord, $userSubscribe, $friendSubscribe) {
+            $secondRecord->forceDelete();
+            $userSubscribe->forceDelete();
+            $friendSubscribe->forceDelete();
+            $friend->forceDelete();
+        });
+
+        session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
+
+        return redirect(route('admin.users.index'));
     }
 }
