@@ -98,6 +98,6 @@ class FriendController extends Controller
 
         session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
 
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.user.index'));
     }
 }
