@@ -44,7 +44,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $subscribes_to_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $subscribesToUsers
  * @property-read int|null $subscribes_to_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\UsersVehicles[] $usersVehicles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\UserVehicle[] $usersVehicles
  * @property-read int|null $users_vehicles_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
@@ -108,7 +108,7 @@ class User extends Authenticatable
      */
     public function usersVehicles()
     {
-        return $this->hasMany('App\UsersVehicles');
+        return $this->hasMany('App\UserVehicle');
     }
 
     /**
