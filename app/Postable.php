@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Postable
  *
  * @property int $id
- * @property int $posts_id
+ * @property int $post_id
  * @property int $postable_id
  * @property string $postable_type
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Postable newModelQuery()
@@ -30,7 +30,7 @@ class Postable extends Model
      * @var array
      */
     protected $fillable = [
-        'posts_id', 'postable_id', 'postable_type'
+        'post_id', 'postable_id', 'postable_type'
     ];
 
 
