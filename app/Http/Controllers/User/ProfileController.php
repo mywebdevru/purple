@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Friends;
-use App\Clubs;
+use App\Club;
 use App\Http\Controllers\User\FriendsController ;
 use Illuminate\Http\Request;
 

@@ -103,7 +103,7 @@ class FriendsController extends Controller
      * @param Friends $friend
      * @return void
      */
-    public function destroy(Friends $friends, Request $request, Subscrable $subcrable)
+    /*public function destroy(Friends $friends, Request $request, Subscrable $subcrable)
     {
         if (!!$request->user_id && !!$request->friend_id == 'request') {
             $friends->where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->delete();
@@ -112,12 +112,12 @@ class FriendsController extends Controller
             $subcrable->where('user_id', $request->friend_id)->where('subscrable_id', $request->user_id)->delete();
         }
         return response()->json(['success' => 'Вы больше не друзья!']);
-    }
+    }*/
 
-    /*public function destroy(Friends $friend)
+    public function destroy(Friends $friend)
     {
         dump($friend);
         $secondRecord = Friends::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
         dd($secondRecord);
-    }*/
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Clubs;
+use App\Club;
 use App\User;
 
 class ClubsSeeder extends Seeder
@@ -13,6 +13,6 @@ class ClubsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Clubs::class, 20)->create();
+        factory(Club::class, 20)->create();
     }
 }

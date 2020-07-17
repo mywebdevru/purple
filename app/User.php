@@ -38,7 +38,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $requestedFriendships
  * @property-read int|null $requested_friendships_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Clubs[] $subscribesToClubs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $subscribesToClubs
  * @property-read int|null $subscribes_to_clubs_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Groups[] $subscribesToGroups
  * @property-read int|null $subscribes_to_groups_count
@@ -141,11 +141,11 @@ class User extends Authenticatable
     // }
 
     /**
-     * Get the user's Clubs subscribes.
+     * Get the user's Club subscribes.
      */
     public function subscribesToClubs()
     {
-        return $this->morphedByMany('App\Clubs', 'subscrable');
+        return $this->morphedByMany('App\Club', 'subscrable');
     }
 
      /**

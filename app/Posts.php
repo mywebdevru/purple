@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $text
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Clubs[] $clubs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
  * @property-read int|null $clubs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Clubs[] $groups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $groups
  * @property-read int|null $groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $user
  * @property-read int|null $user_count
@@ -44,12 +44,12 @@ class Posts extends Model
 
     public function clubs()
     {
-        return $this->morphedByMany('App\Clubs', 'postable');
+        return $this->morphedByMany('App\Club', 'postable');
     }
 
     public function groups()
     {
-        return $this->morphedByMany('App\Clubs', 'postable');
+        return $this->morphedByMany('App\Club', 'postable');
     }
 
     public function user()

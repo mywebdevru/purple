@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Clubs
+ * App\Club
  *
  * @property int $id
  * @property string $name
@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereBirthDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereCountry($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereCreed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Clubs whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereBirthDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Clubs extends Model
+class Club extends Model
 {
         /**
      * The attributes that are mass assignable.
@@ -49,7 +49,7 @@ class Clubs extends Model
 
 
     /**
-     * Get the users who have subscribe to this Clubs.
+     * Get the users who have subscribe to this Club.
      */
     public function users()
     {
