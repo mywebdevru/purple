@@ -15,7 +15,7 @@ class CreatePostablesTable extends Migration
     {
         Schema::create('postables', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('posts_id');
+            $table->bigInteger('post_id');
             $table->bigInteger('postable_id');
             $table->string('postable_type');
         });
