@@ -96,7 +96,7 @@
                     <div class="col-md-3">
                         <ul class="list-group mb-5">
                             <li class="list-group-item">
-                                <a href="{{ route('admin.users.index') }}">Пользователи</a>
+                                <a href="{{ route('admin.user.index') }}">Пользователи</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="">Посты</a>

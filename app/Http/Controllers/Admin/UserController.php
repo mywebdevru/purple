@@ -84,7 +84,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Профиль пользователя обновлен');
 
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.user.index'));
     }
 
     /**

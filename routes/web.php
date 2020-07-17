@@ -37,7 +37,8 @@ Route::group([
     'middleware' => 'auth',
     'as' => 'admin.'
 ], function () {
-    Route::resource('users', 'UserController');
+    Route::resource('user', 'UserController');
+    Route::resource('friend', 'FriendController')->only(['destroy']);
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
 

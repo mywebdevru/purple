@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             @include('admin.partials.errors')
-            <form action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('admin.user.update', $user->id) }}" enctype="multipart/form-data" method="POST">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
