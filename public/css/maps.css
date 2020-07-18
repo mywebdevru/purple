@@ -1,0 +1,20 @@
+.map-btn {
+    display: inline-block;
+    padding: 4px 14px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    border: 1px solid #bbbbbb;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    font-family: Arial;
+}
+.map-btn-selected {
+    color: #333333;
+    background-color: #e6e6e6;
+    border: 2px dashed #333;
+}
