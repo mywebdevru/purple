@@ -5,7 +5,9 @@
 @endphp
 
 @extends('layouts.admin')
-
+@if($errors->any())
+    @dd($errors->get('city'))
+@endif
 @section('content')
     <div class="card card-default">
         <div class="card-header">
@@ -18,15 +20,26 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Имя</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           class="form-control @error('name') is-invalid @enderror"
+                           value="{{ $errors->any() ? old('name') : $user->name }}">
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>
+
+                        </strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="surname">Фамилия</label>
-                    <input type="text" name="surname" id="surname" class="form-control" value="{{ $user->surname }}">
+                    <input type="text" name="surname" id="surname" class="form-control @error('surname') is-invalid @enderror" value="{{ $errors->any() ? old('surname') : $user->surname }}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}">
+                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $errors->any() ? old('email') : $user->email }}">
                 </div>
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
@@ -39,7 +52,7 @@
                             <img src="{{ Gravatar::src($user->email) }}" alt="" width="40" style="border-radius: 50%">
                         </div>
                     @endif
-                    <input type="file" id="avatar" name="avatar" class="form-control-file">
+                    <input type="file" id="avatar" name="avatar" class="form-control-file  @error('avatar') is-invalid @enderror">
                 </div>
                 <div class="form-group">
                     <label for="gender">Пол</label>
@@ -66,20 +79,20 @@
                     <input type="text"
                            name="birth_date"
                            id="birth_date"
-                           class="form-control"
-                           value="{{ $user->birth_date }}">
+                           class="form-control @error('birth_date') is-invalid @enderror"
+                           value="{{ $errors->any() ? old('birth_date') :  $user->birth_date }}">
                 </div>
                 <div class="form-group">
                     <label for="city">Город</label>
-                    <input type="text" name="city" id="city" value="{{ $user->city }}" class="form-control">
+                    <input type="text" name="city" id="city" value="{{ $errors->any() ? old('city') : $user->city }}" class="form-control @error('city') is-invalid @enderror">
                 </div>
                 <div class="form-group">
                     <label for="country">Страна</label>
-                    <input type="text" name="country" id="country" value="{{ $user->country }}" class="form-control">
+                    <input type="text" name="country" id="country" value="{{ $errors->any() ? old('country') : $user->country }}" class="form-control @error('contry') is-invalid @enderror">
                 </div>
                 <div class="form-group">
                     <label for="creed">Кредо</label>
-                    <input type="text" name="creed" id="creed" value="{{ $user->creed }}" class="form-control">
+                    <input type="text" name="creed" id="creed" value="{{ $errors->any() ? old('creed') : $user->creed }}" class="form-control @error('creed') is-invalid @enderror">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">
