@@ -104,10 +104,13 @@ class FriendController extends Controller
             abort(404);
         }
         DB::transaction(function () use ($friend, $secondRecord, $user, $usersFriend) {
-            $user->subscribesToUsers()->detach($usersFriend);
-            $usersFriend->subscribesToUsers()->detach($user);
-            $secondRecord->forceDelete();
-            $friend->forceDelete();
+            $operation1 = $user->subscribesToUsers()->detach($usersFriend);
+            $operation2 = $usersFriend->subscribesToUsers()->detach($user);
+            $operation3 = $secondRecord->forceDelete();
+            $operation4 = $friend->forceDelete();
+            if (!$operation1 || !$operation2 || !$operation3 || !$operation4) {
+                abort(500);
+            }
         });
 
         session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
