@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Friend;
 use App\Http\Controllers\Controller;
 use App\Subscrable;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -83,7 +84,7 @@ class FriendController extends Controller
      */
     public function destroy(Friend $friend)
     {
-        $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
+        /*$secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
         $userSubscribe = Subscrable::where([['user_id', '=', $friend->user_id], ['subscrable_id', '=', $friend->friend_id]])->first();
         $friendSubscribe = Subscrable::where([['user_id', '=', $friend->friend_id], ['subscrable_id', '=', $friend->user_id]])->first();
         if(!$friend || !$secondRecord || !$userSubscribe || !$friendSubscribe) {
@@ -93,6 +94,19 @@ class FriendController extends Controller
             $secondRecord->forceDelete();
             $userSubscribe->forceDelete();
             $friendSubscribe->forceDelete();
+            $friend->forceDelete();
+        });*/
+
+        $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
+        $user = User::find($friend->user_id);
+        $users_friend = User::find($friend->friend_id);
+        if(!$friend || !$secondRecord || !$user || !$users_friend) {
+            abort(404);
+        }
+        DB::transaction(function () use ($friend, $secondRecord, $user, $users_friend) {
+            $user->subscribesToUsers()->detach($friend->friend_id);
+            $users_friend->subscribesToUsers()->detach($friend->user_id);
+            $secondRecord->forceDelete();
             $friend->forceDelete();
         });
 
