@@ -83,19 +83,29 @@
                     <label for="gender">Пол</label>
                     <select name="gender" id="gender" class="form-control">
                         <option value="В смятении"
-                                @if($user->gender == 'В смятении')
+                                @if(old('gender') == 'В смятении')
                                 selected
-                            @endif>В смятении
+                                @elseif($user->gender == 'В смятении')
+                                selected
+                            @endif>
+                            В смятении
                         </option>
                         <option value="Мужчина"
-                                @if($user->gender == 'Мужчина')
-                                    selected
-                                @endif>Мужчина
-                        </option>
-                        <option value="Девушка"
-                                @if($user->gender == 'Девушка')
+                        <option value="Мужчина"
+                                @if(old('gender') == 'Мужчина')
                                 selected
-                                @endif>Девушка
+                                @elseif($user->gender == 'Мужчина')
+                                selected
+                                @endif>
+                            Мужчина
+                        </option>
+                        <option value="Женщина"
+                                @if(old('gender') == 'Женщина')
+                                selected
+                                @elseif($user->gender == 'Женщина')
+                                selected
+                                @endif>
+                            Женщина
                         </option>
                     </select>
                 </div>
