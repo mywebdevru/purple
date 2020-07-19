@@ -99,13 +99,13 @@ class FriendController extends Controller
 
         $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
         $user = User::find($friend->user_id);
-        $users_friend = User::find($friend->friend_id);
-        if(!$friend || !$secondRecord || !$user || !$users_friend) {
+        $usersFriend = User::find($friend->friend_id);
+        if(!$friend || !$secondRecord || !$user || !$usersFriend) {
             abort(404);
         }
-        DB::transaction(function () use ($friend, $secondRecord, $user, $users_friend) {
+        DB::transaction(function () use ($friend, $secondRecord, $user, $usersFriend) {
             $user->subscribesToUsers()->detach($friend->friend_id);
-            $users_friend->subscribesToUsers()->detach($friend->user_id);
+            $usersFriend->subscribesToUsers()->detach($friend->user_id);
             $secondRecord->forceDelete();
             $friend->forceDelete();
         });
