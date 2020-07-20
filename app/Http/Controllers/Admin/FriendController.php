@@ -84,19 +84,6 @@ class FriendController extends Controller
      */
     public function destroy(Friend $friend)
     {
-        /*$secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
-        $userSubscribe = Subscrable::where([['user_id', '=', $friend->user_id], ['subscrable_id', '=', $friend->friend_id]])->first();
-        $friendSubscribe = Subscrable::where([['user_id', '=', $friend->friend_id], ['subscrable_id', '=', $friend->user_id]])->first();
-        if(!$friend || !$secondRecord || !$userSubscribe || !$friendSubscribe) {
-            abort(404);
-        }
-        DB::transaction(function () use ($friend, $secondRecord, $userSubscribe, $friendSubscribe) {
-            $secondRecord->forceDelete();
-            $userSubscribe->forceDelete();
-            $friendSubscribe->forceDelete();
-            $friend->forceDelete();
-        });*/
-
         $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
         $user = User::find($friend->user_id);
         $usersFriend = User::find($friend->friend_id);
@@ -104,13 +91,12 @@ class FriendController extends Controller
             abort(404);
         }
         DB::transaction(function () use ($friend, $secondRecord, $user, $usersFriend) {
-            $operation1 = $user->subscribesToUsers()->detach($usersFriend);
-            $operation2 = $usersFriend->subscribesToUsers()->detach($user);
-            $operation3 = $secondRecord->forceDelete();
-            $operation4 = $friend->forceDelete();
-            if (!$operation1 || !$operation2 || !$operation3 || !$operation4) {
-                abort(500);
-            }
+            $error = 0;
+            $user->subscribesToUsers()->detach($usersFriend) ?: $error = 1;
+            $usersFriend->subscribesToUsers()->detach($user) ?: $error = 1;
+            $secondRecord->forceDelete() ?: $error = 1;
+            $friend->forceDelete() ?: $error = 1;;
+            abort_if($error, 500);
         });
 
         session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
