@@ -38,6 +38,7 @@ Route::group([
     'as' => 'admin.'
 ], function () {
     Route::resource('user', 'UserController');
+    Route::resource('post', 'PostController');
     Route::resource('friend', 'FriendController')->only(['destroy']);
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
