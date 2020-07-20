@@ -19,6 +19,13 @@
                             @if (count($data->friends) > 0)
                                 @foreach ($data->friends as $friend)
                                     <p>{{ $friend->user->full_name }}</p>
+                                    <form action="{{ route('friend.delete', ['friend' => $friend->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ $data->id }}">
+                                        <input type="hidden" name="friend_id" value="{{$friend->user->id}}">
+                                        <button type="submit" class="btn btn-danger">Отменить</button>
+                                    </form>
                                     <hr>
                                 @endforeach
                             @else

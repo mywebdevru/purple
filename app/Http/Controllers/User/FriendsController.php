@@ -118,20 +118,22 @@ class FriendsController extends Controller
     public function destroy(Friend $friend)
     {
         $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
-        $userSubscribe = Subscrable::where([['user_id', '=', $friend->user_id], ['subscrable_id', '=', $friend->friend_id]])->first();
-        $friendSubscribe = Subscrable::where([['user_id', '=', $friend->friend_id], ['subscrable_id', '=', $friend->user_id]])->first();
+        $userSubscribe = User::find($friend->user_id);
+        $friendSubscribe = User::find($friend->friend_id);
+
         if(!$friend || !$secondRecord || !$userSubscribe || !$friendSubscribe) {
             abort(404);
         }
         DB::transaction(function () use ($friend, $secondRecord, $userSubscribe, $friendSubscribe) {
-            $secondRecord->forceDelete();
-            $userSubscribe->forceDelete();
-            $friendSubscribe->forceDelete();
-            $friend->forceDelete();
+            $error = false;
+            $friend->forceDelete()?:$error = true;
+            $secondRecord->forceDelete()?:$error = true;
+            $userSubscribe->subscribesToUsers()->detach($friend->friend_id)?:$error = true;
+            $friendSubscribe->subscribesToUsers()->detach($friend->user_id)?:$error = true;
+            abort_if($error, 500);
         });
 
         session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
-
-        return redirect(route('admin.users.index'));
+        return back();
     }
 }
