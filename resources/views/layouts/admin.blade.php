@@ -99,7 +99,7 @@
                                 <a href="{{ route('admin.user.index') }}">Пользователи</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="">Посты</a>
+                                <a href="{{ route('admin.post.index') }}">Посты</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="">Маршруты</a>
