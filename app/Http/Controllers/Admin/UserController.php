@@ -54,11 +54,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Request $request
      * @param User $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Request $request, User $user)
+    public function edit(User $user)
     {
         return view('admin.users.edit')->with('user', $user);
     }
