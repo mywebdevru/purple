@@ -33,19 +33,14 @@ class FriendshipRequestController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return back()
      */
-    public function store(Request $request, FriendshipRequest $friendshipRequest)
+    public function store(Request $request, FriendshipRequest $friendshipRequests)
     {
-        if (!!$request->user_id && !!$request->friend_id) {
-            $result = $friendshipRequest->create(['user_id' => $request->user_id,'friend_id' => $request->friend_id]);
-        } else {
-            return response()->json(['error' => 'Нет запроса на дружбу']);
-        }
-        if (!$result){
-            return response()->json(['error' => 'Что то пошло не так!']);
-        }
-        return response()->json(['success' => 'Запрос отправлен!']);
+        abort_if(!$request->user_id || !$request->friend_id, 403, 'Странный запрос');
+        $result = $friendshipRequests->create(['user_id' => $request->user_id,'friend_id' => $request->friend_id]);
+        abort_if(!$result, 500);
+        return back();
     }
 
     /**
@@ -88,16 +83,10 @@ class FriendshipRequestController extends Controller
      * @param  \App\FriendshipRequest  $friendshipRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, FriendshipRequest $friendshipRequest, $user)
+    public function destroy(Request $request, FriendshipRequest $friendshipRequest)
     {
-        if (!!$request->user_id && !!$request->friend_id) {
-           $result = $friendshipRequest->where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->delete();
-        }
-        // dd($request);
-        // if (!$result){
-        //     return response()->json(['error' => 'Что то пошло не так!']);
-        // }
-        // return response()->json(['success' => 'Дружба отклонена!']);
-        return redirect()->route('user.show', ['user' => $user]);
+        $result = $friendshipRequest->delete();
+        abort_if(!$result, 404);
+        return back();
     }
 }
