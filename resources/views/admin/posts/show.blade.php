@@ -40,7 +40,7 @@
                         Текст:
                     </th>
                     <td>
-                        {{ $post->text }}
+                        {!! $post->text !!}
                     </td>
                 </tr>
                 </tbody>
