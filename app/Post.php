@@ -37,26 +37,6 @@ class Post extends Model
         'text'
     ];
 
-    // public function postables()
-    // {
-    //     return $this->hasMany('App\Postable');
-    // }
-
-    public function clubs()
-    {
-        return $this->morphedByMany('App\Club', 'postable');
-    }
-
-    public function groups()
-    {
-        return $this->morphedByMany('App\Club', 'postable');
-    }
-
-    public function user()
-    {
-        return $this->morphedByMany('App\User', 'postable');
-    }
-
     public function postable()
     {
         return $this->morphTo();
