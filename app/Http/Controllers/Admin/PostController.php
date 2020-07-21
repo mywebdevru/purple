@@ -43,11 +43,11 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show')->with('post', $post)->with('postable', $post->postable);
     }
 
     /**
@@ -85,6 +85,6 @@ class PostController extends Controller
 
         session()->flash('success', 'Пост был удален');
 
-        return redirect()->back();
+        return redirect()->route('admin.post.index');
     }
 }
