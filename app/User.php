@@ -169,7 +169,7 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->morphToMany('App\Post', 'postable');
+        return $this->morphMany('App\Post', 'postable');
     }
 
     public function removeAvatar()

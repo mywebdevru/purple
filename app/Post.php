@@ -56,4 +56,10 @@ class Post extends Model
     {
         return $this->morphedByMany('App\User', 'postable');
     }
+
+    public function postable()
+    {
+        return $this->morphTo();
+    }
+
 }

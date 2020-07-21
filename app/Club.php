@@ -61,6 +61,6 @@ class Club extends Model
      */
     public function posts()
     {
-        return $this->morphToMany('App\Post', 'postable');
+        return $this->morphMany('App\Post', 'postable');
     }
 }

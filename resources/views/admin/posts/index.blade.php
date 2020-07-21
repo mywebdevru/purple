@@ -30,7 +30,7 @@
                                 {{ Str::words($post->text, 5, '...') }}
                             </td>
                             <td>
-                                @dump($post->postable)
+                                {{ $post->postable->name }}
                             </td>
                             <td>
 
