@@ -25,10 +25,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'User\ProfileController');
 // Route::post('user/friendship_request', 'User\FriendshipRequestController@store');
-Route::delete('user/friendship_reject/{user}', 'User\FriendshipRequestController@destroy')->name('user.friendship_reject');
-Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->name('user.friendship_confirm');
+// Route::delete('user/friendship_reject/{user}', 'User\FriendshipRequestController@destroy')->name('user.friendship_reject');
+// Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->name('user.friendship_confirm');
 //Route::delete('user/friendship_delete', 'User\FriendsController@destroy');
-Route::delete('friend/{friend}', [FriendsController::class, 'destroy'])->name('friend.delete');
+Route::resource('friendship_request', 'User\FriendshipRequestController');
+Route::resource('friend', 'User\FriendsController');
 Route::resource('post', 'Post\PostController');
 
 Route::group([

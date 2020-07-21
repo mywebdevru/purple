@@ -36,32 +36,24 @@ class FriendsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Friend  $friends
-     * @param  \App\Subscrable $subcrable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Friend $friends, Subscrable $subcrable, $user)
+    public function store(Request $request, Friend $friends)
     {
-        if (!!$request->user_id && !!$request->friend_id) {
-            $result1 = $friends->create(
-                ['user_id' => $request->user_id,'friend_id' => $request->friend_id] // add record to Friend table
-            );
-            $result1_2 = $subcrable->create(
-                ['user_id' => $request->user_id,'subscrable_id' => $request->friend_id, 'subscrable_type' => 'App\User' ] // subscribe each other
-            );
-            $result2 = $friends->create(
-                ['user_id' => $request->friend_id,'friend_id' => $request->user_id] // add record to Friend table
-            );
-            $result2_2 = $subcrable->create(
-                ['user_id' => $request->friend_id,'subscrable_id' => $request->user_id, 'subscrable_type' => 'App\User' ] // subscribe each other
-            );
-        }
-        // if (!$result1 || !$result2 || !$result1_2 || !$result2_2) {
-        //     return response()->json(['error' => 'Что то пошло не так']);
-        // }
-        FriendshipRequest::where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->delete(); // delete friendship request
-        // return response()->json(['success' => 'У Вас новый друг!']);
-        return redirect()->route('user.show', ['user' => $user]);
+        abort_if (!$request->user_id || !$request->friend_id || !$request->requested_friendship, 403, 'Недостаточно данных');
+
+        DB::transaction(function () use ($request, $friends) {
+            $error = false;
+            $friends->create(['user_id' => $request->user_id,'friend_id' => $request->friend_id])?:$error = true;
+            $friends->create(['user_id' => $request->friend_id,'friend_id' => $request->user_id])?:$error = true;
+            User::find($request->user_id)->subscribesToUsers()->attach($request->friend_id);
+            User::find($request->friend_id)->subscribesToUsers()->attach($request->user_id);
+            FriendshipRequest::find($request->requested_friendship)->delete()?:$error = true;
+            abort_if($error, 500);
+        });
+        session()->flash('success', 'У вас новый друг');
+        return back();
     }
 
     /**
@@ -104,17 +96,6 @@ class FriendsController extends Controller
      * @param Friend $friend
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    /*public function destroy(Friend $friends, Request $request, Subscrable $subcrable)
-    {
-        if (!!$request->user_id && !!$request->friend_id == 'request') {
-            $friends->where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->delete();
-            $friends->where('user_id', $request->friend_id)->where('friend_id', $request->user_id)->delete();
-            $subcrable->where('user_id', $request->user_id)->where('subscrable_id', $request->friend_id)->delete();
-            $subcrable->where('user_id', $request->friend_id)->where('subscrable_id', $request->user_id)->delete();
-        }
-        return response()->json(['success' => 'Вы больше не друзья!']);
-    }*/
-
     public function destroy(Friend $friend)
     {
         $secondRecord = Friend::where([['user_id', '=', $friend->friend_id], ['friend_id', '=', $friend->user_id]])->first();
@@ -128,8 +109,8 @@ class FriendsController extends Controller
             $error = false;
             $friend->forceDelete()?:$error = true;
             $secondRecord->forceDelete()?:$error = true;
-            $userSubscribe->subscribesToUsers()->detach($friend->friend_id)?:$error = true;
-            $friendSubscribe->subscribesToUsers()->detach($friend->user_id)?:$error = true;
+            $userSubscribe->subscribesToUsers()->detach($friend->friend_id);
+            $friendSubscribe->subscribesToUsers()->detach($friend->user_id);
             abort_if($error, 500);
         });
 

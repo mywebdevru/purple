@@ -19,7 +19,7 @@
                             @if (count($data->friends) > 0)
                                 @foreach ($data->friends as $friend)
                                     <p>{{ $friend->user->full_name }}</p>
-                                    <form action="{{ route('friend.delete', ['friend' => $friend->id]) }}" method="POST">
+                                    <form action="{{ route('friend.destroy', ['friend' => $friend->id]) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{ $data->id }}">
@@ -37,20 +37,20 @@
                             {{-- @dd($data) --}}
                             <h3><strong>С вами хотят подружиться</strong> всего - {{ count($data->requestedFriendships) }}</h3>
                             @if (count($data->requestedFriendships) > 0)
-                                @foreach ($data->requestedFriendships as $friend)
-                                    <p>{{ $friend->user->full_name }}</p>
+                                @foreach ($data->requestedFriendships as $requestedFriendship)
+                                    <p>{{ $requestedFriendship->user->full_name }}</p>
                                     <div class="row">
-                                        <form class="mx-3"  action="{{ route('user.friendship_confirm', ['user' => $data->id]) }}" method="POST">
-                                            @method('PUT')
+                                        <form class="mx-3"  action="{{ route('friend.store') }}" method="POST">
                                             @csrf
-                                            <input type="hidden" name="user_id" value="{{ $friend->user_id }}">
+                                            <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
                                             <input type="hidden" name="friend_id" value="{{$data->id}}">
+                                            <input type="hidden" name="requested_friendship" value="{{$requestedFriendship->id}}">
                                             <button type="submit" class="btn btn-success">Принять</button>
                                         </form>
-                                        <form action="{{ route('user.friendship_reject', ['user' => $data->id]) }}" method="POST">
+                                        <form action="{{ route('friendship_request.destroy', ['friendship_request' => $requestedFriendship->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <input type="hidden" name="user_id" value="{{ $friend->user_id }}">
+                                            <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
                                             <input type="hidden" name="friend_id" value="{{$data->id}}">
                                             <button type="submit" class="btn btn-danger">Отклонить</button>
                                         </form>
@@ -65,13 +65,13 @@
                             @endif
                             <h3><strong>Вы хотите дружить </strong> всего - {{ count($data->friendshipRequests) }}</h3>
                             @if (count($data->friendshipRequests) > 0)
-                                @foreach ($data->friendshipRequests as $friend)
-                                    <p>{{ $friend->friend->full_name }}</p>
-                                    <form  action="{{ route('user.friendship_reject', ['user' => $data->id]) }}" method="POST">
+                                @foreach ($data->friendshipRequests as $friendshipRequest)
+                                    <p>{{ $friendshipRequest->friend->full_name }}</p>
+                                    <form  action="{{ route('friendship_request.destroy', ['friendship_request' => $friendshipRequest->id]) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{$data->id}}">
-                                        <input type="hidden" name="friend_id" value="{{ $friend->friend_id }}">
+                                        <input type="hidden" name="friend_id" value="{{ $friendshipRequest->friend_id }}">
                                         <button type="submit" class="btn btn-danger">Я передумал(а)</button>
                                     </form>
                                     <hr>
