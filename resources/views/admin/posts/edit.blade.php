@@ -12,7 +12,7 @@
             Редактирование поста
         </div>
         <div class="card-body">
-            {{--@include('admin.partials.errors')--}}
+            @include('admin.partials.errors')
             <form action="{{ route('admin.post.update', $post->id) }}" enctype="multipart/form-data" method="POST">
                 @method('PATCH')
                 @csrf
@@ -22,7 +22,7 @@
                               class="form-control @error('name') is-invalid @enderror"
                               name="text">{!! $errors->any() ? old('text') : $post->text !!}
                     </textarea>
-                    @error('name')
+                    @error('text')
                         @foreach ($errors->get('text') as $error)
                             <div class="invalid-feedback">{{ $error }}</div>
                         @endforeach
