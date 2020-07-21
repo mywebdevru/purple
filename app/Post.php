@@ -25,6 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $postable_id
+ * @property string $postable_type
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $postable
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post wherePostableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post wherePostableType($value)
  */
 class Post extends Model
 {
