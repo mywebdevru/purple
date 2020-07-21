@@ -27,15 +27,13 @@
                     @foreach($posts as $post)
                         <tr>
                             <td>
-                                {{ Str::words($post->text, 5, '...') }}
+                                {{ Str::words($post->text, 3, '...') }}
                             </td>
                             <td>
                                 {{ $post->postable->name }}
                             </td>
                             <td>
-
-                            </td>
-                            <td>
+                                {{ $post->created_at->diffForHumans() }}
                             </td>
                             <td>
                                 <a href="{{ route('admin.post.show', $post->id) }}"
