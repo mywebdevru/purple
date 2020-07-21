@@ -27,7 +27,7 @@
                     @foreach($posts as $post)
                         <tr>
                             <td>
-                                {{ Str::words($post->text, 3, '...') }}
+                                {!! Str::words($post->text, 3, '...') !!}
                             </td>
                             <td>
                                 {{ $post->postable->name }}
