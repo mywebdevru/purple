@@ -20,7 +20,7 @@
                     <label for="text">Текст</label>
                     <textarea id="text"
                               class="form-control @error('name') is-invalid @enderror"
-                              name="text">{{ $errors->any() ? old('text') : $post->text }}
+                              name="text">{!! $errors->any() ? old('text') : $post->text !!}
                     </textarea>
                     @error('name')
                         @foreach ($errors->get('text') as $error)
