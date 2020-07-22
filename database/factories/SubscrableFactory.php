@@ -12,6 +12,6 @@ $factory->define(Subscrable::class, function (Faker $faker) {
     return [
         'user_id' => $faker->numberBetween(1, User::all()->count()),
         'subscrable_id' => rand(1, 20),
-        'subscrable_type' => Arr::random(['App\User', 'App\Club', 'App\Group'])
+        'subscrable_type' => Arr::random(['App\Club', 'App\Group'])
     ];
 });
