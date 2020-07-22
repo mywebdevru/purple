@@ -39,8 +39,64 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#text').summernote();
+        $(document).ready(function () {
+            const editor = $('#text'),
+                config = {
+                    lang: 'ru-RU',
+                    shortcuts: false,
+                    airMode: false,
+                    focus: false,
+                    disableDragAndDrop: false,
+                    callbacks: {
+                        onImageUpload: function (files) {
+                            uploadFile(files);
+                        },
+
+                        onMediaDelete: function ($target) {
+                            const url = $target[0].src,
+                                cut = "{{ URL::to('/') }}" + "/storage/",
+                                image = url.replace(cut, '');
+                            deleteFile(image);
+                        }
+                    }
+                };
+            editor.summernote(config);
+
+            async function uploadFile(files) {
+                const data = new FormData();
+
+                for (let i = 0; i < files.length; i++) {
+                    data.append("files[]", files[i]);
+                }
+                try {
+                    const images = (await axios({
+                        data,
+                        method: 'post',
+                        url: "{{ route('summernote.upload') }}",
+                    })).data;
+                    for (let i = 0; i < images.length; i++) {
+                        editor.summernote('insertImage', '/storage/' + images[i], function ($image) {
+                            $image.css('width', '100%');
+                        });
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            async function deleteFile(file) {
+                console.log(file);
+                const data = new FormData();
+                data.append('file', file);
+                try {
+                    await axios({
+                        data,
+                        method: 'post',
+                        url: "{{ route('summernote.delete') }}",
+                    });
+                } catch (e) {
+                    console.log(e);
+                }
+            }
         });
     </script>
 @endsection

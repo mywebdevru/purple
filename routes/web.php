@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Shared\SummernoteController;
 use App\Http\Controllers\User\FriendsController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::group([
     Route::resource('friend', 'FriendController')->only(['destroy']);
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
+
+Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
+Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');
