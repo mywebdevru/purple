@@ -13,7 +13,16 @@ class SummernoteController extends Controller
     {
         $images = [];
         foreach ($request['files'] as $image) {
-            $images[] = $image->store('summernote');
+            $img = $image->store('summernote');
+            $images[] = $img;
+            $pic = \Image::make('storage/' . $img);
+            $width = $pic->width();
+            if($width > 800) {
+                $pic->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            $pic->save();
         }
         return $images;
     }
