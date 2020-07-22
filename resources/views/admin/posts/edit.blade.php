@@ -39,26 +39,27 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            const config = {
-                lang: 'ru-RU',
-                shortcuts: false,
-                airMode: false,
-                focus: false,
-                disableDragAndDrop: false,
-                callbacks: {
-                    onImageUpload: function (files) {
-                        uploadFile(files);
-                    },
+        $(document).ready(function () {
+            const editor = $('#text'),
+                config = {
+                    lang: 'ru-RU',
+                    shortcuts: false,
+                    airMode: false,
+                    focus: false,
+                    disableDragAndDrop: false,
+                    callbacks: {
+                        onImageUpload: function (files) {
+                            uploadFile(files);
+                        },
 
-                    onMediaDelete: function ($target, editor, $editable) {
-                        console.log($target);
-                        console.log(editor);
-                        console.log($editable);
+                        onMediaDelete: function ($target, editor, $editable) {
+                            console.log($target);
+                            console.log(editor);
+                            console.log($editable);
+                        }
                     }
                 }
-            }
-            $('#text').summernote(config);
+            editor.summernote(config);
 
             function uploadFile(files) {
                 const data = new FormData();
@@ -82,23 +83,21 @@
                         if (typeof images['error'] == 'undefined') {
 
                             // Get all images and insert to editor.
-                            for (var i = 0; i < images['url'].length; i++) {
+                            for (let i = 0; i < images.length; i++) {
 
-                                editor.summernote('insertImage', images['url'][i], function ($image) {
+                                editor.summernote('insertImage', '/storage/' + images[i], function ($image) {
                                     //$image.css('width', $image.width() / 3);
                                     //$image.attr('data-filename', 'retriever')
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             // Get user's browser language.
                             var userLang = navigator.language || navigator.userLanguage;
 
                             if (userLang == 'ru-RU') {
                                 var error = 'Ошибка, не могу загрузить файл! Пожалуйста, проверьте файл или ссылку. ' +
                                     'Изображение должно быть не менее 500px!';
-                            }
-                            else {
+                            } else {
                                 var error = 'Error, can\'t upload file! Please check file or URL. Image should be more then 500px!';
                             }
 
