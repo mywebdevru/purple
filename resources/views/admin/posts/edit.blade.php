@@ -40,7 +40,25 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#text').summernote();
+            const config = {
+                lang: 'ru-RU',
+                shortcuts: false,
+                airMode: false,
+                focus: false,
+                disableDragAndDrop: false,
+                callbacks: {
+                    onImageUpload: function (files) {
+                        console.log(files);
+                    },
+
+                    onMediaDelete: function ($target, editor, $editable) {
+                        console.log($target);
+                        console.log(editor);
+                        console.log($editable);
+                    }
+                }
+            }
+            $('#text').summernote(config);
         });
     </script>
 @endsection
