@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Summernote\SummernoteDeleteRequest;
 use App\Http\Requests\Summernote\SummernoteUploadRequest;
 
 class SummernoteController extends Controller
@@ -16,8 +17,8 @@ class SummernoteController extends Controller
         return $images;
     }
 
-    public function delete()
+    public function delete(SummernoteDeleteRequest $request)
     {
-
+        return $request;
     }
 }
