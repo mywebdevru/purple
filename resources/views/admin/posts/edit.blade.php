@@ -59,7 +59,7 @@
                             deleteFile(image);
                         }
                     }
-                }
+                };
             editor.summernote(config);
 
             async function uploadFile(files) {
@@ -83,20 +83,18 @@
                     console.log(e);
                 }
             }
-
             async function deleteFile(file) {
                 console.log(file);
                 const data = new FormData();
                 data.append('file', file);
                 try {
-                    const result = await axios({
+                    await axios({
                         data,
                         method: 'post',
                         url: "{{ route('summernote.delete') }}",
                     });
-                    console.log(result);
                 } catch (e) {
-
+                    console.log(e);
                 }
             }
         });

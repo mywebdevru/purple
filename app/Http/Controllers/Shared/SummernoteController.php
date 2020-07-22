@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shared;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Summernote\SummernoteDeleteRequest;
 use App\Http\Requests\Summernote\SummernoteUploadRequest;
+use Storage;
 
 class SummernoteController extends Controller
 {
@@ -19,6 +20,6 @@ class SummernoteController extends Controller
 
     public function delete(SummernoteDeleteRequest $request)
     {
-        return $request;
+        return Storage::delete($request['file']);
     }
 }
