@@ -74,6 +74,7 @@
                         method: 'post',
                         url: "{{ route('summernote.upload') }}",
                     })).data;
+                    console.log(images);
                     for (let i = 0; i < images.length; i++) {
                         editor.summernote('insertImage', '/storage/' + images[i], function ($image) {
                             $image.css('width', '100%');
