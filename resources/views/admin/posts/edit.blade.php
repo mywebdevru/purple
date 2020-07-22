@@ -65,20 +65,18 @@
 
                 for (let i = 0; i < files.length; i++) {
                     data.append("files[]", files[i]);
-                    data.append('username', 'Chris');
                 }
-                console.log(data);
 
                 $.ajax({
                     data: data,
                     type: "POST",
-                    url: "/ajax/uploader/upload",
+                    url: "{{ route('summernote.upload') }}",
                     cache: false,
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     contentType: false,
                     processData: false,
                     success: function (images) {
-                        //console.log(images);
+                        console.log(images);
 
                         // If not errors.
                         if (typeof images['error'] == 'undefined') {
