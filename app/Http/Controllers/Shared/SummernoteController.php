@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SummernoteUploadRequest;
+use App\Http\Requests\Summernote\SummernoteUploadRequest;
 
 class SummernoteController extends Controller
 {
@@ -14,5 +14,10 @@ class SummernoteController extends Controller
             $images[] = $image->store('summernote');
         }
         return $images;
+    }
+
+    public function delete()
+    {
+
     }
 }

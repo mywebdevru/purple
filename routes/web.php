@@ -46,6 +46,7 @@ Route::group([
 });
 
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
+Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');

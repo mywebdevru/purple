@@ -52,10 +52,11 @@
                             uploadFile(files);
                         },
 
-                        onMediaDelete: function ($target, editor, $editable) {
-                            console.log($target);
-                            console.log(editor);
-                            console.log($editable);
+                        onMediaDelete: function ($target) {
+                            const url = $target[0].src,
+                                cut = "{{ URL::to('/') }}" + "/storage/",
+                                image = url.replace(cut, '');
+                            deleteFile(image);
                         }
                     }
                 }
@@ -80,6 +81,22 @@
                     }
                 } catch (e) {
                     console.log(e);
+                }
+            }
+
+            async function deleteFile(file) {
+                console.log(file);
+                const data = new FormData();
+                data.append('file', file);
+                try {
+                    const result = await axios({
+                        data,
+                        method: 'post',
+                        url: "{{ route('summernote.delete') }}",
+                    });
+                    console.log(result);
+                } catch (e) {
+
                 }
             }
         });
