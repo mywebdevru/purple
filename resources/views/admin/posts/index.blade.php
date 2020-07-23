@@ -41,7 +41,7 @@
                                    role="button">
                                     <i class="far fa-eye"></i>
                                 </a>
-                                @can('edit posts', User::class)
+                                @can('update', $post)
                                 <a href="{{ route('admin.post.edit', $post->id)}}"
                                     class="btn btn-info btn-sm"
                                     role="button"><i class="far fa-edit"></i>

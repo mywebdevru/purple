@@ -56,7 +56,7 @@ class PostPolicy
         if ($user->can('edit posts')) {
             return true;
         }
-        return $user->id === $post->postable_id;
+        return $user->id === $post->postable_id && $post->postable_type == 'App\User';
     }
 
     /**
