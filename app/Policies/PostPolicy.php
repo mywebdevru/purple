@@ -53,7 +53,10 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        //
+        if ($user->can('edit all posts')) {
+            return true;
+        }
+        return $user->id === $post->postable_id;
     }
 
     /**
