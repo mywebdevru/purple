@@ -41,10 +41,12 @@
                                    role="button">
                                     <i class="far fa-eye"></i>
                                 </a>
+                                @can('edit posts', User::class)
                                 <a href="{{ route('admin.post.edit', $post->id)}}"
-                                   class="btn btn-info btn-sm"
-                                   role="button"><i class="far fa-edit"></i>
-                                </a>
+                                    class="btn btn-info btn-sm"
+                                    role="button"><i class="far fa-edit"></i>
+                                 </a>
+                                @endcan
                                 <form class="d-inline-block" action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
