@@ -73,6 +73,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $data = $request->only(['text']);
 
         $post->update($data);
