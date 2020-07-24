@@ -36,7 +36,7 @@ Route::resource('post', 'Post\PostController');
 Route::group([
     'namespace' => 'Admin',
     'prefix' => 'admin',
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'role:admin|super-admin'],
     'as' => 'admin.'
 ], function () {
     Route::resource('user', 'UserController');
