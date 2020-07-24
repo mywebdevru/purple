@@ -2,7 +2,7 @@ name: Run tests
 
 on:
   push:
-    branches: [ 'mywebdevru/purple/test_ci' ]
+    branches: [ test_ci ]
 
 jobs:
   laravel-tests:
