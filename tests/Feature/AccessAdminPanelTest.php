@@ -8,15 +8,15 @@ use Tests\TestCase;
 
 class AccessAdminPanelTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function testUserMustLoginToAccessAdminPanel()
     {
-        $response = $this->get('/');
+        $this->get(route('admin.index'))->assertRedirect('login');
+        $this->get(route('admin.user.index'))->assertRedirect('login');
+        $this->get(route('admin.post.index'))->assertRedirect('login');
+    }
 
-        $response->assertStatus(200);
+    public function testCanUserAccessAdminPanel()
+    {
+
     }
 }
