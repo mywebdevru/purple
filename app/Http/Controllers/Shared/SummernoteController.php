@@ -11,6 +11,7 @@ class SummernoteController extends Controller
 {
     public function upload(SummernoteUploadRequest $request)
     {
+        return $request;
         $images = [];
         foreach ($request['files'] as $image) {
             $img = $image->store('summernote');
