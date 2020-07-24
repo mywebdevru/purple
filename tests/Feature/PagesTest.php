@@ -13,7 +13,7 @@ class PagesTest extends TestCase
      * @return void
      */
 
-    public function ProfilePageTest()
+    public function testProfilePageTest()
     {
         $response1 = $this->get(route('user.show', 1));
         $response2 = $this->get(route('user.show', 10));
