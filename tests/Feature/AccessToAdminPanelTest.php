@@ -39,4 +39,17 @@ class AccessToAdminPanelTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function testSuperAdminCanAccessToAdminPanel()
+    {
+        $superAdminUser = factory(User::class)->create();
+
+        $superAdminUser->assignRole('super-admin');
+
+        $this->actingAs($superAdminUser);
+
+        $response = $this->get(route('admin.index'));
+
+        $response->assertOk();
+    }
 }
