@@ -13,9 +13,9 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: daybyday_test
+          MYSQL_ROOT_PASSWORD: purple
+          MYSQL_PASSWORD: purple
+          MYSQL_DATABASE: purple
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -26,14 +26,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v1
         with:
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
       - name: Create daybyday testing database
         env:
           PORT: ${{ job.services.mysql.ports[3306] }}
-        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS daybyday_test;'
+        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
 
       - name: Run yarn
         run: yarn && yarn dev
