@@ -24,13 +24,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('user', 'User\ProfileController');
-// Route::post('user/friendship_request', 'User\FriendshipRequestController@store');
-// Route::delete('user/friendship_reject/{user}', 'User\FriendshipRequestController@destroy')->name('user.friendship_reject');
-// Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->name('user.friendship_confirm');
-//Route::delete('user/friendship_delete', 'User\FriendsController@destroy');
-Route::resource('friendship_request', 'User\FriendshipRequestController');
-Route::resource('friend', 'User\FriendsController');
+Route::group([
+    'namespace' => 'User',
+    // 'prefix' => 'user',
+    // 'middleware' => 'auth',
+    // 'as' => 'user.'
+], function () {
+    Route::resource('user', 'ProfileController');
+    Route::resource('friendship_request', 'FriendshipRequestController');
+    Route::resource('friend', 'FriendsController');
+});
+
 Route::resource('post', 'Post\PostController');
 
 Route::group([

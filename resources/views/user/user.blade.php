@@ -18,14 +18,16 @@
                             <h3><strong>Друзья</strong> всего - {{ count($data->friends) }}</h3>
                             @if (count($data->friends) > 0)
                                 @foreach ($data->friends as $friend)
-                                    <p>{{ $friend->user->full_name }}</p>
-                                    <form action="{{ route('friend.destroy', ['friend' => $friend->id]) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{ $data->id }}">
-                                        <input type="hidden" name="friend_id" value="{{$friend->user->id}}">
-                                        <button type="submit" class="btn btn-danger">Отменить</button>
-                                    </form>
+                                    <a href="{{ route('user.show',['user' => $friend->user->id] ) }}"><p>{{ $friend->user->full_name }}</p></a>
+                                    @can('update', $data)
+                                        <form action="{{ route('friend.destroy', ['friend' => $friend->id]) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $data->id }}">
+                                            <input type="hidden" name="friend_id" value="{{$friend->user->id}}">
+                                            <button type="submit" class="btn btn-danger">Отменить</button>
+                                        </form>
+                                    @endcan
                                     <hr>
                                 @endforeach
                             @else
@@ -35,53 +37,55 @@
                                 <hr>
                             @endif
                             {{-- @dd($data) --}}
-                            <h3><strong>С вами хотят подружиться</strong> всего - {{ count($data->requestedFriendships) }}</h3>
-                            @if (count($data->requestedFriendships) > 0)
-                                @foreach ($data->requestedFriendships as $requestedFriendship)
-                                    <p>{{ $requestedFriendship->user->full_name }}</p>
-                                    <div class="row">
-                                        <form class="mx-3"  action="{{ route('friend.store') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
-                                            <input type="hidden" name="friend_id" value="{{$data->id}}">
-                                            <input type="hidden" name="requested_friendship" value="{{$requestedFriendship->id}}">
-                                            <button type="submit" class="btn btn-success">Принять</button>
-                                        </form>
-                                        <form action="{{ route('friendship_request.destroy', ['friendship_request' => $requestedFriendship->id]) }}" method="POST">
+                            @can('update', $data)
+                                <h3><strong>С вами хотят подружиться</strong> всего - {{ count($data->requestedFriendships) }}</h3>
+                                @if (count($data->requestedFriendships) > 0)
+                                    @foreach ($data->requestedFriendships as $requestedFriendship)
+                                        <p>{{ $requestedFriendship->user->full_name }}</p>
+                                        <div class="row">
+                                            <form class="mx-3"  action="{{ route('friend.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
+                                                <input type="hidden" name="friend_id" value="{{$data->id}}">
+                                                <input type="hidden" name="requested_friendship" value="{{$requestedFriendship->id}}">
+                                                <button type="submit" class="btn btn-success">Принять</button>
+                                            </form>
+                                            <form action="{{ route('friendship_request.destroy', ['friendship_request' => $requestedFriendship->id]) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
+                                                <input type="hidden" name="friend_id" value="{{$data->id}}">
+                                                <button type="submit" class="btn btn-danger">Отклонить</button>
+                                            </form>
+                                        </div>
+                                        <hr>
+                                    @endforeach
+                                @else
+                                    <p>
+                                        Новых запросов на дружбу пока нет.
+                                    </p>
+                                    <hr>
+                                @endif
+                                <h3><strong>Вы хотите дружить </strong> всего - {{ count($data->friendshipRequests) }}</h3>
+                                @if (count($data->friendshipRequests) > 0)
+                                    @foreach ($data->friendshipRequests as $friendshipRequest)
+                                        <p>{{ $friendshipRequest->friend->full_name }}</p>
+                                        <form  action="{{ route('friendship_request.destroy', ['friendship_request' => $friendshipRequest->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <input type="hidden" name="user_id" value="{{ $requestedFriendship->user_id }}">
-                                            <input type="hidden" name="friend_id" value="{{$data->id}}">
-                                            <button type="submit" class="btn btn-danger">Отклонить</button>
+                                            <input type="hidden" name="user_id" value="{{$data->id}}">
+                                            <input type="hidden" name="friend_id" value="{{ $friendshipRequest->friend_id }}">
+                                            <button type="submit" class="btn btn-danger">Я передумал(а)</button>
                                         </form>
-                                    </div>
+                                        <hr>
+                                    @endforeach
+                                @else
+                                    <p>
+                                        Новых запросов на дружбу пока нет.
+                                    </p>
                                     <hr>
-                                @endforeach
-                            @else
-                                <p>
-                                    Новых запросов на дружбу пока нет.
-                                </p>
-                                <hr>
-                            @endif
-                            <h3><strong>Вы хотите дружить </strong> всего - {{ count($data->friendshipRequests) }}</h3>
-                            @if (count($data->friendshipRequests) > 0)
-                                @foreach ($data->friendshipRequests as $friendshipRequest)
-                                    <p>{{ $friendshipRequest->friend->full_name }}</p>
-                                    <form  action="{{ route('friendship_request.destroy', ['friendship_request' => $friendshipRequest->id]) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{$data->id}}">
-                                        <input type="hidden" name="friend_id" value="{{ $friendshipRequest->friend_id }}">
-                                        <button type="submit" class="btn btn-danger">Я передумал(а)</button>
-                                    </form>
-                                    <hr>
-                                @endforeach
-                            @else
-                                <p>
-                                    Новых запросов на дружбу пока нет.
-                                </p>
-                                <hr>
-                            @endif
+                                @endif
+                            @endcan
                             @if (count($data->usersVehicles) > 0)
                             {{-- @dd($vehicles) --}}
                                 @foreach ($data->usersVehicles as $vehicle)
@@ -170,7 +174,7 @@
                                 <img class="media-object rounded-circle" src="https://placehold.it/200x200" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             </a>
                         </div>
-                        <h4><a href="#" style="text-decoration:none;"><strong>{{ $post->author ? $post->author : $data->full_name}}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->created_at }}</i></a></small></small></h4>
+                    <h4><a href="{{ $post->author_route ? route($post->author_route) :'#' }}" style="text-decoration:none;"><strong>{{ $post->author ? $post->author : $data->full_name}}</strong></a> – <small><small><a href="" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->created_at }}</i></a></small></small></h4>
                         <span>
                             <div class="navbar-right">
                                 <div class="dropdown">
