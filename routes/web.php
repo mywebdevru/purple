@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Shared\SummernoteController;
-use App\Http\Controllers\User\FriendsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,22 +36,21 @@ Route::group([
 
 Route::resource('post', 'Post\PostController');
 
-Route::group([
+\Route::group([
     'namespace' => 'Admin',
     'prefix' => 'admin',
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'role:admin|super-admin'],
     'as' => 'admin.'
 ], function () {
-    Route::resource('user', 'UserController');
-    Route::resource('post', 'PostController');
-    Route::resource('friend', 'FriendController')->only(['destroy']);
-    Route::get('/', [AdminController::class, 'index'])->name('index');
+    \Route::resource('user', 'UserController');
+    \Route::resource('post', 'PostController');
+    \Route::resource('friend', 'FriendController')->only(['destroy']);
+    \Route::get('/', [AdminController::class, 'index'])->name('index');
 });
 
-Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
-Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
+\Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
+\Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
-
