@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\User
@@ -68,7 +69,7 @@ use Illuminate\Support\Str;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

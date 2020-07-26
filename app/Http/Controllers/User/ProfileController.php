@@ -51,29 +51,39 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         $clubsPosts= collect([]);
+        $groupsPosts= collect([]);
         $usersPosts= collect([]);
         $userPosts = $user->posts; //Собственные посты
-        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups'); //Счетчики своих постов и подписок
-        $subscribesPosts = $user->load('subscribesToClubs.posts', 'subscribesToUsers.posts', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
-        foreach ($subscribesPosts->subscribesToClubs as $subscribe){
-            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){ //Условие выбора по дате сделано для примера
-                $post['author'] = 'Клуб '. $subscribe->name;
-                $clubsPosts->push($post);
+        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups'); //Счетчики постов и подписок
+        if (!!auth()->user() && auth()->user()->id == $user->id) {
+            $user->load('subscribesToClubs.posts', 'subscribesToUsers.posts', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+            foreach ($user->subscribesToClubs as $subscribe){
+                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){ //Условие выбора по дате сделано для примера
+                    $post['author'] = 'Клуб '. $subscribe->name;
+                    // $post['author_route'] = "club.show, ['club' => $post->postable_id]";
+                    $clubsPosts->push($post);
+                }
             }
-        }
-        foreach ($subscribesPosts->subscribesToGroups as $subscribe){
-            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
-                $post['author'] = 'Группа '. $subscribe->name;
-                $clubsPosts->push($post);
+            foreach ($user->subscribesToGroups as $subscribe){
+                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
+                    $post['author'] = 'Группа '. $subscribe->name;
+                    // $post['author_route'] = "group.show, ['group' => $post->postable_id]";
+                    $groupsPosts->push($post);
+                }
             }
-        }
-        foreach ($subscribesPosts->subscribesToUsers as $subscribe){
-            foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
-                $post['author'] = $subscribe->full_name;
-                $usersPosts->push($post);
+            foreach ($user->subscribesToUsers as $subscribe){
+                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
+                    $post['author'] = $subscribe->full_name;
+                    $post['author_route'] = "user.show, ['user' => $post->postable_id]";
+                    $usersPosts->push($post);
+                }
             }
+            $posts = $clubsPosts->merge($groupsPosts)->merge($userPosts)->sortByDesc('updated_at');
+        } else {
+            $posts = $userPosts;
+            $user->load('subscribesToClubs', 'subscribesToUsers', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
         }
-        $posts = $clubsPosts->merge($usersPosts)->merge($userPosts)->sortByDesc('updated_at');
+
         // dd($user->toArray());
         return view('user.user',['data' => $user, 'posts' => $posts]);
     }
@@ -98,6 +108,9 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if ($user->cannot('update', $user, User::class)){
+            abort(403, 'Вы не можете редактировать данные '.$user->full);
+        }
         $data = $request->except('_token');
         $save = $user->fill($data)->save();
         return redirect()->route('user.show', ['user' => $user]);

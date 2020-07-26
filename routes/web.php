@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Shared\SummernoteController;
-use App\Http\Controllers\User\FriendsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,37 +23,47 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('user', 'User\ProfileController');
-// Route::post('user/friendship_request', 'User\FriendshipRequestController@store');
-// Route::delete('user/friendship_reject/{user}', 'User\FriendshipRequestController@destroy')->name('user.friendship_reject');
-// Route::put('user/friendship_confirm/{user}', 'User\FriendsController@store')->name('user.friendship_confirm');
-//Route::delete('user/friendship_delete', 'User\FriendsController@destroy');
-Route::resource('friendship_request', 'User\FriendshipRequestController');
-Route::resource('friend', 'User\FriendsController');
-Route::resource('post', 'Post\PostController');
-
 Route::group([
-    'namespace' => 'Admin',
-    'prefix' => 'admin',
-    'middleware' => 'auth',
-    'as' => 'admin.'
+    'namespace' => 'User',
+    // 'prefix' => 'user',
+    // 'middleware' => 'auth',
+    // 'as' => 'user.'
 ], function () {
-    Route::resource('user', 'UserController');
-    Route::resource('post', 'PostController');
-    Route::resource('friend', 'FriendController')->only(['destroy']);
-    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::resource('user', 'ProfileController');
+    Route::resource('friendship_request', 'FriendshipRequestController');
+    Route::resource('friend', 'FriendsController');
 });
 
-Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
-Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
+Route::resource('post', 'Post\PostController');
+
+\Route::group([
+    'namespace' => 'Admin',
+    'prefix' => 'admin',
+    'middleware' => ['auth', 'role:admin|super-admin'],
+    'as' => 'admin.'
+], function () {
+    \Route::resource('user', 'UserController');
+    \Route::resource('post', 'PostController');
+    \Route::resource('friend', 'FriendController')->only(['destroy']);
+    \Route::get('/', [AdminController::class, 'index'])->name('index');
+});
+
+\Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
+\Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
 
-// временная страница
+
+
+
+
+
+// временная страница нового дизайна страницы профиля
 
 Route::get('prof', function() {
     return view('user/prof');
 });
+
 

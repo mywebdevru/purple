@@ -59,6 +59,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('admin.posts.edit')->with('post', $post);
     }
 
@@ -71,6 +73,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $data = $request->only(['text']);
 
         $post->update($data);
