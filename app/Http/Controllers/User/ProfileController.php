@@ -109,7 +109,7 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         if ($user->cannot('update', auth()->user())){
-            abort(403, 'Вы не можете редактировать данные '.$user->full);
+            abort(403, 'Вы не можете редактировать данные '.$user->full_name);
         }
         $data = $request->except('_token');
         $save = $user->fill($data)->save();
