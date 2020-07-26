@@ -52,3 +52,9 @@ Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
 
+// временная страница
+
+Route::get('prof', function() {
+    return view('user/prof');
+});
+
