@@ -108,7 +108,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($user->cannot('update', $user, User::class)){
+        if ($user->cannot('update', auth()->user())){
             abort(403, 'Вы не можете редактировать данные '.$user->full);
         }
         $data = $request->except('_token');
