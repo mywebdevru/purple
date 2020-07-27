@@ -85,7 +85,7 @@ class ProfileController extends Controller
         }
 
         // dd($user->toArray());
-        return view('user.user',['data' => $user, 'posts' => $posts]);
+        return view('user.prof',['data' => $user, 'posts' => $posts]);
     }
 
     /**
