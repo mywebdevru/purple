@@ -758,9 +758,9 @@
 		<form class="search-bar w-search notification-list friend-requests">
 			<div class="form-group with-button">
 				<input class="form-control js-user-search" placeholder="Поиск друзей или информации . . . " type="text">
-				<!-- <button>
+				<button>
 					<svg class="olymp-magnifying-glass-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon') }}"></use></svg>
-				</button> -->
+				</button>
 			</div>
 		</form>
 
