@@ -111,6 +111,6 @@
         <div class="author-title">
             {{ $full_name }} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon') }}"></use></svg>
         </div>
-        <span class="author-subtitle">Следопыт</span>
+        <span class="author-subtitle">{{ $creed }}</span>
     </a>
 </div>
