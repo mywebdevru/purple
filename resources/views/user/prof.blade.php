@@ -13,13 +13,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    {{-- <script src="{{ asset('fonts/fontawesome-free-5.14.0-web/js/all.js') }}" defer></script> --}}
     <script src="{{ asset('js/main.js') }}" defer></script>
 
 	<link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
 
 	<!-- Main Styles CSS -->
-	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('fonts/fontawesome-free-5.14.0-web/css/all.min.css') }}"> --}}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
