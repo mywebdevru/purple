@@ -21,12 +21,22 @@
                             <span class="chat-message-item">{{ $request->friend->location }}</span>
                         </div>
                         <span class="notification-icon">
-                            <a href="#" class="accept-request">
+                            <a class="accept-request" href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $request->id }}').submit();">
+                                <form id="accept-request-{{ $request->id }}" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $request->user_id }}">
+                                    <input type="hidden" name="friend_id" value="{{ $request->friend_id }}">
+                                    <input type="hidden" name="requested_friendship" value="{{ $request->id }}">
+                                </form>
                                 <span class="icon-add without-text">
                                     <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                 </span>
                             </a>
-                            <a href="#" class="accept-request request-del">
+                            <a class="accept-request request-del" href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $request->id }}').submit();">
+                                <form id="request-del-{{ $request->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $request]) }}" method="POST" style="display: none;">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
                                 <span class="icon-minus">
                                     <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                 </span>
@@ -37,7 +47,7 @@
                         </div>
                     </li>
                 @endforeach
-                <li>
+                {{-- <li>
                     <div class="author-thumb">
                         <img src="{{ asset('img/spiegel.jpg') }}" alt="author">
                     </div>
@@ -108,11 +118,10 @@
                     <div class="more">
                         <svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
                     </div>
-                </li>
+                </li> --}}
 
             </ul>
         </div>
-
         <a href="#" class="view-all bg-blue">Добавить всех</a>
     </div>
 </div>

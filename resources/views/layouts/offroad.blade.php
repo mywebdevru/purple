@@ -43,10 +43,7 @@
 
         <!-- <a href="#" class="link-find-friend">Поиск друзей</a> -->
 
-            @component('user.components.header.control_block', ['user' => $data])
-
-
-            @endcomponent
+            @component('user.components.header.control_block', ['user' => $data]) @endcomponent
 
 	</div>
 

@@ -6,11 +6,11 @@
         @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed]) @endcomponent
     @else
         <div class="nav-item text-light">
-            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
         </div>
         @if (Route::has('register'))
             <div class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
             </div>
         @endif
     @endauth
