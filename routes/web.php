@@ -45,6 +45,7 @@ Route::group([
     Route::resource('user', 'UserController')->except(['create', 'store']);
     Route::resource('post', 'PostController')->except(['create', 'store']);
     Route::resource('friend', 'FriendController')->only(['destroy']);
+    Route::resource('request', 'FriendshipRequestController')->only(['destroy']);
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
 

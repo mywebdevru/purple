@@ -76,11 +76,14 @@ class FriendshipRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FriendshipRequest  $friendshipRequest
-     * @return \Illuminate\Http\Response
+     * @param  \App\FriendshipRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(FriendshipRequest $friendshipRequest)
+    public function destroy(FriendshipRequest $request)
     {
-        //
+
+        $result = $request->delete();
+        abort_if(!$result, 404);
+        return back()->with('success', 'Запрос на дружбу удален');
     }
 }
