@@ -42,8 +42,8 @@ Route::group([
     'middleware' => ['auth', 'role:admin|super-admin'],
     'as' => 'admin.'
 ], function () {
-    Route::resource('user', 'UserController');
-    Route::resource('post', 'PostController');
+    Route::resource('user', 'UserController')->except(['create', 'store']);
+    Route::resource('post', 'PostController')->except(['create', 'store']);
     Route::resource('friend', 'FriendController')->only(['destroy']);
     Route::get('/', [AdminController::class, 'index'])->name('index');
 });
