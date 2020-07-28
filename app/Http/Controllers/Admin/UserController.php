@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\FriendshipRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
 use App\User;
@@ -48,7 +49,14 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show')->with('user', $user)->with('friends', $user->friends);
+        $userRequests = FriendshipRequest::where('user_id', $user->id)->get();
+        $friendshipRequests = FriendshipRequest::where('friend_id', $user->id)->get();
+
+        return view('admin.users.show')
+            ->with('user', $user)
+            ->with('friends', $user->friends)
+            ->with('userRequests', $userRequests)
+            ->with('friendshipRequests', $friendshipRequests);
     }
 
     /**
