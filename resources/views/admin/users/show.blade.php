@@ -193,5 +193,17 @@
 @section('scripts')
 @endsection
 @section('css')
+    <style>
+        .btn-link:hover,
+        .btn-link:active,
+        .btn-link:focus {
+            color: black;
+            text-decoration: none;
+        }
+        .btn-link {
+
+            color: black;
+        }
+    </style>
 @endsection
 
