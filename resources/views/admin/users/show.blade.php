@@ -8,7 +8,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card card-default">
+    <div class="card card-default mb-3">
         <div class="card-header">
             Информация о пользователе {{ $user->full_name }}
         </div>
@@ -58,7 +58,7 @@
             <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Collapsible Group Item #1
+                        Друзья
                     </button>
                 </h2>
             </div>
@@ -68,7 +68,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Друзья</th>
+                            <th scope="col">Друг</th>
                             <th scope="col">Действие</th>
                         </tr>
                         </thead>
@@ -103,13 +103,43 @@
             <div class="card-header" id="headingTwo">
                 <h2 class="mb-0">
                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
+                        Запросы пользователя на дружбу
                     </button>
                 </h2>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Пользователь</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($userRequests as $request)
+                            <tr>
+                                <td>
+                                    {{ $request->friend->full_name }}
+                                </td>
+                                <td>
+                                    <form class="d-inline-block" action="{{ route('admin.request.destroy', $request->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="btn btn-danger btn-sm"
+                                            type="submit"
+                                            role="button">
+                                            Удаление
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            Пользователь не предлагал дружбу
+                        @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -117,13 +147,43 @@
             <div class="card-header" id="headingThree">
                 <h2 class="mb-0">
                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
+                        Запросы на дружбу, поступившие пользователю
                     </button>
                 </h2>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Пользователь</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($friendshipRequests as $request)
+                            <tr>
+                                <td>
+                                    {{ $request->user->full_name }}
+                                </td>
+                                <td>
+                                    <form class="d-inline-block" action="{{ route('admin.request.destroy', $request->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="btn btn-danger btn-sm"
+                                            type="submit"
+                                            role="button">
+                                            Удаление
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            Пользователь не предлагал дружбу
+                        @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
