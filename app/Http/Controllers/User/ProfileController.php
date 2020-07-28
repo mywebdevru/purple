@@ -54,7 +54,7 @@ class ProfileController extends Controller
         $groupsPosts= collect([]);
         $usersPosts= collect([]);
         $userPosts = $user->posts; //Собственные посты
-        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups'); //Счетчики постов и подписок
+        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups', 'friendshipRequests'); //Счетчики постов и подписок
         if (!!auth()->user() && auth()->user()->id == $user->id) {
             $user->load('subscribesToClubs.posts', 'subscribesToUsers.posts', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
             foreach ($user->subscribesToClubs as $subscribe){
