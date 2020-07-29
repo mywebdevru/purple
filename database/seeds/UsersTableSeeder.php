@@ -16,25 +16,29 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', 'ruslan@purple.team')->first();
 
         if(!$user) {
-            User::create([
+            $ruslan = User::create([
                 'name' => 'Rus',
                 'surname' => 'Skazkin',
                 'email' => 'ruslan@skazkin.su',
                 'password' => Hash::make('ruslan'),
             ]);
+
+            $ruslan->assignRole('super-admin');
         }
 
         $user = User::where('email', 'x3mart@purple.team')->first();
 
         if(!$user) {
-            User::create([
+            $slava = User::create([
                 'name' => 'Вячеслав',
                 'surname' => 'Морозов',
                 'email' => 'x3mart@purple.team',
                 'password' => Hash::make('123'),
             ]);
+
+            $slava->assignRole('admin');
         }
 
-        factory(User::class, 100)->create();
+        factory(User::class, 300)->create();
     }
 }

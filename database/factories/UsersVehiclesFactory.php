@@ -3,11 +3,11 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
-use App\UsersVehicles;
+use App\UserVehicle;
 use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 
-$factory->define(UsersVehicles::class, function (Faker $faker) {
+$factory->define(UserVehicle::class, function (Faker $faker) {
     return [
         'type' => Arr::random(['Автомобиль', 'Квадроцикл']),
         'brand' => Arr::random(['Toyota', 'Cadilac', 'KIA', 'Renault', 'УАЗ', 'Mersedes Benz']),

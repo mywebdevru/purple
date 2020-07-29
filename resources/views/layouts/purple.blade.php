@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -22,6 +21,40 @@
 </head>
 
 <body>
+    @guest
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @else
     <div class="">
         <div class="navbar navbar-light-bg-light navbar-expand-md">
             <div class="container-fluid">
@@ -34,7 +67,7 @@
                 <div class="navbar-collapse collapse" id="#navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="#">Лента</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Мой профиль</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Мой профиль</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Клубы</a></li>
                         <li class="nav-item"><span class="badge badge-important">6</span><a class="nav-link" href="#" data-toggle="modal" data-target="#notifyModal"><i class="fa fa-bell-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#msgModal"><i class="fa fa-envelope-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
@@ -42,10 +75,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="{{ $data->name }} {{ $data->surname }}" alt="{{ $data->name }} {{ $data->surname }}" width="30px" height="30px">
+                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="{{ auth() ? auth()->user()->full_name: '' }}" alt="{{ auth() ? auth()->user()->full_name: '' }}" width="30px" height="30px">
                                 </span>
                                 <span class="user-name">
-                                    {{ $data->name }} {{ $data->surname }}
+                                    {{ auth()->user()->full_name ?? auth()->user()->full_name }}
                                 </span>
                                 <b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right mt-4">
@@ -59,12 +92,12 @@
                                                 </p>
                                             </div>
                                             <div class="col-md-7">
-                                                <span>{{ $data->name }} {{ $data->surname }}</span>
+                                                <span>{{ auth()->user()->full_name ?? auth()->user()->full_name }}</span>
                                                 <p class="text-muted small">
-                                                    {{ $data->email }}</p>
+                                                    {{ auth()->user()->full_name ?? auth()->user()->email }}</p>
                                                 <div class="divider">
                                                 </div>
-                                                <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Профиль</a>
+                                                <a href="{{ auth()->user() ? route('user.show', ['user' => auth()->user()->full_name]):'' }}" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Профиль</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#setsModal"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Поддержка</a>
@@ -78,7 +111,13 @@
                                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#passwdModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Сменить пароль</a>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <a href="#" class="btn btn-danger btn-sm pull-right"><i class="fa fa-power-off" aria-hidden="true"></i> Выход</a>
+                                                    <a href="#" class="btn btn-danger btn-sm pull-right" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                        {{ __('Выход') }}</a>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +130,63 @@
             </div>
         </div>
     </div>
+    @endguest
     @yield('content')
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>
+    {{-- <script type="text/javascript" >
+
+            class AdminMaker {
+                constructor(buttonsSelector) {
+                    this.selector = buttonsSelector;
+                    this.buttons = this._getButtons();
+                    this.answer = null;
+                    this._listenForClick();
+                }
+
+                _getButtons(){
+                    return document.querySelector(this.selector)
+                }
+                _listenForClick(){
+                    console.log('start');
+                        this.buttons.addEventListener('click', e =>{
+                            this._changeAdminStatus();
+                        });
+                }
+                _changeAdminStatus(){
+                    let settings = this._makeRequestSettings();
+                    (async () => {
+                        const response = await fetch('/user/friendship_delete', settings);
+                        const answer = await response.json();
+                        console.log(answer);
+                        this._changeUserStatusOnSite(answer);
+                    }) ();
+                }
+                _makeRequestSettings(){
+                    let data = {
+                        'user_id': {{ $data->id }},
+                        'friend_id':12,
+                        'friendship' : 'reject'
+                    };
+                    let settings = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            // 'Authorization':'Bearer '+ js_vars.api_token
+                            },
+                        body: JSON.stringify(data),
+                        }
+                    return settings
+                }
+                _changeUserStatusOnSite(answer) {
+                    console.log('ehf')
+
+                }
+            }
+
+
+            let admin = new AdminMaker('#friend');
+        </script> --}}
 </body>

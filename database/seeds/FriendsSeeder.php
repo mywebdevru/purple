@@ -1,6 +1,6 @@
 <?php
 
-use App\Friends;
+use App\Friend;
 use Illuminate\Database\Seeder;
 use App\User;
 
@@ -13,6 +13,6 @@ class FriendsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Friends::class, User::all()->count())->create();
+        factory(Friend::class, User::all()->count()*3)->create();
     }
 }

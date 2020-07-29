@@ -1,7 +1,7 @@
 <?php
 
 use App\User;
-use App\UsersVehicles;
+use App\UserVehicle;
 use Illuminate\Database\Seeder;
 
 class UsersVehiclesSeeder extends Seeder
@@ -13,6 +13,6 @@ class UsersVehiclesSeeder extends Seeder
      */
     public function run()
     {
-        factory(UsersVehicles::class, User::all()->count()*2)->create();
+        factory(UserVehicle::class, User::all()->count()*2)->create();
     }
 }
