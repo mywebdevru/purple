@@ -56,7 +56,7 @@ class ProfileController extends Controller
             $id=$user->id;
             $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
             $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
-            $subscribesToGroup = $user->subscribesToGroup()->pluck('subscrable_id');
+            $subscribesToGroup = $user->subscribesToGroups()->pluck('subscrable_id');
             $posts = Post::where(function (Builder $query) use ($subscribesToUsers) {
                 return $query->whereIn('postable_id', $subscribesToUsers)
                             ->where('postable_type', 'App\User');
