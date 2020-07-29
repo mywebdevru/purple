@@ -49839,8 +49839,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/skazkin/git_projects/purple/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/skazkin/git_projects/purple/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\GAMES\OS\OSPanel\domains\purple\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\GAMES\OS\OSPanel\domains\purple\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
