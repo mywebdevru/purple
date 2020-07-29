@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,78 +20,58 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="">
-        <div class="navbar navbar-light-bg-light navbar-expand-md">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/"><img src="https://github.com/mywebdevru/purple/raw/dev/4x4.png" alt="LOGO" class="logo-4x4"></a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="https://github.com/mywebdevru/purple/raw/dev/4x4.png" alt="" width="30" height="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Лента</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Клубы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Карты</a>
+                </li>
+            </ul>
+            <div class="form-inline navbar-nav ml-auto my-2 my-lg-0 dropleft">
+                <div class="navbar_inline_notifications mr-4 ml-4">
+                    <i class="fas fa-2x fa-bell text-secondary"></i><span class="badge badge-pill badge-danger">12</span>
+                    <i class="fas fa-2x fa-envelope text-secondary"></i><span class="badge badge-pill badge-warning">42</span>
+                    <i class="fas fa-2x fa-plus text-secondary"></i><span class="badge badge-pill badge-success">32</span>
                 </div>
-                <div class="navbar-collapse collapse" id="#navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">Лента</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Мой профиль</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Клубы</a></li>
-                        <li class="nav-item"><span class="badge badge-important">6</span><a class="nav-link" href="#" data-toggle="modal" data-target="#notifyModal"><i class="fa fa-bell-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#msgModal"><i class="fa fa-envelope-o fa-lg bt4fix-fa-icons-blacked" aria-hidden="true"></i></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                    <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" class="img-responsive rounded-circle" title="{{ $data->name }} {{ $data->surname }}" alt="{{ $data->name }} {{ $data->surname }}" width="30px" height="30px">
-                                </span>
-                                <span class="user-name">
-                                    {{ $data->name }} {{ $data->surname }}
-                                </span>
-                                <b class="caret"></b></a>
-                            <ul class="dropdown-menu dropdown-menu-right mt-4">
-                                <li>
-                                    <div class="navbar-content">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
-                                                <p class="text-center small mt-2">
-                                                    <a href="#" data-toggle="modal" data-target="#profpicModal"><i class="fa fa-upload"></i> Новое фото</a>
-                                                </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span>{{ $data->name }} {{ $data->surname }}</span>
-                                                <p class="text-muted small">
-                                                    {{ $data->email }}</p>
-                                                <div class="divider">
-                                                </div>
-                                                <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Профиль</a>
-                                                <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a>
-                                                <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#setsModal"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</a>
-                                                <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Поддержка</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="navbar-footer">
-                                        <div class="navbar-footer-content">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#passwdModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Сменить пароль</a>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <a href="#" class="btn btn-danger btn-sm pull-right"><i class="fa fa-power-off" aria-hidden="true"></i> Выход</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="http://placehold.it/35x35" class="navbar_profile_pic">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <b class="dropdown-item mt-2 disabled font-weight-bold">Имя Фамилия</b>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Профиль (вы здесь)</a>
+                        <a class="dropdown-item" href="#">Настройки</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger mb-2" href="#">Выход</a>
+                    </div>
+                </li>
             </div>
         </div>
-    </div>
+    </nav>
     @yield('content')
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>

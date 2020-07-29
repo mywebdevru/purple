@@ -330,7 +330,7 @@
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#">
-                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">a>
+                                    <img class="media-object rounded-circle mr-4" src="https://placehold.it/200x200" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;"></a>
                             </div>
                             <div class="media-body">
                                 <textarea class="form-control" rows="1" placeholder="Комментарий"></textarea><button class="btn btn-primary mt-2">Отправить</button>
