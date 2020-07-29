@@ -51,7 +51,7 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $user->loadCount('friendshipRequests'); //Счетчики постов и подписок
+
         if (!!auth()->user() && auth()->user()->id == $user->id) {
             $id=$user->id;
             $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
@@ -67,11 +67,16 @@ class ProfileController extends Controller
                             ->where('postable_type', 'App\Club');
             })->orderBy('updated_at', 'desc')->get();
             $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+            $user->loadCount('friendshipRequests');
+            $authUser = $user;
         } else {
-            $posts = $user->posts()->orderBy('updated_at', 'desc');
-            $user->load('subscribesToClubs', 'subscribesToUsers', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+            $posts = $user->posts()->orderBy('updated_at', 'desc')->get();
+            $user->load('usersVehicles', 'friends.user');
+            $authUser = User::find(auth()->user()->id);
+            $authUser->loadCount('friendshipRequests');
+            $authUser->load('friendshipRequests.friend');
         }
-        return view('user.prof',['data' => $user, 'posts' => $posts]);
+        return view('user.prof',['data' => $user, 'posts' => $posts, 'user' => $authUser]);
     }
 
     /**
