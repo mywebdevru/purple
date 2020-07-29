@@ -9,15 +9,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    @yield('css')
+
 </head>
 <body>
 <div id="app">
@@ -93,15 +93,13 @@
             @endif
             @auth
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <ul class="list-group mb-5">
-                            @if('admin')
-                                <li class="list-group-item">
-                                    <a href="">Пользователи</a>
-                                </li>
-                            @endif
                             <li class="list-group-item">
-                                <a href="">Посты</a>
+                                <a href="{{ route('admin.user.index') }}">Пользователи</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('admin.post.index') }}">Посты</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="">Маршруты</a>
@@ -111,7 +109,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         @yield('content')
                     </div>
                 </div>
@@ -123,7 +121,7 @@
 </div>
 
 <!-- Scripts -->
-
+<script src="{{ asset('js/admin.js') }}"></script>
 @yield('scripts')
 </body>
 </html>

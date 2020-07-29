@@ -10955,6 +10955,8 @@ body {
   background: #f0f0f0;
 }
 
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10964,6 +10966,8 @@ body {
   margin-left: -15px;
   margin-right: -15px;
 }
+
+/* Flip around the padding for proper display in narrow viewports */
 
 .navbar-wrapper .container {
   padding-left: 0;
