@@ -56,6 +56,7 @@ class ProfileController extends Controller
             $id=$user->id;
             $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
             $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
+            $subscribesToGroup = $user->subscribesToGroup()->pluck('subscrable_id');
             $posts = Post::where(function (Builder $query) use ($subscribesToUsers) {
                 return $query->whereIn('postable_id', $subscribesToUsers)
                             ->where('postable_type', 'App\User');
@@ -65,6 +66,9 @@ class ProfileController extends Controller
             })->orWhere(function (Builder $query) use ($subscribesToClubs) {
                 return $query->whereIn('postable_id', $subscribesToClubs)
                             ->where('postable_type', 'App\Club');
+            })->orWhere(function (Builder $query) use ($subscribesToGroup) {
+                return $query->whereIn('postable_id', $subscribesToGroup)
+                            ->where('postable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
             $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
             $user->loadCount('friendshipRequests');
@@ -76,6 +80,8 @@ class ProfileController extends Controller
             $authUser->loadCount('friendshipRequests');
             $authUser->load('friendshipRequests.friend');
         }
+        $posts->load('postable');
+        // dd($posts->find(168)->postable->full_name);
         return view('user.prof',['data' => $user, 'posts' => $posts, 'user' => $authUser]);
     }
 
