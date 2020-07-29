@@ -55,3 +55,4 @@ Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name(
 Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
+
