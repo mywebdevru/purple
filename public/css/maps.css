@@ -18,3 +18,61 @@
     background-color: #e6e6e6;
     border: 2px dashed #333;
 }
+.menu{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    z-index: 2
+}
+.close{
+    position: absolute;
+    right: 5px;
+    top: 1px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+}
+.menu-form{
+    display: flex;
+    flex-direction: column;
+}
+.menu-form input,
+#baloon-desc{
+    margin: 8px 0;
+    border-radius: 5px;
+}
+#baloon-desc{
+    resize: none;
+}
+.menu-form input:focus,
+#baloon-desc:focus{
+    outline: none;
+}
+#baloon-save,
+.placemark-delete,
+#save-map{
+    margin-top: 5px;
+    background-color: #41B33B;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    color: #fafafa;
+    border-radius: 5px;
+    transition: all ease-in-out .4s;
+    cursor: pointer;
+    outline: none;
+}
+#baloon-save:hover,
+.placemark-delete:hover,
+#save-map:hover{
+    background-color: #fafafa;
+    color: #2f2a2d;
+    border: 1px solid #2f2a2d;
+}

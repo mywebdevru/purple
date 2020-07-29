@@ -5,47 +5,54 @@ function init() {
     var myMap = new ymaps.Map("map", {
         center: [55.76, 37.64], //Moscow
         zoom: 12,
-        type: 'yandex#hybrid' //гибридный слой при открытии
+        type: 'yandex#hybrid', //гибридный слой при открытии
     }),
-        currentId = 0, //id создаваемого геообъекта
-        object = [], //массив для геообъектов
-        //Объявление кнопок конструктора
-        //Макет кнопки отображает data.content и меняется в зависимости от нажатия
-        btnLayout = ymaps.templateLayoutFactory.createClass(
-            "<div class='map-btn {% if state.selected %}map-btn-selected{% endif %}' title='{{ data.title }}'>" +
-            "{{data.content}}" +
-            "</div>"
-        ),
-        //Общие опции
-        btnOptions = {
-            float: 'left',
-            layout: btnLayout,
+    currentId = 0, //id создаваемого геообъекта
+    object = [], //массив для геообъектов
+    //Объявление кнопок конструктора
+    //Макет кнопки отображает data.content и меняется в зависимости от нажатия
+    btnLayout = ymaps.templateLayoutFactory.createClass(
+        "<div class='map-btn {% if state.selected %}map-btn-selected{% endif %}' title='{{ data.title }}'>" +
+        "{{data.content}}" +
+        "</div>"
+    ),
+    //Общие опции
+    btnOptions = {
+        float: 'left',
+        layout: btnLayout,
+    },
+    //кнопка создания меток
+    placemarkBtn = new ymaps.control.Button({
+        data: {
+            content: 'Метка',
+            title: 'placemark'
         },
-        //кнопка создания меток
-        placemarkBtn = new ymaps.control.Button({
-            data: {
-                content: 'Метка',
-                title: 'placemark'
-            },
-            options: btnOptions
-        }),
-        //кнопка создания ломаных
-        lineBtn = new ymaps.control.Button({
-            data: {
-                content: 'Ломаная',
-                title: 'line'
-            },
-            options: btnOptions
-        }),
-        //кнопка создания многоугольников
-        polygonBtn = new ymaps.control.Button({
-            data: {
-                content: 'Многоугольник',
-                title: 'Polygon'
-            },
-            options: btnOptions
-        });
-
+        options: btnOptions
+    }),
+    //кнопка создания ломаных
+    lineBtn = new ymaps.control.Button({
+        data: {
+            content: 'Ломаная',
+            title: 'line'
+        },
+        options: btnOptions
+    }),
+    //кнопка создания многоугольников
+    polygonBtn = new ymaps.control.Button({
+        data: {
+            content: 'Многоугольник',
+            title: 'Polygon'
+        },
+        options: btnOptions
+    }),
+    // Создание макета балуна
+    MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass (
+        '<div class="baloon">' +
+            '<h3 class="baloon-title">$[properties.balloonHeader]</h3>' +
+            '<div class="baloon-content">$[properties.balloonContent]</div>' +
+        '</div>'
+    );
+    
     //Добавление кнопок конструктора на карту
     myMap.controls.add(placemarkBtn, { floatIndex: 2 });
     myMap.controls.add(lineBtn, { floatIndex: 1 });
@@ -63,21 +70,84 @@ function init() {
         var coords = event.get('coords'); //получаем координаты места клика
         myPlacemark = createPlacemark(coords, 1); //функция описания метки с заданными координатами
         myMap.geoObjects.add(myPlacemark); //установка метки на карту
+        //Смена значка метки при наведении
+        myPlacemark.events.add('mouseenter', function (e) {
+            e.get('target').options.set('preset', 'islands#greenIcon');
+        });
+        myPlacemark.events.add('mouseleave', function (e) {
+            e.get('target').options.unset('preset');
+        });
+        // Контекстное меню, позволяющее изменить параметры метки.
+        // Вызывается при нажатии правой кнопкой мыши на метке.
+        myPlacemark.events.add('contextmenu', function (e) {
+            createBaloonContent(myPlacemark, e);
+        });
     };
     function createPlacemark(coords) {
         return new ymaps.Placemark(coords, {
-            balloonHeader: 'Заголовок балуна',
-            balloonContent: 'Контент балуна',
+            hintContent: "Добавить описание - правая кнопка мыши",
             id: currentId++,
             type: 'Placemark'
         }, {
-            draggable: true,
+            hideIconOnBalloonOpen: false,
+            balloonContentLayout: MyBalloonContentLayout,
+            draggable: true
         });
     };
     placemarkBtn.events.add('deselect', function () {
         //Отключение расстановки меток
         myMap.events.remove('click', markMapClick);
     });
+    function createBaloonContent (placemark, e) {
+        if ($('#menu').css('display') == 'flex') {
+            $('#menu').remove();
+        } else {
+            // HTML-содержимое контекстного меню.
+            var menuContent =
+            '<div class="menu" id="menu">' +
+                '<a class="close" href="#">&times;</a>' +
+                '<div id="form" class="menu-form">' +
+                    '<label for="baloon-hint">Всплывающая подсказка:</label>' +
+                    '<input type="text" id="baloon-hint">' +
+                    '<label for="baloon-header">Подпись метки:</label>' +
+                    '<input type="text" id="baloon-header">' +
+                    '<label for="baloon-desc">Описание метки:</label>' +
+                    '<textarea id="baloon-desc" cols="40" rows="6"></textarea>' +
+                    '<input type="submit" id="baloon-save" value="Сохранить">' +
+                '</div>' +
+                '<button class="placemark-delete">Удалить метку</button>' +
+            '</div>';
+            // Размещаем контекстное меню на странице
+            $('body').append(menuContent);
+            // Задаем позицию меню.
+            $('#menu').css({
+                left: e.get('pagePixels')[0],
+                top: e.get('pagePixels')[1]
+            });
+            $(".close").click(function () {
+                $('#menu').remove();
+            });
+            // Заполняем поля контекстного меню текущими значениями свойств метки.
+            $('#baloon-hint').val(placemark.properties.get('hintContent'));
+            $('#baloon-header').val(placemark.properties.get('balloonHeader'));
+            $('#baloon-desc').val(placemark.properties.get('balloonContent'));
+            // При нажатии на кнопку "Сохранить" изменяем свойства метки
+            // значениями, введенными в форме контекстного меню.
+            $("#baloon-save").click(function () {
+                placemark.properties.set({
+                    hintContent: $("#baloon-hint").val(),
+                    balloonHeader: $("#baloon-header").val(),
+                    balloonContent: $("#baloon-desc").val()
+                });
+                // Удаляем контекстное меню.
+                $('#menu').remove();
+            });
+            $(".placemark-delete").click(function () {
+                myMap.geoObjects.remove(placemark);
+                $('#menu').remove();
+            });
+        }
+    };
 
 
     //Функция включения создания ломаных при нажтии на кнопку lineBtn
@@ -148,8 +218,6 @@ function init() {
             editorDrawingCursor: "crosshair",
             // Максимально допустимое количество вершин.
             editorMaxPoints: 20,
-            // Цвет заливки.
-            fillColor: '#00FF00',
             // Цвет обводки.
             strokeColor: '#0000FF',
             // Ширина обводки.
@@ -174,7 +242,7 @@ function init() {
 
 
     //Сохранение данных геообъектов
-    document.querySelector('#save-map').addEventListener('click', () => {
+    $('#save-map').click(function () {
         object = [];
         for (let i = 0; i < currentId; i++) {
             object.push({

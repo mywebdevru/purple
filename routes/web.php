@@ -56,3 +56,6 @@ Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
 
+Route::group(['prefix'=>'maps', 'namespace'=>'Maps'], function(){
+    Route::get('/', 'ConstructController@map_constructor');
+});
