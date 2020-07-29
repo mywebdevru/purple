@@ -41,17 +41,17 @@ class FriendsController extends Controller
      */
     public function store(Request $request, Friend $friends)
     {
-        abort_if (!$request->user_id || !$request->friend_id || !$request->requested_friendship, 403, 'Недостаточно данных');
+        abort_if (!$request->requested_friendship, 403, 'Недостаточно данных');
 
-        DB::transaction(function () use ($request, $friends) {
-            $error = false;
-            $friends->create(['user_id' => $request->user_id,'friend_id' => $request->friend_id])?:$error = true;
-            $friends->create(['user_id' => $request->friend_id,'friend_id' => $request->user_id])?:$error = true;
-            User::find($request->user_id)->subscribesToUsers()->attach($request->friend_id);
-            User::find($request->friend_id)->subscribesToUsers()->attach($request->user_id);
-            FriendshipRequest::find($request->requested_friendship)->delete()?:$error = true;
-            abort_if($error, 500);
-        });
+        $friendship = json_decode($request->requested_friendship, true);
+
+        if (isset($friendship['id'])) {
+            $this->makeFriendTransactoin($friendship, $friends);
+        } else {
+            foreach ($friendship as $friendship) {
+                $this->makeFriendTransactoin($friendship, $friends);
+            }
+        }
         session()->flash('success', 'У вас новый друг');
         return back();
     }
@@ -116,5 +116,18 @@ class FriendsController extends Controller
 
         session()->flash('success', 'Пользователь больше не дружит с ' . $friend->user->full_name);
         return back();
+    }
+
+    private function makeFriendTransactoin($friendship, $friends)
+    {
+        DB::transaction(function () use ($friendship, $friends) {
+            $error = false;
+            $friends->create(['user_id' => $friendship['user_id'], 'friend_id' => $friendship['friend_id']])?:$error = true;
+            $friends->create(['user_id' => $friendship['friend_id'],'friend_id' => $friendship['user_id']])?:$error = true;
+            User::find($friendship['user_id'])->subscribesToUsers()->attach($friendship['friend_id']);
+            User::find($friendship['friend_id'])->subscribesToUsers()->attach($friendship['user_id']);
+            FriendshipRequest::find($friendship['id'])->delete()?:$error = true;
+            abort_if($error, 500);
+        });
     }
 }

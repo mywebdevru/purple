@@ -1,4 +1,4 @@
-@extends('layouts.offroad')
+@extends('layouts.app')
 
 @section('content')
 
