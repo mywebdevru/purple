@@ -68,6 +68,14 @@ class Club extends Model
         return $this->morphMany('App\Post', 'postable');
     }
 
+    /**
+     * Get the Club's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
     public function getFullNameAttribute() {
         return "Клуб $this->name";
     }

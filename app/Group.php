@@ -62,6 +62,14 @@ class Group extends Model
         return $this->morphMany('App\Post', 'postable');
     }
 
+    /**
+     * Get the Group's's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
     public function getFullNameAttribute() {
         return "Сообщество $this->name";
     }
