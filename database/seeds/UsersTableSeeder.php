@@ -21,6 +21,8 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'Skazkin',
                 'email' => 'ruslan@skazkin.su',
                 'password' => Hash::make('ruslan'),
+                'avatar' => 'https://lorempixel.com/400/400/people/',
+                'wallpaper' => 'https://lorempixel.com/1200/400/transport/',
             ]);
 
             $ruslan->assignRole('super-admin');
@@ -34,6 +36,9 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'Морозов',
                 'email' => 'x3mart@purple.team',
                 'password' => Hash::make('123'),
+                'creed' => 'Too old to die young',
+                'avatar' => 'https://lorempixel.com/400/400/people/',
+                'wallpaper' => 'https://lorempixel.com/1200/400/transport/',
             ]);
 
             $slava->assignRole('admin');
