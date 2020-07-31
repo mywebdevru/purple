@@ -80,7 +80,7 @@ class ProfileController extends Controller
                 return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+            $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
             $user->loadCount('friendshipRequests');
             $authUser = $user;
         } else {
@@ -91,7 +91,7 @@ class ProfileController extends Controller
                             return $query->where('imageable_id', $id)
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user');
+            $user->load('usersVehicles', 'friends.user', 'images');
             if(!!auth()->user()){
                 $authUser = User::find(auth()->user()->id);
                 $authUser->loadCount('friendshipRequests');

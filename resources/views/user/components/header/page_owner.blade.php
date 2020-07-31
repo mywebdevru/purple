@@ -1,6 +1,6 @@
 <div class="author-page author vcard inline-items more">
     <div class="author-thumb">
-        <img alt="author" src="{{ asset('img/ii.jpg') }}" class="avatar">
+        <img alt="author" src="{{ $avatar }}" class="avatar">
         <span class="icon-status online"></span>
         <div class="more-dropdown more-with-triangle">
             <div class="mCustomScrollbar" data-mcs-theme="dark">

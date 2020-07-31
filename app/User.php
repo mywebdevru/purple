@@ -181,9 +181,9 @@ class User extends Authenticatable
     /**
      * Get the User's Images.
      */
-    public function image()
+    public function images()
     {
-        return $this->morphMany('App\Image', 'postable');
+        return $this->morphMany('App\Image', 'imageable');
     }
 
     public function removeAvatar()

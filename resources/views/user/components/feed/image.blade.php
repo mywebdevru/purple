@@ -4,7 +4,7 @@
     <article class="hentry post has-post-thumbnail shared-photo">
 
             <div class="post__author author vcard inline-items">
-                <img src="{{ asset('img/ii.jpg') }}" alt="author">
+                <img src="{{ $feed->imageable['avatar'] }}" alt="author">
 
                 <div class="author-date">
                     <a class="h6 post__author-name fn" href="">{{ $feed->imageable['full_name'] }}</a>

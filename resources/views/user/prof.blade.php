@@ -736,7 +736,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ asset('img/moto.jpg') }}" alt="nature">
+						<img src="{{ $data->wallpaper }}" alt="wallpaper">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -790,11 +790,11 @@
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ asset('img/i.jpg') }}" alt="author">
+							<img src="{{ $data->avatar }}" alt="author">
 						</a>
 						<div class="author-content">
-							<a href="" class="h4 author-name">Иванов Иван</a>
-							<div class="country">Самара</div>
+							<a href="" class="h4 author-name">{{ $data->full_name }}</a>
+							<div class="country">{{ $data->location }}</div>
 						</div>
 					</div>
 				</div>
@@ -1722,12 +1722,19 @@
 					<!-- Фото -->
 
 					<ul class="widget w-last-photo js-zoom-gallery">
-						<li>
+                        @foreach ($data->images as $item)
+                        <li>
+							<a href="img/last-photo10-large.jpg">
+								<img src="{{ $item->image }}" alt="photo">
+							</a>
+						</li>
+                        @endforeach
+						{{-- <li>
 							<a href="img/last-photo10-large.jpg">
 								<img src="{{ asset('img/last-photo10-large.jpg') }}" alt="photo">
 							</a>
-						</li>
-						<li>
+						</li> --}}
+						{{-- <li>
 							<a href="img/last-phot11-large.jpg">
 								<img src="{{ asset('img/last-phot11-large.jpg') }}" alt="photo">
 							</a>
@@ -1766,7 +1773,7 @@
 							<a href="img/last-phot18-large.jpg">
 								<img src="{{ asset('img/last-phot18-large.jpg') }}" alt="photo">
 							</a>
-						</li>
+						</li> --}}
 					</ul>
 
 

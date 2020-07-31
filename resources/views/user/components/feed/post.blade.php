@@ -4,7 +4,7 @@
     <article class="hentry post">
 
             <div class="post__author author vcard inline-items">
-                <img src="{{ asset('img/ii.jpg') }}" alt="author">
+                <img src="{{ $feed->postable['avatar'] }}" alt="author">
                 {{-- @dump($feed) --}}
                 <div class="author-date">
                     <a class="h6 post__author-name fn" href="">{{ $feed->postable['full_name'] }}</a>
