@@ -53,6 +53,9 @@ class PostPolicy
      */
     public function update(?User $user, Post $post)
     {
+        if(!$user){
+            return false;
+        }
         if ($user->can('edit posts')) {
             return true;
         }
