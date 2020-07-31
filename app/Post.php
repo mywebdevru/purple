@@ -47,4 +47,8 @@ class Post extends Model
         return $this->morphTo();
     }
 
+    public function feed()
+    {
+        return $this->morphOne('App\Feed', 'feedable');
+    }
 }

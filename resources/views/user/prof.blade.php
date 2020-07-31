@@ -736,7 +736,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ asset('img/moto.jpg') }}" alt="nature">
+						<img src="{{ $data->wallpaper }}" alt="wallpaper">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -790,11 +790,11 @@
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ asset('img/i.jpg') }}" alt="author">
+							<img src="{{ $data->avatar }}" alt="author">
 						</a>
 						<div class="author-content">
-							<a href="" class="h4 author-name">Иванов Иван</a>
-							<div class="country">Самара</div>
+							<a href="" class="h4 author-name">{{ $data->full_name }}</a>
+							<div class="country">{{ $data->location }}</div>
 						</div>
 					</div>
 				</div>
@@ -814,135 +814,15 @@
 		<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 			<div id="newsfeed-items-grid">
 
-				<div class="ui-block revealator-fade revealator-delay2 revealator-once">
-					<!-- Пост -->
+                @foreach ($feed as $item)
+                {{-- @dd($item->feedable) --}}
+                    @if($item['feedable_type'] == 'App\Post')
+                        @component('user.components.feed.post',['feed' => $item->feedable]) @endcomponent
+                    @else
+                        @component('user.components.feed.image',['feed' => $item->feedable]) @endcomponent
+                    @endif
+                @endforeach
 
-					<article class="hentry post">
-
-							<div class="post__author author vcard inline-items">
-								<img src="{{ asset('img/ii.jpg') }}" alt="author">
-
-								<div class="author-date">
-									<a class="h6 post__author-name fn" href="">Иванов Иван</a>
-									<div class="post__date">
-										<time class="published" datetime="2017-03-24T18:18">
-											19 часов назад
-										</time>
-									</div>
-								</div>
-
-								<div class="more">
-									<svg class="olymp-three-dots-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-									</svg>
-									<ul class="more-dropdown">
-										<li>
-											<a href="#">Редактировать пост</a>
-										</li>
-										<li>
-											<a href="#">Удалить пост</a>
-										</li>
-									</ul>
-								</div>
-
-							</div>
-
-							<p>Iron Maiden Iron Maiden Iron Maiden Iron Maiden Iron Maiden
-							</p>
-
-							<div class="post-additional-info inline-items">
-
-								<a href="#" class="post-add-icon inline-items">
-									<svg class="olymp-heart-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-									</svg>
-									<span>8</span>
-								</a>
-
-								<ul class="friends-harmonic">
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-								</ul>
-
-								<div class="names-people-likes">
-									<a href="#">spiegel</a>, <a href="#">spiegel</a> and
-									<br>6 лайков
-								</div>
-
-
-								<div class="comments-shared">
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-speech-balloon-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
-										</svg>
-										<span>17</span>
-									</a>
-
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-share-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-										</svg>
-										<span>24</span>
-									</a>
-								</div>
-
-
-							</div>
-
-							<div class="control-block-button post-control-button">
-
-								<a href="#" class="btn btn-control featured-post">
-									<svg class="olymp-trophy-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-trophy-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-like-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-like-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-comments-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-share-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-									</svg>
-								</a>
-
-							</div>
-
-						</article>
-
-					</div><!-- .. окончание Поста -->
 
 
 				<div class="ui-block revealator-slideup revealator-once">
@@ -1410,150 +1290,8 @@
 					</form>
 
 					</div><!-- ... окончание Блока для печатания текста комментария  -->
-				<div class="ui-block revealator-slideup revealator-once">
-					<!-- Пост -->
 
-					<article class="hentry post has-post-thumbnail shared-photo">
-
-							<div class="post__author author vcard inline-items">
-								<img src="{{ asset('img/ii.jpg') }}" alt="author">
-
-								<div class="author-date">
-									<a class="h6 post__author-name fn" href="">Иванов Иван</a> shared
-									<a href="#">spiegel</a>’s <a href="#">фото</a>
-									<div class="post__date">
-										<time class="published" datetime="2017-03-24T18:18">
-											7 часов назад
-										</time>
-									</div>
-								</div>
-
-								<div class="more">
-									<svg class="olymp-three-dots-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-									</svg>
-									<ul class="more-dropdown">
-										<li>
-											<a href="#">Редактировать пост</a>
-										</li>
-										<li>
-											<a href="#">Удалить пост</a>
-										</li>
-									</ul>
-								</div>
-
-							</div>
-
-							<p>spiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegel</p>
-
-							<div class="post-thumb">
-								<img src="{{ asset('img/post-photo6.jpg') }}" alt="photo">
-							</div>
-
-							<ul class="children single-children">
-								<li class="comment-item">
-									<div class="post__author author vcard inline-items">
-										<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-										<div class="author-date">
-											<a class="h6 post__author-name fn" href="#">spiegel</a>
-											<div class="post__date">
-												<time class="published" datetime="2017-03-24T18:18">
-													16 часов назад
-												</time>
-											</div>
-										</div>
-									</div>
-
-									<p>spiegel spiegel spiegel spiegel spiegel spiegel spiegel</p>
-								</li>
-							</ul>
-
-							<div class="post-additional-info inline-items">
-
-								<a href="#" class="post-add-icon inline-items">
-									<svg class="olymp-heart-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-									</svg>
-									<span>15</span>
-								</a>
-
-								<ul class="friends-harmonic">
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-								</ul>
-
-								<div class="names-people-likes">
-									<a href="#">spiegel</a>, <a href="#">spiegel</a> и
-									<br>13 лайков
-								</div>
-
-								<div class="comments-shared">
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-speech-balloon-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
-										</svg>
-										<span>0</span>
-									</a>
-
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-share-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-										</svg>
-										<span>16</span>
-									</a>
-								</div>
-
-							</div>
-
-							<div class="control-block-button post-control-button">
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-like-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-like-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-comments-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-share-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-									</svg>
-								</a>
-
-							</div>
-
-						</article>
-
-					</div>
-			</div>
+        </div>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="" data-container="newsfeed-items-grid">
 				<svg class="olymp-three-dots-icon">
@@ -1984,12 +1722,19 @@
 					<!-- Фото -->
 
 					<ul class="widget w-last-photo js-zoom-gallery">
-						<li>
+                        @foreach ($data->images as $item)
+                        <li>
+							<a href="img/last-photo10-large.jpg">
+								<img src="{{ $item->image }}" alt="photo">
+							</a>
+						</li>
+                        @endforeach
+						{{-- <li>
 							<a href="img/last-photo10-large.jpg">
 								<img src="{{ asset('img/last-photo10-large.jpg') }}" alt="photo">
 							</a>
-						</li>
-						<li>
+						</li> --}}
+						{{-- <li>
 							<a href="img/last-phot11-large.jpg">
 								<img src="{{ asset('img/last-phot11-large.jpg') }}" alt="photo">
 							</a>
@@ -2028,7 +1773,7 @@
 							<a href="img/last-phot18-large.jpg">
 								<img src="{{ asset('img/last-phot18-large.jpg') }}" alt="photo">
 							</a>
-						</li>
+						</li> --}}
 					</ul>
 
 

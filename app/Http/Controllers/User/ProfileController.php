@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Feed;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Friend;
-use App\Club;
-use App\Http\Controllers\User\FriendsController ;
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProfileController extends Controller
 {
@@ -50,42 +50,57 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $clubsPosts= collect([]);
-        $groupsPosts= collect([]);
-        $usersPosts= collect([]);
-        $userPosts = $user->posts; //Собственные посты
-        $user->loadCount('posts', 'subscribesToClubs', 'subscribesToUsers', 'subscribesToGroups', 'friendshipRequests'); //Счетчики постов и подписок
-        if (!!auth()->user() && auth()->user()->id == $user->id) {
-            $user->load('subscribesToClubs.posts', 'subscribesToUsers.posts', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
-            foreach ($user->subscribesToClubs as $subscribe){
-                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){ //Условие выбора по дате сделано для примера
-                    $post['author'] = 'Клуб '. $subscribe->name;
-                    // $post['author_route'] = "club.show, ['club' => $post->postable_id]";
-                    $clubsPosts->push($post);
-                }
-            }
-            foreach ($user->subscribesToGroups as $subscribe){
-                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
-                    $post['author'] = 'Группа '. $subscribe->name;
-                    // $post['author_route'] = "group.show, ['group' => $post->postable_id]";
-                    $groupsPosts->push($post);
-                }
-            }
-            foreach ($user->subscribesToUsers as $subscribe){
-                foreach($subscribe->posts->where('updated_at', '>', '2020-07-11') as $post){
-                    $post['author'] = $subscribe->full_name;
-                    $post['author_route'] = "user.show, ['user' => $post->postable_id]";
-                    $usersPosts->push($post);
-                }
-            }
-            $posts = $clubsPosts->merge($groupsPosts)->merge($userPosts)->sortByDesc('updated_at');
+        $id=$user->id;
+        if (!!auth()->user() && auth()->user()->id == $id) {
+            $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
+            $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
+            $subscribesToGroups = $user->subscribesToGroups()->pluck('subscrable_id');
+            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($subscribesToUsers) {
+                return $query->whereIn('postable_id', $subscribesToUsers)
+                            ->where('postable_type', 'App\User');
+            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($id) {
+                return $query->where('postable_id', $id)
+                            ->where('postable_type', 'App\User');
+            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribesToClubs) {
+                return $query->whereIn('postable_id', $subscribesToClubs)
+                            ->where('postable_type', 'App\Club');
+            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribesToGroups) {
+                return $query->whereIn('postable_id', $subscribesToGroups)
+                            ->where('postable_type', 'App\Group');
+            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToUsers) {
+                return $query->whereIn('imageable_id', $subscribesToUsers)
+                            ->where('imageable_type', 'App\User');
+            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
+                return $query->where('imageable_id', $id)
+                            ->where('imageable_type', 'App\User');
+            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToClubs) {
+                return $query->whereIn('imageable_id', $subscribesToClubs)
+                            ->where('imageable_type', 'App\Club');
+            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToGroups) {
+                return $query->whereIn('imageable_id', $subscribesToGroups)
+                            ->where('imageable_type', 'App\Group');
+            })->orderBy('updated_at', 'desc')->get();
+            $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
+            $user->loadCount('friendshipRequests');
+            $authUser = $user;
         } else {
-            $posts = $userPosts;
-            $user->load('subscribesToClubs', 'subscribesToUsers', 'usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user');
+            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
+                return $query->where('postable_id', $id)
+                            ->where('postable_type', 'App\User');
+                        })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
+                            return $query->where('imageable_id', $id)
+                                        ->where('imageable_type', 'App\User');
+                        })->orderBy('updated_at', 'desc')->get();
+            $user->load('usersVehicles', 'friends.user', 'images');
+            if(!!auth()->user()){
+                $authUser = User::find(auth()->user()->id);
+                $authUser->loadCount('friendshipRequests');
+                $authUser->load('friendshipRequests.friend');
+            } else { $authUser = []; }
         }
-
-        // dd($user->toArray());
-        return view('user.prof',['data' => $user, 'posts' => $posts]);
+        $feed->loadMorph('feedable.imageable', ['App\Image']);
+        $feed->loadMorph('feedable.postable', ['App\Post']);
+        return view('user.prof',['data' => $user, 'feed' => $feed, 'user' => $authUser]);
     }
 
     /**

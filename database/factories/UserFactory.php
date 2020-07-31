@@ -31,5 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
         'country' => $faker->country,
         'gender' =>  Arr::random(['Мужчина', 'Женщина']),
         'birth_date' =>$faker->date(),
+        'avatar' => $faker->imageUrl($width = 400, $height = 400, 'people'),
+        'wallpaper' => $faker->imageUrl($width = 1200, $height = 400, 'transport'),
     ];
 });

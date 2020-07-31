@@ -165,12 +165,25 @@ class User extends Authenticatable
         return $this->morphedByMany('App\User', 'subscrable');
     }
 
+    public function users()
+    {
+        return $this->morphToMany('App\User', 'subscrable');
+    }
+
     /**
      * Get the user's Post.
      */
     public function posts()
     {
         return $this->morphMany('App\Post', 'postable');
+    }
+
+    /**
+     * Get the User's Images.
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
     }
 
     public function removeAvatar()

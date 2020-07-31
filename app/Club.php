@@ -47,6 +47,10 @@ class Club extends Model
         'name', 'avatar', 'birth_date', 'country', 'city', 'creed', 'description',
     ];
 
+    protected $appends = [
+        'full_name', 'location'
+    ];
+
 
     /**
      * Get the users who have subscribe to this Club.
@@ -62,5 +66,22 @@ class Club extends Model
     public function posts()
     {
         return $this->morphMany('App\Post', 'postable');
+    }
+
+    /**
+     * Get the Club's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
+    public function getFullNameAttribute() {
+        return "Клуб $this->name";
+    }
+
+    public function getLocationAttribute()
+    {
+        return "$this->city, $this->country";
     }
 }

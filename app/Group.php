@@ -41,6 +41,10 @@ class Group extends Model
         'name', 'avatar', 'creed', 'description',
     ];
 
+    protected $appends = [
+        'full_name'
+    ];
+
 
     /**
      * Get the users who have subscribe to this Group.
@@ -56,5 +60,17 @@ class Group extends Model
     public function posts()
     {
         return $this->morphMany('App\Post', 'postable');
+    }
+
+    /**
+     * Get the Group's's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
+    public function getFullNameAttribute() {
+        return "Сообщество $this->name";
     }
 }

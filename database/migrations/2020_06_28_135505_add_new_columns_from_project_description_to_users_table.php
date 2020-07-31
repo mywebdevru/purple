@@ -16,6 +16,7 @@ class AddNewColumnsFromProjectDescriptionToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname', 30)->nullable(true)->default('');
             $table->string('avatar', 150)->nullable(true)->default('');
+            $table->string('wallpaper', 150)->nullable(true)->default('');
             $table->enum('gender', ['Мужчина', 'Женщина', 'В смятении'])->default('В смятении');
             $table->date('birth_date')->nullable(true);
             $table->string('country', 150)->nullable(true)->default('Человек мира');
@@ -32,7 +33,7 @@ class AddNewColumnsFromProjectDescriptionToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['surname', 'avatar', 'country', 'city', 'creed','gender', 'birth_date']);
+            $table->dropColumn(['surname', 'avatar', 'wallpaper', 'country', 'city', 'creed','gender', 'birth_date']);
         });
     }
 }
