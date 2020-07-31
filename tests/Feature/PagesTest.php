@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,6 +16,10 @@ class PagesTest extends TestCase
 
     public function testProfilePageTest()
     {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user);
+
         $response1 = $this->get(route('user.show', 1));
         $response2 = $this->get(route('user.show', 10));
         $response3 = $this->get(route('user.show', 20));
