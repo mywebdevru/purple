@@ -14,7 +14,7 @@
                         </time>
                     </div>
                 </div>
-                @can('update', User::class)
+                @can('update', $feed)
                 <div class="more">
                     <svg class="olymp-three-dots-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
