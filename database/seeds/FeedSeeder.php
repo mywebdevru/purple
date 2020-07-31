@@ -14,11 +14,12 @@ class FeedSeeder extends Seeder
     public function run()
     {
         foreach(Post::all() as $post) {
-            $post->feed()->create();
+            $post->feed()->create()->update(['created_at' => $post->created_at, 'updated_at' => $post->updated_at]);
         }
 
         foreach(Image::all() as $post) {
-            $post->feed()->create();
+            $post->feed()->create()->update(['created_at' => $post->created_at, 'updated_at' => $post->updated_at]);;
+
         }
 
     }
