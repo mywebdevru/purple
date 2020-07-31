@@ -110,7 +110,7 @@
 
         </div>
     </div>
-    <a href="" class="author-name fn">
+    <a href="{{ route('user.show', ['user' => auth()->user()]) }}" class="author-name fn">
         <div class="author-title">
             {{ $full_name }} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon') }}"></use></svg>
         </div>
