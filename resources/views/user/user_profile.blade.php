@@ -1,21 +1,33 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Редактирование профиля</title>
     <!-- Подключаю скрипты и CDN на всякий случай -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
     <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <!-- Локальные стили, чтобы точно всё работало -->
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="css/fm.revealator.jquery.css">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
+
+    <!-- Main Styles CSS -->
+    <link rel="stylesheet" type="text/css" href="css/fonts.min.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
-    <div class="">
+    <!--  <div class="">
         <div class="navbar navbar-light-bg-light navbar-expand-md">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -47,9 +59,6 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
-                                                <!-- <p class="text-center small mt-2">
-                                                    <a href="#" data-toggle="modal" data-target="#profpicModal"><i class="fa fa-upload"></i> Новое фото</a>
-                                                </p> -->
                                             </div>
                                             <div class="col-md-7">
                                                 <span>John Doe</span>
@@ -58,7 +67,7 @@
                                                 <div class="divider">
                                                 </div>
                                                 <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-user-o" aria-hidden="true"></i> Редактировать</a>
-                                                <!-- <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a> -->
+                                                <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-address-card-o" aria-hidden="true"></i> О себе</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2" data-toggle="modal" data-target="#setsModal"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</a>
                                                 <a href="#" class="btn btn-default btn-xs mb-2"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Поддержка</a>
                                             </div>
@@ -83,8 +92,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mainbody container-fluid mt-4">
+    </div> -->
+    <!--  <div class="mainbody container-fluid mt-4">
         <div class="row">
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                 <div class="card card-default">
@@ -183,8 +192,8 @@
                 </div>                       
             </div>
         </div>
-    </div>
-    <!-- м о д а л к и -->
+    </div> -->
+    <!-- м о д а л к и 
     <div class="modal fade" id="notifyModal" tabindex="-1" role="dialog" aria-labelledby="notifyModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -195,7 +204,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Подписался -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -216,7 +224,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Лайкнул пост -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -229,7 +236,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- Дал комментарий -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -242,7 +248,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- Лайкнул комментарий -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -255,7 +260,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- Поделился записью -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -268,7 +272,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- Принял заявку в друзья -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -281,7 +284,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- Клуб одобрил заявку на вступление -->
                     <div class="row mb-2">
                         <div class="col-sm-1 text-left">
                             <a href="#">
@@ -497,8 +499,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Все нужные жс -->
+    </div> -->
+
+    
+
+    <!-- JS -->
     <script type="text/javascript" src="/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

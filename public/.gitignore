@@ -1,1 +1,7 @@
 *.config
+/css/admin.css
+/css/app.css
+/js/app.js
+/js/admin.js
+/fonts
+/summernote
