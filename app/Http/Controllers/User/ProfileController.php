@@ -92,13 +92,15 @@ class ProfileController extends Controller
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
             $user->load('usersVehicles', 'friends.user');
-            $authUser = User::find(auth()->user()->id);
-            $authUser->loadCount('friendshipRequests');
-            $authUser->load('friendshipRequests.friend');
+            if(!!auth()->user()){
+                $authUser = User::find(auth()->user()->id);
+                $authUser->loadCount('friendshipRequests');
+                $authUser->load('friendshipRequests.friend');
+            } else { $authUser = []; }
         }
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
-        return view('user.prof',['data' => $user, 'posts' => $feed, 'user' => $authUser]);
+        return view('user.prof',['data' => $user, 'feed' => $feed, 'user' => $authUser]);
     }
 
     /**
