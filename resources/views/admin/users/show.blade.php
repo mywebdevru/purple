@@ -8,7 +8,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card card-default mb-3">
+    <div class="card card-default">
         <div class="card-header">
             Информация о пользователе {{ $user->full_name }}
         </div>
@@ -51,141 +51,37 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div class="accordion" id="accordionExample">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Друзья
-                    </button>
-                </h2>
-            </div>
-
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Друзья</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($friends as $friend)
                         <tr>
-                            <th scope="col">Друг</th>
-                            <th scope="col">Действие</th>
+                            <td>
+                                {{ $friend->user->full_name }}
+                            </td>
+                            <td>
+                                <form class="d-inline-block" action="{{ route('admin.friend.destroy', $friend->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        type="submit"
+                                        role="button">
+                                        Удаление
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($friends as $friend)
-                            <tr>
-                                <td>
-                                    {{ $friend->user->full_name }}
-                                </td>
-                                <td>
-                                    <form class="d-inline-block" action="{{ route('admin.friend.destroy', $friend->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button
-                                            class="btn btn-danger btn-sm"
-                                            type="submit"
-                                            role="button">
-                                            Удаление
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            У пользователя пока нет друзей
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingTwo">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Запросы пользователя на дружбу
-                    </button>
-                </h2>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col">Пользователь</th>
-                            <th scope="col">Действие</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($userRequests as $request)
-                            <tr>
-                                <td>
-                                    {{ $request->friend->full_name }}
-                                </td>
-                                <td>
-                                    <form class="d-inline-block" action="{{ route('admin.request.destroy', $request->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button
-                                            class="btn btn-danger btn-sm"
-                                            type="submit"
-                                            role="button">
-                                            Удаление
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            Пользователь не предлагал дружбу
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingThree">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Запросы на дружбу, поступившие пользователю
-                    </button>
-                </h2>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col">Пользователь</th>
-                            <th scope="col">Действие</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($friendshipRequests as $request)
-                            <tr>
-                                <td>
-                                    {{ $request->user->full_name }}
-                                </td>
-                                <td>
-                                    <form class="d-inline-block" action="{{ route('admin.request.destroy', $request->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button
-                                            class="btn btn-danger btn-sm"
-                                            type="submit"
-                                            role="button">
-                                            Удаление
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            Пользователь не предлагал дружбу
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    @empty
+                        У пользователя пока нет друзей
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
@@ -193,16 +89,5 @@
 @section('scripts')
 @endsection
 @section('css')
-    <style>
-        .btn-link:hover,
-        .btn-link:active,
-        .btn-link:focus {
-            color: black;
-            text-decoration: none;
-        }
-        .btn-link {
-            color: black;
-        }
-    </style>
 @endsection
 

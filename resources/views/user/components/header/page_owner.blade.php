@@ -1,6 +1,6 @@
 <div class="author-page author vcard inline-items more">
     <div class="author-thumb">
-        <img alt="author" src="{{ $avatar }}" class="avatar">
+        <img alt="author" src="{{ asset('img/ii.jpg') }}" class="avatar">
         <span class="icon-status online"></span>
         <div class="more-dropdown more-with-triangle">
             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -110,7 +110,7 @@
 
         </div>
     </div>
-    <a href="{{ route('user.show', ['user' => auth()->user()]) }}" class="author-name fn">
+    <a href="" class="author-name fn">
         <div class="author-title">
             {{ $full_name }} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon') }}"></use></svg>
         </div>
