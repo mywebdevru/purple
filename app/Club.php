@@ -35,6 +35,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $full_name
+ * @property-read mixed $location
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $image
+ * @property-read int|null $image_count
  */
 class Club extends Model
 {
