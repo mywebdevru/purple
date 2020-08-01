@@ -790,7 +790,7 @@
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ Str::startsWith($data->avatar, 'http') ? $avatar : asset($data->avatar)}}" alt="author">
+							<img src="{{ Str::startsWith($data->avatar, 'http') ? $data->avatar : asset($data->avatar)}}" alt="author">
 						</a>
 						<div class="author-content">
 							<a href="" class="h4 author-name">{{ $data->full_name }}</a>
