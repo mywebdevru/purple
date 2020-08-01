@@ -4,7 +4,7 @@
     <article class="hentry post has-post-thumbnail shared-photo">
 
             <div class="post__author author vcard inline-items">
-                <img src="{{ $feed->imageable['avatar'] }}" alt="author">
+                <img src="{{ Str::startsWith($feed->imageable['avatar'], 'http') ? $feed->imageable['avatar'] : asset($feed->imageable['avatar'])}}" alt="author">
 
                 <div class="author-date">
                     <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->imageable)).'.show', $feed->imageable['id']) }}">{{ $feed->imageable['full_name'] }}</a>
