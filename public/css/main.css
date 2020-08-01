@@ -23247,15 +23247,3 @@ Build date: 2018-12-12 00:07:25
     border-color: #ffc6ba;
     border-radius: 999px!important;
 }
-
-/*FIXES*/
-.author-image {
-    width: 132px!important;
-    height: 132px!important;
-}
-.country {
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 3px;
-    text-overflow: ellipsis;
-}

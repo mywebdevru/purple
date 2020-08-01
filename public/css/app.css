@@ -3452,8 +3452,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 /*****************************************
-  upload button styles
-******************************************/
+    upload button styles
+  ******************************************/
 
 .file-upload {
   position: relative;
@@ -15333,11 +15333,11 @@ ol ol li {
 /*------------- #PLUGINS --------------*/
 
 /*!
- * Bootstrap-select v1.11.0 (http://silviomoreto.github.io/bootstrap-select)
- *
- * Copyright 2013-2016 bootstrap-select
- * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)
- */
+   * Bootstrap-select v1.11.0 (http://silviomoreto.github.io/bootstrap-select)
+   *
+   * Copyright 2013-2016 bootstrap-select
+   * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)
+   */
 
 select.bs-select-hidden,
 select.selectpicker {
@@ -16312,10 +16312,10 @@ select.selectpicker {
 }
 
 /*!
-FullCalendar Core Package v4.1.0
-Docs & License: https://fullcalendar.io/
-(c) 2019 Adam Shaw
-*/
+  FullCalendar Core Package v4.1.0
+  Docs & License: https://fullcalendar.io/
+  (c) 2019 Adam Shaw
+  */
 
 .fc {
   direction: ltr;
@@ -16332,7 +16332,7 @@ body .fc {
 }
 
 /* Colors
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-highlight {
   /* when user is selecting cells */
@@ -16353,7 +16353,7 @@ body .fc {
 }
 
 /* Popover
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-popover {
   position: absolute;
@@ -16384,7 +16384,7 @@ body .fc {
 }
 
 /* Misc Reusable Components
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-divider {
   border-style: solid;
@@ -16421,7 +16421,7 @@ hr.fc-divider {
 }
 
 /* Tables
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc table {
   width: 100%;
@@ -16452,7 +16452,7 @@ hr.fc-divider {
 }
 
 /* Internal Nav Links
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 a[data-goto] {
   cursor: pointer;
@@ -16463,7 +16463,7 @@ a[data-goto]:hover {
 }
 
 /* Fake Table Rows
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc .fc-row {
   /* extra precedence to overcome themes forcing a 1px border */
@@ -16487,7 +16487,7 @@ a[data-goto]:hover {
 }
 
 /* Day Row (used within the header and the DayGrid)
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-row {
   position: relative;
@@ -16525,9 +16525,9 @@ a[data-goto]:hover {
 }
 
 /*
-row content (which contains day/week numbers and events) as well as "mirror" (which contains
-temporary rendered events).
-*/
+  row content (which contains day/week numbers and events) as well as "mirror" (which contains
+  temporary rendered events).
+  */
 
 .fc-row .fc-content-skeleton {
   position: relative;
@@ -16563,7 +16563,7 @@ temporary rendered events).
 }
 
 /* Scrolling Container
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-scroller {
   -webkit-overflow-scrolling: touch;
@@ -16580,7 +16580,7 @@ temporary rendered events).
 }
 
 /* Global Event Styles
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-event {
   position: relative;
@@ -16660,7 +16660,7 @@ temporary rendered events).
 }
 
 /* Event Selection (only for touch devices)
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-event.fc-selected {
   z-index: 9999 !important;
@@ -16684,7 +16684,7 @@ temporary rendered events).
 }
 
 /* Event Dragging
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-event.fc-dragging.fc-selected {
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
@@ -16695,7 +16695,7 @@ temporary rendered events).
 }
 
 /* Horizontal Events
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 /* bigger touch area when selected */
 
@@ -16795,10 +16795,10 @@ temporary rendered events).
 }
 
 /* DayGrid events
-----------------------------------------------------------------------------------------------------
-We use the full "fc-day-grid-event" class instead of using descendants because the event won't
-be a descendant of the grid when it is being dragged.
-*/
+  ----------------------------------------------------------------------------------------------------
+  We use the full "fc-day-grid-event" class instead of using descendants because the event won't
+  be a descendant of the grid when it is being dragged.
+  */
 
 .fc-day-grid-event {
   margin: 1px 2px 0;
@@ -16845,7 +16845,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
 /* Event Limiting
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 /* "more" link that represents hidden events */
 
@@ -16882,7 +16882,7 @@ a.fc-more:hover {
 }
 
 /* Now Indicator
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-now-indicator {
   position: absolute;
@@ -16890,7 +16890,7 @@ a.fc-more:hover {
 }
 
 /* Utilities
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-unselectable {
   -webkit-user-select: none;
@@ -16902,11 +16902,11 @@ a.fc-more:hover {
 }
 
 /*
-TODO: more distinction between this file and common.css
-*/
+  TODO: more distinction between this file and common.css
+  */
 
 /* Colors
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-unthemed th,
 .fc-unthemed td,
@@ -16941,9 +16941,9 @@ TODO: more distinction between this file and common.css
 }
 
 /* Icons
---------------------------------------------------------------------------------------------------
-from https://feathericons.com/ and built with IcoMoon
-*/
+  --------------------------------------------------------------------------------------------------
+  from https://feathericons.com/ and built with IcoMoon
+  */
 
 @font-face {
   font-family: "fcicons";
@@ -17002,9 +17002,9 @@ from https://feathericons.com/ and built with IcoMoon
 }
 
 /* Buttons
---------------------------------------------------------------------------------------------------
-Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
-*/
+  --------------------------------------------------------------------------------------------------
+  Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
+  */
 
 /* reset */
 
@@ -17114,7 +17114,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 /* Buttons Groups
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-button-group {
   position: relative;
@@ -17152,7 +17152,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 /* Popover
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-unthemed .fc-popover {
   border-width: 1px;
@@ -17160,14 +17160,14 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 /* List View
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-unthemed .fc-list-item:hover td {
   background-color: #f5f5f5;
 }
 
 /* Toolbar
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-toolbar {
   display: flex;
@@ -17195,7 +17195,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 /* View Structure
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-view-container {
   position: relative;
@@ -17288,7 +17288,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
   .fc tbody .fc-row .fc-content-skeleton table {
     /* provides a min-height for the row, but only effective for IE, which exaggerates this value,
-       making it look more like 3em. for other browers, it will already be this tall */
+     making it look more like 3em. for other browers, it will already be this tall */
     height: 1em;
   }
 
@@ -17440,13 +17440,13 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 /*!
-FullCalendar Day Grid Plugin v4.1.0
-Docs & License: https://fullcalendar.io/
-(c) 2019 Adam Shaw
-*/
+  FullCalendar Day Grid Plugin v4.1.0
+  Docs & License: https://fullcalendar.io/
+  (c) 2019 Adam Shaw
+  */
 
 /* DayGridView
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 /* day row structure */
 
@@ -17530,13 +17530,13 @@ Docs & License: https://fullcalendar.io/
 }
 
 /*!
-FullCalendar Time Grid Plugin v4.1.0
-Docs & License: https://fullcalendar.io/
-(c) 2019 Adam Shaw
-*/
+  FullCalendar Time Grid Plugin v4.1.0
+  Docs & License: https://fullcalendar.io/
+  (c) 2019 Adam Shaw
+  */
 
 /* TimeGridView all-day area
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-timeGrid-view .fc-day-grid {
   position: relative;
@@ -17555,7 +17555,7 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid axis running down the side (for both the all-day area and the slot area)
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc .fc-axis {
   /* .fc to overcome default cell styles */
@@ -17573,7 +17573,7 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid Structure
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid-container,
 .fc-time-grid {
@@ -17649,7 +17649,7 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid Slats (lines that run horizontally)
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-slats td {
   height: 1.5em;
@@ -17662,7 +17662,7 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid Highlighting Slots
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-highlight-container {
   /* a div within a cell within the fc-highlight-skeleton */
@@ -17678,7 +17678,7 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid Event Containment
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-ltr .fc-time-grid .fc-event-container {
   /* space on the sides of events for LTR (default) */
@@ -17704,10 +17704,10 @@ Docs & License: https://fullcalendar.io/
 }
 
 /* TimeGrid Event Styling
-----------------------------------------------------------------------------------------------------
-We use the full "fc-time-grid-event" class instead of using descendants because the event won't
-be a descendant of the grid when it is being dragged.
-*/
+  ----------------------------------------------------------------------------------------------------
+  We use the full "fc-time-grid-event" class instead of using descendants because the event won't
+  be a descendant of the grid when it is being dragged.
+  */
 
 .fc-time-grid-event {
   margin-bottom: 1px;
@@ -17825,7 +17825,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 /* Now Indicator
---------------------------------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-now-indicator-line {
   border-top-width: 1px;
@@ -18442,8 +18442,8 @@ img.mfp-img {
 }
 
 /**
- * Simple fade transition,
- */
+   * Simple fade transition,
+   */
 
 .mfp-fade.mfp-bg {
   opacity: 0;
@@ -18473,9 +18473,9 @@ img.mfp-img {
 
 /*
 
-====== Zoom effect ======
+  ====== Zoom effect ======
 
-*/
+  */
 
 .mfp-zoom-in {
   /* start state */
@@ -19152,10 +19152,10 @@ img.mfp-img {
 }
 
 /*
-.mejs-controls .mejs-time-rail:hover .mejs-time-handle {
-    visibility:visible;
-}
-*/
+  .mejs-controls .mejs-time-rail:hover .mejs-time-handle {
+      visibility:visible;
+  }
+  */
 
 /* End: Progress Bar */
 
@@ -19204,10 +19204,10 @@ img.mfp-img {
 }
 
 /*
-.mejs-controls .mejs-volume-button:hover .mejs-volume-slider {
-    display: block;
-}
-*/
+  .mejs-controls .mejs-volume-button:hover .mejs-volume-slider {
+      display: block;
+  }
+  */
 
 .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-total {
   position: absolute;
@@ -19329,10 +19329,10 @@ img.mfp-img {
 }
 
 /*
-.mejs-controls .mejs-captions-button:hover  .mejs-captions-selector {
-    visibility: visible;
-}
-*/
+  .mejs-controls .mejs-captions-button:hover  .mejs-captions-selector {
+      visibility: visible;
+  }
+  */
 
 .mejs-controls .mejs-captions-button .mejs-captions-selector ul {
   margin: 0;
@@ -19386,7 +19386,7 @@ img.mfp-img {
   background: #222;
   background: rgba(0, 0, 0, 0.7);
   background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(0, 0, 0, 0.7));
-  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#323232,endColorstr=#000000);
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#323232, endColorstr=#000000);
   overflow: hidden;
   border: 0;
 }
@@ -19409,7 +19409,7 @@ img.mfp-img {
   background: #666;
   background: rgba(102, 102, 102, 0.7);
   background: linear-gradient(rgba(102, 102, 102, 0.7), rgba(50, 50, 50, 0.6));
-  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#666666,endColorstr=#323232);
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#666666, endColorstr=#323232);
 }
 
 .mejs-chapters .mejs-chapter .mejs-chapter-block .ch-title {
@@ -19843,19 +19843,19 @@ div.mejs-speed-button {
 }
 
 /**
- * Swiper 3.3.1
- * Most modern mobile touch slider and framework with hardware accelerated transitions
- * 
- * http://www.idangero.us/swiper/
- * 
- * Copyright 2016, Vladimir Kharlampidi
- * The iDangero.us
- * http://www.idangero.us/
- * 
- * Licensed under MIT
- * 
- * Released on: February 7, 2016
- */
+   * Swiper 3.3.1
+   * Most modern mobile touch slider and framework with hardware accelerated transitions
+   * 
+   * http://www.idangero.us/swiper/
+   * 
+   * Copyright 2016, Vladimir Kharlampidi
+   * The iDangero.us
+   * http://www.idangero.us/
+   * 
+   * Licensed under MIT
+   * 
+   * Released on: February 7, 2016
+   */
 
 .swiper-container {
   margin: 0 auto;
@@ -20255,10 +20255,10 @@ div.mejs-speed-button {
 }
 
 /**
-Ion.RangeSlider, 2.3.0
-© Denis Ineshin, 2010 - 2018, IonDen.com
-Build date: 2018-12-12 00:07:25
-*/
+  Ion.RangeSlider, 2.3.0
+  © Denis Ineshin, 2010 - 2018, IonDen.com
+  Build date: 2018-12-12 00:07:25
+  */
 
 .irs {
   position: relative;
@@ -22044,12 +22044,10 @@ Build date: 2018-12-12 00:07:25
 
 .top-header-author .author-thumb {
   border-radius: 100%;
-  border: 6px solid #fff;
   margin: 0 auto;
   overflow: hidden;
   width: 132px;
   height: 132px;
-  background-color: #FDFBEE;
 }
 
 .top-header-author .author-thumb img {
@@ -22095,6 +22093,20 @@ Build date: 2018-12-12 00:07:25
   #site-header .header-menu {
     top: 32px;
   }
+}
+
+/*FIXES*/
+
+.author-image {
+  width: 132px !important;
+  height: 132px !important;
+}
+
+.country {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 3px;
+  text-overflow: ellipsis;
 }
 
 [class^=olymp-],
