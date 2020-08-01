@@ -35,7 +35,7 @@
         </div>
     </div>
 @endsection
-
+@javascript('post', $post->id)
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
@@ -64,7 +64,7 @@
 
             async function uploadFile(files) {
                 const data = new FormData();
-
+                data.append('post', post);
                 for (let i = 0; i < files.length; i++) {
                     data.append("files[]", files[i]);
                 }

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.22.4 on 2020-08-01 11:00:04.
+ * Generated for Laravel 7.22.4 on 2020-08-01 12:49:12.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16323,42 +16323,6 @@ namespace Facade\Ignition\Facades {
  
 }
 
-namespace Laracasts\Utilities\JavaScript { 
-
-    /**
-     * 
-     *
-     */ 
-    class JavaScriptFacade {
-        
-        /**
-         * Bind the given array of variables to the view.
-         *
-         * @static 
-         */ 
-        public static function put()
-        {
-                        /** @var \Laracasts\Utilities\JavaScript\Transformers\Transformer $instance */
-                        return $instance->put();
-        }
-        
-        /**
-         * Translate the array of PHP variables to a JavaScript syntax.
-         *
-         * @param array $variables
-         * @return array 
-         * @static 
-         */ 
-        public static function constructJavaScript($variables)
-        {
-                        /** @var \Laracasts\Utilities\JavaScript\Transformers\Transformer $instance */
-                        return $instance->constructJavaScript($variables);
-        }
-         
-    }
- 
-}
-
 namespace Thomaswelton\LaravelGravatar\Facades { 
 
     /**
@@ -19538,8 +19502,6 @@ namespace  {
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
-
-    class JavaScript extends \Laracasts\Utilities\JavaScript\JavaScriptFacade {}
 
     class Gravatar extends \Thomaswelton\LaravelGravatar\Facades\Gravatar {}
  
