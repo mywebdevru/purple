@@ -49850,9 +49850,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\games\os\ospanel\domains\purple\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\games\os\ospanel\domains\purple\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\games\os\ospanel\domains\purple\resources\sass\admin.sass */"./resources/sass/admin.sass");
+__webpack_require__(/*! D:\GAMES\OS\OSPanel\domains\purple\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\GAMES\OS\OSPanel\domains\purple\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\GAMES\OS\OSPanel\domains\purple\resources\sass\admin.sass */"./resources/sass/admin.sass");
 
 
 /***/ })

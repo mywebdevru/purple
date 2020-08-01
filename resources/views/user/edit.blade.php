@@ -1978,7 +1978,7 @@
                         </div>
                         <div class="top-header-author">
                             <a href="#" class="author-thumb revealator-zoomin">
-                                <img src="../../img/i.jpg" alt="author">
+                                <img src="../../img/i.jpg" alt="author" class="author-image">
                             </a>
                             <div class="author-content">
                                 <a href="" class="h4 author-name">Иванов Иван</a>
@@ -2655,7 +2655,7 @@
                 </div>
                 <div class="col-sm-2">
                     <a href="#" class="author-thumb revealator-zoomin revealator-within">
-                        <img src="../../img/i.jpg" alt="author">
+                        <img src="../../img/i.jpg" alt="author" class="author-image">
                     </a>
                 </div>
                 <div class="col-sm-10">

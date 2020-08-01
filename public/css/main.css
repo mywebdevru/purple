@@ -597,12 +597,12 @@
 
 .top-header-author .author-thumb {
     border-radius: 100%;
-    border: 6px solid #fff;
+    /* border: 6px solid #fff; */
     margin: 0 auto;
     overflow: hidden;
     width: 132px;
     height: 132px;
-    background-color: #FDFBEE;
+    /* background-color: #FDFBEE; */
 }
 
 .top-header-author .author-thumb img {
@@ -16093,6 +16093,8 @@ ol ol li {
 }
 
 .author-thumb img {
+    width: 34px;
+    height: 34px;
     border-radius: 100%;
     overflow: hidden;
     max-width: unset;
@@ -23244,4 +23246,16 @@ Build date: 2018-12-12 00:07:25
     border: 1px solid!important;
     border-color: #ffc6ba;
     border-radius: 999px!important;
+}
+
+/*FIXES*/
+.author-image {
+    width: 132px!important;
+    height: 132px!important;
+}
+.country {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 3px;
+    text-overflow: ellipsis;
 }
