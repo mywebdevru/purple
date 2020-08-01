@@ -66,6 +66,18 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSurname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $wallpaper
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereWallpaper($value)
  */
 class User extends Authenticatable
 {
