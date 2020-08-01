@@ -29,6 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $full_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $image
+ * @property-read int|null $image_count
  */
 class Group extends Model
 {
