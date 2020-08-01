@@ -36,7 +36,7 @@ Route::group([
 
 Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
-Route::resource('group', 'Club\ClubController');
+Route::resource('club', 'Club\ClubController');
 
 Route::group([
     'namespace' => 'Admin',
