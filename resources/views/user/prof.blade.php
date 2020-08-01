@@ -1713,6 +1713,32 @@
 
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
+            <div class="ui-block revealator-slideup revealator-once">
+				<div class="ui-block-title">
+					<h6 class="title">Друзья ({{ count($data->friends) }})</h6>
+				</div>
+				<div class="ui-block-content">
+
+					<!--друзья -->
+
+					<ul class="widget w-faved-page js-zoom-gallery">
+                        @foreach ($data->friends as $friend)
+                            <li>
+                                <a href="#">
+                                    <img src="{{ $friend->user->avatar }}" alt="author">
+                                </a>
+                            </li>
+                        @break($loop->iteration == 14)
+                        @endforeach
+						<li class="all-users">
+							<a href="#">+74</a>
+						</li>
+					</ul>
+
+					<!-- .. окончание блока друзей -->
+				</div>
+			</div>
+
 			<div class="ui-block revealator-fade revealator-delay3 revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Фото</h6>
@@ -1727,7 +1753,8 @@
 							<a href="img/last-photo10-large.jpg">
 								<img src="{{ $item->image }}" alt="photo">
 							</a>
-						</li>
+                        </li>
+                        @break($loop->iteration == 8)
                         @endforeach
 						{{-- <li>
 							<a href="img/last-photo10-large.jpg">
@@ -1823,93 +1850,7 @@
 				<!-- .. окончание постов -->
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
-				<div class="ui-block-title">
-					<h6 class="title">Друзья (86)</h6>
-				</div>
-				<div class="ui-block-content">
 
-					<!--друзья -->
-
-					<ul class="widget w-faved-page js-zoom-gallery">
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li class="all-users">
-							<a href="#">+74</a>
-						</li>
-					</ul>
-
-					<!-- .. окончание блока друзей -->
-				</div>
-			</div>
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">

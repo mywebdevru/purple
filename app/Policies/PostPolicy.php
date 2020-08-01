@@ -51,8 +51,11 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function update(User $user, Post $post)
+    public function update(?User $user, Post $post)
     {
+        if(!$user){
+            return false;
+        }
         if ($user->can('edit posts')) {
             return true;
         }

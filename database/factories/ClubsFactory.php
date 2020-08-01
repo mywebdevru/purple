@@ -13,5 +13,6 @@ $factory->define(Club::class, function (Faker $faker) {
         'country' => $faker->country,
         'birth_date' =>$faker->date(),
         'description' => $faker->realText(rand(20, 140)),
+        'avatar' => $faker->imageUrl($width = 400, $height = 400, 'people'),
     ];
 });
