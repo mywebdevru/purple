@@ -78,7 +78,6 @@ jobs:
             git pull origin dev
             composer install
             composer dump-autoload
-            php artisan migrate:reset
-            php artisan migrate --seed
+            php artisan migrate:fresh --seed
             npm i
             npm run dev
