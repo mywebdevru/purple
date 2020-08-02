@@ -12,7 +12,7 @@ class SummernoteImageUploadTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function SummernoteUploadFile()
+    public function testSummernoteUploadFile()
     {
         $this->withoutExceptionHandling();
         $response = $this->call('post', route('summernote.upload'),
