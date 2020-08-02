@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
     'namespace' => 'User',
     // 'prefix' => 'user',
-    // 'middleware' => 'auth',
+    'middleware' => 'auth',
     // 'as' => 'user.'
 ], function () {
     Route::resource('user', 'ProfileController');
