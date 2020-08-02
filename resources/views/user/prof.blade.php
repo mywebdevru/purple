@@ -1730,9 +1730,11 @@
                             </li>
                         @break($loop->iteration == 14)
                         @endforeach
-						<li class="all-users">
-							<a href="#">+74</a>
-						</li>
+                        @if (count($data->friends)-14 > 0)
+                            <li class="all-users">
+                                <a href="#">{{ count($data->friends)-14 }}</a>
+                            </li>
+                        @endif
 					</ul>
 
 					<!-- .. окончание блока друзей -->
