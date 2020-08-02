@@ -81,3 +81,4 @@ jobs:
             php artisan migrate:fresh --seed
             npm i
             npm run dev
+            sudo php artisan cache:clear
