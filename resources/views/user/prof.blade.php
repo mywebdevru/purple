@@ -1730,9 +1730,11 @@
                             </li>
                         @break($loop->iteration == 14)
                         @endforeach
-						<li class="all-users">
-							<a href="#">+74</a>
-						</li>
+                        @if (count($data->friends)-14 > 0)
+                            <li class="all-users">
+                                <a href="#">+{{ count($data->friends)-14 }}</a>
+                            </li>
+                        @endif
 					</ul>
 
 					<!-- .. окончание блока друзей -->
@@ -1741,7 +1743,7 @@
 
 			<div class="ui-block revealator-fade revealator-delay3 revealator-once">
 				<div class="ui-block-title">
-					<h6 class="title">Фото</h6>
+					<h6 class="title">Фото ({{ count($data->images) }})</h6>
 				</div>
 				<div class="ui-block-content">
 
@@ -1749,58 +1751,23 @@
 
 					<ul class="widget w-last-photo js-zoom-gallery">
                         @foreach ($data->images as $item)
-                        <li>
-							<a href="img/last-photo10-large.jpg">
-								<img src="{{ $item->image }}" alt="photo">
-							</a>
-                        </li>
-                        @break($loop->iteration == 8)
+                        @if ($loop->iteration < 9)
+                            <li>
+                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}">
+                                    <img src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}" alt="photo">
+                                </a>
+                            </li>
+                        @else
+                            <li style="display : none">
+                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}"></a>
+                            </li>
+                        @endif
                         @endforeach
-						{{-- <li>
-							<a href="img/last-photo10-large.jpg">
-								<img src="{{ asset('img/last-photo10-large.jpg') }}" alt="photo">
-							</a>
-						</li> --}}
-						{{-- <li>
-							<a href="img/last-phot11-large.jpg">
-								<img src="{{ asset('img/last-phot11-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot12-large.jpg">
-								<img src="{{ asset('img/last-phot12-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot13-large.jpg">
-								<img src="{{ asset('img/last-phot13-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot14-large.jpg">
-								<img src="{{ asset('img/last-phot14-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot15-large.jpg">
-								<img src="{{ asset('img/last-phot15-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot16-large.jpg">
-								<img src="{{ asset('img/last-phot16-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot17-large.jpg">
-								<img src="{{ asset('img/last-phot17-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot18-large.jpg">
-								<img src="{{ asset('img/last-phot18-large.jpg') }}" alt="photo">
-							</a>
-						</li> --}}
+                        @if (count($data->images)-8 > 0)
+                            <li class="all-users">
+                                <a href="#">+{{ count($data->images)-8 }}</a>
+                            </li>
+                        @endif
 					</ul>
 
 
