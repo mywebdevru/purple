@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
     'namespace' => 'User',
     // 'prefix' => 'user',
-    // 'middleware' => 'auth',
+    'middleware' => 'auth',
     // 'as' => 'user.'
 ], function () {
     Route::resource('user', 'ProfileController');
@@ -35,6 +35,8 @@ Route::group([
 });
 
 Route::resource('post', 'Post\PostController');
+Route::resource('group', 'Group\GroupController');
+Route::resource('club', 'Club\ClubController');
 
 Route::group([
     'namespace' => 'Admin',

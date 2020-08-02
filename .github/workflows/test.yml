@@ -30,7 +30,7 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
-      - name: Create daybyday testing database
+      - name: Create offroad testing database
         env:
           PORT: ${{ job.services.mysql.ports[3306] }}
         run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
