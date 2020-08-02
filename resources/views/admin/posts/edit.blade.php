@@ -54,7 +54,7 @@
 
                         onMediaDelete: function ($target) {
                             const url = $target[0].src,
-                                cut = "{{ URL::to('/') }}" + "/storage/",
+                                cut = "{{ URL::to('/') }}" + "/",
                                 image = url.replace(cut, '');
                             deleteFile(image);
                         }
@@ -76,7 +76,7 @@
                     })).data;
                     console.log(images);
                     for (let i = 0; i < images.length; i++) {
-                        editor.summernote('insertImage', '/storage/' + images[i], function ($image) {
+                        editor.summernote('insertImage', '/' + images[i], function ($image) {
                             $image.css('width', '100%');
                         });
                     }

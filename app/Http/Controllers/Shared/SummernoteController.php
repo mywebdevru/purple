@@ -19,7 +19,7 @@ class SummernoteController extends Controller
             $post = Post::find($request['post']);
             $post->images()->create(['image' => $img]);
             $images[] = $img;
-            $pic = \Image::make('storage/' . $img);
+            $pic = \Image::make($img);
             $width = $pic->width();
             if($width > 800) {
                 $pic->resize(800, null, function ($constraint) {
