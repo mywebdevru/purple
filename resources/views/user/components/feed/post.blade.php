@@ -4,7 +4,7 @@
     <article class="hentry post">
 
             <div class="post__author author vcard inline-items">
-                <img src="{{ Str::startsWith($feed->postable['avatar'], 'http') ? $feed->postable['avatar'] : asset($feed->postable['avatar'])}}" alt="author">
+                <img  src="{{ Str::startsWith($feed->postable['avatar'], 'http') ? $feed->postable['avatar'] : asset($feed->postable['avatar'])}}" alt="author">
                 {{-- @dump($feed) --}}
                 <div class="author-date">
                 <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->postable)).'.show', $feed->postable['id']) }}">{{ $feed->postable['full_name'] }}</a>
