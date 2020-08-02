@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Summernote\SummernoteDeleteRequest;
 use App\Http\Requests\Summernote\SummernoteUploadRequest;
 use App\Image;
-use App\User;
+use App\Post;
 use Storage;
 
 class SummernoteController extends Controller
@@ -16,10 +16,10 @@ class SummernoteController extends Controller
         $images = [];
         foreach ($request['files'] as $image) {
             $img = $image->store('summernote');
-            $user = User::find(auth()->user()->id);
-            $user->images()->create(['image' => $img]);
+            $post = Post::find($request['post']);
+            $post->images()->create(['image' => $img]);
             $images[] = $img;
-            $pic = \Image::make('storage/' . $img);
+            $pic = \Image::make($img);
             $width = $pic->width();
             if($width > 800) {
                 $pic->resize(800, null, function ($constraint) {

@@ -61,7 +61,7 @@
                     <label for="avatar">Avatar</label>
                     @if(!empty($user->avatar))
                         <div class="mb-3">
-                            <img src="{{ asset('storage/' . $user->avatar) }}" alt="" width="40px">
+                            <img src="{{ asset($user->avatar) }}" alt="" width="40px" style="border-radius: 50%;">
                         </div>
                     @else
                         <div class="mb-3">
