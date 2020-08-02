@@ -52,4 +52,9 @@ class Post extends Model
     {
         return $this->morphOne('App\Feed', 'feedable');
     }
+
+    public function image()
+    {
+        return $this->morphToMany('App\Image', 'imageable');
+    }
 }
