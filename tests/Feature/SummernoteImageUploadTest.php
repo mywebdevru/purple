@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class SummernoteImageUploadTest extends TestCase
 {
-    public function SummernoteUploadFile()
+    public function testSummernoteUploadFile()
     {
         $response = $this->call('post', route('summernote.upload'),
             [
