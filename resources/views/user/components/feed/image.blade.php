@@ -36,7 +36,7 @@
             {{-- <p>spiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegel</p> --}}
 
             <div class="post-thumb">
-                <img src="{{ $feed['image'] }}" alt="photo">
+                <img src="{{ $feed['image'] }}{{ Str::startsWith($feed['image'], 'http') ? $feed['image'] : asset($feed['image'])}}" alt="photo">
             </div>
 
             {{-- <ul class="children single-children">
