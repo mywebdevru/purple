@@ -1,41 +1,6 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Редактирование профиля</title>
-    <!-- Подключаю скрипты и CDN на всякий случай -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
-    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
-    <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  -->
-    <!-- Локальные стили, чтобы точно всё работало -->
-    <link rel="stylesheet" href="../../css/fm.revealator.jquery.css">
-
-
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" type="text/css" href="../../Bootstrap/dist/css/bootstrap-reboot.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-reboot@4.4.1/reboot.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../../Bootstrap/dist/css/bootstrap.css"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../../Bootstrap/dist/css/bootstrap-grid.css">  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-grid-only@1.0.0/bootstrap.css">
-
-    <!-- FontAwesome
-    <script src="../../js/app.js" defer></script>
-    <link href="../../css/app.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Main Styles CSS -->
-    <!--  <link rel="stylesheet" type="text/css" href="../../../css/fonts.min.css">
-	        Подключается, но не подключает шрифты FA, поэтому CDN -->
-    <link rel="stylesheet" type="text/css" href="../../css/app.css">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
-</head>
-
-<body class="page-has-left-panels page-has-right-panels">
+@section('content')
 
 
 <!-- Левый сайдбар -->
@@ -2706,40 +2671,4 @@
     </form>
 </div>
 
-<!-- js скрипты
-<script src="../../js/jQuery/jquery-3.4.1.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-<!-- js библиотека прогресс бара (бегущий прогресс)
-<script src="../../js/libs/jquery.appear.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js"></script>
-
-<!-- js библиотека прокручивания scrollbar
-<script src="../../js/libs/perfect-scrollbar.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
-
-<!-- js библиотека преобразование объекта при нажатии
-<script src="../../js/libs/material.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
-
-<!-- js библиотека галереи и проигрывание видео
-<script src="../../js/libs/jquery.magnific-popup.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-
-<!-- Старые скрипты + новые -->
-<script src="../../js/main.js"></script>
-
-<!-- js библиотека paralax эффектов -->
-<script src="../../js/libs/fm.revealator.jquery.js"></script>
-
-<!-- Шрифты / Иконки
-<script defer src="../../fonts/fontawesome-all.js"></script> -->
-
-<!-- Инициализация js библиотек к объектам
-<script src="../../js/libs-init/libs-init.js"></script> -->
-
-
-
-</body>
-
-</html>
+@endsection
