@@ -109,9 +109,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(User $users)
+    public function edit(User $user)
     {
-        return view('user.edit')->with('user', auth()->user());
+        return view('user.edit')->with('user', $user);
     }
 
     /**
