@@ -761,31 +761,103 @@
 								</ul>
 							</div>
 						</div>
-
 						<div class="control-block-button">
-							<a href="" class="btn btn-control bg-blue">
-								<svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-							</a>
+                            @if ($user->requestedFriendships->where('user_id', $data->id)->isEmpty() && $data->id != $user->id && $user->friends->where('friend_id', $data->id)->isEmpty() && $user->friendshipRequests->where('friend_id', $data->id)->isEmpty())
+                            <div class="btn btn-control bg-blue more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
+                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.store') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                <input type="hidden" name="friend_id" value="{{ $data->id }}">
+                                            </form>
+                                            Запросить Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                            @if (!$user->friendshipRequests->where('friend_id', $data->id)->isEmpty())
+                            <div class="btn btn-control bg-yellow more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
+                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->friendshipRequests->where('friend_id', $data->id)->first()->id]) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                            Отменить запрос на Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                            @if (!$user->requestedFriendships->where('user_id', $data->id)->isEmpty())
+                                <div class="btn btn-control bg-orange more">
+                                    <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
+                                                <form id="accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships->where('user_id', $data->id)->first() }}">
+                                                </form>
+                                                Принять Дружбу
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
+                                                <form id="request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->requestedFriendships->where('user_id', $data->id)->first()]) }}" method="POST" style="display: none;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
+                                                Отвергнуть Дружбу
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (!$data->friends->where('friend_id', $user->id)->isEmpty())
+                            <div class="btn btn-control bg-green more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}').submit();">
+                                            <form id="request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}" action="{{ route('friend.destroy', ['friend' => $data->friends->where('friend_id', $user->id)->first()->id]) }}" method="POST" style="display: none;">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            Разорвать Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
 							<a href="#" class="btn btn-control bg-purple">
 								<svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
 							</a>
+                            @can('update', $data)
+                                <div class="btn btn-control bg-primary more">
+                                    <svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
 
-							<div class="btn btn-control bg-primary more">
-								<svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
-
-								<ul class="more-dropdown more-with-triangle triangle-bottom-right">
-									<li>
-										<a href="#" data-toggle="modal" data-target="#update-header-photo">Фото профиля</a>
-									</li>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
-									</li>
-									<li>
-										<a href="">Настройки профиля</a>
-									</li>
-								</ul>
-							</div>
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Фото профиля</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Настройки профиля</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endcan
 						</div>
 					</div>
 					<div class="top-header-author">
