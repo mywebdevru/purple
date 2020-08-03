@@ -1389,16 +1389,22 @@
 
 					<ul class="widget w-personal-info item-block">
 						<li>
-							<span class="title">Обо мне:</span>
-							<span class="text">Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне.</span>
+                            <span class="title">{{ $data->full_name }}</span>
+                            <span class="text">{{ $data->creed }}</span>
+                        </li>
+                        <li>
+							<span class="title">Пол:</span>
+                            <span class="text">{{ $data->gender }}</span>
 						</li>
 						<li>
-							<span class="title">Увлечения:</span>
-							<span class="text">Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения.</span>
+							<span class="title">Обитаю в:</span>
+                            <span class="text">{{ $data->location }}</span>
+                        </li>
+                        <li>
+							<span class="title">Рожден:</span>
+                            <span class="text">{{ $data->birth_date }}</span>
 						</li>
 					</ul>
-
-
 				</div>
 			</div>
 
