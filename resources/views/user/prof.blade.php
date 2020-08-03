@@ -1389,18 +1389,58 @@
 
 					<ul class="widget w-personal-info item-block">
 						<li>
-							<span class="title">Обо мне:</span>
-							<span class="text">Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне.</span>
+                            <span class="title">{{ $data->full_name }}</span>
+                            <span class="text">{{ $data->creed }}</span>
+                        </li>
+                        <li>
+							<span class="title">Пол:</span>
+                            <span class="text">{{ $data->gender }}</span>
 						</li>
 						<li>
-							<span class="title">Увлечения:</span>
-							<span class="text">Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения.</span>
+							<span class="title">Обитаю в:</span>
+                            <span class="text">{{ $data->location }}</span>
+                        </li>
+                        <li>
+							<span class="title">Рожден:</span>
+                            <span class="text">{{ $data->birth_date }}</span>
 						</li>
 					</ul>
-
-
 				</div>
-			</div>
+            </div>
+
+			<!-- Автомобили -->
+            <div class="ui-block revealator-slideup revealator-once">
+                @if ($data->usersVehicles->isEmpty())
+                    <div class="ui-block-title">
+                        <h6 class="title">Я хожу пешком</h6>
+                    </div>
+                @else
+                    <div class="ui-block-title">
+                        <h6 class="title">Я катаюсь на:</h6>
+                    </div>
+                @endif
+
+				<ul class="widget w-friend-pages-added notification-list friend-requests js-zoom-gallery">
+                    @forelse ($data->usersVehicles as $item)
+                        <li class="inline-items">
+                            <div class="author-thumb">
+                                <img src="{{ $item->avatar }}" alt="author" class="avatar">
+                            </div>
+                            <div class="notification-event">
+                            <a href="{{ $item->avatar }}" class="h6 notification-friend">{{ $item->type }}</a>
+                                <span class="chat-message-item">{{ $item->full_vehicle_name }}</span>
+                            </div>
+                            <span class="notification-icon" data-toggle="tooltip" data-placement="top" data-original-title="ADD TO YOUR FAVS">
+                                <a href="#">
+                                    <svg class="olymp-star-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-star-icon') }}"></use></svg>
+                                </a>
+                            </span>
+                        </li>
+                    @empty
+                    @endforelse
+				</ul>
+            </div>
+            <!-- .. окончание Авто -->
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-content">

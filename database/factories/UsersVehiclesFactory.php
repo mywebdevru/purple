@@ -15,5 +15,6 @@ $factory->define(UserVehicle::class, function (Faker $faker) {
         'vehicle_bd'=> $faker->year,
         'user_id' => rand(1, App\User::all()->count()),
         'description' => $faker->realText(rand(20, 150)),
+        'avatar' => $faker->imageUrl($width = 400, $height = 400, 'transport'),
     ];
 });
