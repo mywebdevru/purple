@@ -209,7 +209,7 @@ class User extends Authenticatable
 
     public function getLocationAttribute()
     {
-        return "$this->city, $this->country";
+        return "$this->city $this->country";
     }
 
 
