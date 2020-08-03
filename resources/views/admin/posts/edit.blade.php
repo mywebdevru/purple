@@ -35,7 +35,7 @@
         </div>
     </div>
 @endsection
-
+@javascript('post', $post->id)
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
@@ -54,7 +54,7 @@
 
                         onMediaDelete: function ($target) {
                             const url = $target[0].src,
-                                cut = "{{ URL::to('/') }}" + "/storage/",
+                                cut = "{{ URL::to('/') }}" + "/",
                                 image = url.replace(cut, '');
                             deleteFile(image);
                         }
@@ -64,7 +64,7 @@
 
             async function uploadFile(files) {
                 const data = new FormData();
-
+                data.append('post', post);
                 for (let i = 0; i < files.length; i++) {
                     data.append("files[]", files[i]);
                 }
@@ -76,7 +76,7 @@
                     })).data;
                     console.log(images);
                     for (let i = 0; i < images.length; i++) {
-                        editor.summernote('insertImage', '/storage/' + images[i], function ($image) {
+                        editor.summernote('insertImage', '/' + images[i], function ($image) {
                             $image.css('width', '100%');
                         });
                     }

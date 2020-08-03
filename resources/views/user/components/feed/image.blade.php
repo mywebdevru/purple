@@ -4,10 +4,10 @@
     <article class="hentry post has-post-thumbnail shared-photo">
 
             <div class="post__author author vcard inline-items">
-                <img src="{{ $feed->imageable['avatar'] }}" alt="author">
+                <img src="{{ Str::startsWith($feed->imageable['avatar'], 'http') ? $feed->imageable['avatar'] : asset($feed->imageable['avatar'])}}" alt="author">
 
                 <div class="author-date">
-                    <a class="h6 post__author-name fn" href="">{{ $feed->imageable['full_name'] }}</a>
+                    <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->imageable)).'.show', $feed->imageable['id']) }}">{{ $feed->imageable['full_name'] }}</a>
                     {{-- shared
                     <a href="#">spiegel</a>’s <a href="#">фото</a> --}}
                     <div class="post__date">
@@ -16,27 +16,27 @@
                         </time>
                     </div>
                 </div>
-
-                <div class="more">
-                    <svg class="olymp-three-dots-icon">
-                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-                    </svg>
-                    <ul class="more-dropdown">
-                        <li>
-                            <a href="#">Редактировать пост</a>
-                        </li>
-                        <li>
-                            <a href="#">Удалить пост</a>
-                        </li>
-                    </ul>
-                </div>
-
+                @can('update', $feed)
+                    <div class="more">
+                        <svg class="olymp-three-dots-icon">
+                            <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
+                        </svg>
+                        <ul class="more-dropdown">
+                            <li>
+                                <a href="#">Редактировать пост</a>
+                            </li>
+                            <li>
+                                <a href="#">Удалить пост</a>
+                            </li>
+                        </ul>
+                    </div>
+                @endcan
             </div>
 
             {{-- <p>spiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegel</p> --}}
 
             <div class="post-thumb">
-                <img src="{{ $feed['image'] }}" alt="photo">
+                <img src="{{ Str::startsWith($feed['image'], 'http') ? $feed['image'] : asset($feed['image'])}}" alt="photo">
             </div>
 
             {{-- <ul class="children single-children">
