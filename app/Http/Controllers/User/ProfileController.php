@@ -81,7 +81,7 @@ class ProfileController extends Controller
                             ->where('imageable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
             $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
-            $user->loadCount('friendshipRequests');
+            $user->loadCount('requestedFriendships');
             $authUser = $user;
         } else {
             $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
@@ -94,8 +94,8 @@ class ProfileController extends Controller
             $user->load('usersVehicles', 'friends.user', 'images');
             if(!!auth()->user()){
                 $authUser = User::find(auth()->user()->id);
-                $authUser->loadCount('friendshipRequests');
-                $authUser->load('friendshipRequests.friend');
+                $authUser->loadCount('requestedFriendships');
+                $authUser->load('requestedFriendships.user', 'friendshipRequests');
             } else { $authUser = []; }
         }
         $feed->loadMorph('feedable.imageable', ['App\Image']);

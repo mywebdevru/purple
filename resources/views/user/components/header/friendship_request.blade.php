@@ -3,8 +3,8 @@
         <img src="{{ asset('img/spiegel.jpg') }}" alt="author">
     </div>
     <div class="notification-event">
-    <a href="{{ route('user.show', ['user' => $request->friend]) }}" class="h6 notification-friend">{{ $request->friend->full_name }}</a>
-        <span class="chat-message-item">{{ $request->friend->location }}</span>
+    <a href="{{ route('user.show', ['user' => $request->user]) }}" class="h6 notification-friend">{{ $request->user->full_name }}</a>
+        <span class="chat-message-item">{{ $request->user->location }}</span>
     </div>
     <span class="notification-icon">
         <a class="accept-request" href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $request->id }}').submit();">
