@@ -31,11 +31,34 @@ class AppServiceProvider extends ServiceProvider
 
         // Using class based composers...
         View::composer(
-            ['user.prof', 'welcome', 'user.edit'], 'App\Http\View\Composers\ProfileComposer'
+            ['user.prof',
+            'user.edit',
+            'welcome',
+            'user.components.edit_profile.clubs',
+            'user.components.edit_profile.friends',
+            'user.components.edit_profile.groups',
+            'user.components.edit_profile.maps',
+            'user.components.edit_profile.personal',
+            'user.components.edit_profile.secure',
+            'user.components.edit_profile.vehicles',
+            'user.components.edit_profile.clubs',
+            ], 'App\Http\View\Composers\ProfileComposer'
         );
 
         // Using Closure based composers...
-        View::composer(['prof', 'welcome', 'user.edit'], function ($view) {
+        View::composer([
+        'user.prof',
+        'welcome',
+        'user.edit',
+        'user.components.edit_profile.clubs',
+        'user.components.edit_profile.friends',
+        'user.components.edit_profile.clubs',
+        'user.components.edit_profile.maps',
+        'user.components.edit_profile.groups',
+        'user.components.edit_profile.secure',
+        'user.components.edit_profile.personal',
+        'user.components.edit_profile.vehicles',
+       ], function ($view) {
             //
         });
     }

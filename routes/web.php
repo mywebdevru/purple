@@ -34,6 +34,7 @@ Route::group([
     Route::resource('friend', 'FriendsController');
 });
 
+
 Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
@@ -60,4 +61,19 @@ Route::get('edit-profile', function () {
 
 Route::group(['prefix'=>'maps', 'namespace'=>'Maps'], function(){
     Route::get('/', 'ConstructController@map_constructor');
+});
+
+Route::group([
+    'namespace' => 'User',
+    'prefix' => 'user',
+    'middleware' => 'auth',
+    'as' => 'user.edit.'
+], function () {
+    Route::get('{user}/edit/secure', 'ProfileController@edit')->name('secure');
+    Route::get('{user}/edit/maps', 'ProfileController@edit')->name('maps');
+    Route::get('{user}/edit/personal', 'ProfileController@edit')->name('personal');
+    Route::get('{user}/edit/clubs', 'ProfileController@edit')->name('clubs');
+    Route::get('{user}/edit/groups', 'ProfileController@edit')->name('groups');
+    Route::get('{user}/edit/friends', 'ProfileController@edit')->name('friends');
+    Route::get('{user}/edit/vehicles', 'ProfileController@edit')->name('vehicles');
 });
