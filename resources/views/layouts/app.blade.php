@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
+    @yield('css')
 </head>
 
 <body class="page-has-left-panels page-has-right-panels">
@@ -459,6 +460,6 @@
 
 
 @yield('content')
-
+@yield('scripts')
 </body>
 </html>
