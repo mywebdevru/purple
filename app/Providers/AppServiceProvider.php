@@ -31,11 +31,11 @@ class AppServiceProvider extends ServiceProvider
 
         // Using class based composers...
         View::composer(
-            ['user.prof', 'welcome', 'user.edit'], 'App\Http\View\Composers\ProfileComposer'
+            ['user.prof', 'welcome', 'user.components.edit_profile.edit'], 'App\Http\View\Composers\ProfileComposer'
         );
 
         // Using Closure based composers...
-        View::composer(['prof', 'welcome', 'user.edit'], function ($view) {
+        View::composer(['prof', 'welcome', 'user.components.edit_profile.edit'], function ($view) {
             //
         });
     }

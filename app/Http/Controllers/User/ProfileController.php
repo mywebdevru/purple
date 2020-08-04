@@ -80,9 +80,6 @@ class ProfileController extends Controller
                 return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
-            // $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
-            // $user->loadCount('requestedFriendships');
-            // $authUser = $user;
         } else {
             $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
                 return $query->where('postable_id', $id)
@@ -91,11 +88,6 @@ class ProfileController extends Controller
                             return $query->where('imageable_id', $id)
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
-            // if(!!auth()->user()){
-            //     $authUser = User::find(auth()->user()->id);
-            //     $authUser->loadCount('requestedFriendships');
-            //     $authUser->load('requestedFriendships.user', 'friendshipRequests');
-            // } else { $authUser = []; }
         }
         $user->load('usersVehicles', 'friends.user', 'images');
         $feed->loadMorph('feedable.imageable', ['App\Image']);
@@ -111,7 +103,10 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit');
+        if ($user->cannot('update', auth()->user())){
+            abort(403, 'Вы не можете редактировать данные '.$user->full_name);
+        }
+        return view('user.components.edit_profile.edit');
     }
 
     /**
