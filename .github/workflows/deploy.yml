@@ -75,10 +75,11 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/html/purple/dev/purple/
+            sudo php artisan cache:clear
             git pull origin dev
             composer install
             composer dump-autoload
-            php artisan migrate:reset
-            php artisan migrate --seed
+            php artisan migrate:fresh --seed
             npm i
             npm run dev
+            sudo php artisan cache:clear

@@ -35,6 +35,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $full_name
+ * @property-read mixed $location
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $image
+ * @property-read int|null $image_count
  */
 class Club extends Model
 {
@@ -45,6 +49,10 @@ class Club extends Model
      */
     protected $fillable = [
         'name', 'avatar', 'birth_date', 'country', 'city', 'creed', 'description',
+    ];
+
+    protected $appends = [
+        'full_name', 'location'
     ];
 
 
@@ -62,5 +70,22 @@ class Club extends Model
     public function posts()
     {
         return $this->morphMany('App\Post', 'postable');
+    }
+
+    /**
+     * Get the Club's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
+    public function getFullNameAttribute() {
+        return "Клуб $this->name";
+    }
+
+    public function getLocationAttribute()
+    {
+        return "$this->city, $this->country";
     }
 }

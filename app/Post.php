@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $postable
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Post wherePostableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Post wherePostableType($value)
+ * @property-read \App\Feed|null $feed
  */
 class Post extends Model
 {
@@ -47,4 +48,17 @@ class Post extends Model
         return $this->morphTo();
     }
 
+    public function feed()
+    {
+        return $this->morphOne('App\Feed', 'feedable');
+    }
+
+    /**
+     * Get the Post's Images.
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+
+    }
 }

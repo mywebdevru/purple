@@ -1,4 +1,4 @@
-@extends('layouts.offroad')
+@extends('layouts.app')
 
 @section('content')
 
@@ -736,7 +736,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ asset('img/moto.jpg') }}" alt="nature">
+						<img src="{{ $data->wallpaper }}" alt="wallpaper">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -761,40 +761,112 @@
 								</ul>
 							</div>
 						</div>
-
 						<div class="control-block-button">
-							<a href="" class="btn btn-control bg-blue">
-								<svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-							</a>
+                            @if ($user->requestedFriendships->where('user_id', $data->id)->isEmpty() && $data->id != $user->id && $user->friends->where('friend_id', $data->id)->isEmpty() && $user->friendshipRequests->where('friend_id', $data->id)->isEmpty())
+                            <div class="btn btn-control bg-blue more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
+                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.store') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                <input type="hidden" name="friend_id" value="{{ $data->id }}">
+                                            </form>
+                                            Запросить Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                            @if (!$user->friendshipRequests->where('friend_id', $data->id)->isEmpty())
+                            <div class="btn btn-control bg-yellow more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
+                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->friendshipRequests->where('friend_id', $data->id)->first()->id]) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                            Отменить запрос на Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                            @if (!$user->requestedFriendships->where('user_id', $data->id)->isEmpty())
+                                <div class="btn btn-control bg-orange more">
+                                    <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
+                                                <form id="accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships->where('user_id', $data->id)->first() }}">
+                                                </form>
+                                                Принять Дружбу
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
+                                                <form id="request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->requestedFriendships->where('user_id', $data->id)->first()]) }}" method="POST" style="display: none;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
+                                                Отвергнуть Дружбу
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (!$data->friends->where('friend_id', $user->id)->isEmpty())
+                            <div class="btn btn-control bg-green more">
+                                <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
+
+                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}').submit();">
+                                            <form id="request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}" action="{{ route('friend.destroy', ['friend' => $data->friends->where('friend_id', $user->id)->first()->id]) }}" method="POST" style="display: none;">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            Разорвать Дружбу
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
 							<a href="#" class="btn btn-control bg-purple">
 								<svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
 							</a>
+                            @can('update', $data)
+                                <div class="btn btn-control bg-primary more">
+                                    <svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
 
-							<div class="btn btn-control bg-primary more">
-								<svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
-
-								<ul class="more-dropdown more-with-triangle triangle-bottom-right">
-									<li>
-										<a href="#" data-toggle="modal" data-target="#update-header-photo">Фото профиля</a>
-									</li>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
-									</li>
-									<li>
-										<a href="">Настройки профиля</a>
-									</li>
-								</ul>
-							</div>
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Фото профиля</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Настройки профиля</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endcan
 						</div>
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ asset('img/i.jpg') }}" alt="author">
+							<img src="{{ Str::startsWith($data->avatar, 'http') ? $data->avatar : asset($data->avatar)}}" class="author-image" alt="author">
 						</a>
 						<div class="author-content">
-							<a href="" class="h4 author-name">Иванов Иван</a>
-							<div class="country">Самара</div>
+							<a href="" class="h4 author-name">{{ $data->full_name }}</a>
+							<div class="country">{{ $data->location }}</div>
 						</div>
 					</div>
 				</div>
@@ -814,135 +886,15 @@
 		<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 			<div id="newsfeed-items-grid">
 
-				<div class="ui-block revealator-fade revealator-delay2 revealator-once">
-					<!-- Пост -->
+                @foreach ($feed as $item)
+                {{-- @dd($item->feedable) --}}
+                    @if($item['feedable_type'] == 'App\Post')
+                        @component('user.components.feed.post',['feed' => $item->feedable]) @endcomponent
+                    @else
+                        @component('user.components.feed.image',['feed' => $item->feedable]) @endcomponent
+                    @endif
+                @endforeach
 
-					<article class="hentry post">
-
-							<div class="post__author author vcard inline-items">
-								<img src="{{ asset('img/ii.jpg') }}" alt="author">
-
-								<div class="author-date">
-									<a class="h6 post__author-name fn" href="">Иванов Иван</a>
-									<div class="post__date">
-										<time class="published" datetime="2017-03-24T18:18">
-											19 часов назад
-										</time>
-									</div>
-								</div>
-
-								<div class="more">
-									<svg class="olymp-three-dots-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-									</svg>
-									<ul class="more-dropdown">
-										<li>
-											<a href="#">Редактировать пост</a>
-										</li>
-										<li>
-											<a href="#">Удалить пост</a>
-										</li>
-									</ul>
-								</div>
-
-							</div>
-
-							<p>Iron Maiden Iron Maiden Iron Maiden Iron Maiden Iron Maiden
-							</p>
-
-							<div class="post-additional-info inline-items">
-
-								<a href="#" class="post-add-icon inline-items">
-									<svg class="olymp-heart-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-									</svg>
-									<span>8</span>
-								</a>
-
-								<ul class="friends-harmonic">
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-								</ul>
-
-								<div class="names-people-likes">
-									<a href="#">spiegel</a>, <a href="#">spiegel</a> and
-									<br>6 лайков
-								</div>
-
-
-								<div class="comments-shared">
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-speech-balloon-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
-										</svg>
-										<span>17</span>
-									</a>
-
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-share-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-										</svg>
-										<span>24</span>
-									</a>
-								</div>
-
-
-							</div>
-
-							<div class="control-block-button post-control-button">
-
-								<a href="#" class="btn btn-control featured-post">
-									<svg class="olymp-trophy-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-trophy-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-like-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-like-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-comments-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-share-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-									</svg>
-								</a>
-
-							</div>
-
-						</article>
-
-					</div><!-- .. окончание Поста -->
 
 
 				<div class="ui-block revealator-slideup revealator-once">
@@ -1410,150 +1362,8 @@
 					</form>
 
 					</div><!-- ... окончание Блока для печатания текста комментария  -->
-				<div class="ui-block revealator-slideup revealator-once">
-					<!-- Пост -->
 
-					<article class="hentry post has-post-thumbnail shared-photo">
-
-							<div class="post__author author vcard inline-items">
-								<img src="{{ asset('img/ii.jpg') }}" alt="author">
-
-								<div class="author-date">
-									<a class="h6 post__author-name fn" href="">Иванов Иван</a> shared
-									<a href="#">spiegel</a>’s <a href="#">фото</a>
-									<div class="post__date">
-										<time class="published" datetime="2017-03-24T18:18">
-											7 часов назад
-										</time>
-									</div>
-								</div>
-
-								<div class="more">
-									<svg class="olymp-three-dots-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-									</svg>
-									<ul class="more-dropdown">
-										<li>
-											<a href="#">Редактировать пост</a>
-										</li>
-										<li>
-											<a href="#">Удалить пост</a>
-										</li>
-									</ul>
-								</div>
-
-							</div>
-
-							<p>spiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegelspiegel spiegel spiegel spiegel spiegel</p>
-
-							<div class="post-thumb">
-								<img src="{{ asset('img/post-photo6.jpg') }}" alt="photo">
-							</div>
-
-							<ul class="children single-children">
-								<li class="comment-item">
-									<div class="post__author author vcard inline-items">
-										<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-										<div class="author-date">
-											<a class="h6 post__author-name fn" href="#">spiegel</a>
-											<div class="post__date">
-												<time class="published" datetime="2017-03-24T18:18">
-													16 часов назад
-												</time>
-											</div>
-										</div>
-									</div>
-
-									<p>spiegel spiegel spiegel spiegel spiegel spiegel spiegel</p>
-								</li>
-							</ul>
-
-							<div class="post-additional-info inline-items">
-
-								<a href="#" class="post-add-icon inline-items">
-									<svg class="olymp-heart-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-									</svg>
-									<span>15</span>
-								</a>
-
-								<ul class="friends-harmonic">
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-										</a>
-									</li>
-								</ul>
-
-								<div class="names-people-likes">
-									<a href="#">spiegel</a>, <a href="#">spiegel</a> и
-									<br>13 лайков
-								</div>
-
-								<div class="comments-shared">
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-speech-balloon-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
-										</svg>
-										<span>0</span>
-									</a>
-
-									<a href="#" class="post-add-icon inline-items">
-										<svg class="olymp-share-icon">
-											<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-										</svg>
-										<span>16</span>
-									</a>
-								</div>
-
-							</div>
-
-							<div class="control-block-button post-control-button">
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-like-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-like-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-comments-post-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use>
-									</svg>
-								</a>
-
-								<a href="#" class="btn btn-control">
-									<svg class="olymp-share-icon">
-										<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
-									</svg>
-								</a>
-
-							</div>
-
-						</article>
-
-					</div>
-			</div>
+        </div>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="" data-container="newsfeed-items-grid">
 				<svg class="olymp-three-dots-icon">
@@ -1579,18 +1389,58 @@
 
 					<ul class="widget w-personal-info item-block">
 						<li>
-							<span class="title">Обо мне:</span>
-							<span class="text">Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне Обо мне.</span>
+                            <span class="title">{{ $data->full_name }}</span>
+                            <span class="text">{{ $data->creed }}</span>
+                        </li>
+                        <li>
+							<span class="title">Пол:</span>
+                            <span class="text">{{ $data->gender }}</span>
 						</li>
 						<li>
-							<span class="title">Увлечения:</span>
-							<span class="text">Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения Увлечения.</span>
+							<span class="title">Обитаю в:</span>
+                            <span class="text">{{ $data->location }}</span>
+                        </li>
+                        <li>
+							<span class="title">Рожден:</span>
+                            <span class="text">{{ $data->birth_date }}</span>
 						</li>
 					</ul>
-
-
 				</div>
-			</div>
+            </div>
+
+			<!-- Автомобили -->
+            <div class="ui-block revealator-slideup revealator-once">
+                @if ($data->usersVehicles->isEmpty())
+                    <div class="ui-block-title">
+                        <h6 class="title">Я хожу пешком</h6>
+                    </div>
+                @else
+                    <div class="ui-block-title">
+                        <h6 class="title">Я катаюсь на:</h6>
+                    </div>
+                @endif
+
+				<ul class="widget w-friend-pages-added notification-list friend-requests js-zoom-gallery">
+                    @forelse ($data->usersVehicles as $item)
+                        <li class="inline-items">
+                            <div class="author-thumb">
+                                <img src="{{ $item->avatar }}" alt="author" class="avatar">
+                            </div>
+                            <div class="notification-event">
+                            <a href="{{ $item->avatar }}" class="h6 notification-friend">{{ $item->type }}</a>
+                                <span class="chat-message-item">{{ $item->full_vehicle_name }}</span>
+                            </div>
+                            <span class="notification-icon" data-toggle="tooltip" data-placement="top" data-original-title="ADD TO YOUR FAVS">
+                                <a href="#">
+                                    <svg class="olymp-star-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-star-icon') }}"></use></svg>
+                                </a>
+                            </span>
+                        </li>
+                    @empty
+                    @endforelse
+				</ul>
+            </div>
+            <!-- .. окончание Авто -->
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-content">
@@ -1975,60 +1825,61 @@
 
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
+            <div class="ui-block revealator-slideup revealator-once">
+				<div class="ui-block-title">
+					<h6 class="title">Друзья ({{ count($data->friends) }})</h6>
+				</div>
+				<div class="ui-block-content">
+
+					<!--друзья -->
+
+					<ul class="widget w-faved-page js-zoom-gallery">
+                        @foreach ($data->friends as $friend)
+                            <li>
+                                <a href="#">
+                                    <img src="{{ $friend->user->avatar }}" alt="author">
+                                </a>
+                            </li>
+                        @break($loop->iteration == 14)
+                        @endforeach
+                        @if (count($data->friends)-14 > 0)
+                            <li class="all-users">
+                                <a href="#">+{{ count($data->friends)-14 }}</a>
+                            </li>
+                        @endif
+					</ul>
+
+					<!-- .. окончание блока друзей -->
+				</div>
+			</div>
+
 			<div class="ui-block revealator-fade revealator-delay3 revealator-once">
 				<div class="ui-block-title">
-					<h6 class="title">Фото</h6>
+					<h6 class="title">Фото ({{ count($data->images) }})</h6>
 				</div>
 				<div class="ui-block-content">
 
 					<!-- Фото -->
 
 					<ul class="widget w-last-photo js-zoom-gallery">
-						<li>
-							<a href="img/last-photo10-large.jpg">
-								<img src="{{ asset('img/last-photo10-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot11-large.jpg">
-								<img src="{{ asset('img/last-phot11-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot12-large.jpg">
-								<img src="{{ asset('img/last-phot12-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot13-large.jpg">
-								<img src="{{ asset('img/last-phot13-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot14-large.jpg">
-								<img src="{{ asset('img/last-phot14-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot15-large.jpg">
-								<img src="{{ asset('img/last-phot15-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot16-large.jpg">
-								<img src="{{ asset('img/last-phot16-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot17-large.jpg">
-								<img src="{{ asset('img/last-phot17-large.jpg') }}" alt="photo">
-							</a>
-						</li>
-						<li>
-							<a href="img/last-phot18-large.jpg">
-								<img src="{{ asset('img/last-phot18-large.jpg') }}" alt="photo">
-							</a>
-						</li>
+                        @foreach ($data->images as $item)
+                        @if ($loop->iteration < 9)
+                            <li>
+                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}">
+                                    <img src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}" alt="photo">
+                                </a>
+                            </li>
+                        @else
+                            <li style="display : none">
+                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}"></a>
+                            </li>
+                        @endif
+                        @endforeach
+                        @if (count($data->images)-8 > 0)
+                            <li class="all-users">
+                                <a href="#">+{{ count($data->images)-8 }}</a>
+                            </li>
+                        @endif
 					</ul>
 
 
@@ -2078,93 +1929,7 @@
 				<!-- .. окончание постов -->
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
-				<div class="ui-block-title">
-					<h6 class="title">Друзья (86)</h6>
-				</div>
-				<div class="ui-block-content">
 
-					<!--друзья -->
-
-					<ul class="widget w-faved-page js-zoom-gallery">
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="{{ asset('img/spiegel.jpg') }}" alt="user">
-							</a>
-						</li>
-						<li class="all-users">
-							<a href="#">+74</a>
-						</li>
-					</ul>
-
-					<!-- .. окончание блока друзей -->
-				</div>
-			</div>
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">

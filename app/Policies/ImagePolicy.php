@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Post;
+use App\Image;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class ImagePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class PostPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Image  $image
      * @return mixed
      */
-    public function view(User $user, Post $post)
+    public function view(User $user, Image $image)
     {
         //
     }
@@ -48,28 +48,28 @@ class PostPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Image  $image
      * @return mixed
      */
-    public function update(?User $user, Post $post)
+    public function update(?User $user, Image $image)
     {
         if(!$user){
             return false;
         }
-        if ($user->can('edit posts')) {
+        if ($user->can('edit image')) {
             return true;
         }
-        return $user->id === $post->postable_id && $post->postable_type == 'App\User';
+        return $user->id === $image->imageable_id && $image->imageable_type == 'App\User';
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Image  $image
      * @return mixed
      */
-    public function delete(User $user, Post $post)
+    public function delete(User $user, Image $image)
     {
         //
     }
@@ -78,10 +78,10 @@ class PostPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Image  $image
      * @return mixed
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user, Image $image)
     {
         //
     }
@@ -90,10 +90,10 @@ class PostPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Image  $image
      * @return mixed
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user, Image $image)
     {
         //
     }

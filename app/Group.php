@@ -29,6 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Group whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $full_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $image
+ * @property-read int|null $image_count
  */
 class Group extends Model
 {
@@ -39,6 +42,10 @@ class Group extends Model
      */
     protected $fillable = [
         'name', 'avatar', 'creed', 'description',
+    ];
+
+    protected $appends = [
+        'full_name'
     ];
 
 
@@ -56,5 +63,17 @@ class Group extends Model
     public function posts()
     {
         return $this->morphMany('App\Post', 'postable');
+    }
+
+    /**
+     * Get the Group's's Images.
+     */
+    public function image()
+    {
+        return $this->morphMany('App\Image', 'postable');
+    }
+
+    public function getFullNameAttribute() {
+        return "Сообщество $this->name";
     }
 }

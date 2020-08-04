@@ -32,7 +32,7 @@
                                 @if(empty($user->avatar))
                                     <img src="{{ Gravatar::src($user->email) }}" alt="" width="40" style="border-radius: 50%">
                                 @else
-                                    <img src="{{ asset('storage/' . $user->avatar) }}" width="40" alt="">
+                                    <img src="{{ asset($user->avatar) }}" width="40" alt="" style="border-radius: 50%">
                                 @endif
                             </td>
                             <td>{{ $user->name }}</td>
