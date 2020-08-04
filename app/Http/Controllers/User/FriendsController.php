@@ -73,9 +73,9 @@ class FriendsController extends Controller
      * @param  \App\Friend  $friends
      * @return \Illuminate\Http\Response
      */
-    public function edit(Friend $friends)
+    public function edit(Friend $friends, User $user)
     {
-        //
+        return view('user.components.edit_profile.friends');
     }
 
     /**

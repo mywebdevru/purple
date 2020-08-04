@@ -38,7 +38,7 @@
                                 <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
-                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.store') }}" method="POST" style="display: none;">
+                                            <form id="request-{{ $data->id }}" action="{{ route('user.friendship_request.store') }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
                                                 <input type="hidden" name="friend_id" value="{{ $data->id }}">
@@ -55,7 +55,7 @@
                                 <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('request-{{ $data->id }}').submit();">
-                                            <form id="request-{{ $data->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->friendshipRequests->where('friend_id', $data->id)->first()->id]) }}" method="POST" style="display: none;">
+                                            <form id="request-{{ $data->id }}" action="{{ route('user.friendship_request.destroy', ['friendship_request' => $user->friendshipRequests->where('friend_id', $data->id)->first()->id]) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -72,7 +72,7 @@
                                     <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                         <li>
                                             <a href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
-                                                <form id="accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                                                <form id="accept-request-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                                                     @csrf
                                                     <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships->where('user_id', $data->id)->first() }}">
                                                 </form>
@@ -81,7 +81,7 @@
                                         </li>
                                         <li>
                                             <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}').submit();">
-                                                <form id="request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $user->requestedFriendships->where('user_id', $data->id)->first()]) }}" method="POST" style="display: none;">
+                                                <form id="request-del-{{ $user->requestedFriendships->where('user_id', $data->id)->first()->id }}" action="{{ route('user.friendship_request.destroy', ['friendship_request' => $user->requestedFriendships->where('user_id', $data->id)->first()]) }}" method="POST" style="display: none;">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
@@ -98,7 +98,7 @@
                                 <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}').submit();">
-                                            <form id="request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}" action="{{ route('friend.destroy', ['friend' => $data->friends->where('friend_id', $user->id)->first()->id]) }}" method="POST" style="display: none;">
+                                            <form id="request-del-{{ $data->friends->where('friend_id', $user->id)->first()->id }}" action="{{ route('user.friends.destroy', ['friend' => $data->friends->where('friend_id', $user->id)->first()->id]) }}" method="POST" style="display: none;">
                                                 @method('DELETE')
                                                 @csrf
                                             </form>
