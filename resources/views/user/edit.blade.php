@@ -630,7 +630,7 @@
 </div>
 <!-- Конец блока Чата -->
 
-<div class="container pl-4 ml-4">
+<div class="container">
     <form>
         <div class="row">
             <div class="col-sm-12 mb-4">
