@@ -146,3 +146,4 @@
 </div>
 
 <!-- ... окончание панели навигации -->
+@component('user.components.wallpaper_block.modal_photo')@endcomponent

@@ -5,9 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Feed;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Post;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -111,6 +112,29 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
+        $route = url()->current();
+        if(Str::contains($route, 'secure')){
+            return view('user.components.edit_profile.secure');
+        }
+        if(Str::contains($route, 'personal')){
+            return view('user.components.edit_profile.personal');
+        }
+        if(Str::contains($route, 'vehicles')){
+            return view('user.components.edit_profile.vehicles');
+        }
+        if(Str::contains($route, 'groups')){
+            return view('user.components.edit_profile.groups');
+        }
+        if(Str::contains($route, 'clubs')){
+            return view('user.components.edit_profile.clubs');
+        }
+        if(Str::contains($route, 'friends')){
+            return view('user.components.edit_profile.friends');
+        }
+        if(Str::contains($route, 'maps')){
+            return view('user.components.edit_profile.maps');
+        }
+
         return view('user.edit');
     }
 

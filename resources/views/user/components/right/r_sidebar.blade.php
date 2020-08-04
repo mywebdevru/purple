@@ -469,3 +469,210 @@
 </div>
 
 <!-- ... окончание правого сайдбара под мобилу -->
+<!-- Блок чата -->
+
+<div class="ui-block popup-chat popup-chat-responsive" tabindex="-1" role="dialog" aria-labelledby="popup-chat-responsive" aria-hidden="true">
+
+	<div class="modal-content">
+		<div class="modal-header">
+			<span class="icon-status online"></span>
+			<h6 class="title" >Чат</h6>
+			<div class="more">
+				<svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
+				<svg class="olymp-little-delete js-chat-open"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-little-delete') }}"></use></svg>
+			</div>
+		</div>
+		<div class="modal-body">
+			<div class="mCustomScrollbar">
+				<ul class="notification-list chat-message chat-message-field">
+					<li>
+						<div class="author-thumb">
+							<img src="{{ asset('img/spiegel.jpg') }}" alt="author" class="mCS_img_loaded">
+						</div>
+						<div class="notification-event">
+							<span class="chat-message-item">Lorem Lorem Lorem Lorem Lorem</span>
+							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:10pm</time></span>
+						</div>
+					</li>
+
+					<li>
+						<div class="author-thumb">
+							<img src="{{ asset('img/ii.jpg') }}" alt="author" class="mCS_img_loaded">
+						</div>
+						<div class="notification-event">
+							<span class="chat-message-item">Lorem Lorem Lorem Lorem</span>
+							<span class="chat-message-item">Lorem Lorem Lorem Lorem</span>
+							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:29pm</time></span>
+						</div>
+					</li>
+
+					<li>
+						<div class="author-thumb">
+							<img src="{{ asset('img/spiegel.jpg') }}" alt="author" class="mCS_img_loaded">
+						</div>
+						<div class="notification-event">
+							<span class="chat-message-item">Lorem Lorem Lorem Lorem Lorem Lorem</span>
+							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:10pm</time></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+	<form class="need-validation">
+
+		<div class="form-group">
+			<textarea class="form-control" placeholder="Введите сообщение..."></textarea>
+			<div class="add-options-message">
+				<a href="#" class="options-message">
+					<svg class="olymp-computer-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-computer-icon') }}"></use></svg>
+				</a>
+				<div class="options-message smile-block">
+
+					<svg class="olymp-happy-sticker-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-sticker-icon') }}"></use></svg>
+
+					<ul class="more-dropdown more-with-triangle triangle-bottom-right">
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat1.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat2.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat3.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat4.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat5.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat6.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat7.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat8.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat9.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat10.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat11.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat12.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat13.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat14.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat15.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat16.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat17.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat18.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat19.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat20.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat21.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat22.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat23.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat24.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat25.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat26.png') }}" alt="icon">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="{{ asset('img/icon-chat27.png') }}" alt="icon">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	</div>
+	</div>
+</div>
+<!-- Конец блока Чата -->
