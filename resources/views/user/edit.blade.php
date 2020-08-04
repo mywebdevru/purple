@@ -24,7 +24,8 @@
             </div>
 
             <div class="modal-body">
-                <a href="#" class="upload-photo-item">
+                <input type="file" id="wallpaper" name="wallpaper">
+                <a id="upload-wallpaper" class="upload-photo-item">
                     <svg class="olymp-computer-icon">
                         <use xlink:href="../../svg-icons/sprites/icons.svg#olymp-computer-icon"></use>
                     </svg>
@@ -717,4 +718,19 @@
         </center>
     </form>
 </div>
+@endsection
+@section('css')
+<style>
+#wallpaper {
+    display: none;
+}
+</style>
+@endsection
+@section('scripts')
+<script>
+$('#upload-wallpaper').on('click', function (e) {
+    e.preventDefault();
+    $('#wallpaper').trigger('click');
+})
+</script>
 @endsection
