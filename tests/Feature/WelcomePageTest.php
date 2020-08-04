@@ -8,15 +8,8 @@ use Tests\TestCase;
 
 class WelcomePageTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function testGuestCanViewWelcomePage()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get(route('welcome'))->assertStatus(200);
     }
 }
