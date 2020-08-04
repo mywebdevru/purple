@@ -408,7 +408,7 @@
 
 
 <a class="back-to-top" href="#">
-    <img src="../../svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+    <img src="{{ asset('svg-icons/back-to-top.svg') }}" alt="arrow" class="back-icon">
 </a>
 
 
@@ -635,7 +635,7 @@
         <div class="row">
             <div class="col-sm-12 mb-4">
                 <h3 class="text-center">
-                    Редактирование профиля name
+                    Редактирование профиля {{ $user->full_name }}
                 </h3>
             </div>
             <div class="col-sm-12">
@@ -717,5 +717,4 @@
         </center>
     </form>
 </div>
-
 @endsection
