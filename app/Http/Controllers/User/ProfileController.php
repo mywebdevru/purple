@@ -80,9 +80,9 @@ class ProfileController extends Controller
                 return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
-            $user->loadCount('requestedFriendships');
-            $authUser = $user;
+            // $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
+            // $user->loadCount('requestedFriendships');
+            // $authUser = $user;
         } else {
             $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
                 return $query->where('postable_id', $id)
@@ -91,16 +91,16 @@ class ProfileController extends Controller
                             return $query->where('imageable_id', $id)
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user', 'images');
-            if(!!auth()->user()){
-                $authUser = User::find(auth()->user()->id);
-                $authUser->loadCount('requestedFriendships');
-                $authUser->load('requestedFriendships.user', 'friendshipRequests');
-            } else { $authUser = []; }
+            // if(!!auth()->user()){
+            //     $authUser = User::find(auth()->user()->id);
+            //     $authUser->loadCount('requestedFriendships');
+            //     $authUser->load('requestedFriendships.user', 'friendshipRequests');
+            // } else { $authUser = []; }
         }
+        $user->load('usersVehicles', 'friends.user', 'images');
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
-        return view('user.prof',['data' => $user, 'feed' => $feed, 'user' => $authUser]);
+        return view('user.prof',['data' => $user, 'feed' => $feed,]);
     }
 
     /**
@@ -111,7 +111,7 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit')->with('user', $user);
+        return view('user.edit');
     }
 
     /**
