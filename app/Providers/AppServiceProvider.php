@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(config('app.locale'));
 
+        // Using class based composers...
+        View::composer(
+            ['user.prof', 'welcome', 'user.edit'], 'App\Http\View\Composers\ProfileComposer'
+        );
+
+        // Using Closure based composers...
+        View::composer(['prof', 'welcome', 'user.edit'], function ($view) {
+            //
+        });
     }
 }
