@@ -123,7 +123,7 @@
                                             <a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
                                         </li>
                                         <li>
-                                            <a href="">Настройки профиля</a>
+                                            <a href="{{ route('user.edit', $data->id) }}">Настройки профиля</a>
                                         </li>
                                     </ul>
                                 </div>
