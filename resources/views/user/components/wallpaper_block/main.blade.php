@@ -6,7 +6,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ $data->wallpaper }}" alt="wallpaper">
+						<img src="{{ Str::startsWith($data->wallpaper, 'http') ? $data->wallpaper : asset($data->wallpaper)}}" alt="wallpaper" id="wallpaper">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -117,10 +117,10 @@
 
                                     <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Фото профиля</a>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="avatar">Фото профиля</a>
                                         </li>
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#update-header-photo">Главное Фото</a>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="wallpaper">Главное Фото</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('user.edit', $data->id) }}">Настройки профиля</a>

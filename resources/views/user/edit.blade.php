@@ -126,3 +126,29 @@ $('#photo').on('change', function (){
 });
 </script>
 @endsection
+@section('css')
+<style>
+#photo {
+    display: none;
+}
+</style>
+@endsection
+@section('scripts')
+<script>
+let type = '';
+$('#upload-photo').on('click', function (e) {
+    e.preventDefault();
+    $('#photo').trigger('click');
+    console.log(type);
+});
+$('.profile-photo-modal-link').on('click', function (e) {
+    e.preventDefault();
+    type = $(this).data('upload-type')
+});
+$('#photo').on('change', function (){
+    const file = $(this).prop('files')[0];
+    const formData = new FormData();
+    formData.append('file', file);
+});
+</script>
+@endsection

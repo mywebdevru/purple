@@ -81,6 +81,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('avatars') => storage_path('app/avatars'),
+        public_path('wallpapers') => storage_path('app/wallpapers'),
         public_path('summernote') => storage_path('app/summernote'),
     ],
 

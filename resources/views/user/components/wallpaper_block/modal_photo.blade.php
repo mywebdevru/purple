@@ -12,7 +12,8 @@
 			</div>
 
 			<div class="modal-body">
-				<a href="#" class="upload-photo-item">
+                <input type="file" id="photo" name="photo">
+                <a id="upload-photo" class="upload-photo-item">
 				<svg class="olymp-computer-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-computer-icon') }}"></use></svg>
 
 				<h6>Загрузить фото</h6>
