@@ -44,29 +44,29 @@
         <!-- <a href="#" class="link-find-friend">Поиск друзей</a> -->
         <div class="control-block">
             @auth
-                @component('user.components.header.control_block_item',['count' => $user->friendship_requests_count])
+                @component('user.components.header.control_block_item',['count' => $user->requested_friendships_count])
                     @slot('icon')
                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-                        <div class="label-avatar bg-blue">{{ $user->friendship_requests_count }}</div>
+                        <div class="label-avatar bg-blue">{{ $user->requested_friendships_count }}</div>
                     @endslot
                     @slot('title')
                         Они хотят дружить
                     @endslot
                     @slot('notification')
-                        @each('user.components.header.friendship_request', $user->friendshipRequests, 'request')
+                        @each('user.components.header.friendship_request', $user->requestedFriendships, 'request')
                     @endslot
                     @slot('button')
                         <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">      Добавить всех
                         </a>
-                        <form id="accept-all-friends" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                        <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                             @csrf
-                            <input type="hidden" name="requested_friendship" value="{{ $user->friendshipRequests }}">
+                            <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships }}">
                         </form>
                     @endslot
                 @endcomponent
                 @component('user.components.header.alert_chat_message') @endcomponent
                 @component('user.components.header.alert_activity') @endcomponent
-                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar]) @endcomponent
+                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id]) @endcomponent
             @else
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>

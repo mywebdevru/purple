@@ -10,7 +10,7 @@
 
                 <ul class="account-settings">
                     <li>
-                        <a href="">
+                        <a href="{{ route('user.edit', $id) }}">
 
                             <svg class="olymp-menu-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-menu-icon') }}"></use></svg>
 

@@ -16,23 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome')->with('user', auth()->user());
-});
+    return view('welcome');
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group([
-    'namespace' => 'User',
-    // 'prefix' => 'user',
-    'middleware' => 'auth',
-    // 'as' => 'user.'
-], function () {
-    Route::resource('user', 'ProfileController');
-    Route::resource('friendship_request', 'FriendshipRequestController');
-    Route::resource('friend', 'FriendsController');
-});
 
 Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
@@ -52,7 +42,7 @@ Route::group([
 });
 
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
-Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
+Route::post('summernote/destroy', [SummernoteController::class, 'destroy'])->name('summernote.destroy');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');
@@ -61,3 +51,45 @@ Route::get('edit-profile', function () {
 Route::group(['prefix'=>'maps', 'namespace'=>'Maps'], function(){
     Route::get('/', 'ConstructController@map_constructor');
 });
+
+Route::group([
+    'namespace' => 'User',
+    'prefix' => 'user',
+    'middleware' => 'auth',
+    'as' => 'user.edit.'
+], function () {
+    Route::get('{user}/edit/secure', 'ProfileController@edit')->name('secure');
+});
+
+Route::resource('user','User\ProfileController')->except(['index',])->middleware('auth');
+
+Route::group([
+    'namespace' => 'User',
+    'prefix' => 'user',
+    'middleware' => 'auth',
+    'as' => 'user.'
+], function () {
+    Route::get('{user}/edit/personal', 'PersonalInfoController@edit')->name('personal');
+    Route::put('edit/personal/{user}', 'PersonalInfoController@update')->name('personal.update');
+    Route::get('{user}/edit/vehicles', 'VehicleController@edit')->name('vehicles');
+    Route::put('edit/vehicles/{vehicle}', 'VehicleController@update')->name('vehicles.update');
+    Route::post('edit/vehicles', 'VehicleController@store')->name('vehicles.store');
+    Route::delete('edit/vehicles/{vehicle}', 'VehicleController@destroy')->name('vehicles.destroy');
+    Route::get('{user}/edit/maps', 'MapController@edit')->name('maps');
+    Route::put('edit/maps/{map}', 'MapController@update')->name('maps.update');
+    Route::post('edit/maps', 'MapController@store')->name('maps.store');
+    Route::delete('edit/maps/{map}', 'MapController@destroy')->name('maps.destroy');
+    Route::get('{user}/edit/clubs', 'ClubController@edit')->name('clubs');
+    Route::put('edit/clubs/{club}', 'ClubController@update')->name('clubs.update');
+    Route::post('edit/clubs', 'ClubController@store')->name('clubs.store');
+    Route::delete('{user}/edit/clubs', 'ClubController@destroy')->name('clubs.destroy');
+    Route::get('{user}/edit/groups', 'GroupController@edit')->name('groups');
+    Route::put('edit/groups/{group}', 'GroupController@update')->name('groups.update');
+    Route::post('{user}/edit/groups', 'GroupController@store')->name('groups.store');
+    Route::delete('edit/groups/{group}', 'GroupController@destroy')->name('groups.destroy');
+    Route::get('{user}/edit/friends', 'FriendsController@edit')->name('friends');
+    Route::post('edit/friends', 'FriendsController@store')->name('friends.store');
+    Route::delete('edit/friends/{friend}', 'FriendsController@destroy')->name('friends.destroy');
+    Route::resource('friendship_request', 'FriendshipRequestController');
+});
+
