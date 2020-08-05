@@ -107,7 +107,7 @@ class ProfileController extends Controller
         if(Str::contains(url()->current(), 'secure')){
             return view('user.components.edit_profile.secure');
         }
-        return view('user.components.edit_profile.personal');
+        return view('user.components.edit_profile.personal')->with('profile', $user);
     }
 
     /**

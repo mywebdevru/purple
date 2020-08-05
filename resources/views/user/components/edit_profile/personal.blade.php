@@ -1,3 +1,9 @@
+@php
+/**
+ * @var $profile \App\User
+*/
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -6,7 +12,7 @@
 
     <div class="header-spacer"></div>
 
-    @component('user.components.wallpaper_block.main', ['data' => $user, 'user' => $user])@endcomponent
+    @component('user.components.wallpaper_block.main', ['data' => $profile, 'user' => $profile])@endcomponent
 
     <a class="back-to-top" href="#">
         <img src="{{ asset('svg-icons/back-to-top.svg') }}" alt="arrow" class="back-icon">
@@ -17,7 +23,7 @@
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
-                        Редактирование профиля {{ $user->full_name }}
+                        Редактирование профиля {{ $profile->full_name }}
                     </h3>
                 </div>
                 <div class="col-sm-12">
