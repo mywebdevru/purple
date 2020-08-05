@@ -9,15 +9,15 @@
     @component('user.components.wallpaper_block.main', ['data' => $user, 'user' => $user])@endcomponent
 
     <a class="back-to-top" href="#">
-        <img src="../../svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+        <img src="{{ asset('svg-icons/back-to-top.svg') }}" alt="arrow" class="back-icon">
     </a>
 
-    <div class="container pl-4">
+    <div class="container">
         <form>
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
-                        Редактирование профиля
+                        Редактирование профиля {{ $user->full_name }}
                     </h3>
                 </div>
                 <div class="col-sm-12">
@@ -99,4 +99,30 @@
             </center>
         </form>
     </div>
+@endsection
+@section('css')
+    <style>
+        #photo {
+            display: none;
+        }
+    </style>
+@endsection
+@section('scripts')
+    <script>
+        let type = '';
+        $('#upload-photo').on('click', function (e) {
+            e.preventDefault();
+            $('#photo').trigger('click');
+            console.log(type);
+        });
+        $('.profile-photo-modal-link').on('click', function (e) {
+            e.preventDefault();
+            type = $(this).data('upload-type')
+        });
+        $('#photo').on('change', function (){
+            const file = $(this).prop('files')[0];
+            const formData = new FormData();
+            formData.append('file', file);
+        });
+    </script>
 @endsection
