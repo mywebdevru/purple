@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -13,9 +14,13 @@ class ProfileController extends Controller
         $type = $request['type'];
         $user = User::findOrFail($request['user']);
         $file = $request['file'];
-        $image = $file->store('wallpapers');
+        Storage::delete($user->$type);
+        $image = $file->store($type . 's');
         $user->$type = $image;
         $result = $user->save();
-        return $result;
+        return response()->json([
+            'image' => $image,
+            'status' => $result
+        ]);
     }
 }
