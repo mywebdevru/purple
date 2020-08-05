@@ -1,3 +1,9 @@
+@php
+/**
+ * @var $profile \App\User
+*/
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -6,18 +12,18 @@
 
     <div class="header-spacer"></div>
 
-    @component('user.components.wallpaper_block.main', ['data' => $user, 'user' => $user])@endcomponent
+    @component('user.components.wallpaper_block.main', ['data' => $profile, 'user' => $profile])@endcomponent
 
     <a class="back-to-top" href="#">
-        <img src="../../svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+        <img src="{{ asset('svg-icons/back-to-top.svg') }}" alt="arrow" class="back-icon">
     </a>
 
-    <div class="container pl-4">
+    <div class="container">
         <form>
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
-                        Редактирование профиля
+                        Редактирование профиля {{ $profile->full_name }}
                     </h3>
                 </div>
                 <div class="col-sm-12">
@@ -99,4 +105,68 @@
             </center>
         </form>
     </div>
+@endsection
+@javascript('user', $profile->id)
+@section('css')
+    <style>
+        #photo {
+            display: none;
+        }
+        .upload-photo-item:hover {
+            cursor: pointer;
+        }
+    </style>
+@endsection
+@section('scripts')
+    <script>
+        let type = '';
+        $('#upload-photo').on('click', function (e) {
+            e.preventDefault();
+            $('#photo').trigger('click');
+        });
+        $('.profile-photo-modal-link').on('click', function (e) {
+            e.preventDefault();
+            type = $(this).data('upload-type')
+        });
+        $('#photo').on('change', async function (){
+            const file = $(this).prop('files')[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('type', type);
+            formData.append('user', user);
+            try {
+                const response = await imageUpload(formData);
+                $('#update-header-photo').modal('hide');
+                const image = response.image,
+                    imgType = response.type;
+                if(image && imgType) {
+                    const src = "{{ URL::to('/') }}" + '/' + image;
+                    if(imgType === 'avatar') {
+                        $('.author-image').attr('src', src);
+                        $('#header-avatar').attr('src', src);
+                    } else if (imgType === 'wallpaper') {
+                        $('#wallpaper').attr('src', src);
+                    }
+                    swal("Успех!", "Вы успешно загрузили новое изображение", "success");
+                }
+            } catch (e) {
+                console.log(e.message);
+                swal("Ошибка!", e.message, "danger");
+            }
+        });
+        async function imageUpload(data) {
+            try {
+                const response = (await axios({
+                    data,
+                    method: 'post',
+                    url: "{{ route('api.profile.upload') }}",
+                })).data;
+                if(response.status) {
+                    return response;
+                }
+            } catch (e) {
+                throw new Error(e.message);
+            }
+        }
+    </script>
 @endsection
