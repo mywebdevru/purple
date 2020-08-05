@@ -10,6 +10,12 @@ class ProfileController extends Controller
 {
     public function upload(Request $request)
     {
-        return $request;
+        $type = $request['type'];
+        $user = User::find($request['user']);
+        $file = $request['file'];
+        $image = $file->store('avatar');
+        $user->$type = $image;
+        $result = $user->save();
+        return $result;
     }
 }
