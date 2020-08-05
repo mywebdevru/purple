@@ -58,7 +58,7 @@
                     @slot('button')
                         <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">      Добавить всех
                         </a>
-                        <form id="accept-all-friends" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                        <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                             @csrf
                             <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships }}">
                         </form>

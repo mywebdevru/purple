@@ -8,7 +8,7 @@
     </div>
     <span class="notification-icon">
         <a class="accept-request" href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $request->id }}').submit();">
-            <form id="accept-request-{{ $request->id }}" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+            <form id="accept-request-{{ $request->id }}" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                 @csrf
                 <input type="hidden" name="requested_friendship" value="{{ $request }}">
             </form>
@@ -17,7 +17,7 @@
             </span>
         </a>
         <a class="accept-request request-del" href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $request->id }}').submit();">
-            <form id="request-del-{{ $request->id }}" action="{{ route('friendship_request.destroy', ['friendship_request' => $request]) }}" method="POST" style="display: none;">
+            <form id="request-del-{{ $request->id }}" action="{{ route('user.friendship_request.destroy', ['friendship_request' => $request]) }}" method="POST" style="display: none;">
                 @method('DELETE')
                 @csrf
             </form>
