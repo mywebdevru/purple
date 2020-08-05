@@ -143,6 +143,7 @@
                 } else if (imgType === 'wallpaper') {
                     $('#wallpaper').attr('src', src);
                 }
+                swal("Успех!", "Вы успешно загрузили новое изображение", "success");
             }
         });
         async function imageUpload(data) {
