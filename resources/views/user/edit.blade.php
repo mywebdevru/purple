@@ -515,16 +515,27 @@
 @endsection
 @section('css')
 <style>
-#wallpaper {
+#photo {
     display: none;
 }
 </style>
 @endsection
 @section('scripts')
 <script>
-$('#upload-wallpaper').on('click', function (e) {
+let type = '';
+$('#upload-photo').on('click', function (e) {
     e.preventDefault();
-    $('#wallpaper').trigger('click');
-})
+    $('#photo').trigger('click');
+    console.log(type);
+});
+$('.profile-photo-modal-link').on('click', function (e) {
+    e.preventDefault();
+    type = $(this).data('upload-type')
+});
+$('#photo').on('change', function (){
+    const file = $(this).prop('files')[0];
+    const formData = new FormData();
+    formData.append('file', file);
+});
 </script>
 @endsection

@@ -117,10 +117,10 @@
 
                                     <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#update-header-photo" id="avatar-link">Фото профиля</a>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="avatar">Фото профиля</a>
                                         </li>
                                         <li>
-                                            <a href="#" data-toggle="modal" data-target="#update-header-photo" id="wallpaper-link">Главное Фото</a>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="wallpaper">Главное Фото</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('user.edit', $data->id) }}">Настройки профиля</a>
