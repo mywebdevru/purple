@@ -106,6 +106,7 @@
         </form>
     </div>
 @endsection
+@javascript('user', $profile->id)
 @section('css')
     <style>
         #photo {
@@ -129,6 +130,21 @@
             const file = $(this).prop('files')[0];
             const formData = new FormData();
             formData.append('file', file);
+            formData.append('type', type);
+            formData.append('user', user);
+            imageUpload(formData);
         });
+        async function imageUpload(data) {
+            try {
+                const response = (await axios({
+                    data,
+                    method: 'post',
+                    url: "{{ route('api.profile.upload') }}",
+                })).data;
+                console.log(response);
+            } catch (e) {
+                console.log(e);
+            }
+        }
     </script>
 @endsection
