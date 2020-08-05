@@ -131,30 +131,38 @@
             formData.append('file', file);
             formData.append('type', type);
             formData.append('user', user);
-            const response = await imageUpload(formData);
-            $('#update-header-photo').modal('hide');
-            const image = response.image,
-                imgType = response.type;
-            if(image && imgType) {
-                const src = "{{ URL::to('/') }}" + '/' + image;
-                if(imgType === 'avatar') {
-                    $('.author-image').attr('src', src);
-                    $('.avatar').attr('src', src);
-                } else if (imgType === 'wallpaper') {
-                    $('#wallpaper').attr('src', src);
+            try {
+                const response = await imageUpload(formData);
+                $('#update-header-photo').modal('hide');
+                const image = response.image,
+                    imgType = response.type;
+                if(image && imgType) {
+                    const src = "{{ URL::to('/') }}" + '/' + image;
+                    if(imgType === 'avatar') {
+                        $('.author-image').attr('src', src);
+                        $('.avatar').attr('src', src);
+                    } else if (imgType === 'wallpaper') {
+                        $('#wallpaper').attr('src', src);
+                    }
+                    swal("Успех!", "Вы успешно загрузили новое изображение", "success");
                 }
-                swal("Успех!", "Вы успешно загрузили новое изображение", "success");
+            } catch (e) {
+                console.log(e.message);
+                swal("Ошибка!", e.message, "danger");
             }
         });
         async function imageUpload(data) {
             try {
-                return (await axios({
+                const response = (await axios({
                     data,
                     method: 'post',
                     url: "{{ route('api.profile.upload') }}",
                 })).data;
+                if(response.status) {
+                    return response;
+                }
             } catch (e) {
-                console.log(e);
+                throw new Error(e.message);
             }
         }
     </script>
