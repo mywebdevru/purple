@@ -11,9 +11,9 @@ class ProfileController extends Controller
     public function upload(Request $request)
     {
         $type = $request['type'];
-        $user = User::find($request['user']);
+        $user = User::findOrFail($request['user']);
         $file = $request['file'];
-        $image = $file->store('avatar');
+        $image = $file->store('wallpapers');
         $user->$type = $image;
         $result = $user->save();
         return $result;
