@@ -107,11 +107,11 @@ class ProfileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(User $users)
+    public function edit(User $user)
     {
-        return view('user.edit');
+        return view('user.edit')->with('user', $user);
     }
 
     /**

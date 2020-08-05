@@ -48,6 +48,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name.required' => 'Необходимо заполнить поле Имя',
             'surname.required' => 'Необходимо заполнить поле Фамилия',
+            'avatar.dimensions' => 'Соотношение сторон фото должно быть 1:1. Ширина от 100 до 800 пикселей'
         ];
     }
 }
