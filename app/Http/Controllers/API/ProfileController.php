@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUploadRequest;
 use App\User;
-use Illuminate\Http\Request;
 use Storage;
 
 class ProfileController extends Controller
 {
-    public function upload(Request $request)
+    public function upload(ProfileUploadRequest $request)
     {
         $type = $request['type'];
         $user = User::findOrFail($request['user']);
@@ -20,7 +20,8 @@ class ProfileController extends Controller
         $result = $user->save();
         return response()->json([
             'image' => $image,
-            'status' => $result
-        ]);
+            'type' => $type,
+            'status' => $result,
+        ])->status();
     }
 }
