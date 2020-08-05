@@ -120,28 +120,28 @@
         $('#upload-photo').on('click', function (e) {
             e.preventDefault();
             $('#photo').trigger('click');
-            console.log(type);
         });
         $('.profile-photo-modal-link').on('click', function (e) {
             e.preventDefault();
             type = $(this).data('upload-type')
         });
-        $('#photo').on('change', function (){
+        $('#photo').on('change', async function (){
             const file = $(this).prop('files')[0];
             const formData = new FormData();
             formData.append('file', file);
             formData.append('type', type);
             formData.append('user', user);
-            imageUpload(formData);
+            const response = await imageUpload(formData);
+            $('#update-header-photo').modal('hide');
+            console.log(response);
         });
         async function imageUpload(data) {
             try {
-                const response = (await axios({
+                return (await axios({
                     data,
                     method: 'post',
                     url: "{{ route('api.profile.upload') }}",
                 })).data;
-                console.log(response);
             } catch (e) {
                 console.log(e);
             }
