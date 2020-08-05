@@ -25,6 +25,7 @@ class SummernoteUploadRequest extends FormRequest
     {
         return [
             'files.*' => 'image',
+            'post' => 'required|exists:posts,id',
         ];
     }
 }
