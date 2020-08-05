@@ -133,7 +133,17 @@
             formData.append('user', user);
             const response = await imageUpload(formData);
             $('#update-header-photo').modal('hide');
-            console.log(response);
+            const image = response.image,
+                imgType = response.type;
+            if(image && imgType) {
+                const src = "{{ URL::to('/') }}" + '/' + image;
+                if(imgType === 'avatar') {
+                    $('.author-image').attr('src', src);
+                    $('.avatar').attr('src', src);
+                } else if (imgType === 'wallpaper') {
+                    $('#wallpaper').attr('src', src);
+                }
+            }
         });
         async function imageUpload(data) {
             try {

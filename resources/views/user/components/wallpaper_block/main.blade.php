@@ -6,7 +6,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ Str::startsWith($data->wallpaper, 'http') ? $data->wallpaper : asset($data->wallpaper)}}" alt="wallpaper">
+						<img src="{{ Str::startsWith($data->wallpaper, 'http') ? $data->wallpaper : asset($data->wallpaper)}}" alt="wallpaper" id="wallpaper">
 					</div>
 					<div class="profile-section">
 						<div class="row">

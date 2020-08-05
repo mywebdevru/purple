@@ -22,6 +22,6 @@ class ProfileController extends Controller
             'image' => $image,
             'type' => $type,
             'status' => $result,
-        ])->status();
+        ]);
     }
 }
