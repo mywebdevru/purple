@@ -112,6 +112,9 @@
         #photo {
             display: none;
         }
+        .upload-photo-item:hover {
+            cursor: pointer;
+        }
     </style>
 @endsection
 @section('scripts')
@@ -140,7 +143,7 @@
                     const src = "{{ URL::to('/') }}" + '/' + image;
                     if(imgType === 'avatar') {
                         $('.author-image').attr('src', src);
-                        $('.avatar').attr('src', src);
+                        $('#header-avatar').attr('src', src);
                     } else if (imgType === 'wallpaper') {
                         $('#wallpaper').attr('src', src);
                     }
