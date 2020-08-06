@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{-- @dd($feed->first()->feedable->comments->find(2)->authorable['full_name']) --}}
 @section('content')
 @component('user.components.left.l_sidebar')@endcomponent
 @component('user.components.right.r_sidebar')@endcomponent
@@ -20,9 +20,9 @@
                 @foreach ($feed as $item)
                 {{-- @dd($item->feedable) --}}
                     @if($item['feedable_type'] == 'App\Post')
-                        @component('user.components.feed.post',['feed' => $item->feedable]) @endcomponent
+                        @component('user.components.feed.post',['feed' => $item->feedable, 'comment_author' => $user]) @endcomponent
                     @else
-                        @component('user.components.feed.image',['feed' => $item->feedable]) @endcomponent
+                        @component('user.components.feed.image',['feed' => $item->feedable, 'comment_author' => $user]) @endcomponent
                     @endif
                 @endforeach
 
@@ -492,7 +492,7 @@
 
 					</form>
 
-					</div><!-- ... окончание Блока для печатания текста комментария  -->
+				</div><!-- ... окончание Блока для печатания текста комментария  -->
 
         </div>
 
