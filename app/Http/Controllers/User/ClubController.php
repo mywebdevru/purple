@@ -59,7 +59,7 @@ class ClubController extends Controller
      */
     public function edit(Club $clubs, User $user)
     {
-        return view('user.components.edit_profile.groups');
+        return view('user.components.edit_profile.clubs');
     }
 
     /**
