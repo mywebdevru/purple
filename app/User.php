@@ -191,6 +191,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'authorable');
+    }
+
+    /**
      * Get the User's Images.
      */
     public function images()

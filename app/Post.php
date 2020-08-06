@@ -61,4 +61,12 @@ class Post extends Model
         return $this->morphMany('App\Image', 'imageable');
 
     }
+
+    /**
+     * Get the Post's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
 }

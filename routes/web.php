@@ -62,6 +62,7 @@ Route::group([
 });
 
 Route::resource('user','User\ProfileController')->except(['index',])->middleware('auth');
+Route::resource('comment','Comment\CommentController')->except(['index',])->middleware('auth');
 
 Route::group([
     'namespace' => 'User',

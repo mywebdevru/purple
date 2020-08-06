@@ -73,6 +73,14 @@ class Group extends Model
         return $this->morphMany('App\Image', 'postable');
     }
 
+    /**
+     * Get the Group's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'authorable');
+    }
+
     public function getFullNameAttribute() {
         return "Сообщество $this->name";
     }
