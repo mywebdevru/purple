@@ -105,8 +105,8 @@
             </center>
         </form>
     </div>
-    @javascript('user', $profile->id)
 @endsection
+@javascript('user', $profile->id)
 @section('css')
     <style>
         #photo {
