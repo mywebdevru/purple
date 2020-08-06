@@ -125,6 +125,7 @@ class ProfileController extends Controller
         }
         $data = $request->except('_token');
         $save = $user->fill($data)->save();
+        abort_if(!$save, 500);
         return redirect()->route('user.show', ['user' => $user]);
     }
 
