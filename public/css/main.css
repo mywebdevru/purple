@@ -23296,9 +23296,11 @@ a.hello-btn, a.hello-btn:hover, a.hello-btn:focus, a.hello-btn:visited { text-de
 .profileeditmenu_element { background-color: #fff; }
 .profileeditmenu_element:hover { transition: 0.5s; background-color: #ff5e3a; }
 .profileeditmenu_link { color: #ff5e3a; text-decoration: none; }
+/*SCHEME*/
+.currentclub, .clubstosub, .friends { background-color: #fff; }
+.currentclub-image, .passedfriendimg { width: 120px; height: 120px; border-radius: 100%; }
 /*PROFILE EDIT/CLUBS*/
-.currentclub, .clubstosub { background-color: #fff; }
-.currentclub-image { width: 120px; height: 120px; border-radius: 100%; }
 .club_confirmed_state { color: #3490dc; }
 .clubslist_hr { color: #9a9fbf; background-color: #9a9fbf; opacity: 0.65;}
-.clubstosubimg { width: 100px; height: 100px; border-radius: 100%; }
+.clubstosubimg { width: 100px; height: 100px; border-radius: 100%; } 
+/*PROFILE EDIT/FRIENDS*/
