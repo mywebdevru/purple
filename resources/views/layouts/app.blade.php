@@ -9,16 +9,13 @@
 
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/main.js') }}" defer></script>
-
 	<link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
 
 	<!-- Main Styles CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
+    @yield('css')
 </head>
 
 <body class="page-has-left-panels page-has-right-panels">
@@ -58,7 +55,7 @@
                     @slot('button')
                         <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">      Добавить всех
                         </a>
-                        <form id="accept-all-friends" action="{{ route('friend.store') }}" method="POST" style="display: none;">
+                        <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                             @csrf
                             <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships }}">
                         </form>
@@ -66,7 +63,7 @@
                 @endcomponent
                 @component('user.components.header.alert_chat_message') @endcomponent
                 @component('user.components.header.alert_activity') @endcomponent
-                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar]) @endcomponent
+                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id]) @endcomponent
             @else
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
@@ -460,5 +457,9 @@
 
 @yield('content')
 
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+@yield('scripts')
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Summernote;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SummernoteUploadRequest extends FormRequest
+class ProfileUploadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class SummernoteUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'files.*' => 'image',
-            'post' => 'required|exists:posts,id',
+            'type' => 'required|in:avatar,wallpaper',
+            'user' => 'required|exists:users,id',
+            'file' => 'required|image',
         ];
     }
 }

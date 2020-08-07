@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
+        "bootstrap-sweetalert": "^1.0.1",
         "flatpickr": "^4.6.3"
     }
 }

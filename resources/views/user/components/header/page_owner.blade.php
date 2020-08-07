@@ -1,6 +1,6 @@
 <div class="author-page author vcard inline-items more">
     <div class="author-thumb">
-        <img alt="author" src="{{ Str::startsWith($avatar, 'http') ? $avatar : asset($avatar)}}" class="avatar">
+        <img alt="author" src="{{ Str::startsWith($avatar, 'http') ? $avatar : asset($avatar)}}" class="avatar" id="header-avatar">
         <span class="icon-status online"></span>
         <div class="more-dropdown more-with-triangle">
             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -10,7 +10,7 @@
 
                 <ul class="account-settings">
                     <li>
-                        <a href="">
+                        <a href="{{ route('user.edit', $id) }}">
 
                             <svg class="olymp-menu-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-menu-icon') }}"></use></svg>
 

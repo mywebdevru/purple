@@ -5,9 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Feed;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Post;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -80,9 +81,6 @@ class ProfileController extends Controller
                 return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Group');
             })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user', 'friendshipRequests.friend', 'requestedFriendships.user', 'images');
-            $user->loadCount('requestedFriendships');
-            $authUser = $user;
         } else {
             $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
                 return $query->where('postable_id', $id)
@@ -91,16 +89,12 @@ class ProfileController extends Controller
                             return $query->where('imageable_id', $id)
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
-            $user->load('usersVehicles', 'friends.user', 'images');
-            if(!!auth()->user()){
-                $authUser = User::find(auth()->user()->id);
-                $authUser->loadCount('requestedFriendships');
-                $authUser->load('requestedFriendships.user', 'friendshipRequests');
-            } else { $authUser = []; }
         }
+        $user->load('usersVehicles', 'friends.user', 'images');
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
-        return view('user.prof',['data' => $user, 'feed' => $feed, 'user' => $authUser]);
+        $feed->load('feedable.comments.authorable');
+        return view('user.prof',['data' => $user, 'feed' => $feed,]);
     }
 
     /**
@@ -111,7 +105,10 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit')->with('user', $user);
+        if(Str::contains(url()->current(), 'secure')){
+            return view('user.components.edit_profile.secure');
+        }
+        return view('user.components.edit_profile.personal')->with('profile', $user);
     }
 
     /**

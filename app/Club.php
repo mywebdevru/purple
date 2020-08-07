@@ -80,6 +80,14 @@ class Club extends Model
         return $this->morphMany('App\Image', 'postable');
     }
 
+    /**
+     * Get the Clubs's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'authorable');
+    }
+
     public function getFullNameAttribute() {
         return "Клуб $this->name";
     }
