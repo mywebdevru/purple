@@ -2,6 +2,7 @@
 /**
  * @var $user \App\User
  * @var $friends \App\Friend []
+ * @var $vehicles \App\UserVehicle []
  */
 @endphp
 
@@ -181,6 +182,58 @@
                             </tr>
                         @empty
                             Пользователь не предлагал дружбу
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Транспортные средства
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Тип</th>
+                            <th scope="col">Марка</th>
+                            <th scope="col">Модель</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($vehicles as $vehicle)
+                            <tr>
+                                <td>
+                                    {{ $vehicle->type }}
+                                </td>
+                                <td>
+                                    {{ $vehicle->brand }}
+                                </td>
+                                <td>
+                                    {{ $vehicle->model }}
+                                </td>
+                                <td>
+                                    <form class="d-inline-block" action="{{ route('admin.vehicle.destroy', $vehicle->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="btn btn-danger btn-sm"
+                                            type="submit"
+                                            role="button">
+                                            Удаление
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            У пользователя пока нет транспортных средств
                         @endforelse
                         </tbody>
                     </table>
