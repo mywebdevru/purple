@@ -260,10 +260,10 @@
                             <label for="type">Тип транспортного средства</label>
                             <select class="form-control" id="type" name="type">
                                 <option disabled selected>Выберите тип транспортного средства</option>
-                                <option value="1">Легковой</option>
-                                <option value="2">Грузовой или автобус</option>
-                                <option value="3">Коммерческий</option>
-                                <option value="4">Мотоцикл/квадрацикл</option>
+                                <option value="Легковой" data-type="1">Легковой</option>
+                                <option value="Грузовой или автобус" data-type="2">Грузовой или автобус</option>
+                                <option value="Коммерческий" data-type="3">Коммерческий</option>
+                                <option value="Мотоцикл/квадрацикл" data-type="4">Мотоцикл/квадрацикл</option>
                             </select>
                         </div>
                         <div class="form-group" id="brands-group" style="display: none">
@@ -291,7 +291,8 @@
 <script>
 $(document).ready(function () {
     $('#type').on('change', function () {
-        const type = $(this).val();
+        const typeVal = $(this).val(),
+            type = $(`#type option[value=${typeVal}]`).data('type');
         (async function getCategory() {
             try {
                 const brands = (await axios.get('https://auto-db.mywebdev.ru/api/category/' + type)).data.data;
