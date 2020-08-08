@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\UserVehicle;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request['model']);
     }
 
     /**

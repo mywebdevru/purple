@@ -254,7 +254,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="{{ route('admin.vehicle.store') }}" method="POST">
+                    @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="type">Тип транспортного средства</label>
@@ -292,11 +293,10 @@
 $(document).ready(function () {
     $('#type').on('change', function () {
         const typeVal = $(this).val(),
-            type = $(`#type option[value=${typeVal}]`).data('type');
+            type = $(`#type option[value="${typeVal}"]`).data('type');
         (async function getCategory() {
             try {
                 const brands = (await axios.get('https://auto-db.mywebdev.ru/api/category/' + type)).data.data;
-                console.log(brands);
                 brands.forEach(function (brand) {
                     $("#brand-list").append('<option value="' + brand.name + '" data-brand="' + brand.id + '">');
                 });
@@ -312,7 +312,6 @@ $(document).ready(function () {
         (async function getBrand() {
             try {
                 const models = (await axios.get('https://auto-db.mywebdev.ru/api/manufacturer/' + brandID)).data.data;
-                console.log(models);
                 models.forEach(function (model) {
                     $("#model-list").append('<option value="' + model.name + '" data-brand="' + model.id + '">');
                 });
@@ -321,7 +320,6 @@ $(document).ready(function () {
                 console.log(e);
             }
         })();
-        console.log(brandID);
     });
 });
 </script>
