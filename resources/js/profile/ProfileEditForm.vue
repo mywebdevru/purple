@@ -56,6 +56,9 @@
 <script>
 export default {
     name: "ProfileEditForm",
+    props: {
+        id: Number,
+    },
     data() {
         return {
             name: null,
