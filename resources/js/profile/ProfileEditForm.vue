@@ -23,9 +23,9 @@
                 <div class="form-group">
                     <label for="gender">Выберите пол...</label>
                     <select class="form-control form_edit_profile_field" id="gender" name="gender" v-model="profile.gender">
-                        <option>Мужской</option>
-                        <option>Женский</option>
-                        <option>В смятении...</option>
+                        <option :selected="profile.gender === 'Мужчина'">Мужчина</option>
+                        <option :selected="profile.gender === 'Женщина'">Женщина</option>
+                        <option :selected="profile.gender === 'В смятении'">В смятении</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -65,7 +65,7 @@ export default {
                 name: null,
                 surname: null,
                 email: null,
-                gender: null,
+                gender: 'В смятении',
                 birth_date: null,
                 country: null,
                 city: null,

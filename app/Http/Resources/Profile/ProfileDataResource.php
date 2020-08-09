@@ -23,7 +23,7 @@ class ProfileDataResource extends JsonResource
             'surname' => $this->surname,
             'email' => $this->email,
             'gender' => $this->gender,
-            'birth_date' => $this->birth_date->format('Y-m-d'),
+            'birth_date' => $this->birth_date ? $this->birth_date->format('Y-m-d') : null,
             'city' => $this->city,
             'country' => $this->country,
             'creed' => $this->creed,
