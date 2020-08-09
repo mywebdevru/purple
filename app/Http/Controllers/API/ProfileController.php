@@ -24,4 +24,9 @@ class ProfileController extends Controller
             'status' => $result,
         ]);
     }
+
+    public function data(User $user)
+    {
+        return $user;
+    }
 }
