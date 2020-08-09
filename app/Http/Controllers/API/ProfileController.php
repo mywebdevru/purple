@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUploadRequest;
+use App\Http\Resources\Profile\ProfileDataResource;
 use App\User;
 use Storage;
 
@@ -27,6 +28,6 @@ class ProfileController extends Controller
 
     public function data(User $user)
     {
-        return $user;
+        return new ProfileDataResource($user);
     }
 }

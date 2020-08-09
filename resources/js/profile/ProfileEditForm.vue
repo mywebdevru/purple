@@ -77,8 +77,7 @@ export default {
     async created() {
         this.loading = false;
         try {
-            const data = (await axios.get(`/api/profile/${this.id}`)).data;
-            console.log(data);
+            this.profile = (await axios.get(`/api/profile/${this.id}`)).data.data;
         } catch (e) {
 
         } finally {
