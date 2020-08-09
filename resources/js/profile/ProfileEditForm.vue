@@ -3,51 +3,50 @@
         <article class="hentry post video">
             <div class="col-sm-7">
                 <div class="form-group">
-                    <label for="exampleInputName1">Изменить имя</label>
-                    <input type="text" class="form-control form_edit_profile_field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ваше прекрасное имя здесь..." value="Иван">
+                    <label for="name">Изменить имя</label>
+                    <input type="text" class="form-control form_edit_profile_field" id="name" name="name" v-model="name">
                     <small id="InputName1Help" class="form-text text-muted">Имя, которое видят все.</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputName2">Изменить фамилию</label>
-                    <input type="text" class="form-control form_edit_profile_field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ваша фамилия здесь..." value="Иванов">
+                    <label for="surname">Изменить фамилию</label>
+                    <input type="text" class="form-control form_edit_profile_field" id="surname" name="surname" v-model="surname">
                     <small id="InputName2Help" class="form-text text-muted">Фамилия, которую видят все.</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail">Сменить Email</label>
-                    <input type="email" class="form-control form_edit_profile_field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ваш адрес электронной почты, если его надо сменить..." value="example@gb.ru">
+                    <label for="email">Сменить Email</label>
+                    <input type="email" class="form-control form_edit_profile_field" id="email" name="email" v-model="email">
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
 
                 <div class="form-group">
-                    <label for="examplecalendar">Выберите пол...</label>
-                    <select class="form-control form_edit_profile_field" id="examplecalendar">
+                    <label for="gender">Выберите пол...</label>
+                    <select class="form-control form_edit_profile_field" id="gender" name="gender" v-model="gender">
                         <option>Мужской</option>
                         <option>Женский</option>
                         <option>В смятении...</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>Ваша дата рождения</label>
-                    <input type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control form_edit_profile_field">
+                    <label for="birth_date">Ваша дата рождения</label>
+                    <input type="date" name="birth_date" class="form-control form_edit_profile_field" id="birth_date" v-model="birth_date">
                 </div>
 
                 <div class="form-group">
-                    <label for="examplecity">Выберите страну</label>
-                    <select class="form-control form_edit_profile_field" id="country" value="Город, который выбрал пользователь"></select>
+                    <label for="city">Выберите город</label>
+                    <input type="text" class="form-control form_edit_profile_field" id="city" name="city" v-model="city">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="country">Выберите страну</label>
+                    <input type="text" class="form-control form_edit_profile_field" id="country" name="country" v-model="country">
                 </div>
 
                 <div class="form-group">
-                    <label for="examplecity">Выберите город</label>
-                    <select class="form-control form_edit_profile_field" id="city" value="Город, который выбрал пользователь"></select>
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputCreed1">Кредо</label>
-                    <input type="text" class="form-control form_edit_profile_field" id="exampleInputCreed1" aria-describedby="emailHelp" placeholder="Ваша фраза здесь...">
-                    <small id="exampleInputCreed1" class="form-text text-muted">Не обязательно указывать</small>
+                    <label for="creed">Девиз</label>
+                    <input type="text" class="form-control form_edit_profile_field" id="creed" name="creed" v-model="creed">
                 </div>
             </div>
         </article>
@@ -56,7 +55,19 @@
 
 <script>
 export default {
-    name: "ProfileEditForm"
+    name: "ProfileEditForm",
+    data() {
+        return {
+            name: null,
+            surname: null,
+            email: null,
+            gender: null,
+            birth_date: null,
+            country: null,
+            city: null,
+            creed: null,
+        }
+    }
 }
 </script>
 
