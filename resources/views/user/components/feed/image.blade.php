@@ -1,4 +1,4 @@
-<div class="ui-block revealator-slideup revealator-once">
+<div class="ui-block">
     <!-- Пост -->
 
     <article class="hentry post has-post-thumbnail shared-photo">
