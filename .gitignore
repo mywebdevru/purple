@@ -12,3 +12,6 @@ npm-debug.log
 yarn-error.log
 .idea/
 .DS_Store
+composer.lock
+package.json
+package-lock.json
