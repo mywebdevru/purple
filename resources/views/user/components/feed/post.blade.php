@@ -64,7 +64,7 @@
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items" >
+                <a href="#" class="post-add-icon inline-items" onclick="event.preventDefault(); writeComment({{ $feed['id'] }}, 'post');">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
@@ -106,8 +106,9 @@
             </a>
 
         </div>
-        @component('user.components.feed.comments',['comments' => $feed->comments, 'comment_author' => $comment_author])@endcomponent
-        @component('user.components.feed.write_comment',['comment_author' => $comment_author])
+        <a href="#" id="comments_post{{ $feed['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed['id'] }}, 'post');">Показать комментарии <span>+</span></a>
+        @component('user.components.feed.comments',['comments' => $feed->comments, 'comment_author' => $comment_author, 'feed' => 'post'.$feed['id']])@endcomponent
+        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'post'.$feed['id']])
         @slot('commentable_id')
          {{ $feed['id'] }}
         @endslot
@@ -115,7 +116,7 @@
          App\Post
         @endslot
         @endcomponent
-        <a href="#" class="more-comments">Показать комментарии <span>+</span></a>
+
 
 
     </article>
