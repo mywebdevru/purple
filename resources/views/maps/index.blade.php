@@ -1,4 +1,8 @@
-
+@extends('layouts.app')
+@section('content')
+@component('user.components.left.l_sidebar')@endcomponent
+@component('user.components.right.r_sidebar')@endcomponent
+<div class="header-spacer"></div>
     <h1>Maps</h1>
     <div class="container">
         <hr>
@@ -43,3 +47,4 @@
             </tfoot>
         </table>
     </div>
+@endsection
