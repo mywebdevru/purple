@@ -88,6 +88,14 @@ class Club extends Model
         return $this->morphMany('App\Comment', 'authorable');
     }
 
+    /**
+     * Get the Club's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'authorable');
+    }
+
     public function getFullNameAttribute() {
         return "Клуб $this->name";
     }

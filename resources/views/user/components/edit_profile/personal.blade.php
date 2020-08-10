@@ -20,7 +20,6 @@ $data = $profile;
     </a>
 
     <div class="container">
-        <form>
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
@@ -95,12 +94,7 @@ $data = $profile;
                     </div>
                 </div>
             </div>
-
-            </div>
-            <center>
-                <button class="btn btn-primary">Сохранить</button>
-            </center>
-        </form>
+        </div>
     </div>
     @javascript('user', $profile->id)
 @endsection
@@ -115,6 +109,7 @@ $data = $profile;
     </style>
 @endsection
 @section('scripts')
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=467f68a5-dab6-4c12-9b28-13d2745d2d99" type="text/javascript"></script>
     <script src="{{ asset('js/edit.js') }}"></script>
     <script>
         let type = '';
@@ -149,7 +144,7 @@ $data = $profile;
                 }
             } catch (e) {
                 console.log(e.message);
-                swal("Ошибка!", e.message, "danger");
+                swal("Ошибка!", e.message, "error");
             }
         });
         async function imageUpload(data) {

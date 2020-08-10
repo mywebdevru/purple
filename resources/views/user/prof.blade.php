@@ -8,7 +8,7 @@
 
 @component('user.components.wallpaper_block.main', ['data' => $data, 'user' => $user])@endcomponent
 
-
+{{-- @dd($feed->first()->feedable()->first()->comments->first()->likes->first()->authorable->full_name) --}}
 <div class="container">
 	<div class="row">
 
