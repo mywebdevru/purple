@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\SaveProfileRequest;
 use App\Http\Requests\ProfileUploadRequest;
 use App\Http\Resources\Profile\ProfileDataResource;
 use App\User;
+use Illuminate\Support\Facades\Request;
 use Storage;
 
 class ProfileController extends Controller
@@ -29,5 +31,9 @@ class ProfileController extends Controller
     public function data(User $user)
     {
         return new ProfileDataResource($user);
+    }
+
+    public function save(User $user, SaveProfileRequest $request) {
+        return $request;
     }
 }

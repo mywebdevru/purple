@@ -79,7 +79,15 @@ export default {
     },
     methods: {
         async save() {
-            console.log('Save Form Data');
+            this.loading = true;
+            try {
+                const result = (await axios.patch(`/api/profile/${this.id}`, this.profile)).data
+                console.log(result);
+            } catch (e) {
+                console.log(e);
+            } finally {
+                this.loading = false;
+            }
         }
     },
     async created() {
