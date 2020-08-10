@@ -2,7 +2,7 @@
     <div class="ui-block">
         <article class="hentry post video">
             <div class="col-sm-7">
-                <form @submit.prevent="save">
+                <form>
                     <div class="form-group">
                         <label for="name">Изменить имя</label>
                         <input type="text"
@@ -91,7 +91,7 @@
                                :class="[{'is-invalid' : errorsFor('creed')}]">
                         <validation-errors :errors="errorsFor('creed')"></validation-errors>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
+                    <button type="button" class="btn btn-primary btn-block" @click.prevent="save">Сохранить</button>
                 </form>
             </div>
         </article>
