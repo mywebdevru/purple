@@ -7,7 +7,6 @@ use App\Http\Requests\Profile\SaveProfileRequest;
 use App\Http\Requests\ProfileUploadRequest;
 use App\Http\Resources\Profile\ProfileDataResource;
 use App\User;
-use Illuminate\Support\Facades\Request;
 use Storage;
 
 class ProfileController extends Controller
@@ -33,7 +32,7 @@ class ProfileController extends Controller
         return new ProfileDataResource($user);
     }
 
-    public function save(User $user, Request $request) {
+    public function save(User $user, SaveProfileRequest $request) {
         $data = $request->all();
         $result = $user->update($data);
         if($result) {

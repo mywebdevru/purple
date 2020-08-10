@@ -5,46 +5,90 @@
                 <form @submit.prevent="save">
                     <div class="form-group">
                         <label for="name">Изменить имя</label>
-                        <input type="text" class="form-control form_edit_profile_field" id="name" name="name" v-model="profile.name">
-                        <small id="InputName1Help" class="form-text text-muted">Имя, которое видят все.</small>
+                        <input type="text"
+                               class="form-control form_edit_profile_field"
+                               id="name"
+                               name="name"
+                               v-model="profile.name"
+                               :class="[{'is-invalid' : errorsFor('name')}]">
+                        <validation-errors :errors="errorsFor('name')"></validation-errors>
                     </div>
 
                     <div class="form-group">
                         <label for="surname">Изменить фамилию</label>
-                        <input type="text" class="form-control form_edit_profile_field" id="surname" name="surname" v-model="profile.surname">
-                        <small id="InputName2Help" class="form-text text-muted">Фамилия, которую видят все.</small>
+                        <input type="text"
+                               class="form-control form_edit_profile_field"
+                               id="surname"
+                               name="surname"
+                               v-model="profile.surname"
+                               :class="[{'is-invalid' : errorsFor('surname')}]">
+                        <validation-errors :errors="errorsFor('surname')"></validation-errors>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Сменить Email</label>
-                        <input type="email" class="form-control form_edit_profile_field" id="email" name="email" v-model="profile.email">
-                        <small id="emailHelp" class="form-text text-muted"></small>
+                        <input type="email"
+                               class="form-control form_edit_profile_field"
+                               id="email"
+                               name="email"
+                               v-model="profile.email"
+                               :class="[{'is-invalid' : errorsFor('email')}]">
+                        <validation-errors :errors="errorsFor('email')"></validation-errors>
                     </div>
 
                     <div class="form-group">
                         <label for="gender">Выберите пол...</label>
-                        <select class="form-control form_edit_profile_field" id="gender" name="gender" v-model="profile.gender">
+                        <select class="form-control form_edit_profile_field"
+                                id="gender"
+                                name="gender"
+                                v-model="profile.gender"
+                                :class="[{'is-invalid' : errorsFor('gender')}]">
                             <option :selected="profile.gender === 'Мужчина'">Мужчина</option>
                             <option :selected="profile.gender === 'Женщина'">Женщина</option>
                             <option :selected="profile.gender === 'В смятении'">В смятении</option>
                         </select>
+                        <validation-errors :errors="errorsFor('gender')"></validation-errors>
                     </div>
                     <div class="form-group">
                         <label for="birth_date">Ваша дата рождения</label>
-                        <input type="date" name="birth_date" class="form-control form_edit_profile_field" id="birth_date" v-model="profile.birth_date">
+                        <input type="date"
+                               name="birth_date"
+                               class="form-control form_edit_profile_field"
+                               id="birth_date"
+                               v-model="profile.birth_date"
+                               :class="[{'is-invalid' : errorsFor('birth_date')}]">
+                        <validation-errors :errors="errorsFor('birth_date')"></validation-errors>
                     </div>
 
                     <div class="form-group">
                         <label for="city">Выберите город</label>
-                        <input type="text" class="form-control form_edit_profile_field" id="city" name="city" v-model="profile.city">
+                        <input type="text"
+                               class="form-control form_edit_profile_field"
+                               id="city"
+                               name="city"
+                               v-model="profile.city"
+                               :class="[{'is-invalid' : errorsFor('city')}]">
+                        <validation-errors :errors="errorsFor('city')"></validation-errors>
                     </div>
                     <div class="form-group">
                         <label for="country">Выберите страну</label>
-                        <input type="text" class="form-control form_edit_profile_field" id="country" name="country" v-model="profile.country">
+                        <input type="text"
+                               class="form-control form_edit_profile_field"
+                               id="country"
+                               name="country"
+                               v-model="profile.country"
+                               :class="[{'is-invalid' : errorsFor('country')}]">
+                        <validation-errors :errors="errorsFor('country')"></validation-errors>
                     </div>
                     <div class="form-group">
                         <label for="creed">Девиз</label>
-                        <input type="text" class="form-control form_edit_profile_field" id="creed" name="creed" v-model="profile.creed">
+                        <input type="text"
+                               class="form-control form_edit_profile_field"
+                               id="creed"
+                               name="creed"
+                               v-model="profile.creed"
+                               :class="[{'is-invalid' : errorsFor('creed')}]">
+                        <validation-errors :errors="errorsFor('creed')"></validation-errors>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
                 </form>
@@ -56,6 +100,7 @@
 <script>
 import validationErrorsMixin from "../../mixins/validationErrorsMixin";
 import { is422 } from "../../utils/response";
+import ValidationErrors from "../shared/ValidationErrors";
 
 export default {
     name: "ProfileEditForm",
@@ -85,6 +130,7 @@ export default {
             try {
                 const response = (await axios.put(`/api/profile/${this.id}`, this.profile));
                 this.status = response.status;
+                this.errors = null;
                 swal('Успех!', response.data, 'success');
             } catch (e) {
                 this.status = e.response.status;
@@ -108,6 +154,9 @@ export default {
             this.loading = false;
         }
     },
+    components: {
+        ValidationErrors,
+    }
 }
 </script>
 
