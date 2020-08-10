@@ -35,6 +35,10 @@ class ProfileController extends Controller
 
     public function save(User $user, SaveProfileRequest $request) {
         $data = $request->all();
-        return $user->update($data);
+        $result = $user->update($data);
+        if($result) {
+            return response('Профиль пользователя успешно сохранен', 201);
+        }
+        return response('Ошибка сервера. Пожалуйста, попробуйте сохранить профиль позже', 500);
     }
 }

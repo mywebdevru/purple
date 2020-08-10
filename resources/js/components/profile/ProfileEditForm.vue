@@ -81,7 +81,7 @@ export default {
         async save() {
             this.loading = true;
             try {
-                const result = (await axios.patch(`/api/profile/${this.id}`, this.profile)).data
+                const result = (await axios.put(`/api/profile/${this.id}`, this.profile)).data
                 console.log(result);
             } catch (e) {
                 console.log(e);
