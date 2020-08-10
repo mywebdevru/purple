@@ -109,6 +109,7 @@ $data = $profile;
     </style>
 @endsection
 @section('scripts')
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=467f68a5-dab6-4c12-9b28-13d2745d2d99" type="text/javascript"></script>
     <script src="{{ asset('js/edit.js') }}"></script>
     <script>
         let type = '';
