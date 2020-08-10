@@ -66,6 +66,7 @@
                                class="form-control form_edit_profile_field"
                                id="city"
                                name="city"
+                               @click="location"
                                v-model="profile.city"
                                :class="[{'is-invalid' : errorsFor('city')}]">
                         <validation-errors :errors="errorsFor('city')"></validation-errors>
@@ -141,6 +142,24 @@ export default {
                 swal('Ошибка сервера', e.response.statusText, 'error');
             } finally {
                 this.loading = false;
+            }
+        },
+        location() {
+            const that = this;
+            ymaps.ready(init);
+            function init() {
+                const suggestView = new ymaps.SuggestView('city');
+                suggestView.events.add('select', function (e) {
+                    let location = e.get('item').value;
+                    let locationArr = _.split(location, ',');
+                    let city = _.trim(_.last(locationArr));
+                    let country = _.trim(_.first(locationArr));
+                    that.profile.city = city;
+                    that.profile.country = country;
+                    $('#city').val(city);
+                    $('#country').val(country);
+                    suggestView.destroy();
+                });
             }
         }
     },
