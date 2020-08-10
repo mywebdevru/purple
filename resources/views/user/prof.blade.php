@@ -22,13 +22,13 @@
                     @if($item['feedable_type'] == 'App\Post')
                         @component('user.components.feed.post',['feed' => $item->feedable, 'comment_author' => $user]) @endcomponent
                     @else
-                        @component('user.components.feed.image',['feed' => $item->feedable, 'comment_author' => $user]) @endcomponent
+                        @component('user.components.feed.image',['feed' => $item->feedable()->first(), 'comment_author' => $user]) @endcomponent
                     @endif
                 @endforeach
 
 
 
-				<div class="ui-block revealator-slideup revealator-once">
+				{{-- <div class="ui-block revealator-slideup revealator-once">
 
 					<!-- Пост -->
 
@@ -167,10 +167,10 @@
 
 						</article>
 
-					</div> <!-- .. окончание Поста -->
+					</div> <!-- .. окончание Поста --> --}}
 
 
-				<div class="ui-block revealator-slideup revealator-once">
+				{{-- <div class="ui-block revealator-slideup revealator-once">
 					<!-- Пост -->
 
 					<article class="hentry post">
@@ -492,7 +492,7 @@
 
 					</form>
 
-				</div><!-- ... окончание Блока для печатания текста комментария  -->
+				</div><!-- ... окончание Блока для печатания текста комментария  --> --}}
 
         </div>
 
@@ -573,7 +573,7 @@
             </div>
             <!-- .. окончание Авто -->
 
-			<div class="ui-block revealator-slideup revealator-once">
+			{{-- <div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-content">
 
 					<!-- Соцсети -->
@@ -593,6 +593,47 @@
 								VKontakte
 							</a>
 					</div>
+				</div>
+            </div> --}}
+
+            <div class="ui-block revealator-slideup revealator-once">
+				<div class="ui-block-title">
+					<h6 class="title">Видео</h6>
+				</div>
+				<div class="ui-block-content">
+
+					<!-- Видео -->
+
+					<ul class="widget w-last-video">
+						<li>
+							<a href="https://www.youtube.com/watch?v=eFOvZojUJto" class="play-video play-video--small">
+								<svg class="olymp-play-icon">
+									<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-play-icon') }}"></use>
+								</svg>
+							</a>
+							<img src="{{ asset('img/boss.png') }}" alt="video">
+							<div class="video-content">
+								<div class="title">Boss's dauther Pop Evil</div>
+								<time class="published" datetime="2017-03-24T18:18">3:25</time>
+							</div>
+							<div class="overlay"></div>
+						</li>
+						<li>
+							<a href="https://youtube.com/watch?v=excVFQ2TWig" class="play-video play-video--small">
+								<svg class="olymp-play-icon">
+									<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-play-icon') }}"></use>
+								</svg>
+							</a>
+							<img src="{{ asset('img/video2.png') }}" alt="video">
+							<div class="video-content">
+								<div class="title">Kraftklub - Alles Wegen Dir</div>
+								<time class="published" datetime="2017-03-24T18:18">5:48</time>
+							</div>
+							<div class="overlay"></div>
+						</li>
+					</ul>
+
+					<!-- .. окончание Видео -->
 				</div>
 			</div>
 
@@ -664,7 +705,7 @@
 				</div>
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			{{-- <div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Плейлист</h6>
 				</div>
@@ -742,7 +783,7 @@
 						<div class="playlist-thumb">
 							<img src="{{ asset('img/playlist8.jpg') }}" alt="thumb-composition">
 							<div class="overlay"></div>
-							<a href="#" class="play-icon">
+							<a href="https://www.youtube.com/watch?v=eFOvZojUJto" class="play-icon">
 								<svg class="olymp-music-play-icon-big">
 									<use xlink:href="{{ asset('svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big') }}"></use>
 								</svg>
@@ -843,9 +884,9 @@
 				</ol>
 
 				<!-- .. окончание плейлиста -->
-			</div>
+			</div> --}}
 
-			<div class="ui-block revealator-slideup revealator-once">
+			{{-- <div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Твиты</h6>
 				</div>
@@ -904,48 +945,9 @@
 
 
 				<!-- .. окончание твитов -->
-			</div>
+			</div> --}}
 
-			<div class="ui-block revealator-slideup revealator-once">
-				<div class="ui-block-title">
-					<h6 class="title">Видео</h6>
-				</div>
-				<div class="ui-block-content">
 
-					<!-- Видео -->
-
-					<ul class="widget w-last-video">
-						<li>
-							<a href="https://vimeo.com/ondemand/viewfromabluemoon4k/147865858" class="play-video play-video--small">
-								<svg class="olymp-play-icon">
-									<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-play-icon') }}"></use>
-								</svg>
-							</a>
-							<img src="{{ asset('img/video8.jpg') }}" alt="video">
-							<div class="video-content">
-								<div class="title">Видео...</div>
-								<time class="published" datetime="2017-03-24T18:18">3:25</time>
-							</div>
-							<div class="overlay"></div>
-						</li>
-						<li>
-							<a href="https://youtube.com/watch?v=excVFQ2TWig" class="play-video play-video--small">
-								<svg class="olymp-play-icon">
-									<use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-play-icon') }}"></use>
-								</svg>
-							</a>
-							<img src="{{ asset('img/video7.jpg') }}" alt="video">
-							<div class="video-content">
-								<div class="title">Видео</div>
-								<time class="published" datetime="2017-03-24T18:18">5:48</time>
-							</div>
-							<div class="overlay"></div>
-						</li>
-					</ul>
-
-					<!-- .. окончание Видео -->
-				</div>
-			</div>
 
 		</div>
 
