@@ -1,4 +1,4 @@
-<div class="ui-block revealator-fade revealator-delay2 revealator-once">
+<div class="ui-block">
     <!-- Пост -->
     {{-- @dd(count($feed->likes)) --}}
     <article class="hentry post">

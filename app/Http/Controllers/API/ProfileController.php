@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\SaveProfileRequest;
 use App\Http\Requests\ProfileUploadRequest;
+use App\Http\Resources\Profile\ProfileDataResource;
 use App\User;
 use Storage;
 
@@ -23,5 +25,19 @@ class ProfileController extends Controller
             'type' => $type,
             'status' => $result,
         ]);
+    }
+
+    public function data(User $user)
+    {
+        return new ProfileDataResource($user);
+    }
+
+    public function save(User $user, SaveProfileRequest $request) {
+        $data = $request->all();
+        $result = $user->update($data);
+        if($result) {
+            return response('Профиль пользователя успешно сохранен', 201);
+        }
+        return response('Ошибка сервера. Пожалуйста, попробуйте сохранить профиль позже', 500);
     }
 }
