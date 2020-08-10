@@ -220,5 +220,8 @@ class User extends Authenticatable
         return "$this->city $this->country";
     }
 
-
+    public function maps()
+    {
+        return $this->hasMany('App\Map');
+    }
 }
