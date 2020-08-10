@@ -34,6 +34,7 @@ class ProfileController extends Controller
     }
 
     public function save(User $user, SaveProfileRequest $request) {
-        return $request;
+        $data = $request->all();
+        return $user->update($data);
     }
 }
