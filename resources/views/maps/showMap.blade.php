@@ -5,7 +5,7 @@
     <p>{{$map->description}}</p>
     <div>
     @forelse ($photos as $photo)
-        <img src="{{ asset('storage/'.$photo->filename) }}" alt="{{$photo->filename}}" whidth=300>
+        <img src="{{ asset('storage/'+$photo->filename) }}" alt="{{$photo->filename}}" whidth=300>
     @empty
         <span>Фото отсутствуют</span>
     @endforelse
