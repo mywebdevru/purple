@@ -55,6 +55,7 @@
 
 <script>
 import validationErrorsMixin from "../../mixins/validationErrorsMixin";
+import { is422 } from "../../utils/response";
 
 export default {
     name: "ProfileEditForm",
@@ -75,16 +76,24 @@ export default {
                 creed: null,
             },
             loading: false,
+            status: null,
         }
     },
     methods: {
         async save() {
             this.loading = true;
             try {
-                const result = (await axios.put(`/api/profile/${this.id}`, this.profile)).data
-                console.log(result);
+                const response = (await axios.put(`/api/profile/${this.id}`, this.profile));
+                this.status = response.status;
+                swal('Успех!', response.data, 'success');
             } catch (e) {
-                console.log(e);
+                this.status = e.response.status;
+                if(is422(e)) {
+                    this.errors = e.response.data.errors;
+                    return;
+                }
+                console.log(e.response.statusText);
+                swal('Ошибка сервера', e.response.statusText, 'error');
             } finally {
                 this.loading = false;
             }

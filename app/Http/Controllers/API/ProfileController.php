@@ -33,7 +33,7 @@ class ProfileController extends Controller
         return new ProfileDataResource($user);
     }
 
-    public function save(User $user, SaveProfileRequest $request) {
+    public function save(User $user, Request $request) {
         $data = $request->all();
         $result = $user->update($data);
         if($result) {
