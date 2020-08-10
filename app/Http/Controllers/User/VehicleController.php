@@ -59,7 +59,7 @@ class VehicleController extends Controller
      */
     public function edit(UserVehicle $userVehicles, User $user)
     {
-        return view('user.components.edit_profile.vehicles');
+        return view('user.components.edit_profile.personal',['profile'=> $user]);
     }
 
     /**

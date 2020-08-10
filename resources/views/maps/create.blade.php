@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @component('user.components.left.l_sidebar')@endcomponent
-@component('user.components.right.r_sidebar')@endcomponent
+@component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
 <div class="header-spacer"></div>
 
 <main class="container">

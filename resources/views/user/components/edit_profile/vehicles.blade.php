@@ -2,7 +2,7 @@
 
 @section('content')
     @component('user.components.left.l_sidebar')@endcomponent
-    @component('user.components.right.r_sidebar')@endcomponent
+    @component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
 
     <div class="header-spacer"></div>
 
@@ -21,7 +21,7 @@
                     </h3>
                 </div>
                 <!-- Это место под алерт -->
-                <!-- <div class="col-sm-12">                    
+                <!-- <div class="col-sm-12">
                     <div class="alert alert-success alert-dismissible fade show alert-fix-success" role="alert">
                         <strong>Готово!</strong> Вы успешно изменили собственные данные. Можете продолжать пользоваться сервисом!
                     </div>
@@ -33,7 +33,7 @@
 
 
                 <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-  
+
                     <div class="ui-block">
                            <form>
                                 <div class="form-group">
@@ -66,7 +66,7 @@
                                     <small id="InputName1Help" class="form-text text-muted"></small>
                                 </div>
                            </form>
-                    </div>     
+                    </div>
                 </div>
 
                 <div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
@@ -101,8 +101,8 @@
                     </div>
 
                 </div>
-            
-            
+
+
             <div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
                 <div class="ui-block">
@@ -129,13 +129,13 @@
                                     @endif
                                 </ul>
                             </div>
-                    </div>                         
+                    </div>
             </div>
-		
+
             </div>
             <center>
                 <button class="btn btn-primary">Сохранить</button>
             </center>
-        </form>        
+        </form>
     </div>
 @endsection

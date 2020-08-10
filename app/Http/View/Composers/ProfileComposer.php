@@ -37,7 +37,7 @@ class ProfileComposer
         if (!!auth()->user()){
             $user = $this->users->find(auth()->user()->id);
             $user->loadCount('requestedFriendships');
-            $user->load('requestedFriendships.user', 'friendshipRequests');
+            $user->load('requestedFriendships.user', 'friendshipRequests', 'friends.user');
             $view->with('user', $user);
         }
 
