@@ -94,6 +94,8 @@ class ProfileController extends Controller
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
         $feed->load('feedable.comments.authorable');
+        $feed->load('feedable.comments.likes');
+        $feed->load('feedable.likes.authorable');
         return view('user.prof',['data' => $user, 'feed' => $feed,]);
     }
 
@@ -125,6 +127,7 @@ class ProfileController extends Controller
         }
         $data = $request->except('_token');
         $save = $user->fill($data)->save();
+        abort_if(!$save, 500);
         return redirect()->route('user.show', ['user' => $user]);
     }
 

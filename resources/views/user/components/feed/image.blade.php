@@ -1,4 +1,4 @@
-<div class="ui-block revealator-slideup revealator-once">
+<div class="ui-block">
     <!-- Пост -->
 
     <article class="hentry post has-post-thumbnail shared-photo">
@@ -59,46 +59,37 @@
 
         <div class="post-additional-info inline-items">
 
-            <a href="#" class="post-add-icon inline-items">
+            <a href="#" id="like_image_{{ $feed['id'] }}" data-like_id="{{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed['id'] }}, 'image');">
                 <svg class="olymp-heart-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
                 </svg>
-                <span>15</span>
+                <span>{{ count($feed->likes) }}</span>
             </a>
-
-            <ul class="friends-harmonic">
+            <form  method="POST" id="form_like_image_{{ $feed['id'] }}">
+                @csrf
+                <input type="hidden" name="likeable_type" value="App\Image">
+                <input type="hidden" name="likeable_id" value="{{ $feed['id'] }}">
+                <input type="hidden" name="authorable_type" value="App\User">
+                <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
+            </form>
+            <ul class="friends-harmonic" id="avatars_image_{{ $feed['id'] }}">
+                @foreach ($feed->likes->slice(-2) as $item)
                 <li>
-                    <a href="#">
-                        <img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
+                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">
+                        <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="{{ asset('img/spiegel.jpg') }}" alt="friend">
-                    </a>
-                </li>
+                @endforeach
             </ul>
-
-            <div class="names-people-likes">
-                <a href="#">spiegel</a>, <a href="#">spiegel</a> и
-                <br>13 лайков
+            <div class="names-people-likes" id="names_image_{{ $feed['id'] }}">
+                @foreach ($feed->likes->slice(-2) as $item)
+                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">{{ $item->authorable['name'] }}</a>
+                @endforeach
+                @if (count($feed->likes) > 2)
+                    и еще
+                    <br>{{ count($feed->likes) - 2 }} человк(а)
+                @endif
             </div>
-
             <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-speech-balloon-icon">

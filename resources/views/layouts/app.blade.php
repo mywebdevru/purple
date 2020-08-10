@@ -461,5 +461,65 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')
+<script>
+    function like_it(id, model)
+    {
+        // console.log($('#form_like_'+ model +'_' + id + ' input[name="_method"]'))
+        let route ='../like';
+        if($('#like_' + model + '_' + id).hasClass('like_it')){
+            route = route + '/' + $('#like_' + model + '_' + id).data('like_id')
+            $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: route,
+            data: $('#form_like_'+ model +'_' + id).serialize(),
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['error']){
+                    console.log(response['error'])
+                }
+                $('#avatars_' + model + '_' + id).html('')
+                $('#names_' + model + '_' + id).html('')
+                count = response['likes'].length
+                if(model != 'comment'){
+                renderLikedUsers(response, model, id, count)
+                }
+                if(!!response['like_id']){
+                    console.log(response['likes'])
+                    $('#like_' + model + '_' + id)
+                    .toggleClass('like_it')
+                    .data('like_id', response['like_id'])
+                    $('#like_' + model + '_' + id + ' span').text(count)
+                }
+                if(!!response['delete']){
+                    $('#form_like_'+ model +'_' + id + ' input[name="_method"]').detach()
+                    $('#like_' + model + '_' +id)
+                    .toggleClass('like_it')
+                    .data('like_id', 0)
+                    $('#like_' + model + '_' + id + ' span').text(count)
+                }
+            }
+        });
+    }
+    function renderLikedUsers(response, model, id, count)
+    {
+        if(count > 2) {
+            likes = response['likes'].slice(-2)
+        } else {
+            likes = response['likes']
+        }
+        likes.forEach(like => {
+            $('#avatars_' + model + '_' + id).append(`<li><a href="../user/${like['authorable']['id']}">
+                <img src="../${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
+            </a></li>`)
+            $('#names_' + model + '_' + id).append(`<a href="../user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
+        });
+        if (count > 2) {
+            $('#names_' + model + '_' + id).append(` и еще <br>${count - 2} человк(а)`)
+        }
+    }
+</script>
 </body>
 </html>

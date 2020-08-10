@@ -8,7 +8,7 @@
 
 @component('user.components.wallpaper_block.main', ['data' => $data, 'user' => $user])@endcomponent
 
-
+{{-- @dd($feed->first()->feedable()->first()->comments->first()->likes->first()->authorable->full_name) --}}
 <div class="container">
 	<div class="row">
 
@@ -28,7 +28,7 @@
 
 
 
-				<div class="ui-block revealator-slideup revealator-once">
+				<div class="ui-block">
 
 					<!-- Пост -->
 
@@ -170,7 +170,7 @@
 					</div> <!-- .. окончание Поста -->
 
 
-				<div class="ui-block revealator-slideup revealator-once">
+				<div class="ui-block">
 					<!-- Пост -->
 
 					<article class="hentry post">
@@ -540,7 +540,7 @@
             </div>
 
 			<!-- Автомобили -->
-            <div class="ui-block revealator-slideup revealator-once">
+            <div class="ui-block revealator-fade revealator-once">
                 @if ($data->usersVehicles->isEmpty())
                     <div class="ui-block-title">
                         <h6 class="title">Я хожу пешком</h6>
@@ -573,7 +573,7 @@
             </div>
             <!-- .. окончание Авто -->
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-content">
 
 					<!-- Соцсети -->
@@ -596,7 +596,7 @@
 				</div>
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Регалии</h6>
 				</div>
@@ -664,7 +664,7 @@
 				</div>
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Плейлист</h6>
 				</div>
@@ -845,7 +845,7 @@
 				<!-- .. окончание плейлиста -->
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Твиты</h6>
 				</div>
@@ -906,7 +906,7 @@
 				<!-- .. окончание твитов -->
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Видео</h6>
 				</div>
@@ -956,9 +956,9 @@
 
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
-            <div class="ui-block revealator-slideup revealator-once">
+            <div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
-					<h6 class="title">Друзья ({{ count($data->friends) }})</h6>
+					<h6 class="title">Друзья ({{ count($data->friends) }}) Редактировать</h6>
 				</div>
 				<div class="ui-block-content">
 
@@ -1018,7 +1018,7 @@
 				</div>
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Посты</h6>
 				</div>
@@ -1062,7 +1062,7 @@
 
 
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Избранное</h6>
 				</div>
@@ -1123,7 +1123,7 @@
 				<!-- .. окончание избранных мест -->
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			<div class="ui-block revealator-fade revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Опрос</h6>
 				</div>

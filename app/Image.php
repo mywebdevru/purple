@@ -48,10 +48,18 @@ class Image extends Model
     }
 
     /**
-     * Get the Post's Comments.
+     * Get the Image's Comments.
      */
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    /**
+     * Get the Image's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'likeable');
     }
 }

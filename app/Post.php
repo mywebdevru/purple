@@ -69,4 +69,12 @@ class Post extends Model
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    /**
+     * Get the Post's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'likeable');
+    }
 }

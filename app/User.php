@@ -199,6 +199,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the User's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'authorable');
+    }
+
+    /**
      * Get the User's Images.
      */
     public function images()
