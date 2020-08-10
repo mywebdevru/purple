@@ -81,6 +81,14 @@ class Group extends Model
         return $this->morphMany('App\Comment', 'authorable');
     }
 
+    /**
+     * Get the Group's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'authorable');
+    }
+
     public function getFullNameAttribute() {
         return "Сообщество $this->name";
     }

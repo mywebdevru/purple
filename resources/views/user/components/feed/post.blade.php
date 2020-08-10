@@ -1,9 +1,9 @@
 <div class="ui-block">
     <!-- Пост -->
+    {{-- @dd(count($feed->likes)) --}}
     <article class="hentry post">
         <div class="post__author author vcard inline-items">
             <img  src="{{ Str::startsWith($feed->postable['avatar'], 'http') ? $feed->postable['avatar'] : asset($feed->postable['avatar'])}}" alt="author">
-            {{-- @dump($feed) --}}
             <div class="author-date">
             <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->postable)).'.show', $feed->postable['id']) }}">{{ $feed->postable['full_name'] }}</a>
                 <div class="post__date">
@@ -32,33 +32,39 @@
             {!! $feed['text'] !!}
         </p>
         <div class="post-additional-info inline-items">
-            <a href="#" class="post-add-icon inline-items">
+        <a href="#" id="like_post_{{ $feed['id'] }}" data-like_id="{{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed['id'] }}, 'post');">
                 <svg class="olymp-heart-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
                 </svg>
-                <span>{{ count($feed->comments) }}</span>
+                <span>{{ count($feed->likes) }}</span>
             </a>
-            <ul class="friends-harmonic">
-                @foreach ($feed->comments->slice(-2) as $item)
+            <form  method="POST" id="form_like_post_{{ $feed['id'] }}">
+                @csrf
+                <input type="hidden" name="likeable_type" value="App\Post">
+                <input type="hidden" name="likeable_id" value="{{ $feed['id'] }}">
+                <input type="hidden" name="authorable_type" value="App\User">
+                <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
+            </form>
+            <ul class="friends-harmonic" id="avatars_post_{{ $feed['id'] }}">
+                @foreach ($feed->likes->slice(-2) as $item)
                 <li>
-                    <a href="#">
+                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">
                         <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
                     </a>
                 </li>
-                @break($loop->index == 6)
                 @endforeach
             </ul>
-            <div class="names-people-likes">
-                @foreach ($feed->comments->slice(-2) as $item)
-                    <a href="#">{{ $item->authorable['name'] }}</a>
+            <div class="names-people-likes" id="names_post_{{ $feed['id'] }}">
+                @foreach ($feed->likes->slice(-2) as $item)
+                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">{{ $item->authorable['name'] }}</a>
                 @endforeach
-                @if (count($feed->comments) > 2)
+                @if (count($feed->likes) > 2)
                     и еще
-                    <br>{{ count($feed->comments) - 2 }} человк(а)
+                    <br>{{ count($feed->likes) - 2 }} человк(а)
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
+                <a href="#" class="post-add-icon inline-items" >
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
@@ -100,20 +106,27 @@
             </a>
 
         </div>
-        @component('user.components.feed.comments',['comments' => $feed->comments])@endcomponent
+        @component('user.components.feed.comments',['comments' => $feed->comments, 'comment_author' => $comment_author])@endcomponent
         @component('user.components.feed.write_comment',['comment_author' => $comment_author])
         @slot('commentable_id')
          {{ $feed['id'] }}
         @endslot
         @slot('commentable_type')
-         'App\Post'
+         App\Post
         @endslot
         @endcomponent
         <a href="#" class="more-comments">Показать комментарии <span>+</span></a>
 
 
     </article>
-</div><!-- .. окончание Поста -->
+</div>
+@section('script')
+
+@endsection
+
+
+
+<!-- .. окончание Поста -->
                 {{-- <li class="comment-item has-children">
                     <div class="post__author author vcard inline-items">
                         <img src="{{ asset('img/spiegel.jpg') }}" alt="author">

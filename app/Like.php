@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Like extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +12,10 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'commentable_id', 'commetable_type', 'authorable_id', 'authorable_type', 'text'
+        'likeable_id', 'likeable_type', 'authorable_id', 'authorable_type',
     ];
 
-    public function commentable()
+    public function likeable()
     {
         return $this->morphTo();
     }
@@ -25,11 +25,4 @@ class Comment extends Model
         return $this->morphTo('authorable');
     }
 
-    /**
-     * Get the Comment's Likes.
-     */
-    public function likes()
-    {
-        return $this->morphMany('App\Like', 'likeable');
-    }
 }
