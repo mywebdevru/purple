@@ -143,7 +143,7 @@ $data = $profile;
                 }
             } catch (e) {
                 console.log(e.message);
-                swal("Ошибка!", e.message, "danger");
+                swal("Ошибка!", e.message, "error");
             }
         });
         async function imageUpload(data) {

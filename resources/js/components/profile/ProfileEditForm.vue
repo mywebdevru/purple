@@ -92,7 +92,6 @@ export default {
                     this.errors = e.response.data.errors;
                     return;
                 }
-                console.log(e.response.statusText);
                 swal('Ошибка сервера', e.response.statusText, 'error');
             } finally {
                 this.loading = false;
