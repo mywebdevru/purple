@@ -250,7 +250,10 @@ function init() {
                 coord: myMap.geoObjects.get(i).geometry.getCoordinates()
             });
         }
-        let objectJson = JSON.stringify(object);
-        console.log(objectJson);
+        let objectJson = JSON.stringify(object)
+        $("#map").css("display","none")
+        $("#save-map").css("display","none")
+        $(".map-form").css("display","block")
+        $("input[name=map_data]").val(objectJson)
     });
 }
