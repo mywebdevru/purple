@@ -22,4 +22,6 @@ Route::group([
     'as' => 'api.'
 ], function () {
     Route::post('/profile/upload', 'ProfileController@upload')->name('profile.upload');
+    Route::get('/profile/{user}', 'ProfileController@data')->name('profile.data');
+    Route::put('/profile/{user}', 'ProfileController@save')->name('profile.save');
 });
