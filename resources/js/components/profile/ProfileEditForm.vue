@@ -37,13 +37,10 @@
                     <label for="city">Выберите город</label>
                     <input type="text" class="form-control form_edit_profile_field" id="city" name="city" v-model="profile.city">
                 </div>
-
-
                 <div class="form-group">
                     <label for="country">Выберите страну</label>
                     <input type="text" class="form-control form_edit_profile_field" id="country" name="country" v-model="profile.country">
                 </div>
-
                 <div class="form-group">
                     <label for="creed">Девиз</label>
                     <input type="text" class="form-control form_edit_profile_field" id="creed" name="creed" v-model="profile.creed">
@@ -82,7 +79,7 @@ export default {
         try {
             this.profile = (await axios.get(`/api/profile/${this.id}`)).data.data;
         } catch (e) {
-
+            console.log(e);
         } finally {
             this.loading = false;
         }

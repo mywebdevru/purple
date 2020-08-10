@@ -20,7 +20,6 @@ $data = $profile;
     </a>
 
     <div class="container">
-        <form>
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
@@ -95,12 +94,7 @@ $data = $profile;
                     </div>
                 </div>
             </div>
-
-            </div>
-            <center>
-                <button class="btn btn-primary">Сохранить</button>
-            </center>
-        </form>
+        </div>
     </div>
     @javascript('user', $profile->id)
 @endsection
