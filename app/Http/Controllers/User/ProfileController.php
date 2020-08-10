@@ -94,6 +94,8 @@ class ProfileController extends Controller
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
         $feed->load('feedable.comments.authorable');
+        $feed->load('feedable.comments.likes');
+        $feed->load('feedable.likes.authorable');
         return view('user.prof',['data' => $user, 'feed' => $feed,]);
     }
 
