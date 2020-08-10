@@ -48,8 +48,8 @@ Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
 
-Route::group(['prefix'=>'maps', 'namespace'=>'Maps'], function(){
-    Route::get('/', 'ConstructController@map_constructor');
+Route::group(['prefix'=>'maps', 'namespace'=>'Map'], function(){
+    Route::resource('/map', 'MapController');
 });
 
 Route::group([
