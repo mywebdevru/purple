@@ -2,7 +2,7 @@
 {{-- @dd($feed->first()->feedable->comments->find(2)->authorable['full_name']) --}}
 @section('content')
 @component('user.components.left.l_sidebar')@endcomponent
-@component('user.components.right.r_sidebar')@endcomponent
+@component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
 
 <div class="header-spacer"></div>
 
@@ -1020,7 +1020,7 @@
 				</div>
 			</div>
 
-			<div class="ui-block revealator-slideup revealator-once">
+			{{-- <div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Посты</h6>
 				</div>
@@ -1060,13 +1060,13 @@
 				</ul>
 
 				<!-- .. окончание постов -->
-			</div>
+			</div> --}}
 
 
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">
-					<h6 class="title">Избранное</h6>
+					<h6 class="title">Избранные карты</h6>
 				</div>
 
 				<!-- Избранные места -->

@@ -90,7 +90,7 @@ class ProfileController extends Controller
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc')->get();
         }
-        $user->load('usersVehicles', 'friends.user', 'images');
+        $user->load('usersVehicles', 'images');
         $feed->loadMorph('feedable.imageable', ['App\Image']);
         $feed->loadMorph('feedable.postable', ['App\Post']);
         $feed->load('feedable.comments.authorable');
@@ -110,7 +110,7 @@ class ProfileController extends Controller
         if(Str::contains(url()->current(), 'secure')){
             return view('user.components.edit_profile.secure');
         }
-        return view('user.components.edit_profile.personal')->with('profile', $user);
+        return view('user.components.edit_profile.personal',['profile'=> $user]);
     }
 
     /**
