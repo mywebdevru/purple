@@ -54,8 +54,11 @@
 </template>
 
 <script>
+import validationErrorsMixin from "../../mixins/validationErrorsMixin";
+
 export default {
     name: "ProfileEditForm",
+    mixins: [validationErrorsMixin],
     props: {
         id: Number,
     },
