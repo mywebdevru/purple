@@ -1,4 +1,4 @@
-<div class="ui-block revealator-fade revealator-delay2 revealator-once">
+<div class="ui-block">
     <!-- Пост -->
     <article class="hentry post">
         <div class="post__author author vcard inline-items">
