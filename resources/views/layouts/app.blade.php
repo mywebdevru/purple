@@ -520,6 +520,28 @@
             $('#names_' + model + '_' + id).append(` и еще <br>${count - 2} человк(а)`)
         }
     }
+
+    function showComments(list, model)
+    {
+        console.log(list)
+        let  commentsLists = $('#comments_list_' + model + list)
+        commentsLists.slideToggle()
+        if($('#comments_' + model + list + ' span').text() =='+'){
+            $('#comments_' + model + list).html('Скрыть комментарии <span>-</span>')
+            $('#write_comment_' + model + list).slideDown()
+        } else {
+            $('#comments_' + model + list).html('Показать комментарии <span>+</span>')
+            $('#write_comment_' + model + list).slideUp()
+        }
+
+    }
+
+    function writeComment(form, model)
+    {
+        console.log(form)
+        let  commentForm = $('#write_comment_' + model + form)
+        commentForm.slideToggle()
+    }
 </script>
 </body>
 </html>

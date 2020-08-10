@@ -1,4 +1,4 @@
-<form class="comment-form inline-items" method="POST" action="{{ route('comment.store') }}">
+<form class="comment-form inline-items" method="POST" action="{{ route('comment.store') }}" id="write_comment_{{ $feed }}" style="display:none;">
     @csrf
     <input type="hidden" name="commentable_type" value="{{ $commentable_type }}">
     <input type="hidden" name="commentable_id" value="{{ $commentable_id }}">

@@ -1,4 +1,4 @@
-<ul class="comments-list">
+<ul class="comments-list" id="comments_list_{{ $feed }}" style="display:none;">
     @foreach ($comments as $item)
         <li class="comment-item">
             <div class="post__author author vcard inline-items">
