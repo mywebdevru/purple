@@ -65,7 +65,6 @@
                 @component('user.components.header.alert_activity') @endcomponent
                 @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id])
                 @endcomponent
-
             @else
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
