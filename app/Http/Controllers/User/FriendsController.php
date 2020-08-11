@@ -75,7 +75,7 @@ class FriendsController extends Controller
      */
     public function edit(Friend $friends, User $user)
     {
-        return view('user.components.edit_profile.friends');
+        return view('user.components.edit_profile.friends')->with('profile', $user);
     }
 
     /**

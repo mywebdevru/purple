@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @component('user.components.left.l_sidebar')@endcomponent
-    @component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
-
-    <div class="header-spacer"></div>
-
     @component('user.components.wallpaper_block.main', ['data' => $user, 'user' => $user])@endcomponent
 
     <a class="back-to-top" href="#">
@@ -17,7 +12,7 @@
             <div class="row">
                 <div class="col-sm-12 mb-4">
                     <h3 class="text-center">
-                        Редактирование транспортного средства {{ $profile->full_name }}
+                        Редактирование транспортного средства {{ $user->full_name }}
                     </h3>
                 </div>
                 <!-- Это место под алерт -->
@@ -81,20 +76,20 @@
 
                             <ul class="widget w-personal-info item-block">
                                 <li>
-                                    <span class="title">{{ $data->full_name }}</span>
-                                    <span class="text">{{ $data->creed }}</span>
+                                    <span class="title">{{ $profile->full_name }}</span>
+                                    <span class="text">{{ $profile->creed }}</span>
                                 </li>
                                 <li>
                                     <span class="title">Пол:</span>
-                                    <span class="text">{{ $data->gender }}</span>
+                                    <span class="text">{{ $profile->gender }}</span>
                                 </li>
                                 <li>
                                     <span class="title">Обитаю в:</span>
-                                    <span class="text">{{ $data->location }}</span>
+                                    <span class="text">{{ $profile->location }}</span>
                                 </li>
                                 <li>
                                     <span class="title">Рожден:</span>
-                                    <span class="text">{{ $data->birth_date }}</span>
+                                    <span class="text">{{ $profile->birth_date }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -107,14 +102,14 @@
 
                 <div class="ui-block">
                             <div class="ui-block-title">
-                                <h6 class="title">Друзья ({{ count($data->friends) }}) Редактировать</h6>
+                                <h6 class="title">Друзья ({{ count($profile->friends) }}) Редактировать</h6>
                             </div>
                             <div class="ui-block-content">
 
                                 <!--друзья -->
 
                                 <ul class="widget w-faved-page js-zoom-gallery">
-                                    @foreach ($data->friends as $friend)
+                                    @foreach ($profile->friends as $friend)
                                         <li>
                                             <a href="#">
                                                 <img src="{{ $friend->user->avatar }}" alt="author">
@@ -122,9 +117,9 @@
                                         </li>
                                     @break($loop->iteration == 14)
                                     @endforeach
-                                    @if (count($data->friends)-14 > 0)
+                                    @if (count($profile->friends)-14 > 0)
                                         <li class="all-users">
-                                            <a href="#">+{{ count($data->friends)-14 }}</a>
+                                            <a href="#">+{{ count($profile->friends)-14 }}</a>
                                         </li>
                                     @endif
                                 </ul>
