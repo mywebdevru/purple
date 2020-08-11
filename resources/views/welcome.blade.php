@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="view bgi" style="margin-left: -70px">
+    <div class="view bgi" style="margin-left: -70px; margin-top: -70px;">
         <div class="row h-100 w-100">
             <div class="col-sm-12 my-auto helloblock" style="padding-left: 70px">
                 @auth

@@ -63,7 +63,9 @@
                 @endcomponent
                 @component('user.components.header.alert_chat_message') @endcomponent
                 @component('user.components.header.alert_activity') @endcomponent
-                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id]) @endcomponent
+                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id])
+                @endcomponent
+
             @else
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
@@ -77,8 +79,13 @@
         </div>
 	</div>
 </header>
-
 <!-- ... окончание Header -->
+
+@auth
+    @component('user.components.left.l_sidebar')@endcomponent
+    @component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
+@endauth
+<div class="header-spacer"></div>
 
 <!-- Header под мобилу -->
 

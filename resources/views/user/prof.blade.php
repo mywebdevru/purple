@@ -1,10 +1,6 @@
 @extends('layouts.app')
 {{-- @dd($feed->first()->feedable->comments->find(2)->authorable['full_name']) --}}
 @section('content')
-@component('user.components.left.l_sidebar')@endcomponent
-@component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
-
-<div class="header-spacer"></div>
 
 @component('user.components.wallpaper_block.main', ['data' => $data, 'user' => $user])@endcomponent
 
