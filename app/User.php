@@ -150,7 +150,7 @@ class User extends Authenticatable
 
     // public function subscrable()
     // {
-    //     return $this->hasMany('App\Subscrable');
+    //     return $this->morphToMany(['App\User','App\Club','App\Group'], 'subscrable');
     // }
 
     /**

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-{{-- @dd($feed->first()->feedable->comments->find(2)->authorable['full_name']) --}}
 @section('content')
 
 @component('user.components.wallpaper_block.main', ['data' => $data, 'user' => $user])@endcomponent
@@ -14,11 +13,11 @@
 			<div id="newsfeed-items-grid">
 
                 @foreach ($feed as $item)
-                {{-- @dd($item->feedable) --}}
                     @if($item['feedable_type'] == 'App\Post')
-                        @component('user.components.feed.post',['feed' => $item->feedable, 'comment_author' => $user]) @endcomponent
+                    {{-- @dd(class_basename($item->feedable->postable)) --}}
+                        @component('user.components.feed.post',['feed' => $item, 'comment_author' => $user]) @endcomponent
                     @else
-                        @component('user.components.feed.image',['feed' => $item->feedable()->first(), 'comment_author' => $user]) @endcomponent
+                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => $user]) @endcomponent
                     @endif
                 @endforeach
 
