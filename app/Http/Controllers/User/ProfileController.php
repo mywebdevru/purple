@@ -49,8 +49,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Feed $feed1)
     {
+        // $feed1->with(['feedable.postable.users' => function ($query) {
+        //     $query->where('subscrables.user_id', 2);
+        // }])->get();
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
             $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
@@ -80,7 +83,7 @@ class ProfileController extends Controller
             })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToGroups) {
                 return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Group');
-            })->orderBy('updated_at', 'desc')->get();
+            })->orderBy('updated_at', 'desc');
         } else {
             $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
                 return $query->where('postable_id', $id)
@@ -88,15 +91,16 @@ class ProfileController extends Controller
                         })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
                             return $query->where('imageable_id', $id)
                                         ->where('imageable_type', 'App\User');
-                        })->orderBy('updated_at', 'desc')->get();
+                        })->orderBy('updated_at', 'desc');
         }
-        $user->load('usersVehicles', 'images');
-        $feed->loadMorph('feedable.imageable', ['App\Image']);
-        $feed->loadMorph('feedable.postable', ['App\Post']);
-        $feed->load('feedable.comments.authorable');
-        $feed->load('feedable.comments.likes');
-        $feed->load('feedable.likes.authorable');
-        return view('user.prof',['data' => $user, 'feed' => $feed,]);
+        $user->with('usersVehicles', 'images');
+        $feed->with('feedable.postable');
+        // $feed->hasMorph('postable', ['App\Post','App\Image']);
+        $feed->with('feedable.comments.authorable');
+        $feed->with('feedable.comments.likes');
+        $feed->with('feedable.likes.authorable');
+        // dd($feed);
+        return view('user.prof',['data' => $user, 'feed' => $feed->get(), 'test' =>$feed1]);
     }
 
     /**

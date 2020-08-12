@@ -1,18 +1,18 @@
 <div class="ui-block">
     <!-- Пост -->
-    {{-- @dd(count($feed->likes)) --}}
+    {{-- @dd(count($feed->feedable->likes)) --}}
     <article class="hentry post">
         <div class="post__author author vcard inline-items">
-            <img  src="{{ Str::startsWith($feed->postable['avatar'], 'http') ? $feed->postable['avatar'] : asset($feed->postable['avatar'])}}" alt="author">
+            <img  src="{{ Str::startsWith($feed->feedable->postable['avatar'], 'http') ? $feed->feedable->postable['avatar'] : asset($feed->feedable->postable['avatar'])}}" alt="author">
             <div class="author-date">
-            <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->postable)).'.show', $feed->postable['id']) }}">{{ $feed->postable['full_name'] }}</a>
+            <a class="h6 post__author-name fn" href="{{ route(Str::lower(class_basename($feed->feedable->postable)).'.show', $feed->feedable->postable['id']) }}">{{ $feed->feedable->postable['full_name'] }}</a>
                 <div class="post__date">
-                    <time class="published" datetime="{{ $feed['created_at'] }}">
-                        {{ $feed['created_at'] }}
+                    <time class="published" datetime="{{ $feed->feedable['created_at'] }}">
+                        {{ $feed->feedable['created_at'] }}
                     </time>
                 </div>
             </div>
-            @can('update', $feed)
+            @can('update', $feed->feedable)
             <div class="more">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
@@ -29,24 +29,24 @@
             @endcan
         </div>
         <p>
-            {!! $feed['text'] !!}
+            {!! $feed->feedable['text'] !!}
         </p>
         <div class="post-additional-info inline-items">
-        <a href="#" id="like_post_{{ $feed['id'] }}" data-like_id="{{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed['id'] }}, 'post');">
+        <a href="#" id="like_post_{{ $feed->feedable['id'] }}" data-like_id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed->feedable['id'] }}, 'post');">
                 <svg class="olymp-heart-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
                 </svg>
-                <span>{{ count($feed->likes) }}</span>
+                <span>{{ count($feed->feedable->likes) }}</span>
             </a>
-            <form  method="POST" id="form_like_post_{{ $feed['id'] }}">
+            <form  method="POST" id="form_like_post_{{ $feed->feedable['id'] }}">
                 @csrf
                 <input type="hidden" name="likeable_type" value="App\Post">
-                <input type="hidden" name="likeable_id" value="{{ $feed['id'] }}">
+                <input type="hidden" name="likeable_id" value="{{ $feed->feedable['id'] }}">
                 <input type="hidden" name="authorable_type" value="App\User">
                 <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
             </form>
-            <ul class="friends-harmonic" id="avatars_post_{{ $feed['id'] }}">
-                @foreach ($feed->likes->slice(-2) as $item)
+            <ul class="friends-harmonic" id="avatars_post_{{ $feed->feedable['id'] }}">
+                @foreach ($feed->feedable->likes->slice(-2) as $item)
                 <li>
                     <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">
                         <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
@@ -54,21 +54,21 @@
                 </li>
                 @endforeach
             </ul>
-            <div class="names-people-likes" id="names_post_{{ $feed['id'] }}">
-                @foreach ($feed->likes->slice(-2) as $item)
+            <div class="names-people-likes" id="names_post_{{ $feed->feedable['id'] }}">
+                @foreach ($feed->feedable->likes->slice(-2) as $item)
                     <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">{{ $item->authorable['name'] }}</a>
                 @endforeach
-                @if (count($feed->likes) > 2)
+                @if (count($feed->feedable->likes) > 2)
                     и еще
-                    <br>{{ count($feed->likes) - 2 }} человк(а)
+                    <br>{{ count($feed->feedable->likes) - 2 }} человк(а)
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items" onclick="event.preventDefault(); writeComment({{ $feed['id'] }}, 'post');">
+                <a href="#" class="post-add-icon inline-items" onclick="event.preventDefault(); writeComment({{ $feed->feedable['id'] }}, 'post');">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span>{{ count($feed->comments) }}</span>
+                    <span>{{ count($feed->feedable->comments) }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -106,11 +106,11 @@
             </a>
 
         </div>
-        <a href="#" id="comments_post{{ $feed['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed['id'] }}, 'post');">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $feed->comments, 'comment_author' => $comment_author, 'feed' => 'post'.$feed['id']])@endcomponent
-        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'post'.$feed['id']])
+        <a href="#" id="comments_post{{ $feed->feedable['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'post');">Показать комментарии <span>+</span></a>
+        @component('user.components.feed.comments',['comments' => $feed->feedable->comments, 'comment_author' => $comment_author, 'feed' => 'post'.$feed->feedable['id']])@endcomponent
+        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'post'.$feed->feedable['id']])
         @slot('commentable_id')
-         {{ $feed['id'] }}
+         {{ $feed->feedable['id'] }}
         @endslot
         @slot('commentable_type')
          App\Post
