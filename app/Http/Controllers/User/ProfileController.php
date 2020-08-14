@@ -49,13 +49,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Feed $feed1)
+    public function show(User $user)
     {
-        // $feed1->with(['feedable.postable.users' => function ($query) {
-        //     $query->where('subscrables.user_id', 2);
-        // }])->get();
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
+            $user = auth()->user();
             $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
             $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
             $subscribesToGroups = $user->subscribesToGroups()->pluck('subscrable_id');
@@ -93,14 +91,12 @@ class ProfileController extends Controller
                                         ->where('imageable_type', 'App\User');
                         })->orderBy('updated_at', 'desc');
         }
-        $user->with('usersVehicles', 'images');
+        $user->load('usersVehicles', 'images', 'friends.user');
         $feed->with('feedable.postable');
-        // $feed->hasMorph('postable', ['App\Post','App\Image']);
         $feed->with('feedable.comments.authorable');
         $feed->with('feedable.comments.likes');
         $feed->with('feedable.likes.authorable');
-        // dd($feed);
-        return view('user.prof',['data' => $user, 'feed' => $feed->get(), 'test' =>$feed1]);
+        return view('user.prof',['user' => $user, 'feed' => $feed->get()]);
     }
 
     /**

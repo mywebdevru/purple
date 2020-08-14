@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-@component('user.components.wallpaper_block.main', ['data' => $data, 'user' => $user])@endcomponent
+@component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent
 
 {{-- @dd($feed->first()->feedable()->first()->comments->first()->likes->first()->authorable->full_name) --}}
 <div class="container">
@@ -15,9 +15,9 @@
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Post')
                     {{-- @dd(class_basename($item->feedable->postable)) --}}
-                        @component('user.components.feed.post',['feed' => $item, 'comment_author' => $user]) @endcomponent
+                        @component('user.components.feed.post',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
                     @else
-                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => $user]) @endcomponent
+                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
                     @endif
                 @endforeach
 
@@ -515,20 +515,20 @@
 
 					<ul class="widget w-personal-info item-block">
 						<li>
-                            <span class="title">{{ $data->full_name }}</span>
-                            <span class="text">{{ $data->creed }}</span>
+                            <span class="title">{{ $user->full_name }}</span>
+                            <span class="text">{{ $user->creed }}</span>
                         </li>
                         <li>
 							<span class="title">Пол:</span>
-                            <span class="text">{{ $data->gender }}</span>
+                            <span class="text">{{ $user->gender }}</span>
 						</li>
 						<li>
 							<span class="title">Обитаю в:</span>
-                            <span class="text">{{ $data->location }}</span>
+                            <span class="text">{{ $user->location }}</span>
                         </li>
                         <li>
 							<span class="title">Рожден:</span>
-                            <span class="text">{{ $data->birth_date }}</span>
+                            <span class="text">{{ $user->birth_date }}</span>
 						</li>
 					</ul>
 				</div>
@@ -536,7 +536,7 @@
 
 			<!-- Автомобили -->
             <div class="ui-block revealator-slideup revealator-once">
-                @if ($data->usersVehicles->isEmpty())
+                @if ($user->usersVehicles->isEmpty())
                     <div class="ui-block-title">
                         <h6 class="title">Я хожу пешком</h6>
                     </div>
@@ -547,7 +547,7 @@
                 @endif
 
 				<ul class="widget w-friend-pages-added notification-list friend-requests js-zoom-gallery">
-                    @forelse ($data->usersVehicles as $item)
+                    @forelse ($user->usersVehicles as $item)
                         <li class="inline-items">
                             <div class="author-thumb">
                                 <img src="{{ $item->avatar }}" alt="author" class="avatar">
@@ -954,15 +954,16 @@
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
             <div class="ui-block revealator-slideup revealator-once">
+
 				<div class="ui-block-title">
-					<h6 class="title">Друзья ({{ count($data->friends) }})</h6>
+					<h6 class="title">Друзья ({{ count($user->friends) }})</h6>
 				</div>
 				<div class="ui-block-content">
 
 					<!--друзья -->
 
 					<ul class="widget w-faved-page js-zoom-gallery">
-                        @foreach ($data->friends as $friend)
+                        @foreach ($user->friends as $friend)
                             <li>
                                 <a href="#">
                                     <img src="{{ $friend->user->avatar }}" alt="author">
@@ -970,9 +971,9 @@
                             </li>
                         @break($loop->iteration == 14)
                         @endforeach
-                        @if (count($data->friends)-14 > 0)
+                        @if (count($user->friends)-14 > 0)
                             <li class="all-users">
-                                <a href="#">+{{ count($data->friends)-14 }}</a>
+                                <a href="#">+{{ count($user->friends)-14 }}</a>
                             </li>
                         @endif
 					</ul>
@@ -983,14 +984,14 @@
 
 			<div class="ui-block revealator-fade revealator-delay3 revealator-once">
 				<div class="ui-block-title">
-					<h6 class="title">Фото ({{ count($data->images) }})</h6>
+					<h6 class="title">Фото ({{ count($user->images) }})</h6>
 				</div>
 				<div class="ui-block-content">
 
 					<!-- Фото -->
 
 					<ul class="widget w-last-photo js-zoom-gallery">
-                        @foreach ($data->images as $item)
+                        @foreach ($user->images as $item)
                         @if ($loop->iteration < 9)
                             <li>
                                 <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}">
@@ -1003,9 +1004,9 @@
                             </li>
                         @endif
                         @endforeach
-                        @if (count($data->images)-8 > 0)
+                        @if (count($user->images)-8 > 0)
                             <li class="all-users">
-                                <a href="#">+{{ count($data->images)-8 }}</a>
+                                <a href="#">+{{ count($user->images)-8 }}</a>
                             </li>
                         @endif
 					</ul>
@@ -1080,8 +1081,7 @@
 								<svg class="olymp-star-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-star-icon') }}"></use></svg>
 							</a>
 						</span>
-
-					</li>
+                    </li>
 
 					<li class="inline-items">
 						<div class="author-thumb">
