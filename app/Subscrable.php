@@ -41,4 +41,14 @@ class Subscrable extends Model
     // {
     //     return $this->belongsTo('App\User');
     // }
+
+    public function subscrable()
+    {
+        return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongTo();
+    }
 }
