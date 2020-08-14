@@ -19,7 +19,6 @@
 </head>
 
 <body class="page-has-left-panels page-has-right-panels">
-
 <!-- Header -->
 
 <header class="header" id="site-header">
@@ -41,29 +40,29 @@
         <!-- <a href="#" class="link-find-friend">Поиск друзей</a> -->
         <div class="control-block">
             @auth
-                @component('user.components.header.control_block_item',['count' => $user->requested_friendships_count])
+                @component('user.components.header.control_block_item',['count' => auth()->user()->requested_friendships_count])
                     @slot('icon')
                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-                        <div class="label-avatar bg-blue">{{ $user->requested_friendships_count }}</div>
+                        <div class="label-avatar bg-blue">{{ auth()->user()->requested_friendships_count }}</div>
                     @endslot
                     @slot('title')
                         Они хотят дружить
                     @endslot
                     @slot('notification')
-                        @each('user.components.header.friendship_request', $user->requestedFriendships, 'request')
+                        @each('user.components.header.friendship_request', auth()->user()->requestedFriendships, 'request')
                     @endslot
                     @slot('button')
                         <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">      Добавить всех
                         </a>
                         <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                             @csrf
-                            <input type="hidden" name="requested_friendship" value="{{ $user->requestedFriendships }}">
+                            <input type="hidden" name="requested_friendship" value="{{ auth()->user()->requestedFriendships }}">
                         </form>
                     @endslot
                 @endcomponent
                 @component('user.components.header.alert_chat_message') @endcomponent
                 @component('user.components.header.alert_activity') @endcomponent
-                @component('user.components.header.page_owner', ['full_name' => $user->full_name, 'creed' => $user->creed, 'avatar' => $user->avatar, 'id' => $user->id])
+                @component('user.components.header.page_owner', ['full_name' => auth()->user()->full_name, 'creed' => auth()->user()->creed, 'avatar' => auth()->user()->avatar, 'id' => auth()->user()->id])
                 @endcomponent
             @else
                     <div class="nav-item text-light">
@@ -82,7 +81,7 @@
 @component('user.components.header.mobile.mobile_header')@endcomponent
 @auth
     @component('user.components.left.l_sidebar')@endcomponent
-    @component('user.components.right.r_sidebar', ['friends' => $user->friends])@endcomponent
+    @component('user.components.right.r_sidebar', ['friends' => auth()->user()->friends])@endcomponent
 @endauth
 <div class="header-spacer"></div>
 
@@ -142,10 +141,10 @@
             likes = response['likes']
         }
         likes.forEach(like => {
-            $('#avatars_' + model + '_' + id).append(`<li><a href="../user/${like['authorable']['id']}">
-                <img src="../${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
+            $('#avatars_' + model + '_' + id).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
+                <img src="{{ URL::to('/') }}/${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
             </a></li>`)
-            $('#names_' + model + '_' + id).append(`<a href="../user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
+            $('#names_' + model + '_' + id).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
         });
         if (count > 2) {
             $('#names_' + model + '_' + id).append(` и еще <br>${count - 2} человк(а)`)

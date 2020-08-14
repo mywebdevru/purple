@@ -148,10 +148,13 @@ class User extends Authenticatable
         return $this->hasMany('App\FriendshipRequest', 'friend_id');
     }
 
-    // public function subscrable()
-    // {
-    //     return $this->morphToMany(['App\User','App\Club','App\Group'], 'subscrable');
-    // }
+    /**
+     * Get all user's subscribes.
+     */
+    public function subscribes()
+    {
+        return $this->hasMany('App\Subscrable', 'user_id');
+    }
 
     /**
      * Get the user's Club subscribes.
@@ -170,13 +173,16 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's Users subscribes.
+     * Get the user's User subscribes.
      */
     public function subscribesToUsers()
     {
         return $this->morphedByMany('App\User', 'subscrable');
     }
 
+    /**
+     * Get the Users who subscribed on user.
+     */
     public function users()
     {
         return $this->morphToMany('App\User', 'subscrable');
