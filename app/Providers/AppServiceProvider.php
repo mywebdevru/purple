@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         // Using class based composers...
         View::composer(
             [
-                'layouts.app',
+                'layouts.app', 'user.prof'
 
             ], 'App\Http\View\Composers\ProfileComposer'
         );

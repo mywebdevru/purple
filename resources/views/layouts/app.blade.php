@@ -40,10 +40,10 @@
         <!-- <a href="#" class="link-find-friend">Поиск друзей</a> -->
         <div class="control-block">
             @auth
-                @component('user.components.header.control_block_item',['count' => auth()->user()->requested_friendships_count])
+                @component('user.components.header.control_block_item',['count' => count(auth()->user()->requestedFriendships)])
                     @slot('icon')
                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-                        <div class="label-avatar bg-blue">{{ auth()->user()->requested_friendships_count }}</div>
+                        <div class="label-avatar bg-blue">{{ count(auth()->user()->requestedFriendships) }}</div>
                     @endslot
                     @slot('title')
                         Они хотят дружить
