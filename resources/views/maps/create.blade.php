@@ -29,7 +29,7 @@
 </main>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/maps.css')}}">
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
     <style>
         .map-form input:not([type=submit]) {
             border-color: black;

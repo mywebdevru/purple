@@ -1,0 +1,297 @@
+.control-block {
+    float: right;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.control-block .author-thumb {
+    margin-right: 8px;
+    position: unset;
+}
+
+.control-block .author-title {
+    font-weight: 700;
+    font-size: 12px;
+    color: #fff;
+}
+
+.control-block .author-title > svg {
+    margin-left: 15px;
+    fill: #fff;
+    width: 6px;
+    height: 4px;
+}
+
+.control-block .author-subtitle {
+    display: block;
+    font-weight: 700;
+    color: #9a9fbf;
+    font-size: 8px;
+}
+
+.link-find-friend {
+    padding: 25px 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.control-icon {
+    margin-right: 29px;
+    fill: #9a9fbf;
+    margin-top: 8px;
+}
+
+.control-icon > svg {
+    height: 20px;
+}
+
+.control-icon.has-items {
+    fill: #fff;
+}
+
+.control-icon .label-avatar {
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    top: -12px;
+    right: -9px;
+}
+
+.control-icon .more-dropdown {
+    width: 380px;
+    top: 35px;
+    right: -180px;
+    padding: 0 0 70px 0;
+}
+
+.control-icon .more-dropdown .view-all {
+    padding: 20px;
+    color: #fff;
+}
+
+.control-icon .more-dropdown .view-all:hover {
+    color: #fff;
+}
+
+.control-icon .more-dropdown .notification-list {
+    padding: 0;
+}
+
+.control-icon .ui-block-title a {
+    display: inline-block;
+    float: right;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 9px;
+    padding: 0;
+}
+
+.control-icon .accept-request {
+    padding: 0.5rem;
+    font-size: 0.688rem;
+    color: #fff;
+    display: inline-block;
+}
+
+.control-icon .accept-request:hover {
+    color: #fff;
+}
+
+.control-icon .notification-list .author-thumb {
+    height: 34px;
+    width: 34px;
+    margin-right: 0;
+    overflow: hidden;
+}
+
+.control-icon .notification-list .notification-friend {
+    padding: 0;
+    font-size: 14px;
+}
+
+.control-icon .notification-list .notification-link {
+    padding: 0;
+    display: inline-block;
+}
+
+.control-icon .notification-list .notification-event {
+    width: 75%;
+}
+
+.control-icon .notification-list.friend-requests .accepted .notification-link {
+    padding: 0;
+    display: inline-block;
+}
+
+.control-icon .notification-list.friend-requests .accepted .notification-icon {
+    margin-top: 0;
+}
+
+.control-icon .notification-list.friend-requests .notification-event {
+    width: 60%;
+}
+
+.control-icon .notification-list .comment-photo {
+    margin-top: 15px;
+    max-width: 215px;
+}
+
+.control-icon .notification-list .comment-photo span {
+    font-size: 11px;
+}
+
+.control-icon .notification-list li > * {
+    vertical-align: top;
+}
+
+.control-icon .notification-list .notification-icon {
+    margin-top: 0;
+}
+
+.control-icon .notification-list .notification-icon svg {
+    height: 20px;
+    width: 20px;
+}
+
+.control-icon .chat-message li.chat-group .author-thumb {
+    width: 36px;
+}
+
+.control-icon .notification-list.chat-message .notification-icon svg {
+    height: 24px;
+    width: 24px;
+}
+
+.control-icon .mCustomScrollbar {
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.control-icon .ps > .ps__scrollbar-y-rail,
+.control-icon .ps:hover > .ps__scrollbar-y-rail {
+    left: 0;
+    top: 40px !important;
+}
+
+.view-all {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    z-index: 20;
+    padding: 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+}
+
+.view-all:hover {
+    color: #fff;
+}
+
+.author-page {
+    margin-left: 50px;
+}
+
+.author-page .more-dropdown {
+    width: 230px;
+    top: calc(100% + 5px);
+    right: -30px;
+    padding: 0;
+}
+
+.author-page .chat-settings {
+    padding: 15px 40px;
+}
+
+.author-page .chat-settings a {
+    color: #888da8;
+}
+
+.author-page .chat-settings a:hover {
+    color: #515365;
+}
+
+.author-page .chat-settings .icon-status {
+    margin-right: 20px;
+    position: relative;
+    border: none;
+}
+
+.author-page .account-settings {
+    padding: 15px 25px;
+    margin-bottom: 0;
+}
+
+.author-page .account-settings a {
+    padding: 13px 0;
+}
+
+.author-page .mCustomScrollbar {
+    max-height: calc(100vh - 40px);
+}
+
+.account-settings {
+    padding: 15px 25px;
+    margin-bottom: 0;
+}
+
+.account-settings a {
+    padding: 13px 0;
+    font-size: 12px;
+    color: #515365;
+    display: block;
+    font-weight: 700;
+}
+
+.account-settings a:hover {
+    color: #ff5e3a;
+}
+
+.account-settings a > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.custom-status {
+    margin: 15px 25px;
+}
+
+.custom-status input {
+    padding: 0.5rem 1.1rem;
+    font-size: 12px;
+}
+
+.custom-status.form-group.with-button button {
+    border-radius: 0 5px 5px 0;
+    background-color: #7c5ac2;
+    overflow: hidden;
+}
+
+.custom-status.form-group.with-button button svg {
+    fill: #fff;
+    width: 14px;
+    height: 12px;
+}
+
+.account-settings a {
+    padding: 13px 0;
+}
+
+.account-settings svg {
+    margin-right: 15px;
+    fill: #9a9fbf;
+    width: 20px;
+    height: 20px;
+}

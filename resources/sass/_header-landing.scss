@@ -1,0 +1,227 @@
+.header--standard .mCustomScrollbar {
+    max-height: calc(100vh - 70px);
+}
+
+.header--standard-landing {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    color: #fff;
+}
+
+.header--standard-landing svg {
+    width: 18px;
+    height: 18px;
+}
+
+.header--standard-landing .logo {
+    float: left;
+    background-color: transparent;
+    padding: 0;
+    color: #fff;
+}
+
+.header--standard-landing .logo .img-wrap {
+    margin-right: 13px;
+    transition: opacity .3s ease;
+}
+
+.header--standard-landing .logo .logo-colored {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.header--standard-landing .logo .logo-title {
+    color: #fff;
+}
+
+.header--standard-landing .logo:hover {
+    color: inherit;
+}
+
+.header--standard-landing .dropdown-toggle::after {
+    border-top-color: #fff;
+}
+
+.header--standard-landing .dropdown-menu {
+    background-color: #fff;
+}
+
+.header--standard-landing .dropdown-menu.megamenu .dropdown-item:hover {
+    color: #ff5e3a;
+}
+
+.header--standard-landing .header-menu {
+    float: right;
+    background-color: transparent;
+}
+
+.header--standard-landing .header-menu .js-expanded-menu .olymp-close-icon {
+    position: absolute;
+    right: 30px;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.header--standard-landing .header-menu.expanded-menu .nav-item {
+    visibility: visible;
+    opacity: 1;
+}
+
+.header--standard-landing .header-menu.expanded-menu .olymp-menu-icon {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.header--standard-landing .header-menu.expanded-menu .olymp-close-icon {
+    opacity: 1;
+    visibility: visible;
+}
+
+.header--standard-landing .header-menu.open {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.header--standard-landing .header-menu .nav-item {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.header--standard-landing .header-menu .nav-item a,
+.header--standard-landing .header-menu li a {
+    color: #fff;
+    fill: #fff;
+    display: block;
+}
+
+.header--standard-landing .header-menu .nav-item.js-expanded-menu,
+.header--standard-landing .header-menu li.js-expanded-menu {
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+}
+
+.header--standard-landing .header-menu .nav-item.js-expanded-menu a,
+.header--standard-landing .header-menu li.js-expanded-menu a {
+    padding: 0 30px;
+}
+
+.header--standard-landing .header-menu .nav-item .nav-link:hover,
+.header--standard-landing .header-menu li .nav-link:hover {
+    color: #fff;
+}
+
+.header--standard-landing .header-menu .nav-item .dropdown-item,
+.header--standard-landing .header-menu li .dropdown-item {
+    color: #888da8;
+}
+
+.header--standard-landing .header-menu .nav-item .dropdown-item:hover,
+.header--standard-landing .header-menu li .dropdown-item:hover {
+    color: #ff5e3a;
+}
+
+.header--standard-landing .header-menu li:first-child > a {
+    padding-left: 0;
+}
+
+.header--standard-landing .header-menu li:last-child > a {
+    padding-right: 0;
+}
+
+.header--standard-landing .open-responsive-menu,
+.header--standard-landing .close-responsive-menu {
+    fill: #fff;
+}
+
+.header--standard-landing.headroom--not-top {
+    background-color: #fff;
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.2);
+}
+
+.header--standard-landing.headroom--not-top .logo {
+    color: #515365;
+}
+
+.header--standard-landing.headroom--not-top .open-responsive-menu {
+    fill: #9a9fbf;
+}
+
+.header--standard-landing.headroom--not-top .open-responsive-menu:hover {
+    fill: #ff5e3a;
+}
+
+.header--standard-landing.headroom--not-top .logo .logo-colored {
+    opacity: 1;
+}
+
+.header--standard-landing.headroom--not-top .logo .logo-title {
+    color: #515365;
+}
+
+.header--standard-landing.headroom--not-top .header-menu .nav-item a,
+.header--standard-landing.headroom--not-top .header-menu li .nav-link {
+    color: #515365;
+    fill: #9a9fbf;
+}
+
+.header--standard-landing.headroom--not-top .header-menu .nav-item a:hover,
+.header--standard-landing.headroom--not-top .header-menu li .nav-link:hover {
+    color: #515365;
+    fill: #9a9fbf;
+}
+
+.header--standard-landing.headroom--not-top .header-menu li .dropdown-item {
+    color: #888da8;
+}
+
+.header--standard-landing.headroom--not-top .shoping-cart .count-product {
+    color: #9a9fbf;
+}
+
+.landing-page {
+    position: relative;
+    min-height: 100vh;
+}
+
+.landing-page .content-bg-wrap {
+    background-image: url("../img/landing-users.png");
+    background-position: 0 0;
+    background-repeat: repeat;
+    -webkit-animation: sidedownscroll 30s linear infinite;
+    animation: sidedownscroll 30s linear infinite;
+    background-size: auto;
+}
+
+.landing-page .content-bg-wrap:before {
+    background-color: rgba(255, 94, 58, 0.95);
+}
+
+@-webkit-keyframes sidedownscroll {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -2000px 2000px;
+    }
+}
+
+@keyframes sidedownscroll {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -2000px 2000px;
+    }
+}
+
+.landing-page .header-spacer--standard {
+    margin-bottom: 40px;
+}

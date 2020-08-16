@@ -1,0 +1,538 @@
+.fixed-sidebar {
+    position: fixed;
+    z-index: 22;
+    width: 70px;
+    min-height: 1000vh;
+    left: 0;
+}
+
+.fixed-sidebar .logo {
+    height: 70px;
+    background-color: #ff5e3a;
+    padding: 15px;
+}
+
+.fixed-sidebar .ui-block-title {
+    margin: 15px 0;
+}
+
+.fixed-sidebar .ui-block-title:first-child {
+    margin-top: 0;
+}
+
+.fixed-sidebar .search-friend svg {
+    height: 20px;
+    width: 20px;
+}
+
+.fixed-sidebar .search-friend svg:hover {
+    fill: #ff5e3a;
+}
+
+.fixed-sidebar .ui-block-title a {
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 9px;
+    padding: 0;
+}
+
+.fixed-sidebar .ui-block-title a + a {
+    float: right;
+    color: #515365;
+}
+
+.fixed-sidebar .mCustomScrollbar {
+    max-height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+.fixed-sidebar .ps > .ps__scrollbar-y-rail,
+.fixed-sidebar .ps:hover > .ps__scrollbar-y-rail {
+    opacity: 0;
+    z-index: -1;
+    visibility: hidden;
+}
+
+.fixed-sidebar.open .fixed-sidebar-left {
+    transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.fixed-sidebar.open .fixed-sidebar-left.sidebar--small {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.fixed-sidebar.open .fixed-sidebar-left.sidebar--large {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    transition-delay: .3s;
+}
+
+.fixed-sidebar.open .fixed-sidebar-right {
+    transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.fixed-sidebar.open .fixed-sidebar-right.sidebar--small {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.fixed-sidebar.open .fixed-sidebar-right.sidebar--large {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    transition-delay: .3s;
+}
+
+.fixed-sidebar.right {
+    top: 70px;
+    z-index: 20;
+    right: 0;
+    left: auto;
+    min-height: 100%;
+}
+
+.fixed-sidebar.right .mCustomScrollbar {
+    max-height: calc(100vh - 210px);
+}
+
+@supports (-ms-overflow-style: none) {
+    .fixed-sidebar .ps {
+        overflow: hidden !important;
+    }
+}
+
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+    .fixed-sidebar .ps {
+        overflow: hidden !important;
+    }
+}
+
+.fixed-sidebar-left {
+    position: absolute;
+    height: 100%;
+    background-color: #fff;
+    transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+}
+
+.fixed-sidebar-left.sidebar--small {
+    width: 70px;
+    transition-delay: .3s;
+}
+
+.fixed-sidebar-left.sidebar--small .left-menu a {
+    padding: 14px 0 14px 25px;
+    display: block;
+}
+
+.fixed-sidebar-left.sidebar--large {
+    width: 270px;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.sidebar--large .logo .img-wrap {
+    margin-right: 20px;
+}
+
+.sidebar--large .search-friend {
+    padding: 0;
+    border-top: 1px solid #e6ecf5;
+}
+
+.sidebar--large .olympus-chat {
+    padding: 15px 15px 15px 30px;
+}
+
+.sidebar--large .olympus-chat .olymp-chat---messages-icon {
+    margin-right: unset;
+}
+
+.sidebar--large .chat-users li {
+    padding: 13px 25px;
+}
+
+.sidebar--large .chat-users .more-icons li {
+    padding: 0;
+}
+
+.fixed-sidebar-right {
+    position: absolute;
+    border-left: 1px solid #e6ecf5;
+    z-index: 20;
+    right: 0;
+    top: 0;
+    bottom: 70px;
+    background-color: #fff;
+    transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.fixed-sidebar-right.sidebar--small {
+    width: 70px;
+    transition-delay: .3s;
+}
+
+.fixed-sidebar-right.sidebar--large {
+    width: 270px;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.fixed-sidebar.fixed-sidebar-responsive {
+    display: none;
+    height: auto;
+    min-height: 70px;
+    transition: all .3s ease;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.open {
+    min-height: 1000vh;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right {
+    z-index: 30;
+    top: 0;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .sidebar--small {
+    width: 70px;
+    height: 70px;
+    background-color: #ff5e3a;
+    transition-delay: .3s;
+    padding-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .sidebar--small svg {
+    fill: #fff;
+    width: 22px;
+    height: 22px;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right.open .fixed-sidebar-right.sidebar--small {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .fixed-sidebar-right.sidebar--large {
+    position: absolute;
+    top: 70px;
+    min-height: calc(100vh - 70px);
+    background-color: #fff;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .js-sidebar-open.active .olymp-close-icon {
+    visibility: visible;
+    opacity: 1;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .js-sidebar-open.active .olymp-menu-icon {
+    visibility: hidden;
+    opacity: 1;
+}
+
+.fixed-sidebar.fixed-sidebar-responsive.right .olymp-close-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    fill: #fff;
+    transition: all .3s ease;
+}
+
+.logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #fff;
+}
+
+.logo img {
+    transition: opacity .3s ease;
+    display: block;
+}
+
+.logo .logo-title {
+    text-transform: uppercase;
+    margin: 0;
+    color: inherit;
+    transition: all .3s ease;
+}
+
+.logo .sub-title {
+    font-size: 7px;
+    text-transform: uppercase;
+}
+
+.logo:hover {
+    color: #fff;
+}
+
+.logo .img-wrap {
+    position: relative;
+}
+
+.left-menu {
+    padding: 20px 0;
+}
+
+.left-menu .left-menu-title {
+    transition: all .3s ease;
+    font-weight: 700;
+}
+
+.left-menu .left-menu-icon {
+    fill: #9A9FBF;
+    transition: all .3s ease;
+    margin-right: 25px;
+}
+
+.left-menu .olymp-weather-icon {
+    width: 26px;
+}
+
+.left-menu .olymp-happy-faces-icon {
+    width: 23px;
+}
+
+.left-menu svg {
+    width: 20px;
+}
+
+.left-menu a {
+    padding: 16px 0 16px 25px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #9a9fbf;
+}
+
+.left-menu a:hover {
+    color: #515365;
+}
+
+.left-menu a:hover svg {
+    fill: #ff5e3a;
+}
+
+.profile-completion {
+    padding: 15px 25px 25px;
+    transition: all .3s ease;
+}
+
+.profile-completion .skills-item-info {
+    font-size: 14px;
+}
+
+.chat-users {
+    margin-bottom: 0;
+}
+
+.chat-users li {
+    padding: 13px 20px;
+    cursor: pointer;
+}
+
+.chat-users .author-thumb {
+    margin-right: 8px;
+}
+
+.chat-users .author-thumb .icon-status {
+    border-color: #fff;
+}
+
+.chat-users .author-name {
+    font-size: 12px;
+}
+
+.chat-users .status {
+    text-transform: uppercase;
+    font-size: 8px;
+    font-weight: 700;
+    display: block;
+}
+
+.chat-users .more {
+    float: right;
+    margin-top: 7px;
+}
+
+.chat-users .more:hover .more-icons {
+    visibility: visible;
+    opacity: 1;
+    right: 100%;
+}
+
+.more-icons {
+    position: absolute;
+    right: -100%;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #fff;
+    transition: all .3s ease;
+    padding: 10px 25px 10px 10px;
+    width: 160px;
+    bottom: -17px;
+}
+
+.more-icons li {
+    display: inline-block;
+    fill: #c2c5d9;
+    padding: 0;
+}
+
+.more-icons li:hover {
+    fill: #9a9fbf;
+}
+
+.more-icons li + li {
+    margin-left: 20px;
+}
+
+.more-icons svg {
+    width: 22px;
+    height: 20px;
+}
+
+.olympus-chat {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    background-color: #7c5ac2;
+    fill: #fff;
+    height: 70px;
+}
+
+.olympus-chat .olymp-chat---messages-icon {
+    margin: auto;
+}
+
+.olympus-chat .olympus-chat-title {
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.search-friend {
+    position: relative;
+    box-shadow: 0 -50px 45px -3px rgba(255, 255, 255, 0.7);
+    padding: 25px;
+    background-color: #fff;
+    height: 70px;
+    margin-top: auto;
+}
+
+.search-friend input {
+    padding: .5rem 1.1rem;
+    font-size: 12px;
+}
+
+.search-friend .form-group {
+    margin: 15px 20px;
+    max-width: 150px;
+}
+
+.search-friend a {
+    fill: #9a9fbf;
+}
+
+.search-friend a + a {
+    margin-left: 13px;
+}
+
+.accordion-menu .card-header {
+    padding: 0;
+}
+
+.accordion-menu .card-header a > .olymp-dropdown-arrow-icon {
+    margin-left: 15px;
+    margin-top: 4px;
+}
+
+.accordion-menu .card-header svg {
+    margin-top: 0;
+}
+
+.accordion-menu .card-header a {
+    color: inherit;
+    font-size: 13px;
+}
+
+.crumina-sticky-sidebar {
+    will-change: min-height;
+}
+
+.sidebar__inner {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    /* For browsers don't support translate3d. */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
+}
+
+@media (max-width: 768px) {
+    .fixed-sidebar.right {
+        display: none;
+    }
+
+    .fixed-sidebar.right.fixed-sidebar-responsive {
+        display: block;
+    }
+
+    .fixed-sidebar.fixed-sidebar-responsive {
+        display: block;
+    }
+
+    .fixed-sidebar-right {
+        position: relative;
+        bottom: auto;
+        box-shadow: none;
+        border-left: none;
+    }
+
+    .fixed-sidebar .mCustomScrollbar {
+        max-height: calc(100vh - 70px);
+    }
+}

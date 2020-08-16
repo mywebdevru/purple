@@ -1,0 +1,188 @@
+.friend-header-thumb {
+    border-bottom: 1px solid #e6ecf5;
+    overflow: hidden;
+}
+
+.friend-header-thumb img {
+    width: 100%;
+    display: block;
+}
+
+.friend-item {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.friend-item .control-block-button {
+    position: relative;
+}
+
+.friend-item .swiper-container {
+    padding-bottom: 40px;
+}
+
+.friend-item .btn-control {
+    margin-bottom: 0;
+    margin-right: 14px;
+}
+
+.friend-item.fav-page .friend-about {
+    text-align: center;
+}
+
+.friend-item-content {
+    padding: 0 25px 25px 25px;
+    text-align: center;
+    position: relative;
+}
+
+.friend-item-content .more {
+    z-index: 5;
+    position: absolute;
+    right: 15px;
+    top: 50px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.friend-avatar {
+    margin-top: -49px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.friend-avatar .author-thumb {
+    margin: 0 auto;
+    height: 98px;
+    width: 98px;
+    margin-bottom: 10px;
+}
+
+.friend-avatar .author-thumb img {
+    border: 4px solid #fff;
+    display: block;
+}
+
+.friend-count {
+    margin-bottom: 35px;
+}
+
+.friend-count-item {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.friend-count-item .title {
+    color: #888da8;
+}
+
+.friend-count-item:last-child {
+    margin-right: 0;
+}
+
+.friend-about {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+.friend-since > *:first-child {
+    font-size: 11px;
+}
+
+.more-dropdown {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 180px;
+    /*border: 1px solid $border-color;*/
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+    background-color: #fff;
+    border-radius: 4px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+    text-align: left;
+    padding: 15px 20px;
+    z-index: 5;
+}
+
+.more-dropdown ul {
+    padding: 15px 25px;
+    margin-bottom: 0;
+}
+
+.more-dropdown li a > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.more-dropdown a {
+    padding: 7px 0;
+    font-size: 12px;
+    color: #515365;
+    display: block;
+    font-weight: 700;
+}
+
+.more-dropdown a.btn-sm {
+    padding: 0.5rem 1.7rem;
+    font-size: 0.688rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.more-dropdown a:hover {
+    color: #ff5e3a;
+}
+
+.more:hover .more-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.more {
+    position: relative;
+    transition: all .3s ease;
+    color: #888da8;
+    fill: #c0c4d8;
+}
+
+.more .more {
+    cursor: pointer;
+}
+
+.more > svg {
+    cursor: pointer;
+}
+
+.more-with-triangle:before {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    top: -7px;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid #fff;
+    right: 25px;
+}
+
+.more-with-triangle.triangle-bottom-right:before {
+    top: auto;
+    bottom: -7px;
+    right: 15px;
+    border-bottom: none;
+    border-top: 7px solid #fff;
+}
+
+.more-with-triangle.triangle-top-center:before {
+    margin-right: -3px;
+    right: 50%;
+}
+
+.more-with-triangle.triangle-top-left:before {
+    right: auto;
+    left: 15px;
+}
