@@ -1,0 +1,207 @@
+label.control-label {
+    color: #888da8;
+}
+
+textarea {
+    min-height: 132px;
+}
+
+.form-group.label-floating textarea {
+    padding: 1.3rem 1.1rem .2rem;
+}
+
+input,
+.form-control {
+    color: #515365;
+    line-height: inherit;
+    font-size: .875rem;
+}
+
+.label-floating.has-success:after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 900;
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+    font-size: 9px;
+    background-color: #08ddc1;
+    color: #fff;
+    text-align: center;
+    right: 20px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.has-success .form-control-success,
+.has-error .form-control-danger {
+    background-image: none;
+}
+
+.form-group.with-icon-right .form-control,
+.form-group.with-icon-right input,
+.form-group.with-icon-right textarea {
+    padding-right: 60px;
+}
+
+.label-floating .form-control,
+.label-floating input,
+.label-floating select {
+    padding: 1.5rem 1.1rem .5rem;
+    line-height: 1.75;
+}
+
+.label-floating textarea.form-control {
+    padding: 1.5rem 1.1rem .2rem;
+}
+
+.label-floating.with-icon .form-control,
+.label-floating.with-icon input,
+.label-floating.with-icon textarea {
+    padding-left: 70px;
+}
+
+.form-group.has-error:after {
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 900;
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 100%;
+    background-color: #f92552;
+    color: #fff;
+    font-size: 9px;
+    right: 20px;
+    top: 19px;
+}
+
+select.form-control {
+    padding-left: .875rem;
+}
+
+.form-group.with-icon:after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 1px;
+    background-color: #e6ecf5;
+    top: 0;
+    left: 50px;
+}
+
+.form-group.with-icon i,
+.form-group.with-icon svg {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -10px;
+    width: 50px;
+    text-align: center;
+    line-height: 3.5rem;
+    font-size: 20px;
+}
+
+.form-group.with-icon input {
+    padding-left: 70px;
+}
+
+.form-group.with-button button {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 35px;
+    text-align: center;
+    line-height: 100%;
+    color: #fff;
+    fill: #fff;
+    background-color: #d7d9e5;
+    border: none;
+}
+
+.form-group.with-button input {
+    padding-right: 50px;
+    padding-left: 15px;
+}
+
+.label-floating.with-icon label.control-label,
+.label-placeholder.with-icon label.control-label {
+    left: 70px;
+}
+
+.date-time-picker input {
+    position: relative;
+    z-index: 5;
+}
+
+.input-group-addon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    padding: 1.1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.input-group-addon svg {
+    fill: #9a9fbf;
+    width: 22px;
+}
+
+.custom-control-description {
+    padding-left: 7px;
+    color: #888da8;
+    line-height: 2;
+}
+
+.tooltip-inner {
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 1px solid #3f4257 !important;
+}
+
+.tooltip-secondary .tooltip-inner {
+    background-color: #3f4257;
+}
+
+.tooltip-primary .tooltip-inner {
+    background-color: #ff5e3a;
+}
+
+.tooltip-completed .tooltip-inner {
+    background-color: #08ddc1;
+}
+
+
+
+.form-group.is-focused .togglebutton label,
+.form-group.has-bootstrap-select .togglebutton label {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.form-group.is-focused .togglebutton label:hover,
+.form-group.is-focused .togglebutton label:focus {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+fieldset[disabled] .form-group.is-focused .togglebutton label {
+    color: rgba(0, 0, 0, 0.26);
+}
