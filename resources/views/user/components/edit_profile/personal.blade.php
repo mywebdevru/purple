@@ -1,6 +1,6 @@
 @php
 /**
- * @var $profile \App\User
+ * @var $profile \App\Models\User
 */
 $profile = $profile;
 @endphp

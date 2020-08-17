@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Profile;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileDataResource extends JsonResource

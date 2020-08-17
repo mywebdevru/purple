@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\FriendshipRequest;
+use App\Models\FriendshipRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -42,7 +42,7 @@ class FriendshipRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\FriendshipRequest  $friendshipRequest
+     * @param  \App\Models\FriendshipRequest  $friendshipRequest
      * @return \Illuminate\Http\Response
      */
     public function show(FriendshipRequest $friendshipRequest)
@@ -53,7 +53,7 @@ class FriendshipRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\FriendshipRequest  $friendshipRequest
+     * @param  \App\Models\FriendshipRequest  $friendshipRequest
      * @return \Illuminate\Http\Response
      */
     public function edit(FriendshipRequest $friendshipRequest)
@@ -65,7 +65,7 @@ class FriendshipRequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FriendshipRequest  $friendshipRequest
+     * @param  \App\Models\FriendshipRequest  $friendshipRequest
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, FriendshipRequest $friendshipRequest)
@@ -76,7 +76,7 @@ class FriendshipRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FriendshipRequest  $request
+     * @param  \App\Models\FriendshipRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(FriendshipRequest $request)

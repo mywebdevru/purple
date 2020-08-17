@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Like;
 
 use App\Http\Controllers\Controller;
-use App\Like;
-use App\Post;
+use App\Models\Like;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,7 +54,7 @@ class LikeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Like  $like
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
     public function show(Like $like)
@@ -65,7 +65,7 @@ class LikeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Like  $like
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
     public function edit(Like $like)
@@ -77,7 +77,7 @@ class LikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Like  $like
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Like $like)
@@ -88,7 +88,7 @@ class LikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Like  $like
+     * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
     public function destroy(Like $like, Request $request)

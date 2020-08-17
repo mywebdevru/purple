@@ -3,15 +3,15 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model;
-use App\Friend;
-use App\User;
+use App\Models\Friend;
+use App\Models\User;
 use Illuminate\Support\Arr;
 use Faker\Generator as Faker;
 
 
 $factory->define(Friend::class, function (Faker $faker) {
-    $user_id = rand(1, App\User::all()->count());
-    $friend_id = rand(1, App\User::all()->count());
+    $user_id = rand(1, App\Models\User::all()->count());
+    $friend_id = rand(1, App\Models\User::all()->count());
     Friend::create([
         'user_id' => $user_id,
         'friend_id' => $friend_id,
@@ -24,7 +24,7 @@ $factory->define(Friend::class, function (Faker $faker) {
     User::find($friend_id)->subscribesToUsers()->attach($user_id);
     return
     [
-            'user_id' => App\User::all()->count(),
-            'friend_id' => App\User::all()->count(),
+            'user_id' => App\Models\User::all()->count(),
+            'friend_id' => App\Models\User::all()->count(),
     ];
 });

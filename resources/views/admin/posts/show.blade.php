@@ -1,7 +1,7 @@
 @php
 /**
- *  @var $post \App\Post
- *  @var $postable \App\User | \App\Group | \App\Club
+ *  @var $post \App\Models\Post
+ *  @var $postable \App\Models\User | \App\Models\Group | \App\Models\Club
 */
 @endphp
 
@@ -20,7 +20,7 @@
                         Автор
                     </th>
                     <td>
-                        @if($postable instanceof \App\User)
+                        @if($postable instanceof \App\Models\User)
                         {{ $postable->full_name }}
                         @else
                         {{ $postable->name }}

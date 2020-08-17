@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\FriendshipRequest;
+use App\Models\FriendshipRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

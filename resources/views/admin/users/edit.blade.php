@@ -1,6 +1,6 @@
 @php
 /**
- * @var $user \App\User
+ * @var $user \App\Models\User
  */
 @endphp
 

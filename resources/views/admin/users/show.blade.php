@@ -1,7 +1,7 @@
 @php
 /**
- * @var $user \App\User
- * @var $friends \App\Friend []
+ * @var $user \App\Models\User
+ * @var $friends \App\Models\Friend []
  */
 @endphp
 

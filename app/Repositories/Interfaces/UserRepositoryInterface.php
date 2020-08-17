@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories\Interfaces;
-use App\User;
+use App\Models\User;
 interface UserRepositoryInterface
 {
     public function getMaster();

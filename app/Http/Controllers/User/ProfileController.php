@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Feed;
+use App\Models\Feed;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -46,7 +46,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -57,38 +57,38 @@ class ProfileController extends Controller
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
             $user = auth()->user();
-            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\User'])
-                            ->where('postable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($id) {
+            $feed = Feed::whereHasMorph('feedable', ['App\Models\Post'], function (Builder $query, $type) use ($subscribes) {
+                return $query->whereIn('postable_id', $subscribes['App\Models\User'])
+                            ->where('postable_type', 'App\Models\User');
+            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($id) {
                 return $query->where('postable_id', $id)
-                            ->where('postable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\Club'])
-                            ->where('postable_type', 'App\Club');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\Group'])
-                            ->where('postable_type', 'App\Group');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\User'])
-                            ->where('imageable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
+                            ->where('postable_type', 'App\Models\User');
+            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribes) {
+                return $query->whereIn('postable_id', $subscribes['App\Models\Club'])
+                            ->where('postable_type', 'App\Models\Club');
+            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribes) {
+                return $query->whereIn('postable_id', $subscribes['App\Models\Group'])
+                            ->where('postable_type', 'App\Models\Group');
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
+                return $query->whereIn('imageable_id', $subscribes['App\Models\User'])
+                            ->where('imageable_type', 'App\Models\User');
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($id) {
                 return $query->where('imageable_id', $id)
-                            ->where('imageable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\Club'])
-                            ->where('imageable_type', 'App\Club');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\Group'])
-                            ->where('imageable_type', 'App\Group');
+                            ->where('imageable_type', 'App\Models\User');
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
+                return $query->whereIn('imageable_id', $subscribes['App\Models\Club'])
+                            ->where('imageable_type', 'App\Models\Club');
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
+                return $query->whereIn('imageable_id', $subscribes['App\Models\Group'])
+                            ->where('imageable_type', 'App\Models\Group');
             })->orderBy('updated_at', 'desc');
         } else {
-            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
+            $feed = Feed::whereHasMorph('feedable', ['App\Models\Post'], function (Builder $query, $type) use ($id) {
                 return $query->where('postable_id', $id)
-                            ->where('postable_type', 'App\User');
-                        })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
+                            ->where('postable_type', 'App\Models\User');
+                        })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($id) {
                             return $query->where('imageable_id', $id)
-                                        ->where('imageable_type', 'App\User');
+                                        ->where('imageable_type', 'App\Models\User');
                         })->orderBy('updated_at', 'desc');
         }
         $user->load('usersVehicles', 'images', 'friends.user');
@@ -102,7 +102,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
@@ -117,7 +117,7 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -134,7 +134,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $users)

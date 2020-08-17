@@ -1,7 +1,7 @@
 <?php
 
-use App\Image;
-use App\Post;
+use App\Models\Image;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class FeedSeeder extends Seeder
