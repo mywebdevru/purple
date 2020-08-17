@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * App\User
+ * App\Models\User
  *
  * @property int $id
  * @property string $name
@@ -27,57 +27,57 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $country
  * @property string|null $city
  * @property string|null $creed Девиз по жизни
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Friend[] $friends
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Friend[] $friends
  * @property-read int|null $friends_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $friendshipRequests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FriendshipRequest[] $friendshipRequests
  * @property-read int|null $friendship_requests_count
  * @property-read mixed $full_name
  * @property-read mixed $location
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Post[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
  * @property-read int|null $posts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendshipRequest[] $requestedFriendships
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FriendshipRequest[] $requestedFriendships
  * @property-read int|null $requested_friendships_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $subscribesToClubs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Club[] $subscribesToClubs
  * @property-read int|null $subscribes_to_clubs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Group[] $subscribesToGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Group[] $subscribesToGroups
  * @property-read int|null $subscribes_to_groups_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $subscribesToUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $subscribesToUsers
  * @property-read int|null $subscribes_to_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\UserVehicle[] $usersVehicles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserVehicle[] $usersVehicles
  * @property-read int|null $users_vehicles_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereBirthDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCountry($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSurname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereBirthDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSurname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string|null $wallpaper
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $images
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User permission($permissions)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User role($roles, $guard = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereWallpaper($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWallpaper($value)
  */
 class User extends Authenticatable
 {
@@ -121,7 +121,7 @@ class User extends Authenticatable
      */
     public function usersVehicles()
     {
-        return $this->hasMany('App\UserVehicle');
+        return $this->hasMany('App\Models\UserVehicle');
     }
 
     /**
@@ -129,7 +129,7 @@ class User extends Authenticatable
      */
     public function friends()
     {
-        return $this->hasMany('App\Friend');
+        return $this->hasMany('App\Models\Friend');
     }
 
     /**
@@ -137,7 +137,7 @@ class User extends Authenticatable
      */
     public function friendshipRequests()
     {
-        return $this->hasMany('App\FriendshipRequest');
+        return $this->hasMany('App\Models\FriendshipRequest');
     }
 
     /**
@@ -145,7 +145,7 @@ class User extends Authenticatable
      */
     public function requestedFriendships()
     {
-        return $this->hasMany('App\FriendshipRequest', 'friend_id');
+        return $this->hasMany('App\Models\FriendshipRequest', 'friend_id');
     }
 
     /**
@@ -153,7 +153,7 @@ class User extends Authenticatable
      */
     public function subscribes()
     {
-        return $this->hasMany('App\Subscrable', 'user_id');
+        return $this->hasMany('App\Models\Subscrable', 'user_id');
     }
 
     /**
@@ -161,7 +161,7 @@ class User extends Authenticatable
      */
     public function subscribesToClubs()
     {
-        return $this->morphedByMany('App\Club', 'subscrable');
+        return $this->morphedByMany('App\Models\Club', 'subscrable');
     }
 
      /**
@@ -169,7 +169,7 @@ class User extends Authenticatable
      */
     public function subscribesToGroups()
     {
-        return $this->morphedByMany('App\Group', 'subscrable');
+        return $this->morphedByMany('App\Models\Group', 'subscrable');
     }
 
     /**
@@ -177,7 +177,7 @@ class User extends Authenticatable
      */
     public function subscribesToUsers()
     {
-        return $this->morphedByMany('App\User', 'subscrable');
+        return $this->morphedByMany('App\Models\User', 'subscrable');
     }
 
     /**
@@ -185,7 +185,7 @@ class User extends Authenticatable
      */
     public function users()
     {
-        return $this->morphToMany('App\User', 'subscrable');
+        return $this->morphToMany('App\Models\User', 'subscrable');
     }
 
     /**
@@ -193,7 +193,7 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->morphMany('App\Post', 'postable');
+        return $this->morphMany('App\Models\Post', 'postable');
     }
 
     /**
@@ -201,7 +201,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'authorable');
+        return $this->morphMany('App\Models\Comment', 'authorable');
     }
 
     /**
@@ -209,7 +209,7 @@ class User extends Authenticatable
      */
     public function likes()
     {
-        return $this->morphMany('App\Like', 'authorable');
+        return $this->morphMany('App\Models\Like', 'authorable');
     }
 
     /**
@@ -217,7 +217,7 @@ class User extends Authenticatable
      */
     public function images()
     {
-        return $this->morphMany('App\Image', 'imageable');
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 
     public function removeAvatar()
@@ -236,6 +236,6 @@ class User extends Authenticatable
 
     public function maps()
     {
-        return $this->hasMany('App\Map');
+        return $this->hasMany('App\Models\Map');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +30,6 @@ class Comment extends Model
      */
     public function likes()
     {
-        return $this->morphMany('App\Like', 'likeable');
+        return $this->morphMany('App\Models\Like', 'likeable');
     }
 }
