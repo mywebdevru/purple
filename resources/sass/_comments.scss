@@ -1,0 +1,239 @@
+.comments-list {
+    margin-bottom: 0;
+}
+
+.comments-list .comment-item {
+    padding: 25px;
+    border-bottom: 1px solid #e6ecf5;
+    background-color: #fafbfd;
+    position: relative;
+}
+
+.comments-list .comment-item.has-children {
+    padding-bottom: 0;
+}
+
+.comments-list .post-add-icon {
+    margin-right: 20px;
+}
+
+.comments-list .post__author img {
+    width: 26px;
+    height: 26px;
+}
+
+.comments-list.style-2 .comment-item .post__author img {
+    float: left;
+}
+
+.comments-list.style-2 .reply {
+    margin-right: 20px;
+}
+
+.comments-list.style-2 .post__date {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.comments-list.style-2 .author-date {
+    overflow: hidden;
+}
+
+.comments-list.style-2 .post__author .more {
+    float: none;
+}
+
+.comments-list.style-2 .post__author {
+    margin-bottom: 0;
+}
+
+.comments-list.style-3 .comment-item {
+    background-color: transparent;
+}
+
+.comments-list.style-3 .reply {
+    margin-right: 20px;
+    color: #ff5e3a;
+}
+
+.comments-list.style-3 .post__author-thumb {
+    margin-right: 20px;
+    float: left;
+}
+
+.comments-list.style-3 .post__author-thumb img {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    display: block;
+}
+
+.comments-list.style-3 .comments-content {
+    overflow: hidden;
+}
+
+.comments-list.style-3 .children .comment-item {
+    border-left: none;
+}
+
+.comments-list.style-3 .children .comment-item:before {
+    display: none;
+}
+
+.children {
+    border-top: 1px solid #e6ecf5;
+    margin: 25px -25px 0;
+    padding-left: 35px;
+}
+
+.children .comment-item {
+    border-left: 1px solid #e6ecf5;
+}
+
+.children .comment-item:last-child {
+    border-bottom: none;
+}
+
+.children .comment-item:before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 40px;
+    left: -5px;
+    background-color: #fafbfd;
+    border-radius: 100%;
+    border: 2px solid #c2c5d9;
+    z-index: 13;
+}
+
+.children.single-children {
+    border-top: 0;
+    margin: -3px 0 25px;
+    padding-left: 0;
+}
+
+.children.single-children .comment-item {
+    padding: 25px;
+    position: relative;
+}
+
+.children.single-children .comment-item:last-child {
+    padding-bottom: 0;
+}
+
+.reply {
+    font-size: 12px;
+    color: #888da8;
+}
+
+.report {
+    font-size: 12px;
+    color: #888da8;
+}
+
+.more-comments {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 12px;
+    color: #515365;
+    display: block;
+    font-weight: 700;
+    margin: 0 auto;
+}
+
+.more-comments span {
+    transition: all .3s ease;
+}
+
+.more-comments:hover {
+    color: #515365;
+}
+
+.more-comments:hover span {
+    color: #ff5e3a;
+}
+
+.comment-form {
+    padding: 25px;
+    border-top: 1px solid #e6ecf5;
+    overflow: hidden;
+}
+
+.comment-form .add-options-message {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    width: auto;
+    padding: 0;
+}
+
+.comment-form .post__author {
+    margin-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.comment-form .post__author img {
+    margin-right: 10px;
+    min-width: 28px;
+    max-width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.comment-form .form-group {
+    margin-bottom: 0;
+    width: 100%;
+    margin-left: auto;
+}
+
+.comment-form textarea {
+    min-height: 60px;
+    height: 60px;
+    transition: all .3s ease;
+}
+
+.comment-form textarea:focus {
+    min-height: 100px;
+}
+
+.comment-form button {
+    float: right;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.comment-form button + button {
+    margin-right: 15px;
+}
+
+/*================= Responsive Mode ============*/
+@media (max-width: 768px) {
+    .comments-list .comment-item {
+        padding: 10px;
+    }
+
+    .children {
+        margin-right: -10px;
+    }
+
+    .comments-list .comment-item .post__author .more {
+        margin-right: 0;
+    }
+
+    .comments-list.style-3 .post__author-thumb img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comment-form .form-group {
+        width: 80%;
+    }
+}

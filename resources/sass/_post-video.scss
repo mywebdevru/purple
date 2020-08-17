@@ -1,0 +1,150 @@
+.post-video {
+    border: 1px solid #e6ecf5;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.post-video .video-content {
+    padding: 20px;
+    overflow: hidden;
+}
+
+.post-video .video-content .title {
+    display: block;
+}
+
+.post-video .video-content p {
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.post-video .video-content .link-site {
+    font-size: 10px;
+    color: #9a9fbf;
+}
+
+.post-video .video-content .link-site:hover {
+    color: #ff5e3a;
+}
+
+.video-thumb {
+    position: relative;
+    float: left;
+}
+
+.video-thumb img {
+    display: block;
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .video-thumb {
+        float: none;
+    }
+}
+
+.video-player {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    margin: 20px 0;
+}
+
+.video-player img {
+    width: 100%;
+    display: block;
+}
+
+.video-player .video-content {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    color: #fff;
+    z-index: 5;
+    opacity: 0;
+    transition: all .3s ease;
+    padding: 0;
+}
+
+.video-player .video-content .title {
+    color: #fff;
+    display: block;
+}
+
+.video-player .play-video {
+    opacity: 0;
+}
+
+.video-player:hover .video-content {
+    opacity: 1;
+}
+
+.video-player:hover .play-video {
+    opacity: 1;
+}
+
+.video-player:hover .overlay {
+    opacity: 1;
+}
+
+.video-player:hover:after {
+    opacity: 1;
+}
+
+.video-player:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0px -120px 55px -30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+@media (max-width: 480px) {
+    .video-player .video-content .title {
+        display: none;
+    }
+}
+
+
+.crumina-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-image: none;
+}
+
+.crumina-video-background:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(255, 94, 58, 0.6);
+}
+
+.crumina-video-background .video-background {
+    min-width: 100%;
+    min-height: 100%;
+    margin: auto;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    visibility: visible;
+    opacity: 1;
+} 

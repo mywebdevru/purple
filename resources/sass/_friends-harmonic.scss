@@ -1,0 +1,49 @@
+.friends-harmonic {
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.friends-harmonic a {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 2px solid #fff;
+    display: block;
+    margin-left: -12px;
+}
+
+.friends-harmonic li {
+    float: left;
+}
+
+.friends-harmonic li:first-child a {
+    margin-left: 0;
+}
+
+.friends-harmonic .with-text {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.friends-harmonic .all-users {
+    line-height: 26px;
+    opacity: .8;
+}
+
+.friends-harmonic .all-users:hover {
+    color: #fff;
+}
+
+.friends-harmonic-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.friends-harmonic-wrap + .comments-shared {
+    margin-top: 15px;
+}

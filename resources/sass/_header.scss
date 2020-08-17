@@ -1,54 +1,76 @@
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar-wrapper {
+.header {
+    height: 70px;
+    background-color: #3f4257;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 20;
-    margin-left: -15px;
-    margin-right: -15px;
+    z-index: 21;
 }
 
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper .container {
-    padding-left: 0;
+.header .page-title {
+    padding: 26px 50px 26px 100px;
+    text-transform: uppercase;
+    float: left;
+    height: 100%;
+    min-width: 170px;
+}
+
+.header .page-title > * {
+    color: #fff;
+    margin: 0;
+}
+
+.header.header--logout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     padding-right: 0;
 }
 
-.navbar-wrapper .navbar {
-    padding-left: 15px;
-    padding-right: 15px;
+.header.header--logout .page-title {
+    padding: 26px;
 }
 
-.navbar-content {
-    width: 320px;
-    padding: 15px;
-    padding-bottom: 0px;
-}
-
-.navbar-content:before,
-.navbar-content:after {
-    display: table;
-    content: "";
-    line-height: 0;
-}
-
-.navbar-nav.navbar-right:last-child {
-    margin-right: 15px !important;
-}
-
-.navbar-footer {
-    background-color: #DDD;
-}
-
-.navbar-footer-content {
-    padding: 15px 15px 15px 15px;
-}
-
-.navbar-expand-md {
+.header.header--logout .header-content-wrapper {
     width: 100%;
-    background-color: #f0f0f0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
+
+.header.header--logout .logo {
+    min-height: 70px;
+    min-width: 70px;
+    height: 70px;
+    width: 70px;
+    background-color: #ff5e3a;
+    padding: 15px;
+}
+
+.header-content-wrapper {
+    height: 100%;
+}
+
+.header-spacer {
+    display: block;
+    height: 110px;
+}
+
+.header-spacer-small {
+    height: 70px;
+}
+
+.header-spacer--standard {
+    height: 143px;
+}
+
 .img-circle {
     border-radius: 9999px;
 }

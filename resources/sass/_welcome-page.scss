@@ -1,0 +1,36 @@
+.view {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.bgi {
+    background: url(../../public/img/welcome.jpg) no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+}
+.helloblock { margin: 0 25px; }
+a.hello-btn, a.hello-btn:focus, a.hello-btn:visited { 
+    text-decoration: none; 
+    color: #ffffff;
+    border-color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+a.hello-btn:hover {
+    background: #212529;
+}
+
+.reg {
+    background: #212529;
+    text-decoration: none; 
+    color: #ffffff;
+}
+.reg:hover {
+    background: #ffffff !important;
+    text-decoration: none; 
+    color: #212529 !important;
+}
