@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class MapsPhoto extends Model
 
     public function map()
     {
-        return $this->belongsTo('App\Map', 'map_id', 'id');
+        return $this->belongsTo('App\Models\Map', 'map_id', 'id');
     }
 }

@@ -35,7 +35,7 @@ class ProfileComposer
     public function compose(View $view)
     {
         if ($this->master){
-            $this->master->loadCount('requestedFriendships');
+            // $this->master->loadCount('requestedFriendships');
             $this->master->loadMissing('requestedFriendships.user', 'friendshipRequests', 'friends.user');
         }
         $view;

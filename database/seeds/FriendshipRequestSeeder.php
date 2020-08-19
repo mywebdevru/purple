@@ -1,7 +1,7 @@
 <?php
 
-use App\FriendshipRequest;
-use App\User;
+use App\Models\FriendshipRequest;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class FriendshipRequestSeeder extends Seeder

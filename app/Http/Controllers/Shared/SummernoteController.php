@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Shared;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Summernote\SummernoteDeleteRequest;
 use App\Http\Requests\Summernote\SummernoteUploadRequest;
-use App\Image;
-use App\Post;
+use App\Models\Image;
+use App\Models\Post;
 use Storage;
 
 class SummernoteController extends Controller

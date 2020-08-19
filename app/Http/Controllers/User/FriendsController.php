@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Friend;
-use App\FriendshipRequest;
+use App\Models\Friend;
+use App\Models\FriendshipRequest;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Subscrable;
+use App\Models\User;
+use App\Models\Subscrable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +35,7 @@ class FriendsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Friend  $friends
+     * @param  \App\Models\Friend  $friends
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -59,7 +59,7 @@ class FriendsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Friend  $friends
+     * @param  \App\Models\Friend  $friends
      * @return \Illuminate\Http\Response
      */
     public function show(Friend $friends)
@@ -70,7 +70,7 @@ class FriendsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Friend  $friends
+     * @param  \App\Models\Friend  $friends
      * @return \Illuminate\Http\Response
      */
     public function edit(Friend $friends, User $user)
@@ -82,7 +82,7 @@ class FriendsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Friend  $friends
+     * @param  \App\Models\Friend  $friends
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Friend $friends)

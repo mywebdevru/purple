@@ -1,7 +1,7 @@
 <?php
 
-use App\Subscrable;
-use App\User;
+use App\Models\Subscrable;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class SubscrablesSeeder extends Seeder

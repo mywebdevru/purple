@@ -1,6 +1,6 @@
 @php
     /**
-     * @var $posts \App\Post []
+     * @var $posts \App\Models\Post []
      */
 @endphp
 
