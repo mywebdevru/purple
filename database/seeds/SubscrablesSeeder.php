@@ -13,6 +13,9 @@ class SubscrablesSeeder extends Seeder
      */
     public function run()
     {
+        foreach(User::all() as $user){
+            $user->subscribesToUsers()->attach($user);
+        }
         factory(Subscrable::class, User::all()->count()*3)->create();
     }
 }

@@ -62,7 +62,7 @@ class ProfileController extends Controller
                 return $query->whereHasMorph('postable', [Club::class, User::class, Group::class], function ($query){
                     return $query->whereHas('users', function ($query){
                         return $query->where('user_id', auth()->user()->id);
-                    })->orWhere('id', auth()->user()->id);
+                    });
                 });
             })->orderBy('updated_at','DESC');
         } else {
