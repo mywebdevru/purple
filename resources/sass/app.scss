@@ -1,3 +1,4 @@
+@charset "UTF-8";
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -7,16 +8,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import "~bootstrap-sweetalert/dist/sweetalert.css";
-
-@import 'variables';
-@import 'add-post';
-@import 'body';
-@import 'header';
-@import 'icons';
-@import 'inputs';
-@import 'mail';
-@import 'like_it';
+@import '~bootstrap-sweetalert/dist/sweetalert.css';
+@import '~flatpickr/dist/themes/light.css';
 
 // FA Free
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';

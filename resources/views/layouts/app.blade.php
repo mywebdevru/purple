@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
 
 	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
     @yield('css')

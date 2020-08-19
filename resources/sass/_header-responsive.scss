@@ -1,0 +1,232 @@
+.header-responsive {
+    display: none;
+}
+
+.header-responsive .header-content-wrapper {
+    z-index: 5;
+}
+
+.tab-content-responsive {
+    display: none;
+}
+
+.tab-content-responsive .tab-pane {
+    background-color: #fff;
+}
+
+.tab-content-responsive .search-bar.w-search {
+    background-color: #494c62;
+}
+
+.tab-content-responsive .mCustomScrollbar {
+    max-height: calc(100vh - 140px);
+    overflow-y: auto !important;
+}
+
+.header-menu {
+    float: left;
+    height: 100%;
+    transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    background-color: #fff;
+}
+
+.header-menu ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin-bottom: 0;
+    height: 100%;
+}
+
+.header-menu a {
+    font-weight: 700;
+    font-size: 13px;
+    position: relative;
+    color: #515365;
+    padding: 30px;
+    display: block;
+    line-height: 1;
+}
+
+.header-menu .nav-link.active,
+.header-menu .nav-item.show .nav-link {
+    background-color: transparent;
+    cursor: pointer;
+    color: inherit;
+}
+
+.header-menu .nav-link:hover {
+    color: #ff5e3a;
+}
+
+.header-menu .dropdown:hover > .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.header-menu .dropdown-menu {
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    transition: all .3s ease;
+    margin: 0;
+    padding: 0;
+    background-color: #3f4257;
+    border-color: #e6ecf5;
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+}
+
+.header-menu .dropdown-item:focus,
+.header-menu .dropdown-item:hover {
+    color: #ff5e3a;
+    background-color: transparent;
+}
+
+.header-menu.open {
+    -webkit-transform: translateX(70px);
+    transform: translateX(70px);
+}
+
+.header-menu .dropdown-toggle::after {
+    right: 0;
+    top: auto;
+}
+
+.header-menu .menu-search-item a {
+    padding-left: 30px;
+}
+
+.header--standard-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+}
+
+.header--standard {
+    background-color: #fff;
+    width: calc(100% - 140px);
+    position: fixed;
+    left: 70px;
+    padding: 35px 55px;
+    box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+    z-index: 19;
+    transition: all .3s ease;
+}
+
+.header--standard .logo {
+    color: #515365;
+}
+
+.header--standard .logo .img-wrap {
+    margin-right: 13px;
+}
+
+.header--standard .logo:hover {
+    color: #515365;
+}
+
+.header--standard .header-menu {
+    margin-left: auto;
+}
+
+.header--standard .header-menu .dropdown-item {
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.header--standard .header-menu .dropdown-item:hover {
+    background-color: #edf2f6;
+}
+
+.header--standard .header-menu .shoping-cart {
+    visibility: visible;
+    opacity: 1;
+}
+
+.header--standard .dropdown-menu {
+    background-color: #fff;
+}
+
+.header--standard.headroom--not-top {
+    padding: 0 55px;
+}
+
+.header--standard .ps {
+    -ms-touch-action: unset;
+    touch-action: unset;
+    overflow: unset !important;
+    -ms-overflow-style: unset;
+}
+
+.header--standard .ps:hover > .ps__scrollbar-x-rail,
+.header--standard .ps:hover > .ps__scrollbar-y-rail {
+    display: none;
+}
+
+.header--standard.header--standard-landing {
+    width: 100%;
+    left: auto;
+    top: 0;
+}
+
+.header--standard.header--standard-full-width {
+    width: 100%;
+    left: auto;
+    top: 0;
+}
+
+.header--standard .header-menu .close-responsive-menu {
+    display: none;
+}
+
+.header--standard.header-bg-light {
+    background-color: #fff;
+}
+
+.header--standard-dark {
+    background-color: #3f4257;
+}
+
+.header--standard-dark .logo {
+    color: #fff;
+}
+
+.header--standard-dark .logo .logo-title {
+    color: #fff;
+}
+
+.header--standard-dark .logo:hover {
+    color: #fff;
+}
+
+.header--standard-dark .column-tittle {
+    color: #fff;
+}
+
+.header--standard-dark .header-menu {
+    background-color: #3f4257;
+}
+
+.header--standard-dark .header-menu a {
+    color: #fff;
+}
+
+.header--standard-dark .header-menu .dropdown-item:hover {
+    background-color: #545875;
+}
+
+.header--standard-dark .dropdown-menu {
+    background-color: #3f4257;
+    border-color: #4a4d66;
+}
