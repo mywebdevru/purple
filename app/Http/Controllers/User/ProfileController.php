@@ -51,35 +51,38 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $subscribes = $user->subscribes->mapToGroups(function ($item, $key) {
-            return [$item['subscrable_type'] => $item['subscrable_id']];
-        });
+        // $subscribes = $user->subscribes->mapToGroups(function ($item, $key) {
+        //     return [$item['subscrable_type'] => $item['subscrable_id']];
+        // });
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
             $user = auth()->user();
-            $feed = Feed::whereHasMorph('feedable', ['App\Models\Post'], function (Builder $query, $type) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\Models\User'])
+            $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
+            $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
+            $subscribesToGroups = $user->subscribesToGroups()->pluck('subscrable_id');
+            $feed = Feed::whereHasMorph('feedable', ['App\Models\Post'], function (Builder $query, $type) use ($subscribesToUsers) {
+                return $query->whereIn('postable_id', $subscribesToUsers)
                             ->where('postable_type', 'App\Models\User');
             })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($id) {
                 return $query->where('postable_id', $id)
                             ->where('postable_type', 'App\Models\User');
-            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\Models\Club'])
+            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribesToClubs) {
+                return $query->whereIn('postable_id', $subscribesToClubs)
                             ->where('postable_type', 'App\Models\Club');
-            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('postable_id', $subscribes['App\Models\Group'])
+            })->orWhereHasMorph('feedable', ['App\Models\Post'], function (Builder $query) use ($subscribesToGroups) {
+                return $query->whereIn('postable_id', $subscribesToGroups)
                             ->where('postable_type', 'App\Models\Group');
-            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\Models\User'])
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribesToUsers) {
+                return $query->whereIn('imageable_id', $subscribesToUsers)
                             ->where('imageable_type', 'App\Models\User');
             })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($id) {
                 return $query->where('imageable_id', $id)
                             ->where('imageable_type', 'App\Models\User');
-            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\Models\Club'])
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribesToClubs) {
+                return $query->whereIn('imageable_id', $subscribesToClubs)
                             ->where('imageable_type', 'App\Models\Club');
-            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribes) {
-                return $query->whereIn('imageable_id', $subscribes['App\Models\Group'])
+            })->orWhereHasMorph('feedable', ['App\Models\Image'], function (Builder $query) use ($subscribesToGroups) {
+                return $query->whereIn('imageable_id', $subscribesToGroups)
                             ->where('imageable_type', 'App\Models\Group');
             })->orderBy('updated_at', 'desc');
         } else {
