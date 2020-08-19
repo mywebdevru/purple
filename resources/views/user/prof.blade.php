@@ -13,7 +13,7 @@
 			<div id="newsfeed-items-grid">
 
                 @foreach ($feed as $item)
-                    @if($item['feedable_type'] == 'App\Post')
+                    @if($item['feedable_type'] == 'App\Models\Post')
                     {{-- @dd(class_basename($item->feedable->postable)) --}}
                         @component('user.components.feed.post',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
                     @else
