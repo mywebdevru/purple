@@ -16,8 +16,10 @@ class CreateFeedTable extends Migration
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('feedable_id');
-            $table->string('feedable_type');
+            $table->integer('feedable_id')->nullable(true);
+            $table->string('feedable_type')->nullable(true);
+            $table->integer('authorable_id')->nullable(true);
+            $table->string('authorable_type')->nullable(true);
         });
     }
 

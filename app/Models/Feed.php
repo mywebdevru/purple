@@ -31,10 +31,15 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'feedable_id', 'feedable_type'
+        'feedable_id', 'feedable_type', 'authorable_id', 'authorable_type'
     ];
 
     public function feedable()
+    {
+        return $this->morphTo();
+    }
+
+    public function authorable()
     {
         return $this->morphTo();
     }

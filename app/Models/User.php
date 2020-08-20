@@ -220,6 +220,16 @@ class User extends Authenticatable
         return $this->morphMany('App\Models\Image', 'imageable');
     }
 
+    public function feeds()
+    {
+        return $this->morphMany('App\Models\Feed', 'authorable');
+    }
+
+    public function subscribers()
+    {
+        return $this->morphMany('App\Models\Subscrable', 'subscrable');
+    }
+
     public function removeAvatar()
     {
         Storage::delete($this->avatar);
