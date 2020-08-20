@@ -57,6 +57,11 @@ class Group extends Model
         return $this->morphToMany('App\Models\User', 'subscrable');
     }
 
+    public function subscribers()
+    {
+        return $this->morphMany('App\Models\Subscrable', 'subscrable');
+    }
+
     /**
      * Get the Group's's Post.
      */
@@ -87,6 +92,11 @@ class Group extends Model
     public function likes()
     {
         return $this->morphMany('App\Models\Like', 'authorable');
+    }
+
+    public function feeds()
+    {
+        return $this->morphMany('App\Models\Feed', 'authorable');
     }
 
     public function getFullNameAttribute() {

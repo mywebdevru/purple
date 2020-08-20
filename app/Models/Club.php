@@ -96,6 +96,15 @@ class Club extends Model
         return $this->morphMany('App\Models\Like', 'authorable');
     }
 
+    public function feeds()
+    {
+        return $this->morphMany('App\Models\Feed', 'authorable');
+    }
+
+    public function subscribers()
+    {
+        return $this->morphMany('App\Models\Subscrable', 'subscrable');
+    }
     public function getFullNameAttribute() {
         return "Клуб $this->name";
     }

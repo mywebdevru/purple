@@ -57,20 +57,19 @@ class ProfileController extends Controller
     {
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
+            $groups = $user->subscribes()->where('subscrable_type', Group::class)->pluck('subscrable_id');
+            $users = $user->subscribes()->where('subscrable_type', User::class)->pluck('subscrable_id');
+            $clubs = $user->subscribes()->where('subscrable_type', Club::class)->pluck('subscrable_id');
+            $feed = Feed::where(function ($query) use ($users){
+                return $query->where('authorable_type', [User::class])->whereIn('authorable_id', $users);
+                })->orWhere(function ($query) use ($clubs){
+                    return $query->where('authorable_type', [Club::class])->whereIn('authorable_id', $clubs);
+                })->orWhere(function ($query) use ($groups){
+                        return $query->where('authorable_type', [Group::class])->whereIn('authorable_id', $groups);
+                })->orderBy('updated_at','DESC');
             $user = auth()->user();
-            $feed = Feed::whereHasMorph('feedable', [Post::class, Image::class], function ($query){
-                return $query->whereHasMorph('postable', [Club::class, User::class, Group::class], function ($query){
-                    return $query->whereHas('users', function ($query){
-                        return $query->where('user_id', auth()->user()->id);
-                    });
-                });
-            })->orderBy('updated_at','DESC');
         } else {
-            $feed = Feed::whereHasMorph('feedable', [Post::class, Image::class], function ($query) use ($id){
-                return $query->whereHasMorph('postable', [User::class], function ($query) use ($id){
-                    return $query->where('id', [$id]);
-                });
-            })->orderBy('updated_at','DESC');
+            $feed = Feed::where('authorable_type', [User::class])->where('authorable_id', $id)->orderBy('updated_at','DESC');
         }
         $user->load('usersVehicles', 'images', 'friends.user');
         $feed->with('feedable.postable')
