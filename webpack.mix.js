@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/admin.js', 'public/js')
+    .js('resources/js/admin/admin.js', 'public/js')
     .js('resources/js/edit.js', 'public/js')
     .scripts(['resources/js/libs/fm.revealator.jquery.js',
             'resources/js/libs/jquery.appear.js',
