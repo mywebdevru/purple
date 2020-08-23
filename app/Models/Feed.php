@@ -22,6 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $authorable_id
+ * @property string|null $authorable_type
+ * @property-read Model|\Eloquent $authorable
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereAuthorableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereAuthorableType($value)
  */
 class Feed extends Model
 {

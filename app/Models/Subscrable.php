@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscrable whereSubscrableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscrable whereUserId($value)
  * @mixin \Eloquent
+ * @property-read Model|\Eloquent $subscrable
  */
 class Subscrable extends Model
 {

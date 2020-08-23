@@ -39,6 +39,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $location
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $image
  * @property-read int|null $image_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
+ * @property-read int|null $feeds_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscrable[] $subscribers
+ * @property-read int|null $subscribers_count
  */
 class Club extends Model
 {
