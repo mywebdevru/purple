@@ -78,6 +78,18 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWallpaper($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
+ * @property-read int|null $feeds_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Map[] $maps
+ * @property-read int|null $maps_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscrable[] $subscribers
+ * @property-read int|null $subscribers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscrable[] $subscribes
+ * @property-read int|null $subscribes_count
  */
 class User extends Authenticatable
 {
