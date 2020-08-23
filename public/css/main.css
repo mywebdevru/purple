@@ -109,7 +109,7 @@ body.body--fixed {
 }
 
 .header .page-title {
-  padding: 26px 50px 26px 100px;
+  padding: 20px 50px 26px 100px;
   text-transform: uppercase;
   float: left;
   height: 100%;
@@ -9073,25 +9073,51 @@ input[type=file] {
   color: #ff5e3a;
 }
 
-.view {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+@font-face {
+  font-family: "thousand-sticks";
+  src: url("/fonts/Thousandsticks WF Regular.ttf?882e3c623518cc29e9e98e6e7885345d");
+  font-style: normal;
+  font-weight: normal;
 }
 
-.bgi {
+@font-face {
+  font-family: "montserrat-thin";
+  src: url(/fonts/Montserrat-Thin.ttf?b60b82f5e87a84054c09bfa9ee39026f);
+}
+
+.welcome-block {
+  position: relative;
+  background-color: #fff;
+}
+
+.entry {
   background: url(/images/welcome.jpg?9ad0d9b8e8ac8c611260619d8f0f5d55) no-repeat;
   background-size: 100%;
 }
 
-.helloblock {
-  margin: 0 25px;
+.travel {
+  background: url(/images/jeep-travel.jpg?d11aa73a39168f8b8a4e1c0675c06ee7) no-repeat;
+  background-size: 100%;
+  height: 500px;
+  text-align: center;
+  background-position-y: -200px;
 }
 
-a.hello-btn,
-a.hello-btn:focus,
-a.hello-btn:visited {
+.second {
+  background: url(/images/red-jeep.jpg?6f125fb781f3bf1f4dcd90ee5b8883e7) no-repeat;
+  background-size: 100%;
+  height: 500px;
+  text-align: center;
+  background-position-y: -105px;
+}
+
+.entry-text {
+  padding: 165px 130px 340px 130px;
+}
+
+a.auth-btn,
+a.auth-btn:focus,
+a.auth-btn:visited {
   text-decoration: none;
   color: #ffffff;
   border-color: #fff;
@@ -9099,7 +9125,7 @@ a.hello-btn:visited {
   margin-top: 20px;
 }
 
-a.hello-btn:hover {
+a.auth-btn:hover {
   background: #212529;
 }
 
@@ -9113,5 +9139,59 @@ a.hello-btn:hover {
   background: #ffffff !important;
   text-decoration: none;
   color: #212529 !important;
+}
+
+.carousel-img {
+  width: 35px;
+  height: 150px;
+}
+
+.brand-name {
+  font-family: thousand-sticks;
+  font-size: 110px;
+  color: #ffffff;
+}
+
+.brand-name-small {
+  font-family: thousand-sticks;
+  font-size: 35px;
+}
+
+.text-white {
+  font-family: montserrat-thin;
+}
+
+.count-trail {
+  text-align: center;
+}
+
+.text-grey {
+  font-family: montserrat-thin;
+  color: #404040;
+  font-size: 25px;
+}
+
+.text-grey__main {
+  font-size: 40px;
+}
+
+.text-grey__red {
+  color: #ff5e3a;
+}
+
+.block__count-trail {
+  padding: 35px 0 35px 0;
+}
+
+.owl-item {
+  width: 280px;
+}
+
+.travel__text {
+  padding-top: 225px;
+}
+
+footer {
+  background-color: #3f4257;
 }
 
