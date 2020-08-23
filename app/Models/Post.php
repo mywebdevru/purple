@@ -31,6 +31,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post wherePostableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post wherePostableType($value)
  * @property-read \App\Models\Feed|null $feed
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
  */
 class Post extends Model
 {
