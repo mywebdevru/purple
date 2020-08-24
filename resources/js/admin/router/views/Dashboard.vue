@@ -1,12 +1,10 @@
 <template>
-<div>
-    <RouterView :key="$route.fullPath" />
-</div>
+<h1>Dashboard</h1>
 </template>
 
 <script>
 export default {
-    name: "Index"
+    name: "Dashboard"
 }
 </script>
 

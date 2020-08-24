@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
 import Vuex from "vuex";
-import router from "./routes";
+import router from "./router/routes";
 import storeDefinition from './store';
 import "./components/_globals";
 import Index from "./Index";
