@@ -10,8 +10,6 @@
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
 
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
