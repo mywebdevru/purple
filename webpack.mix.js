@@ -25,4 +25,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/main.scss', 'public/css/main.css')
     .sass('resources/sass/admin.sass', 'public/css');
-mix.copyDirectory('resources/fonts', 'public/fonts');
+mix.copyDirectory('resources/assets/fonts', 'public/fonts');
