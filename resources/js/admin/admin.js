@@ -3,14 +3,15 @@ import Vuex from "vuex";
 import router from "./routes";
 import storeDefinition from './store';
 import "./components/_globals";
-
 import Index from "./Index";
+import BootstrapVue from "bootstrap-vue";
 
 require('../bootstrap');
 
 window.Vue = require('vue');
 Vue.use(Vuex);
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+Vue.use(BootstrapVue);
 
 window.flatpickr = require('flatpickr');
 window.flatpickrRU = require("flatpickr/dist/l10n/ru.js").default.ru;
