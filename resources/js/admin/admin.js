@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import Vuex from "vuex";
 import router from "./routes";
 import storeDefinition from './store';
+import "./components/_globals";
 
 import Index from "./Index";
 
