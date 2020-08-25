@@ -56,7 +56,7 @@ class UserController extends Controller
             ->with('user', $user)
             ->with('friends', $user->friends)
             ->with('userRequests', $userRequests)
-            ->with('friendshipRequests', $friendshipRequests);
+            ->with('friendshipRequests', $friendshipRequests)->with('vehicles', $user->usersVehicles);
     }
 
     /**
