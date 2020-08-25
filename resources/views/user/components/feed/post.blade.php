@@ -1,4 +1,4 @@
-<div class="ui-block">
+<div class="ui-block" id="post_{{ $feed->feedable['id'] }}">
     <!-- Пост -->
     {{-- @dd(count($feed->feedable->likes)) --}}
     <article class="hentry post">
@@ -19,18 +19,18 @@
                 </svg>
                 <ul class="more-dropdown">
                     <li>
-                        <a href="#">Редактировать пост</a>
+                        <a href="#" onclick="event.preventDefault(); editPost({{ $feed->feedable['id'] }});">Редактировать пост</a>
                     </li>
                     <li>
-                        <a href="#">Удалить пост</a>
+                        <a href="#" onclick="event.preventDefault(); deletePost({{ $feed->feedable['id'] }});">Удалить пост</a>
                     </li>
                 </ul>
             </div>
             @endcan
         </div>
-        <p>
+        <div id="post_text_{{ $feed->feedable['id'] }}">
             {!! $feed->feedable['text'] !!}
-        </p>
+        </div>
         <div class="post-additional-info inline-items">
         <a href="#" id="like_post_{{ $feed->feedable['id'] }}" data-like_id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed->feedable['id'] }}, 'post');">
                 <svg class="olymp-heart-icon">
