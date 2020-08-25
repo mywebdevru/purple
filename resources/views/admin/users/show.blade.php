@@ -1,7 +1,8 @@
 @php
 /**
- * @var $user \App\Models\User
- * @var $friends \App\Models\Friend []
+ * @var $user \App\User
+ * @var $friends \App\Friend []
+ * @var $vehicles \App\UserVehicle []
  */
 @endphp
 
@@ -187,10 +188,141 @@
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Транспортные средства
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Тип</th>
+                            <th scope="col">Марка</th>
+                            <th scope="col">Модель</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($vehicles as $vehicle)
+                            <tr>
+                                <td>
+                                    {{ $vehicle->type }}
+                                </td>
+                                <td>
+                                    {{ $vehicle->brand }}
+                                </td>
+                                <td>
+                                    {{ $vehicle->model }}
+                                </td>
+                                <td>
+                                    <form class="d-inline-block" action="{{ route('admin.vehicle.destroy', $vehicle->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="btn btn-danger btn-sm"
+                                            type="submit"
+                                            role="button">
+                                            Удаление
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            У пользователя пока нет транспортных средств
+                        @endforelse
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVehicleModal">
+                        Добавить транспортное средство
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addVehicleModal" tabindex="-1" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление транспортного средства</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('admin.vehicle.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="type">Тип транспортного средства</label>
+                            <select class="form-control" id="type" name="type">
+                                <option disabled selected>Выберите тип транспортного средства</option>
+                                <option value="Легковой" data-type="1">Легковой</option>
+                                <option value="Грузовой или автобус" data-type="2">Грузовой или автобус</option>
+                                <option value="Коммерческий" data-type="3">Коммерческий</option>
+                                <option value="Мотоцикл/квадрацикл" data-type="4">Мотоцикл/квадрацикл</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="brands-group" style="display: none">
+                            <label for="brand">Производитель</label>
+                            <input list="brand-list" id="brand" name="brand" class="form-control" placeholder="Начните вводить производителя...">
+                            <datalist id="brand-list"></datalist>
+                        </div>
+                        <div class="form-group" id="models-group" style="display: none">
+                            <label for="model">Модель</label>
+                            <input list="model-list" id="model" name="model" class="form-control" placeholder="Начните вводить марку...">
+                            <datalist id="model-list"></datalist>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
 
 @section('scripts')
+<script>
+$(document).ready(function () {
+    $('#type').on('change', function () {
+        const typeVal = $(this).val(),
+            type = $(`#type option[value="${typeVal}"]`).data('type');
+        (async function getCategory() {
+            try {
+                const brands = (await axios.get('https://auto-db.mywebdev.ru/api/category/' + type)).data.data;
+                brands.forEach(function (brand) {
+                    $("#brand-list").append('<option value="' + brand.name + '" data-brand="' + brand.id + '">');
+                });
+                $('#brands-group').fadeIn();
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+    });
+    $('#brand').on('change', function () {
+        const brand = $(this).val(),
+            brandID = $(`#brand-list option[value=${brand}]`).data('brand');
+        (async function getBrand() {
+            try {
+                const models = (await axios.get('https://auto-db.mywebdev.ru/api/manufacturer/' + brandID)).data.data;
+                models.forEach(function (model) {
+                    $("#model-list").append('<option value="' + model.name + '" data-brand="' + model.id + '">');
+                });
+                $('#models-group').fadeIn();
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+    });
+});
+</script>
 @endsection
 @section('css')
     <style>
