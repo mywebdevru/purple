@@ -1,0 +1,226 @@
+.socials i,
+.socials svg {
+    font-size: 15px;
+    transition: all .3s ease;
+}
+
+.socials li {
+    display: inline-block;
+}
+
+.socials li a {
+    color: #9a9fbf;
+}
+
+.socials li a:hover {
+    color: #ff5e3a;
+}
+
+.socials li + li {
+    margin-left: 20px;
+}
+
+.socials--round .social-item {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    fill: #fff;
+    display: block;
+    position: relative;
+    opacity: .9;
+}
+
+.socials--round .social-item:hover {
+    opacity: 1;
+}
+
+.socials--round .social-item.olympus {
+    background-color: #ff5e3a;
+}
+
+.socials--round .social-item.rss {
+    background-color: #f4b459;
+}
+
+.socials--round .social-item.mail {
+    background: #996DD1;
+}
+
+.socials--round .social-item.pinterest {
+    background: #cc2127;
+}
+
+.socials--round .social-item.googleplus {
+    background: #dd4b39;
+}
+
+.socials--round .social-item.google {
+    background: #dd4b39;
+}
+
+.socials--round .social-item.facebook {
+    background: #3b5998;
+}
+
+.socials--round .social-item.twitter {
+    background: #55acee;
+}
+
+.socials--round .social-item.amazon {
+    background-color: #F69B06;
+}
+
+.socials--round .social-item.behance {
+    background-color: #2D2D2D;
+}
+
+.socials--round .social-item.bing {
+    background-color: #FFA616;
+}
+
+.socials--round .social-item.creative-market {
+    background-color: #8DA741;
+}
+
+.socials--round .social-item.deviantart {
+    background-color: #1B1B1B;
+}
+
+.socials--round .social-item.dribble {
+    background-color: #f74881;
+}
+
+.socials--round .social-item.dropbox {
+    background-color: #0BA4E0;
+}
+
+.socials--round .social-item.envato {
+    background-color: #6D9C3E;
+}
+
+.socials--round .social-item.flickr {
+    background-color: #26A9E1;
+}
+
+.socials--round .social-item.instagram {
+    background-color: #E75351;
+}
+
+.socials--round .social-item.kickstarter {
+    background-color: #14E06E;
+}
+
+.socials--round .social-item.linkedin {
+    background-color: #4A8F9E;
+}
+
+.socials--round .social-item.medium {
+    background-color: #00E56B;
+}
+
+.socials--round .social-item.periscope {
+    background-color: #3FA4C4;
+}
+
+.socials--round .social-item.quora {
+    background-color: #F85F62;
+}
+
+.socials--round .social-item.reddit {
+    background-color: #F05825;
+}
+
+.socials--round .social-item.shutterstock {
+    background-color: #008EC0;
+}
+
+.socials--round .social-item.skype {
+    background-color: #00AAF1;
+}
+
+.socials--round .social-item.snapchat {
+    background-color: #FFED45;
+}
+
+.socials--round .social-item.soundcloud {
+    background-color: #FF3300;
+}
+
+.socials--round .social-item.spotify {
+    background-color: #1ED760;
+}
+
+.socials--round .social-item.trello {
+    background-color: #0079BF;
+}
+
+.socials--round .social-item.tumblr {
+    background-color: #36465D;
+}
+
+.socials--round .social-item.vimeo {
+    background-color: #1AB7EA;
+}
+
+.socials--round .social-item.vk {
+    background-color: #6383A8;
+}
+
+.socials--round .social-item.whatsapp {
+    background-color: #25D366;
+}
+
+.socials--round .social-item.wikipedia {
+    background-color: #000000;
+}
+
+.socials--round .social-item.wordpress {
+    background-color: #21759B;
+}
+
+.socials--round .social-item.youtube {
+    background-color: #CD201F;
+}
+
+.socials--round svg {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.socials-shared {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.socials-shared .social-item {
+    width: 100%;
+    padding: 15px 30px;
+    margin-bottom: 0;
+}
+
+.socials-shared .social-item i,
+.socials-shared .social-item svg {
+    font-size: 15px;
+    margin-right: 0;
+}
+
+.socials-shared .social-item + .social-item {
+    margin-left: 15px;
+}
+
+/*================= Responsive Mode ============*/
+@media (max-width: 560px) {
+    .socials-shared {
+        padding: 20px;
+    }
+}

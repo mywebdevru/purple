@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers;
 
-use App\User;
+use App\Repositories\UserRepository;
 use Illuminate\View\View;
 
 class ProfileComposer
@@ -20,10 +20,10 @@ class ProfileComposer
      * @param  UserRepository  $users
      * @return void
      */
-    public function __construct(User $users)
+    public function __construct(UserRepository $userRepository)
     {
         // Dependencies automatically resolved by service container...
-        $this->users = $users;
+        $this->master = $userRepository->getMaster();
     }
 
     /**
@@ -34,12 +34,10 @@ class ProfileComposer
      */
     public function compose(View $view)
     {
-        if (!!auth()->user()){
-            $user = $this->users->find(auth()->user()->id);
-            $user->loadCount('requestedFriendships');
-            $user->load('requestedFriendships.user', 'friendshipRequests');
-            $view->with('user', $user);
+        if ($this->master){
+            // $this->master->loadCount('requestedFriendships');
+            $this->master->loadMissing('requestedFriendships.user', 'friendshipRequests', 'friends.user');
         }
-
+        $view;
     }
 }

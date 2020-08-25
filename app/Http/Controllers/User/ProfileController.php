@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Feed;
+use App\Models\Feed;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Image;
+use App\Models\Club;
+use App\Models\Group;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -46,63 +50,39 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
-            $subscribesToUsers = $user->subscribesToUsers()->pluck('subscrable_id');
-            $subscribesToClubs = $user->subscribesToClubs()->pluck('subscrable_id');
-            $subscribesToGroups = $user->subscribesToGroups()->pluck('subscrable_id');
-            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($subscribesToUsers) {
-                return $query->whereIn('postable_id', $subscribesToUsers)
-                            ->where('postable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($id) {
-                return $query->where('postable_id', $id)
-                            ->where('postable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribesToClubs) {
-                return $query->whereIn('postable_id', $subscribesToClubs)
-                            ->where('postable_type', 'App\Club');
-            })->orWhereHasMorph('feedable', ['App\Post'], function (Builder $query) use ($subscribesToGroups) {
-                return $query->whereIn('postable_id', $subscribesToGroups)
-                            ->where('postable_type', 'App\Group');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToUsers) {
-                return $query->whereIn('imageable_id', $subscribesToUsers)
-                            ->where('imageable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
-                return $query->where('imageable_id', $id)
-                            ->where('imageable_type', 'App\User');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToClubs) {
-                return $query->whereIn('imageable_id', $subscribesToClubs)
-                            ->where('imageable_type', 'App\Club');
-            })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($subscribesToGroups) {
-                return $query->whereIn('imageable_id', $subscribesToGroups)
-                            ->where('imageable_type', 'App\Group');
-            })->orderBy('updated_at', 'desc')->get();
+            $groups = $user->subscribes()->where('subscrable_type', Group::class)->pluck('subscrable_id');
+            $users = $user->subscribes()->where('subscrable_type', User::class)->pluck('subscrable_id');
+            $clubs = $user->subscribes()->where('subscrable_type', Club::class)->pluck('subscrable_id');
+            $feed = Feed::where(function ($query) use ($users){
+                return $query->where('authorable_type', [User::class])->whereIn('authorable_id', $users);
+                })->orWhere(function ($query) use ($clubs){
+                    return $query->where('authorable_type', [Club::class])->whereIn('authorable_id', $clubs);
+                })->orWhere(function ($query) use ($groups){
+                        return $query->where('authorable_type', [Group::class])->whereIn('authorable_id', $groups);
+                })->orderBy('updated_at','DESC');
+            $user = auth()->user();
         } else {
-            $feed = Feed::whereHasMorph('feedable', ['App\Post'], function (Builder $query, $type) use ($id) {
-                return $query->where('postable_id', $id)
-                            ->where('postable_type', 'App\User');
-                        })->orWhereHasMorph('feedable', ['App\Image'], function (Builder $query) use ($id) {
-                            return $query->where('imageable_id', $id)
-                                        ->where('imageable_type', 'App\User');
-                        })->orderBy('updated_at', 'desc')->get();
+            $feed = Feed::where('authorable_type', [User::class])->where('authorable_id', $id)->orderBy('updated_at','DESC');
         }
-        $user->load('usersVehicles', 'friends.user', 'images');
-        $feed->loadMorph('feedable.imageable', ['App\Image']);
-        $feed->loadMorph('feedable.postable', ['App\Post']);
-        $feed->load('feedable.comments.authorable');
-        $feed->load('feedable.comments.likes');
-        $feed->load('feedable.likes.authorable');
-        return view('user.prof',['data' => $user, 'feed' => $feed,]);
+        $user->load('usersVehicles', 'images', 'friends.user');
+        $feed->with('feedable.postable')
+                ->with('feedable.comments.authorable')
+                ->with('feedable.comments.likes')
+                ->with('feedable.likes.authorable');
+        return view('user.prof',['user' => $user, 'feed' => $feed->get()]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
@@ -110,14 +90,14 @@ class ProfileController extends Controller
         if(Str::contains(url()->current(), 'secure')){
             return view('user.components.edit_profile.secure');
         }
-        return view('user.components.edit_profile.personal')->with('profile', $user);
+        return view('user.components.edit_profile.personal',['profile'=> $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -134,7 +114,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $users)

@@ -5,39 +5,14 @@
 
 		<div class="mCustomScrollbar" data-mcs-theme="dark">
 			<ul class="chat-users">
-				<li class="inline-items js-chat-open">
+                @foreach ($friends as $item)
+                <li class="inline-items js-chat-open">
 					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
+						<img alt="author"src="{{ asset($item->user['avatar']) }}" class="avatar">
 						<span class="icon-status online"></span>
 					</div>
 				</li>
-				<li class="inline-items js-chat-open">
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-				</li>
-
-				<li class="inline-items js-chat-open">
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-				</li>
-
-				<li class="inline-items js-chat-open">
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status away"></span>
-					</div>
-				</li>
-
-				<li class="inline-items js-chat-open">
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status disconected"></span>
-					</div>
-				</li>
+                @endforeach
 			</ul>
 		</div>
 
@@ -63,170 +38,35 @@
 			</div>
 
 			<ul class="chat-users">
-				<li class="inline-items js-chat-open">
+                @foreach ($friends as $item)
+                    <li class="inline-items js-chat-open">
+                        <div class="author-thumb">
+                            <img alt="author"src="{{ asset($item->user['avatar']) }}" class="avatar">
+                            <span class="icon-status online"></span>
+                        </div>
 
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
+                        <div class="author-status">
+                            <a href="#" class="h6 author-name">{{ $item->user['full_name'] }}</a>
+                            <span class="status">ONLINE</span>
+                        </div>
+                        <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
 
-					<div class="author-status">
-						<a href="#" class="h6 author-name">spiegel</a>
-						<span class="status">ONLINE</span>
-					</div>
+                            <ul class="more-icons">
+                                <li>
+                                    <svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
+                                </li>
 
-					<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
+                                <li>
+                                    <svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
+                                </li>
 
-						<ul class="more-icons">
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
-							</li>
-						</ul>
-
-					</div>
-
-				</li>
-				<li class="inline-items js-chat-open">
-
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-
-					<div class="author-status">
-						<a href="#" class="h6 author-name">spiegel</a>
-						<span class="status">AT WORK!</span>
-					</div>
-
-					<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
-
-						<ul class="more-icons">
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
-							</li>
-						</ul>
-
-					</div>
-
-				</li>
-
-				<li class="inline-items js-chat-open">
-
-
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-
-					<div class="author-status">
-						<a href="#" class="h6 author-name">spiegel</a>
-						<span class="status">ONLINE</span>
-					</div>
-
-					<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
-
-						<ul class="more-icons">
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
-							</li>
-						</ul>
-
-					</div>
-
-
-				</li>
-
-				<li class="inline-items js-chat-open">
-
-
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status away"></span>
-					</div>
-
-					<div class="author-status">
-						<a href="#" class="h6 author-name">spiegel</a>
-						<span class="status">AWAY</span>
-					</div>
-
-					<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
-
-						<ul class="more-icons">
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
-							</li>
-						</ul>
-
-					</div>
-
-
-				</li>
-
-				<li class="inline-items js-chat-open">
-
-
-					<div class="author-thumb">
-						<img alt="author"src="{{ asset('img/spiegel.jpg') }}" class="avatar">
-						<span class="icon-status disconected"></span>
-					</div>
-
-					<div class="author-status">
-						<a href="#" class="h6 author-name">spiegel</a>
-						<span class="status">OFFLINE</span>
-					</div>
-
-					<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use></svg>
-
-						<ul class="more-icons">
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-comments-post-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="ADD TO CONVERSATION" class="olymp-add-to-conversation-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-to-conversation-icon') }}"></use></svg>
-							</li>
-
-							<li>
-								<svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
-							</li>
-						</ul>
-
-					</div>
-
-
-				</li>
+                                <li>
+                                    <svg data-toggle="tooltip" data-placement="top" data-original-title="BLOCK FROM CHAT" class="olymp-block-from-chat-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-block-from-chat-icon') }}"></use></svg>
+                                </li>
+                            </ul>
+                        </div>
+				    </li>
+                @endforeach
 			</ul>
 
 		</div>

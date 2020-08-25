@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\UserVehicle;
-use App\User;
+use App\Models\UserVehicle;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -43,7 +43,7 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserVehicle  $userVehicle
+     * @param  \App\Models\UserVehicle  $userVehicle
      * @return \Illuminate\Http\Response
      */
     public function show(UserVehicle $userVehicle)
@@ -54,19 +54,19 @@ class VehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserVehicle  $userVehicle
+     * @param  \App\Models\UserVehicle  $userVehicle
      * @return \Illuminate\Http\Response
      */
     public function edit(UserVehicle $userVehicles, User $user)
     {
-        return view('user.components.edit_profile.vehicles');
+        return view('user.components.edit_profile.vehicles',['profile'=> $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserVehicle  $userVehicle
+     * @param  \App\Models\UserVehicle  $userVehicle
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserVehicle $userVehicle)
@@ -77,7 +77,7 @@ class VehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserVehicle  $userVehicle
+     * @param  \App\Models\UserVehicle  $userVehicle
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserVehicle $userVehicle)

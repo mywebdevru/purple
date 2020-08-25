@@ -28,6 +28,10 @@ Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
 
+Route::get('/admin/{any?}', function () {
+    return view('admin.admin.index');
+})->where('any', '^[\/\w\.-]*')->middleware(['auth', 'role:admin|super-admin']);
+
 Route::group([
     'namespace' => 'Admin',
     'prefix' => 'admin',
@@ -43,14 +47,14 @@ Route::group([
 });
 
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
-Route::post('summernote/delete', [SummernoteController::class, 'destroy'])->name('summernote.delete');
+Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
 Route::get('edit-profile', function () {
     return view('user/user_profile');
 });
 
-Route::group(['prefix'=>'maps', 'namespace'=>'Maps'], function(){
-    Route::get('/', 'ConstructController@map_constructor');
+Route::group(['prefix'=>'maps', 'namespace'=>'Map'], function(){
+    Route::resource('/map', 'MapController');
 });
 
 Route::group([

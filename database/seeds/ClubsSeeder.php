@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Club;
-use App\User;
+use App\Models\Club;
 
 class ClubsSeeder extends Seeder
 {

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Map;
-use App\User;
+use App\Models\Map;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
@@ -43,7 +43,7 @@ class MapController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Map  $map
+     * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
     public function show(Map $map)
@@ -54,7 +54,7 @@ class MapController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Map  $map
+     * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
     public function edit(Map $maps, User $user)
@@ -66,7 +66,7 @@ class MapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Map  $map
+     * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Map $map)
@@ -77,7 +77,7 @@ class MapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Map  $map
+     * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
     public function destroy(Map $map)

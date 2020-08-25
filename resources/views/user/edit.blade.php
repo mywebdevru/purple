@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@component('user.components.left.l_sidebar')@endcomponent
-@component('user.components.right.r_sidebar')@endcomponent
 
-<div class="header-spacer"></div>
-
-@component('user.components.wallpaper_block.main', ['data' => $user, 'user' => $user])@endcomponent
+@component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent
 
 <a class="back-to-top" href="#">
     <img src="{{ asset('svg-icons/back-to-top.svg') }}" alt="arrow" class="back-icon">

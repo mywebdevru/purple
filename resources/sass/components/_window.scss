@@ -1,0 +1,599 @@
+.window-popup {
+    max-width: calc(100% - 40px);
+}
+
+.window-popup .icon-close {
+    opacity: 1;
+    margin-top: 0;
+    margin-right: 0;
+}
+
+.window-popup .icon {
+    fill: #888da8;
+    float: right;
+    margin-top: 7px;
+    padding: 0;
+}
+
+.window-popup .input-group-addon .icon {
+    margin-top: 0;
+}
+
+.window-popup .form-group {
+    margin-bottom: 25px;
+}
+
+.window-popup .form-group.with-button button {
+    width: 50px;
+    border-radius: 0 5px 5px 0;
+}
+
+.window-popup .olymp-computer-icon {
+    width: 22px;
+    height: 20px;
+}
+
+.fav-page-popup {
+    width: 470px;
+}
+
+.fav-page-popup button {
+    margin-bottom: 0;
+}
+
+.fav-page-popup .form-group.label-floating .bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    color: #ff5e3a;
+}
+
+
+.icon-close {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    color: #888da8;
+    fill: #888da8;
+}
+
+.icon-close:hover {
+    color: #ff5e3a;
+    fill: #ff5e3a;
+}
+
+.icon-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.update-header-photo {
+    width: 770px;
+}
+
+.update-header-photo .modal-body {
+    padding: 0;
+}
+
+.upload-photo-item {
+    display: inline-block;
+    vertical-align: middle;
+    width: 49%;
+    padding: 50px;
+    text-align: center;
+    fill: #c2c5d9;
+    border-left: 1px solid #e6ecf5;
+}
+
+.upload-photo-item:first-child {
+    border-right: none;
+}
+
+.upload-photo-item h6,
+.upload-photo-item .h6 {
+    margin-bottom: 0;
+}
+
+.upload-photo-item svg {
+    margin-bottom: 30px;
+    width: 22px;
+    height: 20px;
+}
+
+.upload-photo-item span {
+    font-size: 11px;
+    color: #888da8;
+}
+
+.upload-photo-item:hover {
+    fill: #ff5e3a;
+    background-color: #fafbfd;
+}
+
+.choose-from-my-photo {
+    width: 770px;
+}
+
+.choose-from-my-photo .nav-tabs {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-height: 100%;
+    border-bottom: none;
+}
+
+.choose-from-my-photo .nav-tabs .nav-link {
+    border-radius: 0;
+    padding: 18px 25px;
+    fill: #c2c5d9;
+    background-color: #fafbfd;
+    border-color: #e6ecf5;
+    border-top-color: transparent;
+    border-right: none;
+    height: 100%;
+}
+
+.choose-from-my-photo .nav-tabs .nav-link.active {
+    fill: #ff5e3a;
+    background-color: #fff;
+}
+
+.choose-from-my-photo .nav-tabs .nav-link svg {
+    width: 18px;
+    height: 20px;
+}
+
+.choose-from-my-photo .btn {
+    margin-bottom: 30px;
+}
+
+.choose-from-my-photo .btn + .btn {
+    margin-left: 20px;
+}
+
+.choose-photo-item {
+    position: relative;
+    border-radius: 5px;
+    width: 33%;
+    float: left;
+    padding: 0 22px 25px 0;
+}
+
+.choose-photo-item img {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+}
+
+.choose-photo-item:last-child {
+    margin-right: 0;
+}
+
+.choose-photo-item .radio {
+    position: relative;
+    margin-bottom: 0;
+    border: 1px solid #e6ecf5;
+    border-radius: 5px;
+}
+
+.choose-photo-item .radio label {
+    padding-left: 0;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.choose-photo-item .radio label span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    left: auto;
+}
+
+.choose-photo-item .circle {
+    background-color: #fff;
+}
+
+figcaption {
+    padding: 20px 25px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #515365;
+}
+
+figcaption a {
+    color: #515365;
+}
+
+figcaption a:hover {
+    color: #ff5e3a;
+}
+
+figcaption span {
+    font-size: 10px;
+    color: #888da8;
+    font-weight: 400;
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+.blog-post-popup {
+    width: 770px;
+}
+
+.blog-post-popup .modal-body {
+    padding: 0;
+}
+
+.blog-post-popup .post p {
+    padding: 0 15px;
+}
+
+.blog-post-popup .post-thumb {
+    position: relative;
+}
+
+.blog-post-popup .overlay {
+    opacity: 1;
+}
+
+.blog-post-popup .post-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 20;
+}
+
+.blog-post-popup .mCustomScrollbar {
+    overflow: hidden;
+    max-height: 365px;
+}
+
+.blog-post-popup .ps > .ps__scrollbar-y-rail,
+.blog-post-popup .ps:hover > .ps__scrollbar-y-rail {
+    display: none;
+}
+
+.open-photo-popup {
+    width: 970px;
+}
+
+.open-photo-popup .modal-body {
+    padding: 0;
+}
+
+.open-photo-popup .modal-content {
+    border: none;
+}
+
+.open-photo-popup .mCustomScrollbar {
+    overflow: hidden;
+    max-height: 140px;
+}
+
+.open-photo-popup .ps > .ps__scrollbar-y-rail,
+.open-photo-popup .ps:hover > .ps__scrollbar-y-rail {
+    display: none;
+}
+
+.open-photo-thumb {
+    padding: 55px 0;
+    background-color: #000;
+}
+
+.open-photo-thumb .photo-item {
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+    display: block;
+}
+
+.open-photo-thumb .photo-item .overlay {
+    bottom: 0;
+    right: 0;
+}
+
+.open-photo-thumb .photo-item img {
+    border-radius: 0;
+    display: block;
+}
+
+.open-photo-thumb .photo-item:hover .tag-friends {
+    opacity: 1;
+}
+
+.open-photo-thumb .tag-friends {
+    position: absolute;
+    top: 25px;
+    right: 55px;
+    opacity: 0;
+    transition: all .3s ease;
+    fill: #fff;
+}
+
+.open-photo-thumb .tag-friends svg {
+    width: 20px;
+    height: 20px;
+}
+
+.open-photo-popup-v2 {
+    width: 1200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.open-photo-popup-v2 .open-photo-thumb {
+    width: 66.66%;
+    float: left;
+    z-index: 10;
+}
+
+.open-photo-popup-v2 .open-photo-content {
+    width: 33%;
+    float: left;
+}
+
+.open-photo-popup-v2 .post-additional-info .comments-shared {
+    margin-top: 0;
+}
+
+.open-photo-popup-v2 .mCustomScrollbar {
+    max-height: 180px;
+}
+
+
+.playlist-popup {
+    width: 100%;
+    max-width: 100%;
+    top: 0 !important;
+    left: 0;
+    -webkit-transform: none;
+    transform: none;
+    height: 100vh;
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 999;
+}
+
+.playlist-popup.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.playlist-popup .icon-close {
+    top: auto;
+    right: 25px;
+    bottom: 75px;
+    fill: #ff5e3a;
+}
+
+.playlist-popup .mCustomScrollbar {
+    max-height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+
+
+/*================= Responsive Mode ============*/
+@media (max-width: 1080px) {
+
+    .window-popup .icon-close,
+    .icon-close {
+        right: 50%;
+        margin-right: -9px;
+    }
+
+    .open-photo-popup-v2 {
+        display: block;
+    }
+
+    .modal.show .modal-dialog.open-photo-popup-v2 {
+        display: block !important;
+    }
+
+    .open-photo-popup-v2 .open-photo-thumb {
+        width: 100%;
+        float: none;
+    }
+
+    .open-photo-popup-v2 .open-photo-content {
+        width: 100%;
+        float: none;
+    }
+
+    .create-friend-group .dropdown-menu {
+        bottom: auto;
+        left: 0;
+        top: 100%;
+    }
+
+    .create-friend-group .bootstrap-select.style-2 > .dropdown-toggle {
+        padding-right: 2.5rem;
+    }
+
+    .create-event .bootstrap-select.style-2 .dropdown-menu {
+        top: 100%;
+        bottom: auto;
+        left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .edit-my-poll-popup .control-block-button {
+        top: -20px;
+        right: 17px;
+    }
+
+    .icon-close {
+        right: 50%;
+        margin-right: -9px;
+    }
+
+    .choose-from-my-photo .modal-header .title {
+        width: 50%;
+    }
+
+    .choose-from-my-photo .nav-tabs .nav-link {
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .choose-from-my-photo .nav-tabs .nav-item {
+        width: auto;
+    }
+
+    .choose-from-my-photo .nav-tabs .nav-link svg {
+        margin: auto;
+    }
+
+    .create-photo-album .btn + .btn {
+        margin-left: 0;
+        float: none;
+    }
+
+    .create-photo-album .btn {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .choose-from-my-photo .btn {
+        width: 45%;
+    }
+
+    .photo-album-item.create-album .btn-control {
+        width: 50px;
+    }
+
+    .blog-post-popup .post p {
+        padding: 0;
+    }
+}
+
+@media (max-width: 580px) {
+    .edit-my-poll-popup .edit-my-poll-head {
+        padding: 20px 40px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .edit-my-poll-popup .edit-my-poll-content {
+        padding: 20px 40px;
+    }
+
+    .edit-my-poll-popup .edit-my-poll-head .poll-img {
+        margin: 20px auto 0 0;
+    }
+
+    .edit-my-poll-popup .edit-my-poll-content h3 {
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .choose-photo-item {
+        width: 50%;
+    }
+
+    .private-event-head .more {
+        float: none;
+    }
+
+    .upload-photo-item {
+        padding: 10px;
+    }
+
+    .choose-from-my-photo .btn {
+        width: 100%;
+    }
+
+    .upload-photo-item svg {
+        margin-bottom: 10px;
+    }
+
+    .remember a {
+        float: none;
+        display: block;
+    }
+
+    .page-link {
+        padding: 10px;
+    }
+
+    .notification-list.friend-requests .notification-icon {
+        float: none;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .choose-from-my-photo .btn {
+        margin-bottom: 10px;
+    }
+
+    .choose-from-my-photo .btn + .btn {
+        margin-left: 0;
+    }
+
+    .choose-photo-item {
+        padding: 0 5px 5px 0;
+    }
+
+    .blog-post-popup .post .post-title {
+        display: none;
+    }
+
+    .main-popup-search .search-form {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding: 0;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    .main-popup-search .search-form .btn {
+        border-radius: 5px;
+    }
+
+    .main-popup-search .search-form > * + * {
+        margin-left: 0;
+    }
+
+    .main-popup-search .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .choose-photo-item {
+        width: 100%;
+    }
+
+    .private-event-head .more {
+        float: none;
+        display: block;
+    }
+
+    .private-event-head img {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .event-private-public .post__author img {
+        display: block;
+        margin-bottom: 10px;
+    }
+}

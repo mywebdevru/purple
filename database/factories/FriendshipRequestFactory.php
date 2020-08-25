@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\FriendshipRequest;
-use App\User;
+use App\Models\FriendshipRequest;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(FriendshipRequest::class, function (Faker $faker) {

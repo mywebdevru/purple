@@ -1,8 +1,8 @@
 <?php
 
-use App\Friend;
+use App\Models\Friend;
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Models\User;
 
 class FriendsSeeder extends Seeder
 {

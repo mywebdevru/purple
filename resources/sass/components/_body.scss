@@ -1,0 +1,47 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.mainbody {
+    background: #f0f0f0;
+}
+
+.page-has-left-panels {
+    padding-left: 70px;
+}
+
+.page-has-right-panels {
+    padding-right: 70px;
+}
+
+.page-has-right-panels .header {
+    padding-right: 70px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+body:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(43, 45, 59, 0.9);
+    opacity: 0;
+    transition: opacity .3s ease;
+    z-index: -999;
+}
+
+body.overlay-enable:before {
+    opacity: .8;
+    z-index: 500;
+}
+
+body.body--fixed {
+    position: fixed;
+    width: 100%;
+}

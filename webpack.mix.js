@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/admin.js', 'public/js')
+    .js('resources/js/admin/admin.js', 'public/js')
     .js('resources/js/edit.js', 'public/js')
     .scripts(['resources/js/libs/fm.revealator.jquery.js',
             'resources/js/libs/jquery.appear.js',
@@ -20,6 +20,10 @@ mix.js('resources/js/app.js', 'public/js')
             'resources/js/libs/material.min.js',
             'resources/js/libs/perfect-scrollbar.js',
             'resources/js/main.js',
-            'resources/js/libs-init/libs-init.js'] ,'public/js/main.js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/admin.sass', 'public/css');
+            'resources/js/libs-init/libs-init.js',
+            'resources/js/owl.carousel.min.js'] ,'public/js/main.js')
+    .sass('resources/sass/app.scss', 'public/css/app.css')
+    .sass('resources/sass/main.scss', 'public/css/main.css')
+    .sass('resources/sass/admin/admin.sass', 'public/css');
+mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+

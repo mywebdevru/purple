@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\SaveProfileRequest;
 use App\Http\Requests\ProfileUploadRequest;
 use App\Http\Resources\Profile\ProfileDataResource;
-use App\User;
+use App\Models\User;
 use Storage;
 
 class ProfileController extends Controller

@@ -1,7 +1,8 @@
 <template>
     <div class="ui-block">
         <article class="hentry post video">
-            <div class="col-sm-7">
+            <div v-if="this.loading">Загрузка...</div>
+            <div v-else class="col-sm-7">
                 <form>
                     <div class="form-group">
                         <label for="name">Изменить имя</label>
@@ -91,7 +92,7 @@
                                :class="[{'is-invalid' : errorsFor('creed')}]">
                         <validation-errors :errors="errorsFor('creed')"></validation-errors>
                     </div>
-                    <button type="button" class="btn btn-primary btn-block" @click.prevent="save">Сохранить</button>
+                    <button type="button" class="btn btn-primary btn-block" @click.prevent="save" :disabled="loading">Сохранить</button>
                 </form>
             </div>
         </article>

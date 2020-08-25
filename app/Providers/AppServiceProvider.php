@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use App\Console\Commands\ModelMakeCommand;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->extend('command.model.make', function ($command, $app) {
+            return new ModelMakeCommand($app['files']);
+        });
     }
 
     /**
@@ -31,34 +34,16 @@ class AppServiceProvider extends ServiceProvider
 
         // Using class based composers...
         View::composer(
-            ['user.prof',
-            'user.edit',
-            'welcome',
-            'user.components.edit_profile.clubs',
-            'user.components.edit_profile.friends',
-            'user.components.edit_profile.groups',
-            'user.components.edit_profile.maps',
-            'user.components.edit_profile.personal',
-            'user.components.edit_profile.secure',
-            'user.components.edit_profile.vehicles',
-            'user.components.edit_profile.clubs',
+            [
+                'layouts.app', 'user.prof'
+
             ], 'App\Http\View\Composers\ProfileComposer'
         );
 
         // Using Closure based composers...
         View::composer([
-        'user.prof',
-        'welcome',
-        'user.edit',
-        'user.components.edit_profile.clubs',
-        'user.components.edit_profile.friends',
-        'user.components.edit_profile.clubs',
-        'user.components.edit_profile.maps',
-        'user.components.edit_profile.groups',
-        'user.components.edit_profile.secure',
-        'user.components.edit_profile.personal',
-        'user.components.edit_profile.vehicles',
-       ], function ($view) {
+            'layouts.app',
+        ], function ($view) {
             //
         });
     }

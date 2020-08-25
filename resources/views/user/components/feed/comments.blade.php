@@ -1,4 +1,4 @@
-<ul class="comments-list">
+<ul class="comments-list" id="comments_list_{{ $feed }}" style="display:none;">
     @foreach ($comments as $item)
         <li class="comment-item">
             <div class="post__author author vcard inline-items">
@@ -20,12 +20,12 @@
                 </a>
             </div>
             <p>{{ $item['text'] }}</p>
-            <a href="#" id="like_comment_{{ $item['id'] }}" data-like_id="{{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $item['id'] }}, 'comment');">
+            <a href="#" id="like_comment_{{ $item['id'] }}" data-like_id="{{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $item['id'] }}, 'comment');">
                 <form  method="POST" id="form_like_comment_{{ $item['id'] }}">
                     @csrf
-                    <input type="hidden" name="likeable_type" value="App\Comment">
+                    <input type="hidden" name="likeable_type" value="App\Models\Comment">
                     <input type="hidden" name="likeable_id" value="{{ $item['id'] }}">
-                    <input type="hidden" name="authorable_type" value="App\User">
+                    <input type="hidden" name="authorable_type" value="App\Models\User">
                     <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
                 </form>
                 <svg class="olymp-heart-icon">
