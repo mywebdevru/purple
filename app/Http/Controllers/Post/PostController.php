@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use DB;
 use Illuminate\Http\Request;
+use Storage;
 
 class PostController extends Controller
 {
@@ -42,10 +44,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $posts)
+    public function show(Post $post)
     {
         //
     }
@@ -82,7 +84,18 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        DB::transaction(function () use ($post) {
+            foreach ($post->comments as $comment){
+                $comment->likes()->forceDelete();
+            }
+            $images = $post->images()->pluck('image')->toArray();
+            Storage::delete($images);
+            $post->images()->forceDelete();
+            $post->comments()->forceDelete();
+            $post->likes()->forceDelete();
+            $post->feed()->forceDelete();
+            $post->delete();
+        });
         return response()->json(['deleted' => true]);
     }
 }
