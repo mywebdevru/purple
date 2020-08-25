@@ -30,7 +30,7 @@ Route::resource('club', 'Club\ClubController');
 
 Route::get('/admin/{any?}', function () {
     return view('admin.admin.index');
-})->where('any', '^[\/\w\.-]*');
+})->where('any', '^[\/\w\.-]*')->middleware(['auth', 'role:admin|super-admin']);
 
 Route::group([
     'namespace' => 'Admin',
