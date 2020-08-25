@@ -13,7 +13,8 @@
 
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
 
     @yield('css')
 </head>
@@ -91,47 +92,51 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <script>
     function like_it(id, model)
     {
-        // console.log($('#form_like_'+ model +'_' + id + ' input[name="_method"]'))
-        let route ='../like';
-        if($('#like_' + model + '_' + id).hasClass('like_it')){
-            route = route + '/' + $('#like_' + model + '_' + id).data('like_id')
-            $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
-        }
-
-        $.ajax({
-            type: "POST",
-            url: route,
-            data: $('#form_like_'+ model +'_' + id).serialize(),
-            dataType: "JSON",
-            success: function (response) {
-                if(!!response['error']){
-                    console.log(response['error'])
-                }
-                $('#avatars_' + model + '_' + id).html('')
-                $('#names_' + model + '_' + id).html('')
-                count = response['likes'].length
-                if(model != 'comment'){
-                renderLikedUsers(response, model, id, count)
-                }
-                if(!!response['like_id']){
-                    console.log(response['likes'])
-                    $('#like_' + model + '_' + id)
-                    .toggleClass('like_it')
-                    .data('like_id', response['like_id'])
-                    $('#like_' + model + '_' + id + ' span').text(count)
-                }
-                if(!!response['delete']){
-                    $('#form_like_'+ model +'_' + id + ' input[name="_method"]').detach()
-                    $('#like_' + model + '_' +id)
-                    .toggleClass('like_it')
-                    .data('like_id', 0)
-                    $('#like_' + model + '_' + id + ' span').text(count)
-                }
+        if(true){
+            let canLike = false
+            let route ='../like';
+            if($('#like_' + model + '_' + id).hasClass('like_it')){
+                route = route + '/' + $('#like_' + model + '_' + id).data('like_id')
+                $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
             }
-        });
+
+            $.ajax({
+                type: "POST",
+                url: route,
+                data: $('#form_like_'+ model +'_' + id).serialize(),
+                dataType: "JSON",
+                success: function (response) {
+                    if(!!response['error']){
+                        console.log(response['error'])
+                    }
+                    $('#avatars_' + model + '_' + id).html('')
+                    $('#names_' + model + '_' + id).html('')
+                    count = response['likes'].length
+                    if(model != 'comment'){
+                    renderLikedUsers(response, model, id, count)
+                    }
+                    if(!!response['like_id']){
+                        console.log(response['likes'])
+                        $('#like_' + model + '_' + id)
+                        .toggleClass('like_it')
+                        .data('like_id', response['like_id'])
+                        $('#like_' + model + '_' + id + ' span').text(count)
+                    }
+                    if(!!response['delete']){
+                        $('#form_like_'+ model +'_' + id + ' input[name="_method"]').detach()
+                        $('#like_' + model + '_' +id)
+                        .toggleClass('like_it')
+                        .data('like_id', 0)
+                        $('#like_' + model + '_' + id + ' span').text(count)
+                    }
+                    canLike = true
+                }
+            });
+        }
     }
     function renderLikedUsers(response, model, id, count)
     {
@@ -153,8 +158,7 @@
 
     function showComments(list, model)
     {
-        console.log(list)
-        let  commentsLists = $('#comments_list_' + model + list)
+        var  commentsLists = $('#comments_list_' + model + list)
         commentsLists.slideToggle()
         if($('#comments_' + model + list + ' span').text() =='+'){
             $('#comments_' + model + list).html('Скрыть комментарии <span>-</span>')
@@ -168,9 +172,134 @@
 
     function writeComment(form, model)
     {
-        console.log(form)
         let  commentForm = $('#write_comment_' + model + form)
         commentForm.slideToggle()
+    }
+
+    function editPost(id)
+    {
+        let post_id = id
+        let post = $('#post_text_' + post_id)
+        post.html(`<form action="" enctype="multipart/form-data" method="POST">
+                    @method('PATCH')
+                    @csrf
+                    <div class="form-group">
+                        <label for="text">Текст</label>
+                        <textarea id="text"
+                                class="form-control"
+                                name="text">${post.html()}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        Сохранить
+                    </button>
+                </form>`)
+        startSummernote(post_id)
+        post.children('form').submit(function (e) {
+            e.preventDefault()
+            $.ajax({
+                type: "POST",
+                url: `{{ URL::to('/') }}/post/${post_id}`,
+                data: $(this).serialize(),
+                dataType: "JSON",
+                success: function (response) {
+                    if(!!response['text']){
+                        post.html(response['text'])
+                    }
+                }
+            });
+        })
+    }
+    function startSummernote(post_id)
+    {
+        var post_id = post_id
+        console.log(post_id)
+        const editor = $('#text'),
+            config = {
+                lang: 'ru-RU',
+                shortcuts: false,
+                airMode: false,
+                focus: true,
+                disableDragAndDrop: false,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'video']],
+                ],
+                callbacks: {
+                    onImageUpload: function (files) {
+                        uploadFile(files);
+                    },
+
+                    onMediaDelete: function ($target) {
+                        const url = $target[0].src,
+                            cut = "{{ URL::to('/') }}" + "/",
+                            image = url.replace(cut, '');
+                        deleteFile(image);
+                    }
+                }
+            };
+        editor.summernote(config);
+        async function uploadFile(files) {
+            console.log(post_id)
+            const data = new FormData();
+            data.append('post', post_id);
+            for (let i = 0; i < files.length; i++) {
+                data.append("files[]", files[i]);
+            }
+            try {
+                const images = (await axios({
+                    data,
+                    method: 'post',
+                    url: "{{ route('summernote.upload') }}",
+                })).data;
+                console.log(images);
+                for (let i = 0; i < images.length; i++) {
+                    editor.summernote('insertImage', '/' + images[i], function ($image) {
+                        $image.css('width', '100%');
+                    });
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        async function deleteFile(file) {
+            console.log(file);
+            const data = new FormData();
+            data.append('file', file);
+            try {
+                await axios({
+                    data,
+                    method: 'post',
+                    url: "{{ route('summernote.delete') }}",
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
+    function deletePost(post_id)
+    {
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        let post = $('#post_' + post_id)
+        $.ajax({
+                type: "delete",
+                url: `{{ URL::to('/') }}/post/${post_id}`,
+                data: '',
+                dataType: "JSON",
+                success: function (response) {
+                    if(!!response['deleted']){
+                        post.detach()
+                    }
+                }
+            });
+
     }
 </script>
 </body>
