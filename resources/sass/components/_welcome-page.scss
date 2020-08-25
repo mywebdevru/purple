@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "thousand-sticks";
+    src: url("../../assets/fonts/Thousandsticks WF Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "montserrat-thin";
+    src: url("../../assets/fonts/Montserrat-Thin.ttf");    
+}
+.welcome-block {
+    position: relative;    
+    background-color: #fff;    
+}
+.entry {
+    background: url(../../public/img/welcome.jpg) no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+}
+.travel {
+    background: url(../../public/img/jeep-travel.jpg) no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    height: 500px;
+    text-align: center;
+    background-position-y: -200px;
+}
+.second {
+    background: url(../../public/img/red-jeep.jpg) no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    height: 500px;
+    text-align: center;
+    background-position-y: -105px;
+}
+.entry-text { 
+    // margin: 0 25px; 
+    // padding-left: 70px
+    padding: 165px 130px 340px 130px;
+}
+a.auth-btn, a.auth-btn:focus, a.auth-btn:visited { 
+    text-decoration: none; 
+    color: #ffffff;
+    border-color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+a.auth-btn:hover {
+    background: #212529;
+}
+
+.reg {
+    background: #212529;
+    text-decoration: none; 
+    color: #ffffff;
+}
+.reg:hover {
+    background: #ffffff !important;
+    text-decoration: none; 
+    color: #212529 !important;
+}
+.carousel-img {
+    width: 35px;
+    height: 150px;
+}
+.brand-name {
+    font-family: thousand-sticks;
+    font-size: 110px;
+    color: #ffffff;
+}
+.brand-name-small {
+    font-family: thousand-sticks;
+    font-size: 35px;
+}
+.text-white {
+    font-family: montserrat-thin;
+}
+.count-trail {
+    text-align: center;
+}
+.text-grey {
+    font-family: montserrat-thin;
+    color: #404040;
+    font-size: 25px;
+}
+.text-grey__main {
+    font-size: 40px;
+}
+.text-grey__red {
+    color: #ff5e3a;
+}
+.block__count-trail {
+    padding: 35px 0 35px 0;
+}
+.owl-item {
+    width: 280px;
+}
+.travel__text {
+    padding-top: 225px;
+}
+
+footer {
+    background-color: #3f4257;
+}

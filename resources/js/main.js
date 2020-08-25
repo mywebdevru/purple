@@ -10,6 +10,24 @@ $(document).ready(function()
 //     $('[data-toggle="popover"]').popover()
 // });
 
+$('#js-carousel').owlCarousel({
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplaySpeed: 2000,
+    autoplayHoverPause: true,
+    slideTransition: 'linear',
+    items: 2,
+    nav: false,
+    dots: false,
+  
+    responsive: {
+      600: {
+        items: 3
+      }
+    }
+  });
+
 $(function () {
     $('input[type=file]').change(function () {
         var t = $(this).val();
@@ -257,3 +275,10 @@ var CRUMINA = {};
 
 	});
 })(jQuery);
+
+// const el = document.querySelector(".travel");
+
+// el.addEventListener("mousemove", (e) => {
+//   el.style.backgroundPositionX = -e.offsetX + "px";
+//   el.style.backgroundPositionY = -e.offsetY + "px";
+// });

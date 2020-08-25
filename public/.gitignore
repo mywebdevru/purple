@@ -1,11 +1,6 @@
 *.config
-/css/admin.css
-/css/app.css
-/css/main.css
-/js/app.js
-/js/main.js
-/js/admin.js
-/js/edit.js
+/css
+/js
 /fonts
 /summernote
 /avatars
