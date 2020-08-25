@@ -128,9 +128,9 @@
             </a>
 
         </div>
-        <a href="#" id="comments_image{{ $feed->feedable['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'image');">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $feed->feedable->comments, 'comment_author' => $comment_author,'feed' => 'image'.$feed->feedable['id']])@endcomponent
-        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'image'.$feed->feedable['id']])
+        <a href="#" id="comments_image_{{ $feed->feedable['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'image');">Показать комментарии <span>+</span></a>
+        @component('user.components.feed.comments',['comments' => $feed->feedable->comments, 'comment_author' => $comment_author,'feed' => 'image_'.$feed->feedable['id']])@endcomponent
+        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'image_'.$feed->feedable['id']])
         @slot('commentable_id')
          {{ $feed->feedable['id'] }}
         @endslot

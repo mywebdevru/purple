@@ -157,21 +157,23 @@
 
     function showComments(list, model)
     {
-        var  commentsLists = $('#comments_list_' + model + list)
-        commentsLists.slideToggle()
-        if($('#comments_' + model + list + ' span').text() =='+'){
-            $('#comments_' + model + list).html('Скрыть комментарии <span>-</span>')
-            $('#write_comment_' + model + list).slideDown()
+        let  commentsList = $(`#comments_list_${model}_${list}`)
+        let button = $(`#comments_${model}_${list}`)
+        let commentForm = $(`#write_comment_${model}_${list}`)
+        commentsList.slideToggle()
+        if(button.children('span').text() =='+'){
+            button.html('Скрыть комментарии <span>-</span>')
+            commentForm.slideDown()
         } else {
-            $('#comments_' + model + list).html('Показать комментарии <span>+</span>')
-            $('#write_comment_' + model + list).slideUp()
+            button.html('Показать комментарии <span>+</span>')
+            commentForm.slideUp()
         }
 
     }
 
-    function writeComment(form, model)
+    function writeComment(list, model)
     {
-        let  commentForm = $('#write_comment_' + model + form)
+        let  commentForm = $(`#write_comment_${model}_${list}`)
         commentForm.slideToggle()
     }
 
