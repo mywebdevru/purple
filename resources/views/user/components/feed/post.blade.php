@@ -19,7 +19,7 @@
                 </svg>
                 <ul class="more-dropdown">
                     <li>
-                        <a href="#" onclick="event.preventDefault(); editPost({{ $feed->feedable['id'] }});">Редактировать пост</a>
+                        <a href="#" class="edit" onclick="event.preventDefault(); editPost({{ $feed->feedable['id'] }});">Редактировать пост</a>
                     </li>
                     <li>
                         <a href="#" onclick="event.preventDefault(); deletePost({{ $feed->feedable['id'] }});">Удалить пост</a>
@@ -28,11 +28,11 @@
             </div>
             @endcan
         </div>
-        <div id="post_text_{{ $feed->feedable['id'] }}">
+        <div id="post_text_{{ $feed->feedable['id'] }}" class="can_edit">
             {!! $feed->feedable['text'] !!}
         </div>
         <div class="post-additional-info inline-items">
-        <a href="#" id="like_post_{{ $feed->feedable['id'] }}" data-like_id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); like_it({{ $feed->feedable['id'] }}, 'post');">
+        <a href="#" id="like_post_{{ $feed->feedable['id'] }}" data-like_id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); likeIt({{ $feed->feedable['id'] }}, 'post');">
                 <svg class="olymp-heart-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
                 </svg>

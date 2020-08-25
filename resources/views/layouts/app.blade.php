@@ -95,13 +95,14 @@
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <script>
-    function like_it(id, model)
+    function likeIt(id, model)
     {
-        if(true){
-            let canLike = false
+        let item =$('#like_' + model + '_' + id)
+        if(item.hasClass('can_like')){
+            item.toggleClass('can_like')
             let route ='../like';
-            if($('#like_' + model + '_' + id).hasClass('like_it')){
-                route = route + '/' + $('#like_' + model + '_' + id).data('like_id')
+            if(item.hasClass('like_it')){
+                route = route + '/' + item.data('like_id')
                 $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
             }
 
@@ -122,7 +123,7 @@
                     }
                     if(!!response['like_id']){
                         console.log(response['likes'])
-                        $('#like_' + model + '_' + id)
+                        item
                         .toggleClass('like_it')
                         .data('like_id', response['like_id'])
                         $('#like_' + model + '_' + id + ' span').text(count)
@@ -134,7 +135,7 @@
                         .data('like_id', 0)
                         $('#like_' + model + '_' + id + ' span').text(count)
                     }
-                    canLike = true
+                    item.toggleClass('can_like')
                 }
             });
         }
@@ -177,38 +178,42 @@
         commentForm.slideToggle()
     }
 
-    function editPost(id)
+    function editPost(post_id)
     {
-        let post_id = id
         let post = $('#post_text_' + post_id)
-        post.html(`<form action="" enctype="multipart/form-data" method="POST">
-                    @method('PATCH')
-                    @csrf
-                    <div class="form-group">
-                        <label for="text">Текст</label>
-                        <textarea id="text"
-                                class="form-control"
-                                name="text">${post.html()}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">
-                        Сохранить
-                    </button>
-                </form>`)
-        startSummernote(post_id)
-        post.children('form').submit(function (e) {
-            e.preventDefault()
-            $.ajax({
-                type: "POST",
-                url: `{{ URL::to('/') }}/post/${post_id}`,
-                data: $(this).serialize(),
-                dataType: "JSON",
-                success: function (response) {
-                    if(!!response['text']){
-                        post.html(response['text'])
+        if(post.hasClass('can_edit')){
+            let feed = $('.can_edit')
+            feed.toggleClass('can_edit')
+            post.html(`<form action="" enctype="multipart/form-data" method="POST">
+                        @method('PATCH')
+                        @csrf
+                        <div class="form-group">
+                            <label for="text">Текст</label>
+                            <textarea id="text"
+                                    class="form-control"
+                                    name="text">${post.html()}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Сохранить
+                        </button>
+                    </form>`)
+            startSummernote(post_id)
+            post.children('form').submit(function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "POST",
+                    url: `{{ URL::to('/') }}/post/${post_id}`,
+                    data: $(this).serialize(),
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(!!response['text']){
+                            post.html(response['text'])
+                            feed.toggleClass('can_edit')
+                        }
                     }
-                }
-            });
-        })
+                });
+            })
+        }
     }
     function startSummernote(post_id)
     {
