@@ -163,7 +163,7 @@
         commentsList.slideToggle()
         if(button.children('span').text() =='+'){
             button.html('Скрыть комментарии <span>-</span>')
-            commentForm.slideDown()
+            writeComment(list, model)
         } else {
             button.html('Показать комментарии <span>+</span>')
             commentForm.slideUp()
@@ -175,6 +175,68 @@
     {
         let  commentForm = $(`#write_comment_${model}_${list}`)
         commentForm.slideToggle()
+        commentForm.children('button').not('[type]').click(function (e){
+            e.preventDefault()
+            commentForm.slideToggle()
+            commentForm.find('textarea').val('')
+        })
+        commentForm.submit(function (e) {
+            e.preventDefault()
+            $(this).children('button').prop('disabled', true)
+            $.ajax({
+                type: "POST",
+                url: `{{ URL::to('/') }}/comment`,
+                data: $(this).serialize(),
+                dataType: "JSON",
+                success: function (response) {
+                    if(!!response){
+                        console.log(response)
+                        renderComment(response, list, model)
+                        commentForm.find('textarea').val('')
+                        commentForm.children('button').removeAttr("disabled")
+                    }
+                }
+            });
+        })
+    }
+
+    function renderComment(response, list, model)
+    {
+        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item">
+            <div class="post__author author vcard inline-items">
+                <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
+                <div class="author-date">
+                    <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => auth()->user()->id]) }}">
+                        {{ auth()->user()->full_name }}
+                    </a>
+                    <div class="post__date">
+                        <time class="published" datetime="${response['created_at']}">
+                            ${response['created_at']}
+                        </time>
+                    </div>
+                </div>
+                <a href="#" class="more">
+                    <svg class="olymp-three-dots-icon">
+                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
+                    </svg>
+                </a>
+            </div>
+            <p>${response['text']}</p>
+            <a href="#" id="like_comment_${response['id']}" data-like_id="0" class="post-add-icon inline-items can_like" onclick="event.preventDefault(); likeIt(${response['id']}, 'comment');">
+                <form  method="POST" id="form_like_comment_${response['id']}">
+                    @csrf
+                    <input type="hidden" name="likeable_type" value="App\\Models\\Comment">
+                    <input type="hidden" name="likeable_id" value="${response['id']}">
+                    <input type="hidden" name="authorable_type" value="App\\Models\\User">
+                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
+                </form>
+                <svg class="olymp-heart-icon">
+                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
+                </svg>
+                <span>0</span>
+            </a>
+            <a href="#" class="reply">Ответить</a>
+        </li>`)
     }
 
     function editPost(post_id)
@@ -294,16 +356,16 @@
         });
         let post = $('#post_' + post_id)
         $.ajax({
-                type: "delete",
-                url: `{{ URL::to('/') }}/post/${post_id}`,
-                data: '',
-                dataType: "JSON",
-                success: function (response) {
-                    if(!!response['deleted']){
-                        post.detach()
-                    }
+            type: "delete",
+            url: `{{ URL::to('/') }}/post/${post_id}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    post.detach()
                 }
-            });
+            }
+        });
 
     }
 </script>
