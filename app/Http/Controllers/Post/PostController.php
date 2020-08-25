@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use DB;
 use Illuminate\Http\Request;
+use Storage;
 
 class PostController extends Controller
 {
@@ -42,10 +44,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $posts)
+    public function show(Post $post)
     {
         //
     }
@@ -65,24 +67,35 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $posts, $post)
+    public function update(Request $request, Post $post)
     {
-        $post = $request->model::find($post)->posts()->create(['text' => $request->text]);
-        // dd($post);
-        return back();
+        $post->update(['text' => $request->text]);
+        return response()->json(['text' => $post->text]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $posts)
+    public function destroy(Post $post)
     {
-        //
+        DB::transaction(function () use ($post) {
+            foreach ($post->comments as $comment){
+                $comment->likes()->forceDelete();
+            }
+            $images = $post->images()->pluck('image')->toArray();
+            Storage::delete($images);
+            $post->images()->forceDelete();
+            $post->comments()->forceDelete();
+            $post->likes()->forceDelete();
+            $post->feed()->forceDelete();
+            $post->delete();
+        });
+        return response()->json(['deleted' => true]);
     }
 }
