@@ -97,13 +97,13 @@
 <script>
     function likeIt(id, model)
     {
-        let item =$('#like_' + model + '_' + id)
+        let item =$(`#like_${model}_${id}`)
         if(item.hasClass('can_like')){
             item.toggleClass('can_like')
             let route ='../like';
             if(item.hasClass('like_it')){
-                route = route + '/' + item.data('like_id')
-                $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
+                route = `${route}/${item.data('like_id')}`
+                $(`#form_like_${model}_${id}`).append('<input type="hidden" name="_method" value="DELETE">')
             }
 
             $.ajax({
@@ -115,25 +115,22 @@
                     if(!!response['error']){
                         console.log(response['error'])
                     }
-                    $('#avatars_' + model + '_' + id).html('')
-                    $('#names_' + model + '_' + id).html('')
+                    $(`#avatars_${model}_${id}`).html('')
+                    $(`#names_${model}_${id}`).html('')
                     count = response['likes'].length
                     if(model != 'comment'){
                     renderLikedUsers(response, model, id, count)
                     }
                     if(!!response['like_id']){
-                        console.log(response['likes'])
-                        item
-                        .toggleClass('like_it')
-                        .data('like_id', response['like_id'])
-                        $('#like_' + model + '_' + id + ' span').text(count)
+                        item.toggleClass('like_it')
+                            .data('like_id', response['like_id'])
+                            .children('span').text(count)
                     }
                     if(!!response['delete']){
-                        $('#form_like_'+ model +'_' + id + ' input[name="_method"]').detach()
-                        $('#like_' + model + '_' +id)
-                        .toggleClass('like_it')
-                        .data('like_id', 0)
-                        $('#like_' + model + '_' + id + ' span').text(count)
+                        $(`#form_like_${model}_${id} input[name="_method"]`).detach()
+                        item.toggleClass('like_it')
+                            .data('like_id', 0)
+                            .children('span').text(count)
                     }
                     item.toggleClass('can_like')
                 }
@@ -148,13 +145,13 @@
             likes = response['likes']
         }
         likes.forEach(like => {
-            $('#avatars_' + model + '_' + id).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
+            $(`#avatars_${model}_${id}`).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
                 <img src="{{ URL::to('/') }}/${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
             </a></li>`)
-            $('#names_' + model + '_' + id).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
+            $(`#names_${model}_${id}`).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
         });
         if (count > 2) {
-            $('#names_' + model + '_' + id).append(` и еще <br>${count - 2} человк(а)`)
+            $(`#names_${model}_${id}`).append(` и еще <br>${count - 2} человк(а)`)
         }
     }
 
