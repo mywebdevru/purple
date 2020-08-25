@@ -282,6 +282,21 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.noti-scroll {
+    height: 220px;
+}
+.ps > .ps__scrollbar-y-rail {
+    width: 8px !important;
+    background-color: transparent !important;
+}
+.ps > .ps__scrollbar-y-rail > .ps__scrollbar-y,
+.ps.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail > .ps__scrollbar-y,
+.ps > .ps__scrollbar-y-rail:active > .ps__scrollbar-y,
+.ps > .ps__scrollbar-y-rail:hover > .ps__scrollbar-y {
+    width: 6px !important;
+}
+.button-menu-mobile {
+    outline: none !important;
+}
 </style>

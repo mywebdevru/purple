@@ -121,7 +121,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 /*!
 * metismenu - v2.7.9
 * A jQuery menu plugin
