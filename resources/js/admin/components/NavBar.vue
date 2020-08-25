@@ -64,7 +64,7 @@
                         >
                             <div class="notify-icon">
                                 <img
-                                    src="@assets/images/users/user-1.jpg"
+                                    src="/admin/users/user-1.jpg"
                                     class="img-fluid rounded-circle"
                                     alt=""
                                 /> </div>
@@ -94,7 +94,7 @@
                         >
                             <div class="notify-icon">
                                 <img
-                                    src="@assets/images/users/user-4.jpg"
+                                    src="/admin/users/user-4.jpg"
                                     class="img-fluid rounded-circle"
                                     alt=""
                                 /> </div>
@@ -163,7 +163,7 @@
                 <template slot="button-content">
                     <div class="nav-user mr-0 waves-effect waves-light">
                         <img
-                            src="@assets/images/users/user-1.jpg"
+                            src="/admin/users/user-1.jpg"
                             alt="user-image"
                             class="rounded-circle"
                         />
@@ -213,14 +213,14 @@
             >
         <span class="logo-lg">
           <img
-              src="@assets/images/logo-dark.png"
+              src="/admin/logo-dark.png"
               alt=""
               height="16"
           />
         </span>
                 <span class="logo-sm">
           <img
-              src="/images/logo-sm.png"
+              src="/admin/logo-sm.png"
               alt=""
               height="24"
           />
@@ -247,8 +247,38 @@
 </template>
 
 <script>
+import { authComputed } from '../state/helpers'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
 export default {
-    name: "NavBar"
+    name: "NavBar",
+    components: { VuePerfectScrollbar },
+    props: {
+        user: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        title: {
+            type: String,
+            required: false,
+            default: () => '',
+        },
+    },
+    data() {
+        return {}
+    },
+    computed: {
+        ...authComputed,
+    },
+    methods: {
+        toggleMenu() {
+            this.$parent.toggleMenu()
+        },
+        toggleRightSidebar() {
+            this.$parent.toggleRightSidebar()
+        },
+    },
 }
 </script>
 
