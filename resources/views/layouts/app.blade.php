@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
-	<link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fm.revealator.jquery.css') }}">
 
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -25,7 +25,7 @@
 <header class="header" id="site-header">
 
 	<div class="page-title">
-		<h6>OffRoad Paradise</h6>
+		<h6 class="brand-name-small">OffRoad Paradise</h6>
 	</div>
 
 	<div class="header-content-wrapper">
@@ -91,6 +91,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <script>
