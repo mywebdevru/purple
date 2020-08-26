@@ -168,8 +168,9 @@
         } else {
             button.html('Показать комментарии <span>+</span>')
             commentForm.slideUp()
+            commentForm.unbind('submit')
+            commentForm.children('button').not('[type]').unbind('click')
         }
-
     }
 
     function writeComment(list, model)
@@ -180,8 +181,8 @@
         commentForm.slideToggle()
         commentForm.children('button').not('[type]').click(function (e){
             e.preventDefault()
-            commentForm.slideToggle()
             commentForm.find('textarea').val('')
+            showComments(list, model)
         })
         commentForm.submit(function (e) {
             e.preventDefault()
