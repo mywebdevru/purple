@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-alias');
 
 /*
  |--------------------------------------------------------------------------
@@ -25,5 +26,11 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/main.scss', 'public/css/main.css')
     .sass('resources/sass/admin/admin.sass', 'public/css');
+
 mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+
+mix.alias({
+    '@fonts': '/resources/assets/fonts',
+    '@images': '/resources/assets/images'
+});
 

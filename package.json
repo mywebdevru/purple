@@ -26,10 +26,11 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "bootstrap-sweetalert": "^1.0.1",
-        "owl.carousel": "^2.3.4",
         "bootstrap-vue": "^2.16.0",
         "flatpickr": "^4.6.3",
+        "laravel-mix-alias": "^1.0.2",
         "metismenujs": "^1.2.1",
+        "owl.carousel": "^2.3.4",
         "vue-perfect-scrollbar": "^0.2.1",
         "vue-router": "^3.4.3",
         "vuex": "^3.5.1"
