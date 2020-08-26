@@ -37,7 +37,9 @@ export default {
     data() {
         return {
             isMenuCondensed: false,
-            user: {},
+            user: {
+                name: 'Rus Skazkin',
+            },
             // user: this.$store ? this.$store.state.auth.currentUser : {} || {},
             title: this.$route ? this.$route.meta.title || '' : '',
         }

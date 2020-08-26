@@ -19,7 +19,7 @@
                         href="#"
                         class="text-muted"
                     >
-                        <i class="mdi mdi-settings"></i>
+                        <i class="mdi mdi-cog"></i>
                     </a>
                 </li>
 

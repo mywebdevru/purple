@@ -213,7 +213,7 @@
             >
         <span class="logo-lg">
           <img
-              src="/admin/logo-dark.png"
+              src="/admin/logo-light.png"
               alt=""
               height="16"
           />
