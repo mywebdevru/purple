@@ -98,6 +98,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->likes()->forceDelete();
+        $deleted = $comment->delete();
+        return response()->json(['deleted' => $deleted]);
     }
 }
