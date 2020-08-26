@@ -8,18 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
     @yield('css')
 
 </head>
-<body>
+<body class="left-side-menu-dark">
 <div id="app">
     <index></index>
 </div>
