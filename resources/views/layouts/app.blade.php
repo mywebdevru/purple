@@ -173,7 +173,9 @@
 
     function writeComment(list, model)
     {
-        let  commentForm = $(`#write_comment_${model}_${list}`)
+        let commentForm = $(`#write_comment_${model}_${list}`)
+        let commentCount = +$(`#comments_count_${model}_${list}`).text()
+        console.log(commentCount)
         commentForm.slideToggle()
         commentForm.children('button').not('[type]').click(function (e){
             e.preventDefault()
@@ -194,6 +196,7 @@
                         renderComment(response, list, model)
                         commentForm.find('textarea').val('')
                         commentForm.children('button').removeAttr("disabled")
+                        $(`#comments_count_${model}_${list}`).text(++commentCount)
                     }
                 }
             });
@@ -241,7 +244,7 @@
 
     function editPost(post_id)
     {
-        let post = $('#post_text_' + post_id)
+        let post = $(`#post_text_${post_id}`)
         if(post.hasClass('can_edit')){
             let feed = $('.can_edit')
             feed.toggleClass('can_edit')

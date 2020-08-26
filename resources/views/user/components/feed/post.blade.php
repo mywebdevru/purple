@@ -68,7 +68,7 @@
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span>{{ count($feed->feedable->comments) }}</span>
+                    <span id="comments_count_post_{{ $feed->feedable['id'] }}">{{ count($feed->feedable->comments) }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
