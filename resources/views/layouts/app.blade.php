@@ -94,6 +94,7 @@
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+@auth
 <script>
     function likeIt(id, model)
     {
@@ -372,5 +373,6 @@
 
     }
 </script>
+@endauth
 </body>
 </html>
