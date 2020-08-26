@@ -175,9 +175,8 @@
 
     function writeComment(list, model)
     {
+        let commentCount = 0
         let commentForm = $(`#write_comment_${model}_${list}`)
-        let commentCount = +$(`#comments_count_${model}_${list}`).text()
-        console.log(commentCount)
         commentForm.slideToggle()
         commentForm.children('button').not('[type]').click(function (e){
             e.preventDefault()
@@ -186,6 +185,7 @@
         })
         commentForm.submit(function (e) {
             e.preventDefault()
+            let commentCount = +$(`#comments_count_${model}_${list}`).text()
             $(this).children('button').prop('disabled', true)
             $.ajax({
                 type: "POST",
@@ -371,7 +371,29 @@
                 }
             }
         });
+    }
 
+    function deleteComment(comment_id, feed)
+    {
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        let comment = $('#comment_' + comment_id)
+        let commentCount = +$(`#comments_count_${feed}`).text()
+        $.ajax({
+            type: "delete",
+            url: `{{ URL::to('/') }}/comment/${comment_id}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    comment.detach()
+                    $(`#comments_count_${feed}`).text(--commentCount)
+                }
+            }
+        });
     }
 </script>
 @endauth

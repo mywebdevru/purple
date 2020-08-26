@@ -1,6 +1,6 @@
 <ul class="comments-list" id="comments_list_{{ $feed }}" style="display:none;">
     @foreach ($comments as $item)
-        <li class="comment-item">
+        <li class="comment-item" id="comment_{{ $item['id'] }}">
             <div class="post__author author vcard inline-items">
                 <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
                 <div class="author-date">
@@ -13,11 +13,21 @@
                         </time>
                     </div>
                 </div>
-                <a href="#" class="more">
-                    <svg class="olymp-three-dots-icon">
-                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-                    </svg>
-                </a>
+                {{-- @can('update', $item) --}}
+                    <div class="more">
+                        <svg class="olymp-three-dots-icon">
+                            <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
+                        </svg>
+                        <ul class="more-dropdown">
+                            <li>
+                                <a href="#" onclick="event.preventDefault(); editComment({{ $item['id'] }})">Редактировать коммент</a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="event.preventDefault(); deleteComment({{ $item['id'] }}, '{{ $feed }}')">Удалить коммент</a>
+                            </li>
+                        </ul>
+                    </div>
+                {{-- @endcan --}}
             </div>
             <p>{{ $item['text'] }}</p>
             <a href="#" id="like_comment_{{ $item['id'] }}" data-like_id="{{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); likeIt({{ $item['id'] }}, 'comment');">
