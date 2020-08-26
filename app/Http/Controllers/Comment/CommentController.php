@@ -51,9 +51,9 @@ class CommentController extends Controller
         }
 
         $comment = $request->commentable_type::find($request->commentable_id)->comments()->create(['text' => $request->text]);
-        $request->authorable_type::find($request->authorable_id)->comments()->save($comment);
+        $comment = $request->authorable_type::find($request->authorable_id)->comments()->save($comment);
 
-        return back();
+        return response()->json($comment);
     }
 
     /**

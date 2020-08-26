@@ -94,15 +94,17 @@
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+@auth
 <script>
-    function like_it(id, model)
+    function likeIt(id, model)
     {
-        if(true){
-            let canLike = false
+        let item =$(`#like_${model}_${id}`)
+        if(item.hasClass('can_like')){
+            item.toggleClass('can_like')
             let route ='../like';
-            if($('#like_' + model + '_' + id).hasClass('like_it')){
-                route = route + '/' + $('#like_' + model + '_' + id).data('like_id')
-                $('#form_like_'+ model +'_' + id).append('<input type="hidden" name="_method" value="DELETE">')
+            if(item.hasClass('like_it')){
+                route = `${route}/${item.data('like_id')}`
+                $(`#form_like_${model}_${id}`).append('<input type="hidden" name="_method" value="DELETE">')
             }
 
             $.ajax({
@@ -114,27 +116,24 @@
                     if(!!response['error']){
                         console.log(response['error'])
                     }
-                    $('#avatars_' + model + '_' + id).html('')
-                    $('#names_' + model + '_' + id).html('')
+                    $(`#avatars_${model}_${id}`).html('')
+                    $(`#names_${model}_${id}`).html('')
                     count = response['likes'].length
                     if(model != 'comment'){
                     renderLikedUsers(response, model, id, count)
                     }
                     if(!!response['like_id']){
-                        console.log(response['likes'])
-                        $('#like_' + model + '_' + id)
-                        .toggleClass('like_it')
-                        .data('like_id', response['like_id'])
-                        $('#like_' + model + '_' + id + ' span').text(count)
+                        item.toggleClass('like_it')
+                            .data('like_id', response['like_id'])
+                            .children('span').text(count)
                     }
                     if(!!response['delete']){
-                        $('#form_like_'+ model +'_' + id + ' input[name="_method"]').detach()
-                        $('#like_' + model + '_' +id)
-                        .toggleClass('like_it')
-                        .data('like_id', 0)
-                        $('#like_' + model + '_' + id + ' span').text(count)
+                        $(`#form_like_${model}_${id} input[name="_method"]`).detach()
+                        item.toggleClass('like_it')
+                            .data('like_id', 0)
+                            .children('span').text(count)
                     }
-                    canLike = true
+                    item.toggleClass('can_like')
                 }
             });
         }
@@ -147,68 +146,139 @@
             likes = response['likes']
         }
         likes.forEach(like => {
-            $('#avatars_' + model + '_' + id).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
+            $(`#avatars_${model}_${id}`).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
                 <img src="{{ URL::to('/') }}/${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
             </a></li>`)
-            $('#names_' + model + '_' + id).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
+            $(`#names_${model}_${id}`).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
         });
         if (count > 2) {
-            $('#names_' + model + '_' + id).append(` и еще <br>${count - 2} человк(а)`)
+            $(`#names_${model}_${id}`).append(` и еще <br>${count - 2} человк(а)`)
         }
     }
 
     function showComments(list, model)
     {
-        var  commentsLists = $('#comments_list_' + model + list)
-        commentsLists.slideToggle()
-        if($('#comments_' + model + list + ' span').text() =='+'){
-            $('#comments_' + model + list).html('Скрыть комментарии <span>-</span>')
-            $('#write_comment_' + model + list).slideDown()
+        let  commentsList = $(`#comments_list_${model}_${list}`)
+        let button = $(`#comments_${model}_${list}`)
+        let commentForm = $(`#write_comment_${model}_${list}`)
+        commentsList.slideToggle()
+        if(button.children('span').text() =='+'){
+            button.html('Скрыть комментарии <span>-</span>')
+            writeComment(list, model)
         } else {
-            $('#comments_' + model + list).html('Показать комментарии <span>+</span>')
-            $('#write_comment_' + model + list).slideUp()
+            button.html('Показать комментарии <span>+</span>')
+            commentForm.slideUp()
         }
 
     }
 
-    function writeComment(form, model)
+    function writeComment(list, model)
     {
-        let  commentForm = $('#write_comment_' + model + form)
+        let commentForm = $(`#write_comment_${model}_${list}`)
+        let commentCount = +$(`#comments_count_${model}_${list}`).text()
+        console.log(commentCount)
         commentForm.slideToggle()
-    }
-
-    function editPost(id)
-    {
-        let post_id = id
-        let post = $('#post_text_' + post_id)
-        post.html(`<form action="" enctype="multipart/form-data" method="POST">
-                    @method('PATCH')
-                    @csrf
-                    <div class="form-group">
-                        <label for="text">Текст</label>
-                        <textarea id="text"
-                                class="form-control"
-                                name="text">${post.html()}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">
-                        Сохранить
-                    </button>
-                </form>`)
-        startSummernote(post_id)
-        post.children('form').submit(function (e) {
+        commentForm.children('button').not('[type]').click(function (e){
             e.preventDefault()
+            commentForm.slideToggle()
+            commentForm.find('textarea').val('')
+        })
+        commentForm.submit(function (e) {
+            e.preventDefault()
+            $(this).children('button').prop('disabled', true)
             $.ajax({
                 type: "POST",
-                url: `{{ URL::to('/') }}/post/${post_id}`,
+                url: `{{ URL::to('/') }}/comment`,
                 data: $(this).serialize(),
                 dataType: "JSON",
                 success: function (response) {
-                    if(!!response['text']){
-                        post.html(response['text'])
+                    if(!!response){
+                        console.log(response)
+                        renderComment(response, list, model)
+                        commentForm.find('textarea').val('')
+                        commentForm.children('button').removeAttr("disabled")
+                        $(`#comments_count_${model}_${list}`).text(++commentCount)
                     }
                 }
             });
         })
+    }
+
+    function renderComment(response, list, model)
+    {
+        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item">
+            <div class="post__author author vcard inline-items">
+                <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
+                <div class="author-date">
+                    <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => auth()->user()->id]) }}">
+                        {{ auth()->user()->full_name }}
+                    </a>
+                    <div class="post__date">
+                        <time class="published" datetime="${response['created_at']}">
+                            ${response['created_at']}
+                        </time>
+                    </div>
+                </div>
+                <a href="#" class="more">
+                    <svg class="olymp-three-dots-icon">
+                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
+                    </svg>
+                </a>
+            </div>
+            <p>${response['text']}</p>
+            <a href="#" id="like_comment_${response['id']}" data-like_id="0" class="post-add-icon inline-items can_like" onclick="event.preventDefault(); likeIt(${response['id']}, 'comment');">
+                <form  method="POST" id="form_like_comment_${response['id']}">
+                    @csrf
+                    <input type="hidden" name="likeable_type" value="App\\Models\\Comment">
+                    <input type="hidden" name="likeable_id" value="${response['id']}">
+                    <input type="hidden" name="authorable_type" value="App\\Models\\User">
+                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
+                </form>
+                <svg class="olymp-heart-icon">
+                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
+                </svg>
+                <span>0</span>
+            </a>
+            <a href="#" class="reply">Ответить</a>
+        </li>`)
+    }
+
+    function editPost(post_id)
+    {
+        let post = $(`#post_text_${post_id}`)
+        if(post.hasClass('can_edit')){
+            let feed = $('.can_edit')
+            feed.toggleClass('can_edit')
+            post.html(`<form action="" enctype="multipart/form-data" method="POST">
+                        @method('PATCH')
+                        @csrf
+                        <div class="form-group">
+                            <label for="text">Текст</label>
+                            <textarea id="text"
+                                    class="form-control"
+                                    name="text">${post.html()}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Сохранить
+                        </button>
+                    </form>`)
+            startSummernote(post_id)
+            post.children('form').submit(function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "POST",
+                    url: `{{ URL::to('/') }}/post/${post_id}`,
+                    data: $(this).serialize(),
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(!!response['text']){
+                            post.html(response['text'])
+                            feed.toggleClass('can_edit')
+                        }
+                    }
+                });
+            })
+        }
     }
     function startSummernote(post_id)
     {
@@ -290,18 +360,19 @@
         });
         let post = $('#post_' + post_id)
         $.ajax({
-                type: "delete",
-                url: `{{ URL::to('/') }}/post/${post_id}`,
-                data: '',
-                dataType: "JSON",
-                success: function (response) {
-                    if(!!response['deleted']){
-                        post.detach()
-                    }
+            type: "delete",
+            url: `{{ URL::to('/') }}/post/${post_id}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    post.detach()
                 }
-            });
+            }
+        });
 
     }
 </script>
+@endauth
 </body>
 </html>
