@@ -66,7 +66,7 @@ Route::group([
     Route::get('{user}/edit/secure', 'ProfileController@edit')->name('secure');
 });
 
-Route::resource('user','User\ProfileController')->except(['index',])->middleware('auth');
+Route::resource('user','User\ProfileController')->except(['index', 'store'])->middleware('auth');
 Route::resource('comment','Comment\CommentController')->except(['index',])->middleware('auth');
 Route::resource('like','Like\LikeController')->except(['index',])->middleware('auth');
 
