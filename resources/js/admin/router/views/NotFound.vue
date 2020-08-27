@@ -72,7 +72,7 @@
 import Layout from '../layouts/Auth';
 
 export default {
-    name: "404",
+    name: "NotFound",
     page: {
         title: '404',
         meta: [{ name: 'description', content: '404' }],
