@@ -20,10 +20,10 @@
                         </svg>
                         <ul class="more-dropdown">
                             <li>
-                                <a href="#" onclick="event.preventDefault(); editComment({{ $item['id'] }})">Редактировать коммент</a>
+                                <a href="#" class="edit_comment" data-id="{{ $item['id'] }}">Редактировать коммент</a>
                             </li>
                             <li>
-                                <a href="#" onclick="event.preventDefault(); deleteComment({{ $item['id'] }}, '{{ $feed }}')">Удалить коммент</a>
+                            <a href="#" class="delete_comment" data-id="{{ $item['id'] }}" data-feed="{{ $feed }}">Удалить коммент</a>
                             </li>
                         </ul>
                     </div>
