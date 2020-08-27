@@ -14,14 +14,14 @@ const routes = [
         //props: (route) => ({ user: store.state.auth.currentUser || {}}),
     },
     {
-        path: '/404',
+        path: '/admin/404/',
         name: '404',
         component: NotFound,
         props: true,
     },
     {
-        path: '*',
-        redirect: '404',
+        path: '/admin/*',
+        redirect: '/admin/404/',
     },
 ];
 
