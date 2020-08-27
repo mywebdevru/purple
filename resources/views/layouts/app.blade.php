@@ -185,7 +185,7 @@
         })
         commentForm.submit(function (e) {
             e.preventDefault()
-            let commentCount = +$(`#comments_count_${model}_${list}`).text()
+            commentCount = +$(`#comments_count_${model}_${list}`).text()
             $(this).children('button').prop('disabled', true)
             $.ajax({
                 type: "POST",
@@ -277,7 +277,7 @@
                             feed.toggleClass('can_edit')
                         }
                     }
-                });
+                })
             })
         }
     }
@@ -355,9 +355,9 @@
     function deletePost(post_id)
     {
         $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
         let post = $('#post_' + post_id)
         $.ajax({
@@ -370,7 +370,50 @@
                     post.detach()
                 }
             }
-        });
+        })
+    }
+
+    function editComment(commentId)
+    {
+        let comment = $(`#comment_${commentId}`).find('p')
+        if(comment.hasClass('can_edit')){
+            comment.toggleClass('can_edit')
+            commentText = comment.text()
+            comment.html(`<form class="comment-form inline-items" method="POST" action=""
+                            <div class="post__author author vcard inline-items">
+                                <div class="form-group with-icon-right">
+                                    <textarea class="form-control" placeholder="" name="text">${commentText}</textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-md-2 btn-primary">Сохранить</button>
+                            <button class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Отмена</button>
+                        </form>`)
+            comment.find('.cancel').click(function(e){
+                e.preventDefault()
+                comment.html(commentText)
+                comment.toggleClass('can_edit')
+            })
+            comment.children('form').submit(function(e) {
+                e.preventDefault()
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                $.ajax({
+                    type: "patch",
+                    url: `{{ URL::to('/') }}/comment/${commentId}`,
+                    data: $(this).serialize(),
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(!!response['text']){
+                            comment.html(response['text'])
+                            comment.toggleClass('can_edit')
+                        }
+                    }
+                })
+            })
+        }
     }
 
     function deleteComment(comment_id, feed)

@@ -87,7 +87,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update(['text' => $request->text]);
+        return response()->json(['text' => $comment->text]);
     }
 
     /**
