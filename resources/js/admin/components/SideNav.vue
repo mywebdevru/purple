@@ -45,7 +45,7 @@
                 <li class="active">
                     <router-link
                         tag="a"
-                        to="/"
+                        to="/admin"
                         class="active"
                     >
                         <i class="mdi mdi-view-dashboard"></i>

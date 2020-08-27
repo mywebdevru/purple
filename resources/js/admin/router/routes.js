@@ -1,5 +1,6 @@
 import VueRouter from "vue-router";
 import store from "../state/store";
+import NotFound from "./views/NotFound";
 
 const routes = [
     {
@@ -11,6 +12,16 @@ const routes = [
             title: 'Dashboard',
         },
         //props: (route) => ({ user: store.state.auth.currentUser || {}}),
+    },
+    {
+        path: '/admin/404/',
+        name: '404',
+        component: NotFound,
+        props: true,
+    },
+    {
+        path: '/admin/*',
+        redirect: '/admin/404/',
     },
 ];
 
