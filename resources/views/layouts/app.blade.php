@@ -173,7 +173,7 @@
         }
     }
 
-    function writeComment(list, model)
+    function writeComment(list, model, feed)
     {
         let commentCount = 0
         let commentForm = $(`#write_comment_${model}_${list}`)
@@ -207,7 +207,7 @@
 
     function renderComment(response, list, model)
     {
-        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item">
+        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item" id="comment_${response['id']}">
             <div class="post__author author vcard inline-items">
                 <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
                 <div class="author-date">
@@ -220,13 +220,21 @@
                         </time>
                     </div>
                 </div>
-                <a href="#" class="more">
+                <div class="more">
                     <svg class="olymp-three-dots-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
-                </a>
+                    <ul class="more-dropdown">
+                        <li>
+                            <a href="#" class="edit_comment" data-id="${response['id']}">Редактировать коммент</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="delete_comment" data-id="${response['id']}" data-feed="${model}_${list}">Удалить коммент</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <p>${response['text']}</p>
+            <p class="can_edit">${response['text']}</p>
             <a href="#" id="like_comment_${response['id']}" data-like_id="0" class="post-add-icon inline-items can_like" onclick="event.preventDefault(); likeIt(${response['id']}, 'comment');">
                 <form  method="POST" id="form_like_comment_${response['id']}">
                     @csrf
@@ -246,6 +254,7 @@
 
     function editPost(post_id)
     {
+        console.log(post_id)
         let post = $(`#post_text_${post_id}`)
         if(post.hasClass('can_edit')){
             let feed = $('.can_edit')
@@ -375,8 +384,10 @@
 
     function editComment(commentId)
     {
+        console.log(commentId)
         let comment = $(`#comment_${commentId}`).find('p')
         if(comment.hasClass('can_edit')){
+            console.log(commentId)
             comment.toggleClass('can_edit')
             commentText = comment.text()
             comment.html(`<form class="comment-form inline-items" method="POST" action=""
@@ -416,28 +427,46 @@
         }
     }
 
-    function deleteComment(comment_id, feed)
+    function deleteComment(data)
     {
+        console.log(data.id)
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-        let comment = $('#comment_' + comment_id)
-        let commentCount = +$(`#comments_count_${feed}`).text()
+        console.log(`#comment_${data.id}`)
+        let comment = $(`#comment_${data.id}`)
+        let commentCount = +$(`#comments_count_${data.feed}`).text()
         $.ajax({
             type: "delete",
-            url: `{{ URL::to('/') }}/comment/${comment_id}`,
+            url: `{{ URL::to('/') }}/comment/${data.id}`,
             data: '',
             dataType: "JSON",
             success: function (response) {
                 if(!!response['deleted']){
+                    console.log(comment)
                     comment.detach()
-                    $(`#comments_count_${feed}`).text(--commentCount)
+                    $(`#comments_count_${data.feed}`).text(--commentCount)
                 }
             }
         });
     }
+
+    $(document).ready(function() {
+        $('.comments-list').on('click', 'a', function(e){
+            e.preventDefault()
+            console.log($(this).data())
+            if($(this).hasClass('edit_comment')){
+                console.log($(this).data())
+                editComment($(this).data('id'))
+            }
+            if($(this).hasClass('delete_comment')){
+                console.log($(this).data())
+                deleteComment($(this).data())
+            }
+        })
+    })
 </script>
 @endauth
 </body>
