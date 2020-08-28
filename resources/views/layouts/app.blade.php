@@ -376,7 +376,7 @@
             dataType: "JSON",
             success: function (response) {
                 if(!!response['deleted']){
-                    post.detach()
+                    post.slideUp(500)
                 }
             }
         })
@@ -446,7 +446,7 @@
             success: function (response) {
                 if(!!response['deleted']){
                     console.log(comment)
-                    comment.detach()
+                    comment.slideUp(500)
                     $(`#comments_count_${data.feed}`).text(--commentCount)
                 }
             }
