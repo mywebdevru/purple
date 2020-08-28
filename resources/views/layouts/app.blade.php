@@ -168,23 +168,24 @@
         } else {
             button.html('Показать комментарии <span>+</span>')
             commentForm.slideUp()
+            commentForm.unbind('submit')
+            commentForm.children('button').not('[type]').unbind('click')
         }
-
     }
 
-    function writeComment(list, model)
+    function writeComment(list, model, feed)
     {
+        let commentCount = 0
         let commentForm = $(`#write_comment_${model}_${list}`)
-        let commentCount = +$(`#comments_count_${model}_${list}`).text()
-        console.log(commentCount)
         commentForm.slideToggle()
         commentForm.children('button').not('[type]').click(function (e){
             e.preventDefault()
-            commentForm.slideToggle()
             commentForm.find('textarea').val('')
+            showComments(list, model)
         })
         commentForm.submit(function (e) {
             e.preventDefault()
+            commentCount = +$(`#comments_count_${model}_${list}`).text()
             $(this).children('button').prop('disabled', true)
             $.ajax({
                 type: "POST",
@@ -206,26 +207,34 @@
 
     function renderComment(response, list, model)
     {
-        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item">
-            <div class="post__author author vcard inline-items">
+        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item" id="comment_${response['id']}">
+            <div class="comment__author author vcard inline-items">
                 <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
-                <div class="author-date">
+                <div class="comment-date">
                     <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => auth()->user()->id]) }}">
                         {{ auth()->user()->full_name }}
                     </a>
-                    <div class="post__date">
+                    <div class="comment__date">
                         <time class="published" datetime="${response['created_at']}">
                             ${response['created_at']}
                         </time>
                     </div>
                 </div>
-                <a href="#" class="more">
+                <div class="more">
                     <svg class="olymp-three-dots-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
-                </a>
+                    <ul class="more-dropdown">
+                        <li>
+                            <a href="#" class="edit_comment" data-id="${response['id']}">Редактировать коммент</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="delete_comment" data-id="${response['id']}" data-feed="${model}_${list}">Удалить коммент</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <p>${response['text']}</p>
+            <p class="can_edit">${response['text']}</p>
             <a href="#" id="like_comment_${response['id']}" data-like_id="0" class="post-add-icon inline-items can_like" onclick="event.preventDefault(); likeIt(${response['id']}, 'comment');">
                 <form  method="POST" id="form_like_comment_${response['id']}">
                     @csrf
@@ -245,6 +254,7 @@
 
     function editPost(post_id)
     {
+        console.log(post_id)
         let post = $(`#post_text_${post_id}`)
         if(post.hasClass('can_edit')){
             let feed = $('.can_edit')
@@ -276,7 +286,7 @@
                             feed.toggleClass('can_edit')
                         }
                     }
-                });
+                })
             })
         }
     }
@@ -354,9 +364,9 @@
     function deletePost(post_id)
     {
         $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
         let post = $('#post_' + post_id)
         $.ajax({
@@ -366,12 +376,97 @@
             dataType: "JSON",
             success: function (response) {
                 if(!!response['deleted']){
-                    post.detach()
+                    post.slideUp(500)
+                }
+            }
+        })
+    }
+
+    function editComment(commentId)
+    {
+        console.log(commentId)
+        let comment = $(`#comment_${commentId}`).find('p')
+        if(comment.hasClass('can_edit')){
+            console.log(commentId)
+            comment.toggleClass('can_edit')
+            commentText = comment.text()
+            comment.html(`<form class="comment-form inline-items" method="POST" action=""
+                            <div class="post__author author vcard inline-items">
+                                <div class="form-group with-icon-right">
+                                    <textarea class="form-control" placeholder="" name="text">${commentText}</textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-md-2 btn-primary">Сохранить</button>
+                            <button class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Отмена</button>
+                        </form>`)
+            comment.find('.cancel').click(function(e){
+                e.preventDefault()
+                comment.html(commentText)
+                comment.toggleClass('can_edit')
+            })
+            comment.children('form').submit(function(e) {
+                e.preventDefault()
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                $.ajax({
+                    type: "patch",
+                    url: `{{ URL::to('/') }}/comment/${commentId}`,
+                    data: $(this).serialize(),
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(!!response['text']){
+                            comment.html(response['text'])
+                            comment.toggleClass('can_edit')
+                        }
+                    }
+                })
+            })
+        }
+    }
+
+    function deleteComment(data)
+    {
+        console.log(data.id)
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        console.log(`#comment_${data.id}`)
+        let comment = $(`#comment_${data.id}`)
+        let commentCount = +$(`#comments_count_${data.feed}`).text()
+        $.ajax({
+            type: "delete",
+            url: `{{ URL::to('/') }}/comment/${data.id}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    console.log(comment)
+                    comment.slideUp(500)
+                    $(`#comments_count_${data.feed}`).text(--commentCount)
                 }
             }
         });
-
     }
+
+    $(document).ready(function() {
+        $('.comments-list').on('click', 'a', function(e){
+            e.preventDefault()
+            console.log($(this).data())
+            if($(this).hasClass('edit_comment')){
+                console.log($(this).data())
+                editComment($(this).data('id'))
+            }
+            if($(this).hasClass('delete_comment')){
+                console.log($(this).data())
+                deleteComment($(this).data())
+            }
+        })
+    })
 </script>
 @endauth
 </body>

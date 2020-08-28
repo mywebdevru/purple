@@ -90,7 +90,7 @@
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items" class="more-comments" onclick="event.preventDefault(); writeComment({{ $feed->feedable['id'] }}, 'image');">
+                <a href="#" class="post-add-icon inline-items" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'image');">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>

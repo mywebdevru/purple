@@ -87,7 +87,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update(['text' => $request->text]);
+        return response()->json(['text' => $comment->text]);
     }
 
     /**
@@ -98,6 +99,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->likes()->forceDelete();
+        $deleted = $comment->delete();
+        return response()->json(['deleted' => $deleted]);
     }
 }

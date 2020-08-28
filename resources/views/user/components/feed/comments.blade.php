@@ -1,25 +1,35 @@
 <ul class="comments-list" id="comments_list_{{ $feed }}" style="display:none;">
     @foreach ($comments as $item)
-        <li class="comment-item">
-            <div class="post__author author vcard inline-items">
+        <li class="comment-item" id="comment_{{ $item['id'] }}">
+            <div class="comment__author author vcard inline-items">
                 <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
                 <div class="author-date">
                     <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => $item->authorable['id']]) }}">
                         {{ $item->authorable['full_name'] }}
                     </a>
-                    <div class="post__date">
+                    <div class="comment__date">
                         <time class="published" datetime="{{ $item['created_at'] }}">
                             {{ $item['created_at'] }}
                         </time>
                     </div>
                 </div>
-                <a href="#" class="more">
-                    <svg class="olymp-three-dots-icon">
-                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-                    </svg>
-                </a>
+                {{-- @can('update', $item) --}}
+                    <div class="more">
+                        <svg class="olymp-three-dots-icon">
+                            <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
+                        </svg>
+                        <ul class="more-dropdown">
+                            <li>
+                                <a href="#" class="edit_comment" data-id="{{ $item['id'] }}">Редактировать коммент</a>
+                            </li>
+                            <li>
+                            <a href="#" class="delete_comment" data-id="{{ $item['id'] }}" data-feed="{{ $feed }}">Удалить коммент</a>
+                            </li>
+                        </ul>
+                    </div>
+                {{-- @endcan --}}
             </div>
-            <p>{{ $item['text'] }}</p>
+            <p class="can_edit">{{ $item['text'] }}</p>
             <a href="#" id="like_comment_{{ $item['id'] }}" data-like_id="{{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $item->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); likeIt({{ $item['id'] }}, 'comment');">
                 <form  method="POST" id="form_like_comment_{{ $item['id'] }}">
                     @csrf
