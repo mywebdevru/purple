@@ -208,13 +208,13 @@
     function renderComment(response, list, model)
     {
         $(`#comments_list_${model}_${list}`).append(`<li class="comment-item" id="comment_${response['id']}">
-            <div class="post__author author vcard inline-items">
+            <div class="comment__author author vcard inline-items">
                 <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
-                <div class="author-date">
+                <div class="comment-date">
                     <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => auth()->user()->id]) }}">
                         {{ auth()->user()->full_name }}
                     </a>
-                    <div class="post__date">
+                    <div class="comment__date">
                         <time class="published" datetime="${response['created_at']}">
                             ${response['created_at']}
                         </time>

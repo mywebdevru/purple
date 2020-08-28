@@ -166,6 +166,7 @@
     display: block;
     font-weight: 700;
     margin: 0 auto;
+    border-bottom: 1px solid #e6ecf5;
 }
 
 .more-comments span {
@@ -185,6 +186,16 @@
     padding-bottom: 0;
     border-top: 1px solid #e6ecf5;
     overflow: hidden;
+
+    button + button {
+        margin-right: 15px;
+    }
+    
+    .btn {
+        float: right;
+        margin-bottom: 0;
+        margin-top: 15px;
+    }
 }
 
 .comment-form .add-options-message {
@@ -229,15 +240,6 @@
     min-height: 100px;
 }
 
-.post .comment-form  button {
-    float: right;
-    margin-bottom: 0;
-    margin-top: 15px;
-}
-
-.comment-form button + button {
-    margin-right: 15px;
-}
 
 /*================= Responsive Mode ============*/
 @media (max-width: 768px) {
