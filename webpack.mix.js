@@ -25,9 +25,9 @@ mix.js('resources/js/app.js', 'public/js')
             'resources/js/owl.carousel.min.js'] ,'public/js/main.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/main.scss', 'public/css/main.css')
-    // .sass('resources/sass/admin/bootstrap.scss', 'public/css') //admin-panel
-    // .sass('resources/sass/admin/icons.scss', 'public/css') //admin-panel
-    // .sass('resources/sass/admin/admin.sass', 'public/css'); //admin-panel
+    .sass('resources/sass/admin/bootstrap.scss', 'public/css') //admin-panel
+    .sass('resources/sass/admin/icons.scss', 'public/css') //admin-panel
+    .sass('resources/sass/admin/admin.sass', 'public/css'); //admin-panel
 
 mix.copyDirectory('resources/assets/fonts', 'public/fonts');
 
