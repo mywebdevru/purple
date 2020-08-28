@@ -1,13 +1,39 @@
 .comments-list {
     margin-bottom: 0;
+
+    .comment-item {
+        padding: 15px;
+        border-bottom: 1px solid #e6ecf5;
+        background-color: #fafbfd;
+        position: relative;
+
+        .comment__author{
+            margin-bottom: 10px;
+
+            img {
+                margin-right: 10px;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+            }
+
+            .more {
+                float: right;
+                font-size: 16px;
+                margin-right: 20px;
+            }
+        }
+
+        .comment__date {
+            font-size: 0.6rem;
+        }
+
+        p {
+            margin: 0 0 10px 40px;
+        }
+    }
 }
 
-.comments-list .comment-item {
-    padding: 25px;
-    border-bottom: 1px solid #e6ecf5;
-    background-color: #fafbfd;
-    position: relative;
-}
 
 .comments-list .comment-item.has-children {
     padding-bottom: 0;
@@ -17,10 +43,10 @@
     margin-right: 20px;
 }
 
-.comments-list .post__author img {
-    width: 26px;
-    height: 26px;
-}
+// .comments-list .post__author img {
+//     width: 26px;
+//     height: 26px;
+// }
 
 .comments-list.style-2 .comment-item .post__author img {
     float: left;
@@ -140,6 +166,7 @@
     display: block;
     font-weight: 700;
     margin: 0 auto;
+    border-bottom: 1px solid #e6ecf5;
 }
 
 .more-comments span {
@@ -155,9 +182,20 @@
 }
 
 .comment-form {
-    padding: 25px;
+    padding: 15px;
+    padding-bottom: 0;
     border-top: 1px solid #e6ecf5;
     overflow: hidden;
+
+    button + button {
+        margin-right: 15px;
+    }
+    
+    .btn {
+        float: right;
+        margin-bottom: 0;
+        margin-top: 15px;
+    }
 }
 
 .comment-form .add-options-message {
@@ -202,15 +240,6 @@
     min-height: 100px;
 }
 
-.comment-form button {
-    float: right;
-    margin-bottom: 0;
-    margin-top: 15px;
-}
-
-.comment-form button + button {
-    margin-right: 15px;
-}
 
 /*================= Responsive Mode ============*/
 @media (max-width: 768px) {
@@ -222,7 +251,7 @@
         margin-right: -10px;
     }
 
-    .comments-list .comment-item .post__author .more {
+    .comments-list .comment-item .comment__author .more {
         margin-right: 0;
     }
 

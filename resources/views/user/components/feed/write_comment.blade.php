@@ -10,6 +10,6 @@
             <textarea class="form-control" placeholder="" name="text"></textarea>
         </div>
     </div>
-    <button type="submit" class="btn btn-md-2 btn-primary">Запостить комментарий</button>
-    <button class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Отмена</button>
+    <button type="submit" class="btn btn-md-2 btn-primary comment-form__button">Запостить комментарий</button>
+    <button class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color comment-form__button">Отмена</button>
 </form>

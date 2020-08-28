@@ -1,13 +1,13 @@
 <ul class="comments-list" id="comments_list_{{ $feed }}" style="display:none;">
     @foreach ($comments as $item)
         <li class="comment-item" id="comment_{{ $item['id'] }}">
-            <div class="post__author author vcard inline-items">
+            <div class="comment__author author vcard inline-items">
                 <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
                 <div class="author-date">
                     <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => $item->authorable['id']]) }}">
                         {{ $item->authorable['full_name'] }}
                     </a>
-                    <div class="post__date">
+                    <div class="comment__date">
                         <time class="published" datetime="{{ $item['created_at'] }}">
                             {{ $item['created_at'] }}
                         </time>
