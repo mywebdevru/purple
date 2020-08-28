@@ -19,10 +19,8 @@
                         <form onsubmit="if(confirm('Удалить?')){return true}else{return false}" action="{{route('map.destroy', $map)}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             {{ csrf_field() }}
-                            <!-- Редактирования пока нет -->
-                            <!-- <a class="btn btn-default" href="{{route('map.edit', $map)}}"><i class="fa fa-edit"></i></a> -->
-
-                            <button type="submit" class="btn">Удалить</button>
+                            <a class="btn btn-primary" href="{{route('map.edit', $map)}}"><i class="fa fa-edit"></i></a>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

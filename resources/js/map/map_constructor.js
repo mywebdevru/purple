@@ -243,17 +243,23 @@ function init() {
 
     //Сохранение данных геообъектов
     $('#save-map').click(function () {
-        object = [];
-        for (let i = 0; i < currentId; i++) {
-            object.push({
-                data: myMap.geoObjects.get(i).properties._data,
-                coord: myMap.geoObjects.get(i).geometry.getCoordinates()
-            });
+        if (currentId === 0) {
+            alert("Карта не должна быть пустой. Пожалуйста, нарисуйте свой путь!")
+        } else {
+            console.log(myMap.geoObjects)
+            object = [];
+            for (let i = 0; i < currentId; i++) {
+                console.log(myMap.geoObjects.get(i))
+                object.push({
+                    data: myMap.geoObjects.get(i).properties._data,
+                    coord: myMap.geoObjects.get(i).geometry.getCoordinates()
+                });
+            }
+            let objectJson = JSON.stringify(object)
+            $("#map").css("display","none")
+            $("#save-map").css("display","none")
+            $(".map-form").css("display","block")
+            $("input[name=map_data]").val(objectJson)
         }
-        let objectJson = JSON.stringify(object)
-        $("#map").css("display","none")
-        $("#save-map").css("display","none")
-        $(".map-form").css("display","block")
-        $("input[name=map_data]").val(objectJson)
     });
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Map;
 use App\Models\MapsPhoto;
 use Illuminate\Http\Request;
+use App\Http\Requests\MapRequest;
+use Storage;
 
 class MapController extends Controller
 {
@@ -39,15 +41,18 @@ class MapController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MapRequest $request)
     {
         $map = Map::create($request->all());
-        foreach ($request->photos as $photo) {
-            $filename = $photo->store('photos');
-            MapsPhoto::create([
-                'map_id' => $map->id,
-                'filename' => $filename
-            ]);
+        if ($request->photos) {
+            foreach ($request->photos as $photo) {
+                $filename = $photo->store('public/photos');
+                $filename = str_replace('public/', '', $filename);
+                MapsPhoto::create([
+                    'map_id' => $map->id,
+                    'filename' => $filename
+                ]);
+            }
         }
         return redirect()->route('map.index');
     }
@@ -75,7 +80,9 @@ class MapController extends Controller
      */
     public function edit(Map $map)
     {
-        //
+        return view('maps.edit', [
+            'map' => $map
+        ]);
     }
 
     /**
@@ -85,9 +92,10 @@ class MapController extends Controller
      * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Map $map)
+    public function update(MapRequest $request, Map $map)
     {
-        //
+        $map->update($request->except('slug'));
+        return redirect()->route('map.index');
     }
 
     /**
@@ -98,8 +106,11 @@ class MapController extends Controller
      */
     public function destroy(Map $map)
     {
+        $photos = MapsPhoto::where('map_id', $map->id)->get();
+        foreach ($photos as $photo) {
+            Storage::delete($photo->filename);
+        }
         $map->delete();
-
         return redirect()->route('map.index');
     }
 }
