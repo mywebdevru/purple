@@ -29,4 +29,8 @@ const app = new Vue({
     el: '#app',
     store,
     router,
+    mounted() {
+        const target = document.getElementById('app-loading');
+        target.remove();
+    }
 });
