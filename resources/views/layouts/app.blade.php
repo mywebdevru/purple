@@ -254,7 +254,6 @@
 
     function editPost(post_id)
     {
-        console.log(post_id)
         let post = $(`#post_text_${post_id}`)
         if(post.hasClass('can_edit')){
             let feed = $('.can_edit')
@@ -293,7 +292,6 @@
     function startSummernote(post_id)
     {
         var post_id = post_id
-        console.log(post_id)
         const editor = $('#text'),
             config = {
                 lang: 'ru-RU',
@@ -323,7 +321,6 @@
             };
         editor.summernote(config);
         async function uploadFile(files) {
-            console.log(post_id)
             const data = new FormData();
             data.append('post', post_id);
             for (let i = 0; i < files.length; i++) {
@@ -384,10 +381,8 @@
 
     function editComment(commentId)
     {
-        console.log(commentId)
         let comment = $(`#comment_${commentId}`).find('p')
         if(comment.hasClass('can_edit')){
-            console.log(commentId)
             comment.toggleClass('can_edit')
             commentText = comment.text()
             comment.html(`<form class="comment-form inline-items" method="POST" action=""
@@ -429,13 +424,11 @@
 
     function deleteComment(data)
     {
-        console.log(data.id)
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-        console.log(`#comment_${data.id}`)
         let comment = $(`#comment_${data.id}`)
         let commentCount = +$(`#comments_count_${data.feed}`).text()
         $.ajax({
@@ -445,7 +438,6 @@
             dataType: "JSON",
             success: function (response) {
                 if(!!response['deleted']){
-                    console.log(comment)
                     comment.slideUp(500)
                     $(`#comments_count_${data.feed}`).text(--commentCount)
                 }
@@ -458,11 +450,9 @@
             e.preventDefault()
             console.log($(this).data())
             if($(this).hasClass('edit_comment')){
-                console.log($(this).data())
                 editComment($(this).data('id'))
             }
             if($(this).hasClass('delete_comment')){
-                console.log($(this).data())
                 deleteComment($(this).data())
             }
         })
