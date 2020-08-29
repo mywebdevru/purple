@@ -144,6 +144,20 @@
         text-align: center;
     }
 
+    .control-block-button {
+        left: 75% !important;
+    }
+    .control-block-button-left {
+        right: auto;
+        top: -30px;
+        left: 25%;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        bottom: auto;
+        width: 100%;
+        text-align: center;
+    }
+
     .top-header.top-header-favorit .profile-section .control-block-button {
         right: 38px;
         top: -31px;
