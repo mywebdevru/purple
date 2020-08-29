@@ -12,9 +12,7 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
-
-    @yield('css')
-
+    <script src="{{ asset('js/admin.js') }}" defer></script>
 </head>
 <body class="left-side-menu-dark">
 <div id="app">
@@ -22,7 +20,5 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/admin.js') }}"></script>
-@yield('scripts')
 </body>
 </html>
