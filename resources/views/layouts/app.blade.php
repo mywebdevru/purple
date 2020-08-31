@@ -195,7 +195,7 @@
                 success: function (response) {
                     if(!!response){
                         console.log(response)
-                        renderComment(response, list, model)
+                        $(`#comments_list_${model}_${list}`).append(response['comment'])
                         commentForm.find('textarea').val('')
                         commentForm.children('button').removeAttr("disabled")
                         $(`#comments_count_${model}_${list}`).text(++commentCount)
@@ -203,53 +203,6 @@
                 }
             });
         })
-    }
-
-    function renderComment(response, list, model)
-    {
-        $(`#comments_list_${model}_${list}`).append(`<li class="comment-item" id="comment_${response['id']}">
-            <div class="comment__author author vcard inline-items">
-                <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->full_name }}">
-                <div class="comment-date">
-                    <a class="h6 post__author-name fn" href="{{ route('user.show',['user' => auth()->user()->id]) }}">
-                        {{ auth()->user()->full_name }}
-                    </a>
-                    <div class="comment__date">
-                        <time class="published" datetime="${response['created_at']}">
-                            ${response['created_at']}
-                        </time>
-                    </div>
-                </div>
-                <div class="more">
-                    <svg class="olymp-three-dots-icon">
-                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
-                    </svg>
-                    <ul class="more-dropdown">
-                        <li>
-                            <a href="#" class="edit_comment" data-id="${response['id']}">Редактировать коммент</a>
-                        </li>
-                        <li>
-                            <a href="#"  class="delete_comment" data-id="${response['id']}" data-feed="${model}_${list}">Удалить коммент</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <p class="can_edit">${response['text']}</p>
-            <a href="#" id="like_comment_${response['id']}" data-like_id="0" class="post-add-icon inline-items can_like" onclick="event.preventDefault(); likeIt(${response['id']}, 'comment');">
-                <form  method="POST" id="form_like_comment_${response['id']}">
-                    @csrf
-                    <input type="hidden" name="likeable_type" value="App\\Models\\Comment">
-                    <input type="hidden" name="likeable_id" value="${response['id']}">
-                    <input type="hidden" name="authorable_type" value="App\\Models\\User">
-                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
-                </form>
-                <svg class="olymp-heart-icon">
-                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-                </svg>
-                <span>0</span>
-            </a>
-            <a href="#" class="reply">Ответить</a>
-        </li>`)
     }
 
     function editPost(post_id)
