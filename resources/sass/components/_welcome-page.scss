@@ -74,10 +74,12 @@ a.auth-btn:hover {
     font-family: thousand-sticks;
     font-size: 110px;
     color: #ffffff;
+    letter-spacing: 10px;
 }
 .brand-name-small {
     font-family: thousand-sticks;
     font-size: 35px;
+    letter-spacing: 2px;
 }
 .text-white {
     font-family: montserrat-thin;
@@ -88,7 +90,8 @@ a.auth-btn:hover {
 .text-grey {
     font-family: montserrat-thin;
     color: #404040;
-    font-size: 25px;
+    font-size: 20px;
+    padding: 15px;
 }
 .text-grey__main {
     font-size: 40px;

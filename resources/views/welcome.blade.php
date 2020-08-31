@@ -134,5 +134,6 @@
             padding-left: 130px
         } */
         </style>
-    @endsection   
+    @endsection
+      
 @endsection

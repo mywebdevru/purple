@@ -29,6 +29,17 @@
 									</li>
 								</ul>
 							</div>
+                        </div>
+                        <div class="control-block-button-left">
+                            <div class="btn btn-control bg-red" title="Создать пост">
+                                <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
+                                
+                            </div>
+                            
+                            <div class="btn btn-control bg-green" title="Добавить маршрут">
+                                <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
+
+                            </div>							
 						</div>
 						<div class="control-block-button">
                             @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())

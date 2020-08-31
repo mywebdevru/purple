@@ -1,7 +1,4 @@
 *.config
-/css
-/js
-/fonts
 /summernote
 /avatars
 /wallpapers
