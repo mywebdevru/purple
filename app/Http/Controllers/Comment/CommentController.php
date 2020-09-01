@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Comment;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Image;
@@ -49,11 +50,14 @@ class CommentController extends Controller
         if(!$request->commentable_type || !$request->commentable_id || !$request->authorable_type || !$request->authorable_id){
             abort(403, 'Недостаточно информации для создания комментария');
         }
+        $vars = DB::transaction(function () use ($request) {
+            $comment = $request->commentable_type::find($request->commentable_id)->comments()->create(['text' => $request->text]);
+            $comment = $request->authorable_type::find($request->authorable_id)->comments()->save($comment);
+            return compact('comment');
+        });
 
-        $comment = $request->commentable_type::find($request->commentable_id)->comments()->create(['text' => $request->text]);
-        $comment = $request->authorable_type::find($request->authorable_id)->comments()->save($comment);
 
-        return response()->json($comment);
+        return response()->json(['comment' => view('user.components.feed.comment_body', ['item' =>$vars['comment'], 'feed' => $request->feed, 'comment_author' => auth()->user()])->render()]);
     }
 
     /**

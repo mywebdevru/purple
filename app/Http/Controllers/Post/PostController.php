@@ -38,7 +38,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vars = DB::transaction(function () use ($request) {
+            $author = $request['model']::find($request['id']);
+            $post = $author->post()->create('text');
+            $feed = $post->feed()->create();
+            $feed->authorable()->update($author);
+            return compact('author', 'post', 'feed');
+        });
+        return response()->json();
     }
 
     /**
