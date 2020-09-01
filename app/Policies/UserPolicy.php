@@ -53,6 +53,9 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         // dd($model);
+        if($user->hasRole('admin')){
+            return true;
+        }
         return $model->id == $user->id;
     }
 

@@ -46,6 +46,6 @@ class AccessToProfileEditTest extends TestCase
 
         $response = $this->get(route('user.edit', $user2->id));
 
-        $response->assertStatus(401);
+        $response->assertStatus(403);
     }
 }
