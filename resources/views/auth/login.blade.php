@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -70,4 +71,34 @@
         </div>
     </div>
 </div>
+    @section('css')
+        <style>
+        body {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .fixed-sidebar-left {
+            background-color: #212529;
+        }
+        .fixed-sidebar-right {
+            background-color: #212529;
+        }
+        .olympus-chat {
+            background-color: #212529;
+        }
+        .page-has-right-panels {
+            padding-right: 0px;
+        }
+        .page-has-left-panels {
+            padding-left: 0px;
+        }
+        .header-spacer {
+            display: block;
+            height: 70px;
+        }
+        
+        </style>
+    @endsection
+
+    
 @endsection

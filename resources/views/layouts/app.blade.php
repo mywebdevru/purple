@@ -22,11 +22,20 @@
 <body class="page-has-left-panels page-has-right-panels">
 <!-- Header -->
 
-<header class="header" id="site-header">
+<header class="header" id="site-header">   
 
-	<div class="page-title">
+    <a href="#" class="logo head-logo">
+        <div class="img-wrap head-img-wrap">
+            <img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
+        </div>
+        <div class="title-block">
+            <h6 class="logo-title brand-name-small">Offroad Paradise</h6>
+        </div>
+    </a>
+
+	<!-- <div class="page-title">
 		<h6 class="brand-name-small">OffRoad Paradise</h6>
-	</div>
+	</div> -->
 
 	<div class="header-content-wrapper">
 		<form class="search-bar w-search notification-list friend-requests">
@@ -65,7 +74,7 @@
                 @component('user.components.header.alert_activity') @endcomponent
                 @component('user.components.header.page_owner', ['full_name' => auth()->user()->full_name, 'creed' => auth()->user()->creed, 'avatar' => auth()->user()->avatar, 'id' => auth()->user()->id])
                 @endcomponent
-            @else
+            @else   
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
                     </div>

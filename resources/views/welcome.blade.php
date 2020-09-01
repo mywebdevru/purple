@@ -128,12 +128,15 @@
         .header-spacer {
             display: block;
             height: 70px;
-        }
-        
-        /* .entry-text {
-            padding-left: 130px
-        } */
+        }              
         </style>
     @endsection
-      
+
+    @section('scripts')
+    <script>       
+        // let logo = '<div class="col-sm"><a href="#" class="logo"><div class="img-wrap"><img src="{{ asset("img/4x4_white_small.png") }}" alt="offroad"></div></a></div>';
+        // let siteHeader = document.querySelector('.header');
+        // siteHeader.insertAdjacentHTML('afterbegin', logo);
+    </script>    
+    @endsection
 @endsection
