@@ -38,4 +38,14 @@ class AccessToProfileEditTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testUserCantViewOthersUsersProfileEdit()
+    {
+        $this->actingAs($user = factory(User::class)->create());
+        $user2 = factory(User::class)->create();
+
+        $response = $this->get(route('user.edit', $user2->id));
+
+        $response->assertStatus(401);
+    }
 }
