@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,7 +11,22 @@ class AccessToProfileEditTest extends TestCase
 {
     public function testUserMustLoginToViewProfileEdit()
     {
-        $this->get(route('user.show', 1))->assertRedirect('login');
-        $this->get(route('user.show', 10))->assertRedirect('login');
+        $this->get(route('user.edit', 1))->assertRedirect('login');
+        $this->get(route('user.edit', 10))->assertRedirect('login');
+    }
+
+    public function testAdminCanViewProfilesEditPages()
+    {
+        $adminUser = factory(User::class)->create();
+
+        $adminUser->assignRole('admin');
+
+        $this->actingAs($adminUser);
+
+        $response1 = $this->get(route('user.edit', 1));
+        $response2 = $this->get(route('user.edit', 10));
+
+        $response1->assertOk();
+        $response2->assertOk();
     }
 }
