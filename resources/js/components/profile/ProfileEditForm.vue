@@ -2,7 +2,7 @@
     <div class="ui-block">
         <article class="hentry post video">
             <div v-if="this.loading">Загрузка...</div>
-            <div v-else class="col-sm-7">
+            <div v-else>
                 <form>
                     <div class="form-group">
                         <label for="name">Изменить имя</label>
