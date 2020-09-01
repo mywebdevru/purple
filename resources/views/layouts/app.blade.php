@@ -195,7 +195,7 @@
                 success: function (response) {
                     if(!!response){
                         console.log(response)
-                        $(`#comments_list_${model}_${list}`).append(response['comment'])
+                        renderComment(response, list, model)
                         commentForm.find('textarea').val('')
                         commentForm.children('button').removeAttr("disabled")
                         $(`#comments_count_${model}_${list}`).text(++commentCount)
@@ -203,6 +203,11 @@
                 }
             });
         })
+    }
+
+    function renderComment(response, list, model)
+    {
+        $(`#comments_list_${model}_${list}`).append(response['comment'])
     }
 
     function editPost(post_id)
@@ -351,6 +356,7 @@
                 e.preventDefault()
                 comment.html(commentText)
                 comment.toggleClass('can_edit')
+                $(`#comment_${commentId}`).find('.more-dropdown').show()
             })
             comment.children('form').submit(function(e) {
                 e.preventDefault()
@@ -368,6 +374,7 @@
                         if(!!response['text']){
                             comment.html(response['text'])
                             comment.toggleClass('can_edit')
+                            $(`#comment_${commentId}`).find('.more-dropdown').show()
                         }
                     }
                 })
@@ -404,9 +411,12 @@
             console.log($(this).data())
             if($(this).hasClass('edit_comment')){
                 editComment($(this).data('id'))
+                $(`#more-dropdown_comment_${$(this).data('id')}`).fadeOut(200)
+
             }
             if($(this).hasClass('delete_comment')){
                 deleteComment($(this).data())
+                $(`#more-dropdown_comment_${$(this).data('id')}`).fadeOut(200)
             }
         })
     })

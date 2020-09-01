@@ -16,7 +16,7 @@
                         <svg class="olymp-three-dots-icon">
                             <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                         </svg>
-                        <ul class="more-dropdown">
+                        <ul class="more-dropdown" id="more-dropdown_comment_{{ $item['id'] }}">
                             <li>
                                 <a href="#" class="edit_comment" data-id="{{ $item['id'] }}">Редактировать коммент</a>
                             </li>
