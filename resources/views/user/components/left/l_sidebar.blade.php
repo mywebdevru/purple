@@ -4,7 +4,7 @@
 <div class="fixed-sidebar">
 	<div class="fixed-sidebar-left sidebar--small" id="sidebar-left">
 
-		<a href="#" class="logo">
+		<a href="{{ route('welcome') }}" class="logo">
 			<div class="img-wrap">
 				<img src="{{ asset('img/4x4_white.png') }}" alt="offroad">
 			</div>
@@ -47,7 +47,7 @@
 				<img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
 			</div>
 			<div class="title-block">
-				<h6 class="logo-title">Offroad</h6>
+				<h6 class="logo-title brand-name-small panel">Offroad Paradise</h6>
 			</div>
 		</a>
 
@@ -124,7 +124,7 @@
 				<img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
 			</div>
 			<div class="title-block">
-				<h6 class="logo-title">Offroad</h6>
+				<h6 class="logo-title brand-name-small panel">Offroad Paradise</h6>
 			</div>
 		</a>
 

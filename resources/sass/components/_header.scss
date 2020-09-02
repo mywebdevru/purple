@@ -119,6 +119,32 @@
     width: 30px !important;
 }
 
+.head-logo {
+    position: relative;
+    float: left;
+    letter-spacing: 3px;
+}
+.title-block {
+    padding-right: 15px;}
+    // @media (min-width: 768px) and (max-width: 1024px) {
+    //     .title-block {padding: 19px;}}
+
+.logo-title {            
+    letter-spacing: 3px;
+}
+
+.header .page-title {
+    padding: 20px 50px 26px 20px;
+    text-transform: uppercase;
+    height: 100%;
+    min-width: 170px;
+}
+.head-img-wrap {
+    padding: 15px 15px 15px 18px;
+    position: relative;}
+    // @media (min-width: 768px) and (max-width: 1024px) {
+    //     .head-img-wrap {display: none;}}    
+
 // .author-thumb {
 //     width: 40px;
 // }

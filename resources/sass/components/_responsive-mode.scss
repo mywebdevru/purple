@@ -47,7 +47,7 @@
     }
 
     .page-has-left-panels .header {
-        padding-left: 70px;
+        padding-left: 0px;
     }
 
     .header.header--logout {
@@ -110,7 +110,7 @@
     }
 }
 
-@media (max-width: 801px) {
+@media (max-width: 768px) {
     .search-bar.w-search {
         max-width: 200px;
     }
