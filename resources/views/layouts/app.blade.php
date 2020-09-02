@@ -100,8 +100,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<!-- <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/libs/jquery.magnific-popup.js') }}"></script> -->
+
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 @auth

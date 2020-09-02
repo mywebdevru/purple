@@ -71,7 +71,9 @@
         </div>
     </div>
 </div>
-    @section('css')
+@endsection
+
+@section('css')
         <style>
         body {
             padding-left: 0px;
@@ -99,6 +101,3 @@
         
         </style>
     @endsection
-
-    
-@endsection

@@ -104,7 +104,10 @@
             </div>
         </div>
     </footer>    
-    @section('css')
+    
+@endsection
+
+@section('css')
         <style>
         body {
             padding-left: 0px;
@@ -139,4 +142,3 @@
         // siteHeader.insertAdjacentHTML('afterbegin', logo);
     </script>    
     @endsection
-@endsection
