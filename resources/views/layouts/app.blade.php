@@ -22,9 +22,9 @@
 <body class="page-has-left-panels page-has-right-panels">
 <!-- Header -->
 
-<header class="header" id="site-header">   
+<header class="header" id="site-header">
 
-    <a href="#" class="logo head-logo">
+    <a href="{{ route('welcome') }}" class="logo head-logo">
         <div class="img-wrap head-img-wrap">
             <img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
         </div>
@@ -74,7 +74,7 @@
                 @component('user.components.header.alert_activity') @endcomponent
                 @component('user.components.header.page_owner', ['full_name' => auth()->user()->full_name, 'creed' => auth()->user()->creed, 'avatar' => auth()->user()->avatar, 'id' => auth()->user()->id])
                 @endcomponent
-            @else   
+            @else
                     <div class="nav-item text-light">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
                     </div>
