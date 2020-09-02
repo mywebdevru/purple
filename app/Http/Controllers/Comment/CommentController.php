@@ -57,7 +57,7 @@ class CommentController extends Controller
         });
 
 
-        return response()->json(['comment' => view('user.components.feed.comment_body', ['item' =>$vars['comment'], 'feed' => $request->feed, 'comment_author' => auth()->user()])->render()]);
+        return response()->json(['comment' => view('user.components.feed.comment_body', ['item' =>$vars['comment'], 'comment_author' => auth()->user()])->render()]);
     }
 
     /**
