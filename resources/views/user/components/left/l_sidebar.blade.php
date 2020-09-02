@@ -47,7 +47,7 @@
 				<img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
 			</div>
 			<div class="title-block">
-				<h6 class="logo-title">Offroad</h6>
+				<h6 class="logo-title brand-name-small panel">Offroad Paradise</h6>
 			</div>
 		</a>
 
@@ -124,7 +124,7 @@
 				<img src="{{ asset('img/4x4_white_small.png') }}" alt="offroad">
 			</div>
 			<div class="title-block">
-				<h6 class="logo-title">Offroad</h6>
+				<h6 class="logo-title brand-name-small panel">Offroad Paradise</h6>
 			</div>
 		</a>
 
