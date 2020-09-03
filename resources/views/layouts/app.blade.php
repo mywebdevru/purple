@@ -105,41 +105,41 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 @auth
 <script>
-    function likeIt(id, model)
+    function likeIt(item)
     {
-        let item =$(`#like_${model}_${id}`)
+        let data =item.data()
         if(item.hasClass('can_like')){
             item.toggleClass('can_like')
             let route ='../like';
             if(item.hasClass('like_it')){
-                route = `${route}/${item.data('like_id')}`
-                $(`#form_like_${model}_${id}`).append('<input type="hidden" name="_method" value="DELETE">')
+                route = `${route}/${data.id}`
+                item.children('form').append('<input type="hidden" name="_method" value="DELETE">')
             }
 
             $.ajax({
                 type: "POST",
                 url: route,
-                data: $('#form_like_'+ model +'_' + id).serialize(),
+                data: item.children('form').serialize(),
                 dataType: "JSON",
                 success: function (response) {
                     if(!!response['error']){
                         console.log(response['error'])
                     }
-                    $(`#avatars_${model}_${id}`).html('')
-                    $(`#names_${model}_${id}`).html('')
                     count = response['likes'].length
-                    if(model != 'comment'){
-                    renderLikedUsers(response, model, id, count)
+                    if (data.model != 'Comment'){
+                        item.parents('.post-additional-info').find('.friends-harmonic').html('')
+                        item.parents('.post-additional-info').find('.names-people-likes').html('')
+                        renderLikedUsers(response, item, count)
                     }
                     if(!!response['like_id']){
                         item.toggleClass('like_it')
-                            .data('like_id', response['like_id'])
+                            .data('id', response['like_id'])
                             .children('span').text(count)
                     }
                     if(!!response['delete']){
-                        $(`#form_like_${model}_${id} input[name="_method"]`).detach()
+                        item.children('form').find('input[name="_method"]').detach()
                         item.toggleClass('like_it')
-                            .data('like_id', 0)
+                            .data('id', 0)
                             .children('span').text(count)
                     }
                     item.toggleClass('can_like')
@@ -147,7 +147,7 @@
             });
         }
     }
-    function renderLikedUsers(response, model, id, count)
+    function renderLikedUsers(response, item, count)
     {
         if(count > 2) {
             likes = response['likes'].slice(-2)
@@ -155,107 +155,78 @@
             likes = response['likes']
         }
         likes.forEach(like => {
-            $(`#avatars_${model}_${id}`).append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
-                <img src="{{ URL::to('/') }}/${like['authorable']['avatar']}" alt="${like['authorable']['full_name']}">
+            item.parents('.post-additional-info').find('.friends-harmonic').append(`<li><a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">
+                <img src="{{ URL::to('/') }}/${like['authorable']['avatar']}" alt="автор">
             </a></li>`)
-            $(`#names_${model}_${id}`).append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
+            item.parents('.post-additional-info').find('.names-people-likes').append(`<a href="{{ URL::to('/') }}/user/${like['authorable']['id']}">${like['authorable']['name']} </a>`)
         });
         if (count > 2) {
-            $(`#names_${model}_${id}`).append(` и еще <br>${count - 2} человк(а)`)
+            item.parents('.post-additional-info').find('.names-people-likes').append(` и еще <br>${count - 2} человк(а)`)
         }
     }
 
-    function showComments(list, model)
+    function editPost(item)
     {
-        let  commentsList = $(`#comments_list_${model}_${list}`)
-        let button = $(`#comments_${model}_${list}`)
-        let commentForm = $(`#write_comment_${model}_${list}`)
-        commentsList.slideToggle()
-        if(button.children('span').text() =='+'){
-            button.html('Скрыть комментарии <span>-</span>')
-            writeComment(list, model)
-        } else {
-            button.html('Показать комментарии <span>+</span>')
-            commentForm.slideUp()
-            commentForm.unbind('submit')
-            commentForm.children('button').not('[type]').unbind('click')
-        }
-    }
-
-    function writeComment(list, model, feed)
-    {
-        let commentCount = 0
-        let commentForm = $(`#write_comment_${model}_${list}`)
-        commentForm.slideToggle()
-        commentForm.children('button').not('[type]').click(function (e){
-            e.preventDefault()
-            commentForm.find('textarea').val('')
-            showComments(list, model)
-        })
-        commentForm.submit(function (e) {
-            e.preventDefault()
-            commentCount = +$(`#comments_count_${model}_${list}`).text()
-            $(this).children('button').prop('disabled', true)
-            $.ajax({
-                type: "POST",
-                url: `{{ URL::to('/') }}/comment`,
-                data: $(this).serialize(),
-                dataType: "JSON",
-                success: function (response) {
-                    if(!!response){
-                        console.log(response)
-                        renderComment(response, list, model)
-                        commentForm.find('textarea').val('')
-                        commentForm.children('button').removeAttr("disabled")
-                        $(`#comments_count_${model}_${list}`).text(++commentCount)
-                    }
-                }
-            });
-        })
-    }
-
-    function renderComment(response, list, model)
-    {
-        $(`#comments_list_${model}_${list}`).append(response['comment'])
-    }
-
-    function editPost(post_id)
-    {
-        let post = $(`#post_text_${post_id}`)
-        if(post.hasClass('can_edit')){
-            let feed = $('.can_edit')
-            feed.toggleClass('can_edit')
-            post.html(`<form action="" enctype="multipart/form-data" method="POST">
+        let postBody = item.parents('.hentry').find('.post_body')
+        console.log(postBody)
+        let id = item.data('id')
+        if(postBody.hasClass('can_edit')){
+            postBody.toggleClass('can_edit')
+                .html(`<form action="" enctype="multipart/form-data" method="POST">
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
                             <label for="text">Текст</label>
                             <textarea id="text"
                                     class="form-control"
-                                    name="text">${post.html()}</textarea>
+                                    name="text">${postBody.html()}</textarea>
                         </div>
                         <button type="submit" class="btn btn-success">
                             Сохранить
                         </button>
                     </form>`)
-            startSummernote(post_id)
-            post.children('form').submit(function (e) {
+            startSummernote(id)
+            postBody.children('form').submit(function (e) {
                 e.preventDefault()
                 $.ajax({
                     type: "POST",
-                    url: `{{ URL::to('/') }}/post/${post_id}`,
+                    url: `{{ URL::to('/') }}/post/${id}`,
                     data: $(this).serialize(),
                     dataType: "JSON",
                     success: function (response) {
                         if(!!response['text']){
-                            post.html(response['text'])
-                            feed.toggleClass('can_edit')
+                            postBody.html(response['text'])
+                                .toggleClass('can_edit')
+                                .prev().find('.more-dropdown').show()
                         }
                     }
                 })
             })
         }
     }
+
+    function deletePost(item)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let post = item.parents('.ui-block')
+        console.log(post)
+        $.ajax({
+            type: "delete",
+            url: `{{ URL::to('/') }}/post/${item.data('id')}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    post.slideUp(300)
+                }
+            }
+        })
+    }
+
     function startSummernote(post_id)
     {
         var post_id = post_id
@@ -325,30 +296,64 @@
         }
     }
 
-    function deletePost(post_id)
+    function showComments(feed)
     {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        let post = $('#post_' + post_id)
-        $.ajax({
-            type: "delete",
-            url: `{{ URL::to('/') }}/post/${post_id}`,
-            data: '',
-            dataType: "JSON",
-            success: function (response) {
-                if(!!response['deleted']){
-                    post.slideUp(500)
+        let commentsList = feed.find('.comments-list')
+        let button = feed.find('.more-comments')
+        let commentForm = feed.find('.write_comment')
+        commentsList.slideToggle()
+        if(button.children('span').text() =='+'){
+            button.html('Скрыть комментарии <span>-</span>')
+            writeComment(feed)
+        } else {
+            button.html('Показать комментарии <span>+</span>')
+            commentForm.slideUp()
+            commentForm.unbind('submit')
+            commentForm.children('button').not('[type]').unbind('click')
+        }
+    }
+
+    function writeComment(feed)
+    {
+        let commentCount = 0
+        let commentForm = feed.find('.write_comment')
+        commentForm.slideToggle()
+        commentForm.children('button').not('[type]').click(function (e){
+            e.preventDefault()
+            commentForm.find('textarea').val('')
+            showComments(feed)
+        })
+        commentForm.submit(function (e) {
+            e.preventDefault()
+            commentCount = +feed.find('.comments_count').text()
+            $(this).children('button').prop('disabled', true)
+            $.ajax({
+                type: "POST",
+                url: `{{ URL::to('/') }}/comment`,
+                data: $(this).serialize(),
+                dataType: "JSON",
+                success: function (response) {
+                    if(!!response){
+                        console.log(response)
+                        renderComment(response, feed)
+                        commentForm.find('textarea').val('')
+                        commentForm.children('button').removeAttr("disabled")
+                        feed.find('.comments_count').text(++commentCount)
+                    }
                 }
-            }
+            });
         })
     }
 
-    function editComment(commentId)
+    function renderComment(response, feed)
     {
-        let comment = $(`#comment_${commentId}`).find('p')
+        feed.find('.comments-list').append(response['comment'])
+    }
+
+    function editComment(href)
+    {
+        let commentId = href.data('id')
+        let comment = href.parents('.comment-item').find('p')
         if(comment.hasClass('can_edit')){
             comment.toggleClass('can_edit')
             commentText = comment.text()
@@ -365,7 +370,7 @@
                 e.preventDefault()
                 comment.html(commentText)
                 comment.toggleClass('can_edit')
-                $(`#comment_${commentId}`).find('.more-dropdown').show()
+                href.parents('.more-dropdown').show()
             })
             comment.children('form').submit(function(e) {
                 e.preventDefault()
@@ -383,7 +388,7 @@
                         if(!!response['text']){
                             comment.html(response['text'])
                             comment.toggleClass('can_edit')
-                            $(`#comment_${commentId}`).find('.more-dropdown').show()
+                            href.parents('.more-dropdown').show()
                         }
                     }
                 })
@@ -391,15 +396,16 @@
         }
     }
 
-    function deleteComment(data)
+    function deleteComment(href)
     {
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-        let comment = $(`#comment_${data.id}`)
-        let commentCount = +$(`#comments_count_${data.feed}`).text()
+        let data = href.data()
+        let comment = href.parents('.comment-item')
+        let commentCount = +href.parents('.hentry').find('.comments_count').text()
         $.ajax({
             type: "delete",
             url: `{{ URL::to('/') }}/comment/${data.id}`,
@@ -407,27 +413,46 @@
             dataType: "JSON",
             success: function (response) {
                 if(!!response['deleted']){
-                    comment.slideUp(500)
-                    $(`#comments_count_${data.feed}`).text(--commentCount)
+                    comment.slideUp(300)
+                    href.parents('.hentry').find('.comments_count').text(--commentCount)
                 }
             }
         });
     }
 
     $(document).ready(function() {
-        $('.comments-list').on('click', 'a', function(e){
+        $('#newsfeed-items-grid').on('click', '.dropdown_menu_item', function(e){
             e.preventDefault()
             console.log($(this).data())
             if($(this).hasClass('edit_comment')){
-                editComment($(this).data('id'))
-                $(`#more-dropdown_comment_${$(this).data('id')}`).fadeOut(200)
+                editComment($(this))
+                $(this).parents('.more-dropdown').fadeOut(200)
 
             }
             if($(this).hasClass('delete_comment')){
-                deleteComment($(this).data())
-                $(`#more-dropdown_comment_${$(this).data('id')}`).fadeOut(200)
+                deleteComment($(this))
+                console.log($(this).parents('.hentry').find('.comments_count'))
+                $(this).parents('.more-dropdown').fadeOut(200)
+            }
+            if($(this).hasClass('edit_post')){
+                editPost($(this))
+               $(this).parents('.more-dropdown').fadeOut(200)
+            }
+            if($(this).hasClass('delete_post')){
+                deletePost($(this))
+               $(this).parents('.more-dropdown').fadeOut(200)
             }
         })
+        .on('click', '.show_comments', function(e){
+            e.preventDefault()
+            showComments($(this).parents('.hentry'))
+        })
+        .on('click', '.likes', function(e){
+            e.preventDefault()
+            console.log($(this))
+            likeIt($(this))
+        })
+
     })
 </script>
 @endauth
