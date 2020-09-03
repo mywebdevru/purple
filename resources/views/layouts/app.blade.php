@@ -186,7 +186,6 @@
                         </button>
                     </form>`)
             startSummernote(id)
-            console.log('Start')
             postBody.children('form').submit(function (e) {
                 e.preventDefault()
                 $.ajax({
