@@ -260,4 +260,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Map');
     }
+
+    public function getAvatarAttribute($value)
+    {
+        return $value ? (Str::startsWith($value , 'http') ? $value : asset($value)) : asset('img/default-avatar.jpg');
+    }
 }

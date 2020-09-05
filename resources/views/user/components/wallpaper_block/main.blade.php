@@ -150,7 +150,7 @@
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ $user->avatar ? (Str::startsWith($user->avatar, 'http') ? $user->avatar : asset($user->avatar)) : asset('img/default-avatar.jpg')}}" class="author-image" alt="author">
+							<img src="{{ $user->avatar }}" class="author-image" alt="author">
 						</a>
 						<div class="author-content">
 							<a href="" class="h4 author-name">{{ $user->full_name }}</a>
