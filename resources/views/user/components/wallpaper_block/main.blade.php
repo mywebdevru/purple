@@ -4,9 +4,11 @@
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block">
 				<div class="top-header">
-					<div class="top-header-thumb">
-						<img src="{{ Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)}}" alt="wallpaper" id="wallpaper">
-					</div>
+                    <div class="top-header-thumb">
+                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
+                             alt="wallpaper"
+                             id="wallpaper">
+                    </div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
@@ -33,9 +35,9 @@
                         <div class="control-block-button-left">
                             <div class="btn btn-control bg-red" title="Создать пост">
                                 <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
-                                
+
                             </div>
-                            
+
                             <div class="btn btn-control bg-green" title="Добавить маршрут">
                                 <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
 
@@ -43,10 +45,10 @@
                             <div class="btn btn-control bg-yellow" title="Добавить Фото">
                                 <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
 
-                            </div>                            							
+                            </div>
 						</div>
 						<div class="control-block-button">
-                            
+
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -143,7 +145,7 @@
                                         </ul>
                                     </div>
                                 @endcan
-                                                      
+
 						</div>
 					</div>
 					<div class="top-header-author">
