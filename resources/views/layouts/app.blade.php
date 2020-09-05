@@ -165,6 +165,43 @@
         }
     }
 
+    function createPost()
+    {
+        let post = $('.new_post')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        console.log(post)
+        $.ajax({
+            type: "delete",
+            url: `{{ URL::to('/') }}/post/${item.data('id')}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    post.slideUp(300)
+                }
+            }
+        })
+        let postBody = post.find('.post_body')
+        postBody.html(`<form action="" enctype="multipart/form-data" method="POST">
+                        @method('PATCH')
+                        @csrf
+                        <div class="form-group">
+                            <label for="text">Текст</label>
+                            <textarea id="text"
+                                    class="form-control"
+                                    name="text">${postBody.html()}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Сохранить
+                        </button>
+                    </form>`)
+            startSummernote(id)
+    }
+
     function editPost(item)
     {
         let postBody = item.parents('.hentry').find('.post_body')
@@ -453,7 +490,12 @@
             likeIt($(this))
         })
 
+        $('.create_post').click( function(e){
+            e.preventDefault()
+            createPost()
+        })
     })
+
 </script>
 @endauth
 </body>
