@@ -31,11 +31,11 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
-                            <div class="btn btn-control bg-red" title="Создать пост">
+                            <div class="btn btn-control bg-red create_post" title="Создать пост">
                                 <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
-                                
+
                             </div>
-                            
+
                             <div class="btn btn-control bg-green" title="Добавить маршрут">
                                 <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
 
@@ -43,10 +43,10 @@
                             <div class="btn btn-control bg-yellow" title="Добавить Фото">
                                 <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
 
-                            </div>                            							
+                            </div>
 						</div>
 						<div class="control-block-button">
-                            
+
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -143,7 +143,7 @@
                                         </ul>
                                     </div>
                                 @endcan
-                                                      
+
 						</div>
 					</div>
 					<div class="top-header-author">

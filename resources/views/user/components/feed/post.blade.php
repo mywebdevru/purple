@@ -42,7 +42,7 @@
                     <input type="hidden" name="likeable_type" value="App\Models\Post">
                     <input type="hidden" name="likeable_id" value="{{ $feed->feedable['id'] }}">
                     <input type="hidden" name="authorable_type" value="App\Models\User">
-                    <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
+                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
                 </form>
             </a>
             <ul class="friends-harmonic">
@@ -107,8 +107,8 @@
 
         </div>
         <a href="#" class="more-comments show_comments">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $feed->feedable->comments, 'comment_author' => $comment_author, 'feed' => 'post_'.$feed->feedable['id']])@endcomponent
-        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'post_'.$feed->feedable['id']])
+        @component('user.components.feed.comments',['comments' => $feed->feedable->comments])@endcomponent
+        @component('user.components.feed.write_comment')
             @slot('commentable_id')
             {{ $feed->feedable['id'] }}
             @endslot

@@ -34,7 +34,7 @@
             <input type="hidden" name="likeable_type" value="App\Models\Comment">
             <input type="hidden" name="likeable_id" value="{{ $item['id'] }}">
             <input type="hidden" name="authorable_type" value="App\Models\User">
-            <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
+            <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
         </form>
         <svg class="olymp-heart-icon">
             <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
