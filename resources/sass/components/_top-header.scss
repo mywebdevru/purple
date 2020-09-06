@@ -149,10 +149,21 @@
     position: absolute;
     left: 38px;
     top: -31px;
+    display: flex;
 }
 
 .bg-red {
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.bg-green {
+    margin-right: 20px;
+    margin-top: 10px;
+}
+.bg-yellow {
     // margin-right: 20px;
+    margin-top: 10px;
 }
 
 .profile-section.with-social-menu-tabs {
@@ -166,6 +177,31 @@
 @media screen and (min-width: 783px) {
     .admin-bar #site-header {
         top: 32px;
+    }
+    .bg-red {
+        margin-right: unset;
+    }
+    
+    .bg-green {
+        margin-right: unset;
+    }
+}
+@media screen and (max-width: 783px) {
+    .bg-red {
+        margin-right: unset;
+        margin-top: unset;
+    }
+
+    .bg-green {
+        margin-right: unset;
+        margin-top: unset;
+    }
+    .bg-yellow {
+        margin-right: unset;
+        margin-top: unset;
+    }
+    .bg-purple {
+        margin-left: unset;
     }
 }
 
