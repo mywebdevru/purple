@@ -14,7 +14,7 @@
                 <div class="ui-block" style="display: none;">
                     <article class="hentry post new_post">
                         <div class="post__author author vcard inline-items">
-                            <img  src="{{ Str::startsWith( auth()->user()->avatar, 'http') ? auth()->user()->avatar : asset( auth()->user()->avatar) }}" alt="author">
+                            <img  src="{{ auth()->user()->avatar }}" alt="author">
                             <div class="author-date">
                                 <a class="h6 post__author-name fn" href="{{ route('user.show', auth()->user()->id) }}">{{ auth()->user()->full_name }}</a>
                                 <div class="post__date">
