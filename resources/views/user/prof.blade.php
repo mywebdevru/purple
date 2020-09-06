@@ -27,6 +27,11 @@
                         <div class="can_edit post_body">
 
                         </div>
+                        <form  method="POST">
+                            @csrf
+                            <input type="hidden" name="postable_type" value="App\Models\User">
+                            <input type="hidden" name="postable_id" value="{{ auth()->user()->id }}">
+                        </form>
                     </article>
                 </div>
 
