@@ -4,9 +4,11 @@
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block">
 				<div class="top-header">
-					<div class="top-header-thumb">
-						<img src="{{ Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)}}" alt="wallpaper" id="wallpaper">
-					</div>
+                    <div class="top-header-thumb">
+                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
+                             alt="wallpaper"
+                             id="wallpaper">
+                    </div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
@@ -31,6 +33,7 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
+
                             
                         <div class="wheel wheel__red">
   
@@ -70,10 +73,9 @@
                                 <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>    
                             </div>
                         </div>
-
 						</div>
 						<div class="control-block-button">
-                            
+
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -170,12 +172,12 @@
                                         </ul>
                                     </div>
                                 @endcan
-                                                      
+
 						</div>
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ Str::startsWith($user->avatar, 'http') ? $user->avatar : asset($user->avatar)}}" class="author-image" alt="author">
+							<img src="{{ $user->avatar }}" class="author-image" alt="author">
 						</a>
 						<div class="author-content">
 							<a href="" class="h4 author-name">{{ $user->full_name }}</a>
