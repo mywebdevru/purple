@@ -33,7 +33,7 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
-                            <div class="btn btn-control bg-red" title="Создать пост">
+                            <div class="btn btn-control bg-red create_post" title="Создать пост">
                                 <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
 
                             </div>

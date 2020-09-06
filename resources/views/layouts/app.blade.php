@@ -165,16 +165,42 @@
         }
     }
 
-    function editPost(item)
+    function createPost()
     {
-        let postBody = item.parents('.hentry').find('.post_body')
+        let post = $('.new_post')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        console.log(post)
+        $.ajax({
+            type: "post",
+            url: `{{ URL::to('/') }}/post`,
+            data: post.find('form').serialize(),
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response)
+                if(!!response['id']){
+                    editPost(0, post, response['id'])
+                    post.parent().slideDown(300)
+                }
+            }
+        })
+    }
+    function editPost(item, post = 0, id = 0)
+    {
+        post ? postBody = post.find('.post_body') : postBody = item.parents('.hentry').find('.post_body')
         console.log(postBody)
-        let id = item.data('id')
+        id ? id = id : id = item.data('id')
+        console.log(id)
         if(postBody.hasClass('can_edit')){
             postBody.toggleClass('can_edit')
                 .html(`<form action="" enctype="multipart/form-data" method="POST">
-                        @method('PATCH')
                         @csrf
+                        <input type="hidden" name="postable_type" value="App\\Models\\User">
+                        <input type="hidden" name="postable_id" value='{{ auth()->user()->id }}'>
+                        <input type="hidden" name="post_id" value="${id}">
                         <div class="form-group">
                             <label for="text">Текст</label>
                             <textarea id="text"
@@ -186,18 +212,25 @@
                         </button>
                     </form>`)
             startSummernote(id)
+            !!post ? url = '{{ URL::to('/') }}/post' : url = `{{ URL::to('/') }}/post/${id}`
+            !!post ? method = 'post' : method = 'patch'
             postBody.children('form').submit(function (e) {
                 e.preventDefault()
                 $.ajax({
-                    type: "POST",
-                    url: `{{ URL::to('/') }}/post/${id}`,
+                    type: method,
+                    url: url,
                     data: $(this).serialize(),
                     dataType: "JSON",
                     success: function (response) {
+                        console.log(response)
                         if(!!response['text']){
                             postBody.html(response['text'])
                                 .toggleClass('can_edit')
                                 .prev().find('.more-dropdown').show()
+                        } else {
+                            post.parent().slideUp(300)
+                            postBody.html('')
+                            $('#newsfeed-items-grid').prepend(response)
                         }
                     }
                 })
@@ -421,6 +454,7 @@
     }
 
     $(document).ready(function() {
+        console.log($('#newsfeed-items-grid'))
         $('#newsfeed-items-grid').on('click', '.dropdown_menu_item', function(e){
             e.preventDefault()
             console.log($(this).data())
@@ -453,7 +487,12 @@
             likeIt($(this))
         })
 
+        $('.create_post').click( function(e){
+            e.preventDefault()
+            createPost()
+        })
     })
+
 </script>
 @endauth
 </body>
