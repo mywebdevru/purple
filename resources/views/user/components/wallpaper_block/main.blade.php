@@ -33,24 +33,51 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
-                            <div class="btn btn-control bg-red create_post" title="Создать пост">
-                                <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
 
+                            
+                        <div class="wheel wheel__red">
+  
+                            <div class="wheel__inner__red">
+                                <div class="wheel__content__red">п</div>
+                                <div class="wheel__content__red">о</div>
+                                <div class="wheel__content__red">с</div>
+                                <div class="wheel__content__red">т</div>
                             </div>
-
-                            <div class="btn btn-control bg-green" title="Добавить маршрут">
+                            <div class="btn btn-control bg-red" onmouseover="changeItemRed()" onmouseout="rechangeItemRed()" data-toggle="tooltip" data-placement="top" title="">
+                                <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>                                
+                            </div>
+                        </div>
+                            
+                        <div class="wheel wheel__green">  
+                            
+                            <div class="wheel__inner__green">
+                                <div class="wheel__content__green">п</div>
+                                <div class="wheel__content__green">у</div>
+                                <div class="wheel__content__green">т</div>
+                                <div class="wheel__content__green">ь</div>                                
+                            </div>
+                            <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
                                 <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
-
                             </div>
-                            <div class="btn btn-control bg-yellow" title="Добавить Фото">
-                                <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
+                        </div>
 
+                        <div class="wheel wheel__yellow">  
+                            
+                            <div class="wheel__inner__yellow">
+                                <div class="wheel__content__yellow">ф</div>
+                                <div class="wheel__content__yellow">о</div>
+                                <div class="wheel__content__yellow">т</div>
+                                <div class="wheel__content__yellow">о</div>
                             </div>
+                            <div class="btn btn-control bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
+                                <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>    
+                            </div>
+                        </div>
 						</div>
 						<div class="control-block-button">
 
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-blue more append">
+                                    <div class="btn btn-control bg-blue more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                             <li>
@@ -67,7 +94,7 @@
                                     </div>
                                 @endif
                                 @if (!auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-yellow more append">
+                                    <div class="btn btn-control bg-yellow more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                             <li>
@@ -83,7 +110,7 @@
                                     </div>
                                 @endif
                                 @if (!auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-orange more append">
+                                    <div class="btn btn-control bg-orange more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
@@ -109,7 +136,7 @@
                                     </div>
                                 @endif
                                 @if (!$user->friends->where('friend_id', auth()->user()->id)->isEmpty())
-                                    <div class="btn btn-control bg-green more append">
+                                    <div class="btn btn-control bg-green more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
@@ -125,7 +152,7 @@
                                         </ul>
                                     </div>
                                 @endif
-                                    <a href="#" class="btn btn-control bg-purple" id="bg-purple">
+                                    <a href="#" class="btn btn-control bg-purple" data-toggle="tooltip" data-placement="top" title="Настройки" id="bg-purple">
                                         <svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
                                     </a>
                                 @can('update', $user)
@@ -165,3 +192,138 @@
 
 <!-- ... окончание панели навигации -->
 @component('user.components.wallpaper_block.modal_photo')@endcomponent
+@section('scripts')
+<script>
+    function rotateMainRed(value) {
+    let wheelInnerRed = document.querySelectorAll('.wheel__inner__red');
+    deg = 100;
+    for (let item of wheelInnerRed) {
+      item.style.transform = `rotate(${deg}deg)`;
+      item.style.color = 'red';
+      deg += value;
+    }
+    return value
+    }
+rotateMainRed(10);
+
+function rotateMainGreen(value) {
+    let wheelInnerGreen = document.querySelectorAll('.wheel__inner__green');
+    deg = -121;
+    for (let item of wheelInnerGreen) {
+      item.style.transform = `rotate(${deg}deg)`;
+      item.style.color = 'green';
+      deg += value;
+    }
+    return value
+    }
+rotateMainGreen(10);
+
+function rotateMainYellow(value) {
+    let wheelInnerYellow = document.querySelectorAll('.wheel__inner__yellow');
+    deg = -111;
+    for (let item of wheelInnerYellow) {
+      item.style.transform = `rotate(${deg}deg)`;
+      item.style.color = 'black';
+      deg += value;
+    }
+    return value
+    }
+rotateMainYellow(10);
+  
+function rotateOutherRed(value) {
+    let wheelContentRed = document.querySelectorAll('.wheel__content__red');
+    deg = 0;
+    for (let item of wheelContentRed) {
+      item.style.transform = `rotate(${deg}deg)`
+      deg += value;
+    }
+}
+rotateOutherRed(14);
+
+function rotateOutherGreen(value) {
+    let wheelContentGreen = document.querySelectorAll('.wheel__content__green');
+    deg = 0;
+    for (let item of wheelContentGreen) {
+      item.style.transform = `rotate(${deg}deg)`
+      deg += value;
+    }
+}
+rotateOutherGreen(14);
+
+function rotateOutherYellow(value) {
+    let wheelContentYellow = document.querySelectorAll('.wheel__content__yellow');
+    deg = 0;
+    for (let item of wheelContentYellow) {
+      item.style.transform = `rotate(${deg}deg)`
+      deg += value;
+    }
+}
+rotateOutherYellow(14);
+
+function changeItemRed() {
+  document.querySelector('.wheel__red').style.backgroundColor = 'antiquewhite';
+  document.querySelector('.wheel__red').style.transition = '0.5s';
+  document.querySelectorAll('.wheel__inner__red')[0].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__red')[0].style.transform = 'rotate(-79deg)';
+  document.querySelectorAll('.wheel__inner__red')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__red')[1].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__red')[1].style.transform = 'rotate(5deg)';
+  document.querySelectorAll('.wheel__inner__red')[1].style.transition = 'all 2s ease-in-out';
+}
+function rechangeItemRed() {
+  document.querySelector('.wheel__red').style.backgroundColor = 'unset';
+  document.querySelectorAll('.wheel__inner__red')[0].style.opacity = '0';
+  document.querySelectorAll('.wheel__inner__red')[1].style.opacity = '0';
+}
+
+function changeItemGreen() {
+  document.querySelector('.wheel__green').style.backgroundColor = '#c7fcda';
+  document.querySelector('.wheel__green').style.transition = '0.5s';
+  document.querySelectorAll('.wheel__inner__green')[0].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__green')[0].style.transform = 'rotate(-79deg)';
+  document.querySelectorAll('.wheel__inner__green')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__green')[1].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__green')[1].style.transform = 'rotate(0deg)';
+  document.querySelectorAll('.wheel__inner__green')[1].style.transition = 'all 2s ease-in-out';
+}
+function rechangeItemGreen() {
+  document.querySelector('.wheel__green').style.backgroundColor = 'unset';
+  document.querySelectorAll('.wheel__inner__green')[0].style.opacity = '0';
+  document.querySelectorAll('.wheel__inner__green')[1].style.opacity = '0';
+}
+
+function changeItemYellow() {
+  document.querySelector('.wheel__yellow').style.backgroundColor = '#fcf8d1';
+  document.querySelector('.wheel__yellow').style.transition = '0.5s';
+  document.querySelectorAll('.wheel__inner__yellow')[0].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__yellow')[0].style.transform = 'rotate(-79deg)';
+  document.querySelectorAll('.wheel__inner__yellow')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__yellow')[1].style.opacity = '1';
+  document.querySelectorAll('.wheel__inner__yellow')[1].style.transform = 'rotate(5deg)';
+  document.querySelectorAll('.wheel__inner__yellow')[1].style.transition = 'all 2s ease-in-out';
+}
+function rechangeItemYellow() {
+  document.querySelector('.wheel__yellow').style.backgroundColor = 'unset';
+  document.querySelectorAll('.wheel__inner__yellow')[0].style.opacity = '0';
+  document.querySelectorAll('.wheel__inner__yellow')[1].style.opacity = '0';
+}
+let controlBlockButtonsRight = document.querySelector('.append');
+let controlBlockButtonsLeft = document.querySelector('.control-block-button-left');
+let bgPurple = document.querySelector('#bg-purple');
+
+if (screen.width <= '768') {
+  controlBlockButtonsRight.remove();
+  controlBlockButtonsLeft.append(controlBlockButtonsRight, bgPurple);
+  document.querySelector('#bg-purple').style.marginLeft = '3px';
+}
+$(document).ready(function(){
+    if ($(window).width() <= 768){
+        $('.wheel').contents().unwrap();
+        $('.wheel__inner__red').remove();
+        $('.wheel__inner__green').remove();
+        $('.wheel__inner__yellow').remove();
+    }
+});
+
+</script>
+@endsection
