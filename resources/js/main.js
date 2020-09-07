@@ -96,8 +96,6 @@ $(function () {
                     .unbind('dblclick', replaceHTML);
 
         }
-    $(".fancy_title").lettering();
-    $('[data-toggle="tooltip"]').tooltip();
 });
 
 // конец кодя для страницы редактирования
