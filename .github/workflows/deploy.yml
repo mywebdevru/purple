@@ -75,7 +75,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo find ./storage/app/* -type d -name admin -prune -o -exec rm -rf {} \;
+            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
             sudo php artisan cache:clear
             git pull origin dev
             composer install
