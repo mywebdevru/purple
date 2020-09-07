@@ -4,11 +4,9 @@
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block">
 				<div class="top-header">
-                    <div class="top-header-thumb">
-                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
-                             alt="wallpaper"
-                             id="wallpaper">
-                    </div>
+					<div class="top-header-thumb">
+						<img src="{{ Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)}}" alt="wallpaper" id="wallpaper">
+					</div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
@@ -33,7 +31,6 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
-
                             
                         <div class="wheel wheel__red">
   
@@ -73,9 +70,10 @@
                                 <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>    
                             </div>
                         </div>
+
 						</div>
 						<div class="control-block-button">
-
+                            
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append" data-toggle="tooltip" data-placement="top">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -172,12 +170,12 @@
                                         </ul>
                                     </div>
                                 @endcan
-
+                                                      
 						</div>
 					</div>
 					<div class="top-header-author">
 						<a href="#" class="author-thumb revealator-zoomin">
-							<img src="{{ $user->avatar }}" class="author-image" alt="author">
+							<img src="{{ Str::startsWith($user->avatar, 'http') ? $user->avatar : asset($user->avatar)}}" class="author-image" alt="author">
 						</a>
 						<div class="author-content">
 							<a href="" class="h4 author-name">{{ $user->full_name }}</a>
@@ -266,14 +264,10 @@ function changeItemRed() {
   document.querySelectorAll('.wheel__inner__red')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__red')[0].style.transform = 'rotate(-79deg)';
   document.querySelectorAll('.wheel__inner__red')[0].style.transition = 'all 2s ease-in-out';
-  document.querySelectorAll('.wheel__inner__red')[1].style.opacity = '1';
-  document.querySelectorAll('.wheel__inner__red')[1].style.transform = 'rotate(5deg)';
-  document.querySelectorAll('.wheel__inner__red')[1].style.transition = 'all 2s ease-in-out';
 }
 function rechangeItemRed() {
   document.querySelector('.wheel__red').style.backgroundColor = 'unset';
   document.querySelectorAll('.wheel__inner__red')[0].style.opacity = '0';
-  document.querySelectorAll('.wheel__inner__red')[1].style.opacity = '0';
 }
 
 function changeItemGreen() {
@@ -282,14 +276,10 @@ function changeItemGreen() {
   document.querySelectorAll('.wheel__inner__green')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__green')[0].style.transform = 'rotate(-79deg)';
   document.querySelectorAll('.wheel__inner__green')[0].style.transition = 'all 2s ease-in-out';
-  document.querySelectorAll('.wheel__inner__green')[1].style.opacity = '1';
-  document.querySelectorAll('.wheel__inner__green')[1].style.transform = 'rotate(0deg)';
-  document.querySelectorAll('.wheel__inner__green')[1].style.transition = 'all 2s ease-in-out';
 }
 function rechangeItemGreen() {
   document.querySelector('.wheel__green').style.backgroundColor = 'unset';
   document.querySelectorAll('.wheel__inner__green')[0].style.opacity = '0';
-  document.querySelectorAll('.wheel__inner__green')[1].style.opacity = '0';
 }
 
 function changeItemYellow() {
@@ -298,24 +288,20 @@ function changeItemYellow() {
   document.querySelectorAll('.wheel__inner__yellow')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__yellow')[0].style.transform = 'rotate(-79deg)';
   document.querySelectorAll('.wheel__inner__yellow')[0].style.transition = 'all 2s ease-in-out';
-  document.querySelectorAll('.wheel__inner__yellow')[1].style.opacity = '1';
-  document.querySelectorAll('.wheel__inner__yellow')[1].style.transform = 'rotate(5deg)';
-  document.querySelectorAll('.wheel__inner__yellow')[1].style.transition = 'all 2s ease-in-out';
 }
 function rechangeItemYellow() {
   document.querySelector('.wheel__yellow').style.backgroundColor = 'unset';
   document.querySelectorAll('.wheel__inner__yellow')[0].style.opacity = '0';
-  document.querySelectorAll('.wheel__inner__yellow')[1].style.opacity = '0';
 }
-let controlBlockButtonsRight = document.querySelector('.append');
-let controlBlockButtonsLeft = document.querySelector('.control-block-button-left');
-let bgPurple = document.querySelector('#bg-purple');
+// let controlBlockButtonsRight = document.querySelector('.append');
+// let controlBlockButtonsLeft = document.querySelector('.control-block-button-left');
+// let bgPurple = document.querySelector('#bg-purple');
 
-if (screen.width <= '768') {
-  controlBlockButtonsRight.remove();
-  controlBlockButtonsLeft.append(controlBlockButtonsRight, bgPurple);
-  document.querySelector('#bg-purple').style.marginLeft = '3px';
-}
+// if (screen.width <= '768') {
+//   controlBlockButtonsRight.remove();
+//   controlBlockButtonsLeft.append(controlBlockButtonsRight, bgPurple);
+//   document.querySelector('#bg-purple').style.marginLeft = '3px';
+// }
 $(document).ready(function(){
     if ($(window).width() <= 768){
         $('.wheel').contents().unwrap();
