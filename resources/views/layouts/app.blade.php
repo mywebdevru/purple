@@ -165,9 +165,8 @@
         }
     }
 
-    function createPost()
+    function createPost(post)
     {
-        let post = $('.new_post')
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -224,7 +223,8 @@
                                 .toggleClass('can_edit')
                                 .prev().find('.more-dropdown').show()
                         } else {
-                            post.parent().slideUp(300)
+                            post.data('id', 0)
+                                .parent().slideUp(300)
                                 .after(response)
                             postBody.html('')
                                     .toggleClass('can_edit')
@@ -476,7 +476,10 @@
         })
         $('.create_post').click(function(e){
             e.preventDefault()
-            createPost()
+            let post = $('.new_post')
+            if (!!!post.data('id')){
+                createPost(post)
+            }
         })
     })
 </script>
