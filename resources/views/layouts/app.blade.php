@@ -219,7 +219,6 @@
                     data: $(this).serialize(),
                     dataType: "JSON",
                     success: function (response) {
-                        console.log(response)
                         if(!!response['text']){
                             postBody.html(response['text'])
                                 .toggleClass('can_edit')
