@@ -164,35 +164,31 @@
         }
     }
 
-    function createPost()
+    function createPost(post)
     {
-        let post = $('.new_post')
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        console.log(post)
         $.ajax({
             type: "post",
             url: `{{ URL::to('/') }}/post`,
             data: post.find('form').serialize(),
             dataType: "JSON",
             success: function (response) {
-                console.log(response)
                 if(!!response['id']){
-                    editPost(0, post, response['id'])
+                    post.data('id', response['id'])
+                    editPost(post, 1)
                     post.parent().slideDown(300)
                 }
             }
         })
     }
-    function editPost(item, post = 0, id = 0)
+    function editPost(post, newPost = 0)
     {
-        post ? postBody = post.find('.post_body') : postBody = item.parents('.hentry').find('.post_body')
-        console.log(postBody)
-        id ? id = id : id = item.data('id')
-        console.log(id)
+        let postBody = post.find('.post_body')
+        let id = post.data('id')
         if(postBody.hasClass('can_edit')){
             postBody.toggleClass('can_edit')
                 .html(`<form action="" enctype="multipart/form-data" method="POST">
@@ -211,8 +207,8 @@
                         </button>
                     </form>`)
             startSummernote(id)
-            !!post ? url = '{{ URL::to('/') }}/post' : url = `{{ URL::to('/') }}/post/${id}`
-            !!post ? method = 'post' : method = 'patch'
+            !!newPost ? url = '{{ URL::to('/') }}/post' : url = `{{ URL::to('/') }}/post/${id}`
+            !!newPost ? method = 'post' : method = 'patch'
             postBody.children('form').submit(function (e) {
                 e.preventDefault()
                 $.ajax({
@@ -221,13 +217,13 @@
                     data: $(this).serialize(),
                     dataType: "JSON",
                     success: function (response) {
-                        console.log(response)
                         if(!!response['text']){
                             postBody.html(response['text'])
                                 .toggleClass('can_edit')
                                 .prev().find('.more-dropdown').show()
                         } else {
-                            post.parent().slideUp(300)
+                            post.data('id', 0)
+                                .parent().slideUp(300)
                                 .after(response)
                             postBody.html('')
                                     .toggleClass('can_edit')
@@ -245,8 +241,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        let post = item.parents('.ui-block')
-        console.log(post)
+        let post = item.parent('.ui-block')
         $.ajax({
             type: "delete",
             url: `{{ URL::to('/') }}/post/${item.data('id')}`,
@@ -303,7 +298,6 @@
                     method: 'post',
                     url: "{{ route('summernote.upload') }}",
                 })).data;
-                console.log(images);
                 for (let i = 0; i < images.length; i++) {
                     editor.summernote('insertImage', '/' + images[i], function ($image) {
                         $image.css('width', '100%');
@@ -314,7 +308,6 @@
             }
         }
         async function deleteFile(file) {
-            console.log(file);
             const data = new FormData();
             data.append('file', file);
             try {
@@ -367,7 +360,6 @@
                 dataType: "JSON",
                 success: function (response) {
                     if(!!response){
-                        console.log(response)
                         renderComment(response, feed)
                         commentForm.find('textarea').val('')
                         commentForm.children('button').removeAttr("disabled")
@@ -454,26 +446,22 @@
     }
 
     $(document).ready(function() {
-        console.log($('#newsfeed-items-grid'))
         $('#newsfeed-items-grid').on('click', '.dropdown_menu_item', function(e){
             e.preventDefault()
-            console.log($(this).data())
             if($(this).hasClass('edit_comment')){
                 editComment($(this))
                 $(this).parents('.more-dropdown').fadeOut(200)
-
             }
             if($(this).hasClass('delete_comment')){
                 deleteComment($(this))
-                console.log($(this).parents('.hentry').find('.comments_count'))
                 $(this).parents('.more-dropdown').fadeOut(200)
             }
             if($(this).hasClass('edit_post')){
-                editPost($(this))
+                editPost($(this).parents('.hentry'))
                $(this).parents('.more-dropdown').fadeOut(200)
             }
             if($(this).hasClass('delete_post')){
-                deletePost($(this))
+                deletePost($(this).parents('.hentry'))
                $(this).parents('.more-dropdown').fadeOut(200)
             }
         })
@@ -483,16 +471,16 @@
         })
         .on('click', '.likes', function(e){
             e.preventDefault()
-            console.log($(this))
             likeIt($(this))
         })
-
-        $('.create_post').click( function(e){
+        $('.create_post').click(function(e){
             e.preventDefault()
-            createPost()
+            let post = $('.new_post')
+            if (!!!post.data('id')){
+                createPost(post)
+            }
         })
     })
-
 </script>
 @endauth
 </body>

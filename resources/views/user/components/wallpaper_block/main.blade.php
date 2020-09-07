@@ -31,6 +31,7 @@
 							</div>
                         </div>
                         <div class="control-block-button-left">
+
                             
                         <div class="wheel wheel__red">
   
@@ -39,43 +40,30 @@
                                 <div class="wheel__content__red">о</div>
                                 <div class="wheel__content__red">с</div>
                                 <div class="wheel__content__red">т</div>
-                            </div>
-                            <div class="btn btn-control bg-red" onmouseover="changeItemRed()" onmouseout="rechangeItemRed()" data-toggle="tooltip" data-placement="top" title="">
-                                <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>                                
-                            </div>
-                        </div>
+
                             
-                        <div class="wheel wheel__green">  
-                            
-                            <div class="wheel__inner__green">
-                                <div class="wheel__content__green">п</div>
-                                <div class="wheel__content__green">у</div>
-                                <div class="wheel__content__green">т</div>
-                                <div class="wheel__content__green">ь</div>                                
+
+
                             </div>
-                            <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
+
+                            <div class="btn btn-control bg-green" title="Добавить маршрут">
                                 <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
+
                             </div>
+                            <div class="btn btn-control bg-yellow" title="Добавить Фото">
+                                <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
+
+                            </div>
+
                         </div>
 
-                        <div class="wheel wheel__yellow">  
-                            
-                            <div class="wheel__inner__yellow">
-                                <div class="wheel__content__yellow">ф</div>
-                                <div class="wheel__content__yellow">о</div>
-                                <div class="wheel__content__yellow">т</div>
-                                <div class="wheel__content__yellow">о</div>
-                            </div>
-                            <div class="btn btn-control bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
-                                <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>    
-                            </div>
-                        </div>
+
 
 						</div>
 						<div class="control-block-button">
                             
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-blue more append" data-toggle="tooltip" data-placement="top">
+                                    <div class="btn btn-control bg-blue more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                             <li>
@@ -92,7 +80,7 @@
                                     </div>
                                 @endif
                                 @if (!auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-yellow more append" data-toggle="tooltip" data-placement="top">
+                                    <div class="btn btn-control bg-yellow more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                             <li>
@@ -108,7 +96,7 @@
                                     </div>
                                 @endif
                                 @if (!auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty())
-                                    <div class="btn btn-control bg-orange more append" data-toggle="tooltip" data-placement="top">
+                                    <div class="btn btn-control bg-orange more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
@@ -134,7 +122,7 @@
                                     </div>
                                 @endif
                                 @if (!$user->friends->where('friend_id', auth()->user()->id)->isEmpty())
-                                    <div class="btn btn-control bg-green more append" data-toggle="tooltip" data-placement="top">
+                                    <div class="btn btn-control bg-green more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
 
                                         <ul class="more-dropdown more-with-triangle triangle-bottom-right">
@@ -150,7 +138,7 @@
                                         </ul>
                                     </div>
                                 @endif
-                                    <a href="#" class="btn btn-control bg-purple" data-toggle="tooltip" data-placement="top" title="Настройки" id="bg-purple">
+                                    <a href="#" class="btn btn-control bg-purple" id="bg-purple">
                                         <svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
                                     </a>
                                 @can('update', $user)
@@ -190,6 +178,7 @@
 
 <!-- ... окончание панели навигации -->
 @component('user.components.wallpaper_block.modal_photo')@endcomponent
+
 @section('scripts')
 <script>
     function rotateMainRed(value) {
@@ -313,3 +302,4 @@ $(document).ready(function(){
 
 </script>
 @endsection
+
