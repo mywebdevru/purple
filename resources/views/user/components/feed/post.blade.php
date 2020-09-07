@@ -1,7 +1,7 @@
 <div class="ui-block">
     <!-- Пост -->
     {{-- @dd(count($feed->feedable->likes)) --}}
-    <article class="hentry post">
+    <article class="hentry post" data-id="{{ $feed->feedable['id'] }}">
         <div class="post__author author vcard inline-items">
             <img  src="{{ Str::startsWith($feed->feedable->postable['avatar'], 'http') ? $feed->feedable->postable['avatar'] : asset($feed->feedable->postable['avatar'])}}" alt="author">
             <div class="author-date">
@@ -19,10 +19,10 @@
                 </svg>
                 <ul class="more-dropdown">
                     <li>
-                        <a href="#" class="edit_post dropdown_menu_item" data-id="{{ $feed->feedable['id'] }}">Редактировать пост</a>
+                        <a href="#" class="edit_post dropdown_menu_item">Редактировать пост</a>
                     </li>
                     <li>
-                        <a href="#" class="delete_post dropdown_menu_item" data-id="{{ $feed->feedable['id'] }}"">Удалить пост</a>
+                        <a href="#" class="delete_post dropdown_menu_item">Удалить пост</a>
                     </li>
                 </ul>
             </div>
