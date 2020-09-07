@@ -229,8 +229,9 @@
                                 .prev().find('.more-dropdown').show()
                         } else {
                             post.parent().slideUp(300)
+                                .after(response)
                             postBody.html('')
-                            $('#newsfeed-items-grid').prepend(response)
+                                    .toggleClass('can_edit')
                         }
                     }
                 })
