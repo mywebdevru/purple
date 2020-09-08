@@ -179,7 +179,7 @@
 <!-- ... окончание панели навигации -->
 @component('user.components.wallpaper_block.modal_photo')@endcomponent
 
-@section('scripts')
+{{-- @section('scripts')
 <script>
     function rotateMainRed(value) {
     let wheelInnerRed = document.querySelectorAll('.wheel__inner__red');
@@ -301,5 +301,5 @@ $(document).ready(function(){
 });
 
 </script>
-@endsection
+@endsection --}}
 
