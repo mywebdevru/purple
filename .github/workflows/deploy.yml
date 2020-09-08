@@ -76,6 +76,7 @@ jobs:
           script: |
             cd /var/www/html/purple/dev/purple/
             sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
+            mkdir ./storage/app/avatars ./storage/app/summernote ./storage/app/wallpapers
             sudo php artisan cache:clear
             git pull origin dev
             composer install
