@@ -84,4 +84,4 @@ jobs:
             npm i
             npm run dev
             sudo php artisan cache:clear
-            sudo php artisan storage:link
+            php artisan storage:link
