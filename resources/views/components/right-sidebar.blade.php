@@ -1,5 +1,3 @@
-<!-- Правый сайдбар -->
-
 <div class="fixed-sidebar right">
 	<div class="fixed-sidebar-right sidebar--small" id="sidebar-right">
 

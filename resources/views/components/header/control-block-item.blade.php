@@ -15,8 +15,6 @@
                 {{ $notification }}
             </ul>
         </div>
-        @if($count > 0)
-            {{ $button }}
-        @endif
+        {{ $button }}
     </div>
 </div>
