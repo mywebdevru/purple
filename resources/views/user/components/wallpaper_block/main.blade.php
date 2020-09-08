@@ -30,36 +30,25 @@
 								</ul>
 							</div>
                         </div>
-                        <div class="control-block-button-left">
+                        @if (Route::getCurrentRoute()->getName() == 'user.show')
+                            <div class="control-block-button-left">
+                                <div class="wheel wheel__red">
+                                    <div class="wheel__inner__red">
+                                        <div class="wheel__content__red">п</div>
+                                        <div class="wheel__content__red">о</div>
+                                        <div class="wheel__content__red">с</div>
+                                        <div class="wheel__content__red">т</div>
+                                    </div>
+                                    <div class="btn btn-control bg-green" title="Добавить маршрут">
+                                        <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
 
-
-                        <div class="wheel wheel__red">
-
-                            <div class="wheel__inner__red">
-                                <div class="wheel__content__red">п</div>
-                                <div class="wheel__content__red">о</div>
-                                <div class="wheel__content__red">с</div>
-                                <div class="wheel__content__red">т</div>
-
-
-
-
+                                    </div>
+                                    <div class="btn btn-control bg-yellow create_post" title="Добавить Фото">
+                                        <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="btn btn-control bg-green" title="Добавить маршрут">
-                                <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
-
-                            </div>
-                            <div class="btn btn-control bg-yellow create_post" title="Добавить Фото">
-                                <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
-
-                            </div>
-
-                        </div>
-
-
-
-						</div>
+                        @endif
 						<div class="control-block-button">
 
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
