@@ -85,3 +85,4 @@ jobs:
             npm run dev
             sudo php artisan cache:clear
             php artisan storage:link
+            sudo chown -R www-data:www-data ./storage/app
