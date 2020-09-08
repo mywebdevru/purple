@@ -12,7 +12,7 @@
 		<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 			<div id="newsfeed-items-grid">
                 <div class="ui-block" style="display: none;">
-                    <article class="hentry post new_post" data-id="0">
+                    <article class="hentry post new_post" data-id="0" data-author="{{ auth()->user()->id }}">
                         <div class="post__author author vcard inline-items">
                             <img  src="{{ auth()->user()->avatar }}" alt="author">
                             <div class="author-date">

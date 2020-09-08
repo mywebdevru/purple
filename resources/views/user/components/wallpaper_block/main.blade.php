@@ -32,16 +32,16 @@
                         </div>
                         <div class="control-block-button-left">
 
-                            
+
                         <div class="wheel wheel__red">
-  
+
                             <div class="wheel__inner__red">
                                 <div class="wheel__content__red">п</div>
                                 <div class="wheel__content__red">о</div>
                                 <div class="wheel__content__red">с</div>
                                 <div class="wheel__content__red">т</div>
 
-                            
+
 
 
                             </div>
@@ -50,7 +50,7 @@
                                 <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
 
                             </div>
-                            <div class="btn btn-control bg-yellow" title="Добавить Фото">
+                            <div class="btn btn-control bg-yellow create_post" title="Добавить Фото">
                                 <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
 
                             </div>
@@ -61,7 +61,7 @@
 
 						</div>
 						<div class="control-block-button">
-                            
+
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -158,7 +158,7 @@
                                         </ul>
                                     </div>
                                 @endcan
-                                                      
+
 						</div>
 					</div>
 					<div class="top-header-author">
@@ -216,7 +216,7 @@ function rotateMainYellow(value) {
     return value
     }
 rotateMainYellow(10);
-  
+
 function rotateOutherRed(value) {
     let wheelContentRed = document.querySelectorAll('.wheel__content__red');
     deg = 0;
