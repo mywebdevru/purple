@@ -119,8 +119,6 @@
     border: 6px solid #fff;
     margin: 0 auto;
     overflow: hidden;
-    /* width: 132px;
-    height: 132px; */
     background-color: #FDFBEE;
 }
 
@@ -162,7 +160,6 @@
     margin-top: 10px;
 }
 .bg-yellow {
-    // margin-right: 20px;
     margin-top: 10px;
 }
 
@@ -174,7 +171,7 @@
     top: 46px;
 }
 
-@media screen and (min-width: 783px) {
+@media screen and (min-width: 768px) {
     .admin-bar #site-header {
         top: 32px;
     }
@@ -186,7 +183,7 @@
         margin-right: unset;
     }
 }
-@media screen and (max-width: 783px) {
+@media screen and (max-width: 768px) {
     .bg-red {
         margin-right: unset;
         margin-top: unset;
@@ -201,7 +198,7 @@
         margin-top: unset;
     }
     .bg-purple {
-        margin-left: unset;
+        margin-left: unset !important;
     }
 }
 
