@@ -5,8 +5,10 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)}}" alt="wallpaper" id="wallpaper">
-					</div>
+                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
+                             alt="wallpaper"
+                             id="wallpaper">
+                        </div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
