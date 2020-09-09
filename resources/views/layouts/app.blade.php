@@ -66,5 +66,38 @@
 
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+<script>
+ function acceptFriendshipRequest()
+ {
+
+ }
+ function deleteFriendshipRequest(item)
+ {
+    let id = item.data('id')
+    let request = item.parents('li')
+    let requestsCount = +item.parents('.control-icon').find('.requests_count').text()
+     $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+    $.ajax({
+        type: "delete",
+        url: `${document.location.origin}/user/friendship_request/${id}`,
+        data: '',
+        dataType: "JSON",
+        success: function (response) {
+            if(!!response['deleted']){
+                request.slideUp(300)
+                item.parents('.control-icon').find('.requests_count').text(--requestsCount)
+            }
+        }
+    })
+ }
+ $('.control-block').on('click', '.requested_friendship_delete', function (e){
+     e.preventDefault()
+     deleteFriendshipRequest($(this))
+ })
+</script>
 </body>
 </html>

@@ -3,23 +3,26 @@
        <x-header.control-block-item>
             <x-slot name='icon'>
                 <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
-                <div class="label-avatar bg-blue">{{ count(auth()->user()->requestedFriendships) }}</div>
+                <div class="label-avatar bg-blue requests_count">{{ count($requestedFriendships) }}</div>
             </x-slot>
             <x-slot name='title'>
                 Они хотят дружить
             </x-slot>
-            <x-slot name='notification'>
-                @each('user.components.header.friendship_request', auth()->user()->requestedFriendships, 'request')
-            </x-slot>
-            @if (count(auth()->user()->requestedFriendships) > 0)
+            @if ($isRequested())
+                <x-slot name='notification'>
+                    @each('components.header.alert-requested-friendship', $requestedFriendships, 'request')
+                </x-slot>
                 <x-slot name='button'>
                     <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">Добавить всех</a>
                     <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                         @csrf
-                        <input type="hidden" name="requested_friendship" value="{{ auth()->user()->requestedFriendships }}">
+                        <input type="hidden" name="requested_friendship" value="{{ $requestedFriendships }}">
                     </form>
                 </x-slot>
             @else
+                <x-slot name='notification'>
+                    <div>Запросов нет</div>
+                </x-slot>
                 <x-slot name='button'></x-slot>
             @endif
        </x-header.control-block-item>
