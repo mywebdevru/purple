@@ -136,7 +136,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-10T08:22:48+00:00"
+=======
+            "time": "2020-04-22T09:57:26+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -237,7 +241,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-18T23:57:15+00:00"
+=======
+            "time": "2020-04-15T15:59:35+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "composer/ca-bundle",
@@ -299,15 +307,22 @@
                     "type": "custom"
                 },
                 {
+<<<<<<< HEAD
                     "url": "https://github.com/composer",
                     "type": "github"
                 },
                 {
+=======
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
                     "url": "https://tidelift.com/funding/github/packagist/composer/composer",
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-23T12:54:47+00:00"
+=======
+            "time": "2020-04-08T08:27:21+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "composer/composer",
@@ -594,6 +609,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-19T10:27:58+00:00"
         },
         {
@@ -658,6 +674,9 @@
                 "symmetric key cryptography"
             ],
             "time": "2018-07-24T23:27:56+00:00"
+=======
+            "time": "2020-06-04T11:16:35+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2480,6 +2499,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-18T01:19:12+00:00"
         },
         {
@@ -2531,6 +2551,9 @@
                 "listener"
             ],
             "time": "2018-11-26T11:52:41+00:00"
+=======
+            "time": "2020-07-19T22:47:30+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "league/flysystem",
@@ -2621,6 +2644,7 @@
                     "type": "other"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-23T07:39:11+00:00"
         },
         {
@@ -2756,6 +2780,9 @@
                 }
             ],
             "time": "2020-07-01T11:33:50+00:00"
+=======
+            "time": "2020-07-26T07:20:36+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "monolog/monolog",
@@ -2935,7 +2962,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-24T12:35:58+00:00"
+=======
+            "time": "2020-08-04T19:12:46+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "nikic/php-parser",
@@ -4041,7 +4072,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-18T17:17:46+00:00"
+=======
+            "time": "2020-07-28T16:51:01+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "seld/jsonlint",
@@ -4100,7 +4135,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-25T06:56:57+00:00"
+=======
+            "time": "2020-04-30T19:05:18+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "seld/phar-utils",
@@ -4290,7 +4329,11 @@
                     "type": "custom"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-18T17:14:06+00:00"
+=======
+            "time": "2020-05-20T00:31:29+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4445,7 +4488,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-17T13:51:41+00:00"
+=======
+            "time": "2020-07-06T13:23:11+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/css-selector",
@@ -4580,7 +4627,11 @@
         },
         {
             "name": "symfony/error-handler",
+<<<<<<< HEAD
             "version": "v5.1.4",
+=======
+            "version": "v5.1.5",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
@@ -4651,7 +4702,11 @@
         },
         {
             "name": "symfony/event-dispatcher",
+<<<<<<< HEAD
             "version": "v5.1.4",
+=======
+            "version": "v5.1.5",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -4873,7 +4928,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-21T17:19:47+00:00"
+=======
+            "time": "2020-05-30T20:35:19+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/finder",
@@ -4936,11 +4995,19 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-17T10:01:29+00:00"
         },
         {
             "name": "symfony/http-foundation",
             "version": "v5.1.4",
+=======
+            "time": "2020-05-20T17:43:50+00:00"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v5.1.5",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -5015,6 +5082,7 @@
         },
         {
             "name": "symfony/http-kernel",
+<<<<<<< HEAD
             "version": "v5.1.4",
             "source": {
                 "type": "git",
@@ -5025,6 +5093,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/f829c240113986b60fda425c2533142e88efd7c4",
                 "reference": "f829c240113986b60fda425c2533142e88efd7c4",
+=======
+            "version": "v5.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-kernel.git",
+                "reference": "3e32676e6cb5d2081c91a56783471ff8a7f7110b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/3e32676e6cb5d2081c91a56783471ff8a7f7110b",
+                "reference": "3e32676e6cb5d2081c91a56783471ff8a7f7110b",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
                 "shasum": ""
             },
             "require": {
@@ -5124,7 +5204,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-31T06:18:12+00:00"
+=======
+            "time": "2020-09-02T08:15:18+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/mime",
@@ -5201,7 +5285,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-17T10:01:29+00:00"
+=======
+            "time": "2020-07-23T10:04:31+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -6045,7 +6133,25 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-07-23T08:36:24+00:00"
+=======
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-07-14T12:35:20+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/psr-http-message-bridge",
@@ -6101,6 +6207,7 @@
                     "homepage": "http://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
             "description": "PSR HTTP message bridge",
             "homepage": "http://symfony.com",
             "keywords": [
@@ -6109,6 +6216,10 @@
                 "psr-17",
                 "psr-7"
             ],
+=======
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6123,7 +6234,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-06-25T08:21:47+00:00"
+=======
+            "time": "2020-07-23T08:36:24+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/routing",
@@ -6215,7 +6330,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-10T08:03:57+00:00"
+=======
+            "time": "2020-06-18T18:24:02+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/service-contracts",
@@ -6376,7 +6495,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-17T07:48:54+00:00"
+=======
+            "time": "2020-07-08T08:27:49+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/translation",
@@ -6468,7 +6591,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-17T10:01:29+00:00"
+=======
+            "time": "2020-06-30T17:42:22+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "symfony/translation-contracts",
@@ -6547,7 +6674,11 @@
         },
         {
             "name": "symfony/var-dumper",
+<<<<<<< HEAD
             "version": "v5.1.4",
+=======
+            "version": "v5.1.5",
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -7023,7 +7154,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-30T07:08:17+00:00"
+=======
+            "time": "2020-05-05T10:53:32+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "doctrine/instantiator",
@@ -7155,7 +7290,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-26T18:06:23+00:00"
+=======
+            "time": "2020-07-13T23:25:57+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "facade/ignition",
@@ -8120,6 +8259,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -8288,7 +8428,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-27T03:24:44+00:00"
+=======
+            "time": "2020-03-02T05:59:21+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -8974,7 +9118,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-10T07:47:39+00:00"
+=======
+            "time": "2020-07-23T08:31:43+00:00"
+>>>>>>> 447f2f35fdf559a40dc93a6703f751b5be56e771
         },
         {
             "name": "theseer/tokenizer",

@@ -6,21 +6,21 @@
 }
 @font-face {
     font-family: "montserrat-thin";
-    src: url("../../assets/fonts/Montserrat-Thin.ttf");    
+    src: url("../../assets/fonts/Montserrat-Thin.ttf");
 }
 .welcome-block {
-    position: relative;    
-    background-color: #fff;    
+    position: relative;
+    background-color: #fff;
 }
 .entry {
-    background: url(../../public/img/welcome.jpg) no-repeat;
+    background: url(~@images/welcome/welcome.jpg) no-repeat;
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
     -o-background-size: 100%;
     background-size: 100%;
 }
 .travel {
-    background: url(../../public/img/jeep-travel.jpg) no-repeat;
+    background: url(~@images/welcome/jeep-travel.jpg) no-repeat;
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
     -o-background-size: 100%;
@@ -30,7 +30,7 @@
     background-position-y: -200px;
 }
 .second {
-    background: url(../../public/img/red-jeep.jpg) no-repeat;
+    background: url(~@images/welcome/red-jeep.jpg) no-repeat;
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
     -o-background-size: 100%;
@@ -39,13 +39,13 @@
     text-align: center;
     background-position-y: -105px;
 }
-.entry-text { 
-    // margin: 0 25px; 
+.entry-text {
+    // margin: 0 25px;
     // padding-left: 70px
     padding: 165px 130px 340px 130px;
 }
-a.auth-btn, a.auth-btn:focus, a.auth-btn:visited { 
-    text-decoration: none; 
+a.auth-btn, a.auth-btn:focus, a.auth-btn:visited {
+    text-decoration: none;
     color: #ffffff;
     border-color: #fff;
     font-size: 20px;
@@ -58,12 +58,12 @@ a.auth-btn:hover {
 
 .reg {
     background: #212529;
-    text-decoration: none; 
+    text-decoration: none;
     color: #ffffff;
 }
 .reg:hover {
     background: #ffffff !important;
-    text-decoration: none; 
+    text-decoration: none;
     color: #212529 !important;
 }
 .carousel-img {
@@ -80,6 +80,9 @@ a.auth-btn:hover {
     font-family: thousand-sticks;
     font-size: 35px;
     letter-spacing: 2px;
+}
+.panel {
+    padding-top: 9px;
 }
 .text-white {
     font-family: montserrat-thin;

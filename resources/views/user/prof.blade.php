@@ -11,11 +11,33 @@
 
 		<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 			<div id="newsfeed-items-grid">
+                <div class="ui-block" style="display: none;">
+                    <article class="hentry post new_post" data-id="0" data-author="{{ auth()->user()->id }}">
+                        <div class="post__author author vcard inline-items">
+                            <img  src="{{ auth()->user()->avatar }}" alt="author">
+                            <div class="author-date">
+                                <a class="h6 post__author-name fn" href="{{ route('user.show', auth()->user()->id) }}">{{ auth()->user()->full_name }}</a>
+                                <div class="post__date">
+                                    <time class="published" datetime="{{ now() }}">
+                                        {{ now() }}
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="can_edit post_body">
+
+                        </div>
+                        <form  method="POST">
+                            @csrf
+                            <input type="hidden" name="postable_type" value="App\Models\User">
+                            <input type="hidden" name="postable_id" value="{{ auth()->user()->id }}">
+                        </form>
+                    </article>
+                </div>
 
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Models\Post')
-                    {{-- @dd(class_basename($item->feedable->postable)) --}}
-                        @component('user.components.feed.post',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
+                        @component('user.components.feed.post',['feed' => $item]) @endcomponent
                     @else
                         @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
                     @endif

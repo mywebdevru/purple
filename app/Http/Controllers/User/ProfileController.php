@@ -87,6 +87,7 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize($user);
         if(Str::contains(url()->current(), 'secure')){
             return view('user.components.edit_profile.secure');
         }
