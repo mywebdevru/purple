@@ -1,6 +1,6 @@
 <li>
     <div class="author-thumb">
-        <img src="{{ asset('img/spiegel.jpg') }}" alt="author">
+        <img src="{{ $request->user->avatar }}" alt="author">
     </div>
     <div class="notification-event">
     <a href="{{ route('user.show', ['user' => $request->user]) }}" class="h6 notification-friend">{{ $request->user->full_name }}</a>
