@@ -31,11 +31,6 @@
             <h6 class="logo-title brand-name-small">Offroad Paradise</h6>
         </div>
     </a>
-
-	<!-- <div class="page-title">
-		<h6 class="brand-name-small">OffRoad Paradise</h6>
-	</div> -->
-
 	<div class="header-content-wrapper">
 		<form class="search-bar w-search notification-list friend-requests">
 			<div class="form-group with-button">
@@ -44,8 +39,21 @@
 					<svg class="olymp-magnifying-glass-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon') }}"></use></svg>
 				</button>
 			</div>
-		</form>
-        <x-header.control-block/>
+        </form>
+        @auth
+            <x-header.control-block/>
+        @else
+            <div class="control-block">
+                <div class="nav-item text-light">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
+                </div>
+                @if (Route::has('register'))
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                    </div>
+                @endif
+            </div>
+        @endauth
 	</div>
 </header>
 <!-- ... окончание Header -->
@@ -66,5 +74,38 @@
 
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+<script>
+ function acceptFriendshipRequest()
+ {
+
+ }
+ function deleteFriendshipRequest(item)
+ {
+    let id = item.data('id')
+    let request = item.parents('li')
+    let requestsCount = +item.parents('.control-icon').find('.requests_count').text()
+     $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+    $.ajax({
+        type: "delete",
+        url: `${document.location.origin}/user/friendship_request/${id}`,
+        data: '',
+        dataType: "JSON",
+        success: function (response) {
+            if(!!response['deleted']){
+                request.slideUp(300)
+                item.parents('.control-icon').find('.requests_count').text(--requestsCount)
+            }
+        }
+    })
+ }
+ $('.control-block').on('click', '.requested_friendship_delete', function (e){
+     e.preventDefault()
+     deleteFriendshipRequest($(this))
+ })
+</script>
 </body>
 </html>
