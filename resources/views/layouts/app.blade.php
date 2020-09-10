@@ -75,37 +75,69 @@
 @yield('scripts')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <script>
- function acceptFriendshipRequest()
- {
+    function acceptFriendshipRequest(item)
+    {
 
- }
- function deleteFriendshipRequest(item)
- {
-    let id = item.data('id')
-    let request = item.parents('li')
-    let requestsCount = +item.parents('.control-icon').find('.requests_count').text()
-     $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    })
-    $.ajax({
-        type: "delete",
-        url: `${document.location.origin}/user/friendship_request/${id}`,
-        data: '',
-        dataType: "JSON",
-        success: function (response) {
-            if(!!response['deleted']){
-                request.slideUp(300)
-                item.parents('.control-icon').find('.requests_count').text(--requestsCount)
+    }
+    function acceptAllFriendshipRequests(item)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        })
+        $.ajax({
+            type: "post",
+            url: `${document.location.origin}/user/edit/friends`,
+            data: {'getThemAll': 1},
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response)
+                if(!!response){
+                    item.parents('.more-dropdown').find('.friend-requests').html('<div class="text-center">Запросов нет</div>')
+                    item.parents('.control-icon').find('.requests_count').text('0')
+                    
+                }
+            }
+        })
+    }
+    function deleteFriendshipRequest(item)
+    {
+        let id = item.data('id')
+        let request = item.parents('li')
+        let requestsCount = +item.parents('.control-icon').find('.requests_count').text()
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        $.ajax({
+            type: "delete",
+            url: `${document.location.origin}/user/friendship_request/${id}`,
+            data: '',
+            dataType: "JSON",
+            success: function (response) {
+                if(!!response['deleted']){
+                    request.slideUp(300)
+                    item.parents('.control-icon').find('.requests_count').text(--requestsCount)
+                }
+            }
+        })
+    }
+    $('.control-block').on('click', '.requested_friendship_delete', function (e){
+        e.preventDefault()
+        deleteFriendshipRequest($(this))
+    })
+    .on('click', '.requested_friendship_accept', function (e){
+        e.preventDefault()
+        console.log($(this))
+        if($(this).data('id') == 'all') {
+            acceptAllFriendshipRequests($(this))
+            console.log('all')
+        } else {
+            acceptFriendshipRequest($(this))
         }
     })
- }
- $('.control-block').on('click', '.requested_friendship_delete', function (e){
-     e.preventDefault()
-     deleteFriendshipRequest($(this))
- })
 </script>
 </body>
 </html>
