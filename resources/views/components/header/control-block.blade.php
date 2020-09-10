@@ -12,15 +12,11 @@
                 @each('components.header.alert-requested-friendship', $requestedFriendships, 'request')
             </x-slot>
             <x-slot name='button'>
-                <a class="view-all bg-blue" href="#" onclick="event.preventDefault(); document.getElementById('accept-all-friends').submit();">Добавить всех</a>
-                <form id="accept-all-friends" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
-                    @csrf
-                    <input type="hidden" name="requested_friendship" value="{{ $requestedFriendships }}">
-                </form>
+                <a class="view-all bg-blue requested_friendship_accept" href="#" data-id="all">Добавить всех</a>
             </x-slot>
         @else
             <x-slot name='notification'>
-                <div>Запросов нет</div>
+                <div class="text-center">Запросов нет</div>
             </x-slot>
             <x-slot name='button'></x-slot>
         @endif

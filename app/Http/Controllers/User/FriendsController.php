@@ -41,19 +41,19 @@ class FriendsController extends Controller
      */
     public function store(Request $request, Friend $friends)
     {
-        abort_if (!$request->requested_friendship, 403, 'Недостаточно данных');
-
-        $friendship = json_decode($request->requested_friendship, true);
-
-        if (isset($friendship['id'])) {
+        if (!!$request['id']){
+            $friendship = FriendshipRequest::find($request['id']);
             $this->makeFriendTransactoin($friendship, $friends);
-        } else {
-            foreach ($friendship as $friendship) {
+            return response()->json(User::find($friendship->user_id));
+        }
+        if (!!$request['getThemAll']){
+            $friendships = FriendshipRequest::where('friend_id', auth()->user()->id);
+            $users = $friendships->pluck('user_id');
+            foreach ($friendships->get() as $friendship) {
                 $this->makeFriendTransactoin($friendship, $friends);
             }
+           return response()->json(User::whereIn('id', $users)->get());
         }
-        session()->flash('success', 'У вас новый друг');
-        return back();
     }
 
     /**
