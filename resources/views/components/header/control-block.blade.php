@@ -21,8 +21,8 @@
             <x-slot name='button'></x-slot>
         @endif
     </x-header.control-block-item>
-    @component('user.components.header.alert_chat_message') @endcomponent
-    @component('user.components.header.alert_activity') @endcomponent
+    <x-header.alert-chat-message/>
+    <x-header.alert-activity/>
     @component('user.components.header.page_owner', ['full_name' => auth()->user()->full_name, 'creed' => auth()->user()->creed, 'avatar' => auth()->user()->avatar, 'id' => auth()->user()->id])
     @endcomponent
 </div>
