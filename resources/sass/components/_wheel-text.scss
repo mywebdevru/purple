@@ -1,0 +1,127 @@
+@font-face {
+    font-family: "nimbusmono";
+    src: url("../../assets/fonts/nimbusmono-regular.otf");
+    font-style: normal;
+    font-weight: normal;
+}
+@keyframes stretchLeft {
+    0% {
+        transform: scaleX(0.3);
+    }
+    40% {
+        transform: scaleX(1.02);
+    }
+    60% {
+        transform: scaleX(0.98);
+    }
+    80% {
+        transform: scaleX(1.01);
+    }
+    100% {
+        transform: scaleX(0.98);
+    }               
+    80% {
+        transform: scaleX(1.01);
+    }
+    100% {
+        transform: scaleX(1);
+    }                           
+}
+ 
+@-webkit-keyframes stretchLeft {
+    0% {
+        -webkit-transform: scaleX(0.3);
+    }
+    40% {
+        -webkit-transform: scaleX(1.02);
+    }
+    60% {
+        -webkit-transform: scaleX(0.98);
+    }
+    80% {
+        -webkit-transform: scaleX(1.01);
+    }
+    100% {
+        -webkit-transform: scaleX(0.98);
+    }               
+    80% {
+        -webkit-transform: scaleX(1.01);
+    }
+    100% {
+        -webkit-transform: scaleX(1);
+    }       
+} 
+
+.wheel {
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+.wheel__red {}
+.wheel__green {}
+.wheel__yellow {}
+.wheel__inner__red {
+    font-family: nimbusmono;
+    font-size: 12px;
+    position: absolute;
+    top: 43%;
+    left: 16%;
+    transform: rotate(-40deg);
+    opacity: 0;
+}
+.wheel__inner__green {
+    font-family: nimbusmono;
+    font-size: 12px;
+    position: absolute;
+    top: 45%;
+    left: 84%;
+    transform: rotate(-40deg);
+    opacity: 0;
+}
+.wheel__inner__yellow {
+    font-family: nimbusmono;
+    font-size: 12px;
+    position: absolute;    
+    top: 45%;
+    left: 50%;
+    transform: rotate(-40deg);
+    opacity: 0;
+}
+.wheel__content__red {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 0;
+    transform-origin: 0 100%;
+    padding-bottom: 21px;
+}
+.wheel__content__green {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 0;
+    transform-origin: 0 100%;
+    padding-bottom: 23px;
+}
+.wheel__content__yellow {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 0;
+    transform-origin: 0 100%;
+    padding-bottom: 22px;
+}
+.inner {
+    position:absolute;
+    width: 98px;
+    height: 98px;
+    border: 1px solid black;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: yellow;
+    top:13%;
+    left:13%;
+}

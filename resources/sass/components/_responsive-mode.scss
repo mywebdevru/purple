@@ -47,7 +47,7 @@
     }
 
     .page-has-left-panels .header {
-        padding-left: 70px;
+        padding-left: 0px;
     }
 
     .header.header--logout {
@@ -110,7 +110,7 @@
     }
 }
 
-@media (max-width: 801px) {
+@media (max-width: 768px) {
     .search-bar.w-search {
         max-width: 200px;
     }
@@ -150,12 +150,13 @@
     .control-block-button-left {
         right: auto;
         top: -30px;
-        left: 25%;
+        left: 50%;
         -webkit-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
         bottom: auto;
         width: 100%;
         text-align: center;
+        justify-content: space-evenly;
     }
 
     .top-header.top-header-favorit .profile-section .control-block-button {

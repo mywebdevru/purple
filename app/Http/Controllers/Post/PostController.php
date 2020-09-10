@@ -38,7 +38,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!!$request['post_id']) {
+            DB::transaction(function () use ($request) {
+                $post = Post::find($request->post_id);
+                $post->update(['text' => $request->text, 'created_at' => now()]);
+                $post->feed()->create(['authorable_type' => $request->postable_type, 'authorable_id' => $request->postable_id]);
+            });
+            return redirect()->action('Post\PostController@show', ['post' => $request->post_id]);
+        } else {
+            $vars = DB::transaction(function () use ($request) {
+                $author = $request['postable_type']::find($request['postable_id']);
+                $post = $author->posts()->create();
+                return compact('post');
+            });
+            return response()->json($vars['post']);
+        }
     }
 
     /**
@@ -49,7 +63,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $feed = $post->feed;
+        return response()->json([view('user.components.feed.post', ['feed' => $feed])->render()]);
     }
 
     /**

@@ -1,7 +1,7 @@
-<div class="ui-block" id="post_{{ $feed->feedable['id'] }}">
+<div class="ui-block">
     <!-- Пост -->
     {{-- @dd(count($feed->feedable->likes)) --}}
-    <article class="hentry post">
+    <article class="hentry post" data-id="{{ $feed->feedable['id'] }}">
         <div class="post__author author vcard inline-items">
             <img  src="{{ Str::startsWith($feed->feedable->postable['avatar'], 'http') ? $feed->feedable->postable['avatar'] : asset($feed->feedable->postable['avatar'])}}" alt="author">
             <div class="author-date">
@@ -19,42 +19,42 @@
                 </svg>
                 <ul class="more-dropdown">
                     <li>
-                        <a href="#" class="edit" onclick="event.preventDefault(); editPost({{ $feed->feedable['id'] }});">Редактировать пост</a>
+                        <a href="#" class="edit_post dropdown_menu_item">Редактировать пост</a>
                     </li>
                     <li>
-                        <a href="#" onclick="event.preventDefault(); deletePost({{ $feed->feedable['id'] }});">Удалить пост</a>
+                        <a href="#" class="delete_post dropdown_menu_item">Удалить пост</a>
                     </li>
                 </ul>
             </div>
             @endcan
         </div>
-        <div id="post_text_{{ $feed->feedable['id'] }}" class="can_edit">
+        <div class="can_edit post_body">
             {!! $feed->feedable['text'] !!}
         </div>
         <div class="post-additional-info inline-items">
-        <a href="#" id="like_post_{{ $feed->feedable['id'] }}" data-like_id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}}" onclick="event.preventDefault(); likeIt({{ $feed->feedable['id'] }}, 'post');">
+            <a href="#" data-model="{{ Post::class }}" data-id="{{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $feed->feedable->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}} likes">
                 <svg class="olymp-heart-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
                 </svg>
                 <span>{{ count($feed->feedable->likes) }}</span>
+                <form  method="POST">
+                    @csrf
+                    <input type="hidden" name="likeable_type" value="App\Models\Post">
+                    <input type="hidden" name="likeable_id" value="{{ $feed->feedable['id'] }}">
+                    <input type="hidden" name="authorable_type" value="App\Models\User">
+                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
+                </form>
             </a>
-            <form  method="POST" id="form_like_post_{{ $feed->feedable['id'] }}">
-                @csrf
-                <input type="hidden" name="likeable_type" value="App\Models\Post">
-                <input type="hidden" name="likeable_id" value="{{ $feed->feedable['id'] }}">
-                <input type="hidden" name="authorable_type" value="App\Models\User">
-                <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
-            </form>
-            <ul class="friends-harmonic" id="avatars_post_{{ $feed->feedable['id'] }}">
+            <ul class="friends-harmonic">
                 @foreach ($feed->feedable->likes->slice(-2) as $item)
                 <li>
                     <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">
-                        <img src="{{ asset($item->authorable['avatar']) }}" alt="{{ $item->authorable['full_name'] }}">
+                        <img src="{{ asset($item->authorable['avatar']) }}" alt="автор">
                     </a>
                 </li>
                 @endforeach
             </ul>
-            <div class="names-people-likes" id="names_post_{{ $feed->feedable['id'] }}">
+            <div class="names-people-likes">
                 @foreach ($feed->feedable->likes->slice(-2) as $item)
                     <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">{{ $item->authorable['name'] }}</a>
                 @endforeach
@@ -64,11 +64,11 @@
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'post');">
+                <a href="#" class="post-add-icon inline-items show_comments">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span id="comments_count_post_{{ $feed->feedable['id'] }}">{{ count($feed->feedable->comments) }}</span>
+                    <span class="comments_count">{{ count($feed->feedable->comments) }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -106,19 +106,16 @@
             </a>
 
         </div>
-        <a href="#" id="comments_post_{{ $feed->feedable['id'] }}" class="more-comments" onclick="event.preventDefault(); showComments({{ $feed->feedable['id'] }}, 'post');">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $feed->feedable->comments, 'comment_author' => $comment_author, 'feed' => 'post_'.$feed->feedable['id']])@endcomponent
-        @component('user.components.feed.write_comment',['comment_author' => $comment_author,'feed' => 'post_'.$feed->feedable['id']])
-        @slot('commentable_id')
-         {{ $feed->feedable['id'] }}
-        @endslot
-        @slot('commentable_type')
-         App\Models\Post
-        @endslot
+        <a href="#" class="more-comments show_comments">Показать комментарии <span>+</span></a>
+        @component('user.components.feed.comments',['comments' => $feed->feedable->comments])@endcomponent
+        @component('user.components.feed.write_comment')
+            @slot('commentable_id')
+            {{ $feed->feedable['id'] }}
+            @endslot
+            @slot('commentable_type')
+            App\Models\Post
+            @endslot
         @endcomponent
-
-
-
     </article>
 </div>
 @section('script')

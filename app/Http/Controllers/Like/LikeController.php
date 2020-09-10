@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Like;
 use App\Http\Controllers\Controller;
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\Image;
+use App\Models\Comment;
+use App\Models\User;
+use App\Models\Group;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
