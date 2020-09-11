@@ -23,6 +23,5 @@
     </x-header.control-block-item>
     <x-header.alert-chat-message/>
     <x-header.alert-activity/>
-    @component('user.components.header.page_owner', ['full_name' => auth()->user()->full_name, 'creed' => auth()->user()->creed, 'avatar' => auth()->user()->avatar, 'id' => auth()->user()->id])
-    @endcomponent
+    <x-header.auth-user/>
 </div>
