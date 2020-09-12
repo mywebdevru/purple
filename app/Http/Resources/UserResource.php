@@ -32,6 +32,7 @@ class UserResource extends JsonResource
                     'city' => $this->city,
                     'country' => $this->country,
                     'creed' => $this->creed,
+                    'roles' => $this->getRoleNames(),
                 ],
             ],
             'links' => [

@@ -4,7 +4,7 @@ const state = {
 };
 const getters = {
     authUser: state => state.user,
-    AuthUserLoading: state => state.userLoading,
+    authUserLoading: state => state.userLoading,
 };
 const actions = {
     async fetchAuthUser({commit}) {
