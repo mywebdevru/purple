@@ -206,6 +206,11 @@
 .post-add-icon .olymp-share-icon {
     width: 26px;
     height: 21px;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+.olymp-share-icon:hover {        
+    transform: rotateY(180deg);
 }
 
 .post-add-icon:hover {
