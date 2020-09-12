@@ -6,7 +6,6 @@ import store from "./store";
 import "./components/_globals";
 import Index from "./Index";
 import BootstrapVue from "bootstrap-vue";
-import dispatchActionForAllModules from './utils/dispatch-action-for-all-modules'
 
 require('../bootstrap');
 
@@ -21,7 +20,6 @@ const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component("index", Index);
-//dispatchActionForAllModules('init');
 
 const app = new Vue({
     el: '#app',

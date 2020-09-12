@@ -21,7 +21,6 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { authComputed } from '../state/helpers'
 import SideNav from './SideNav'
 export default {
     name: "SideBar",

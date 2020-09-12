@@ -247,7 +247,6 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {

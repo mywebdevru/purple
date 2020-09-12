@@ -98,7 +98,6 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
 import MetisMenu from 'metismenujs/dist/metismenujs'
 export default {
     name: "SideNav",
