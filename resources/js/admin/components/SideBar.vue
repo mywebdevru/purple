@@ -43,9 +43,6 @@ export default {
             },
         }
     },
-    computed: {
-        ...authComputed,
-    },
     methods: {},
 }
 </script>

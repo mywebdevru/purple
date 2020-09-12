@@ -109,9 +109,6 @@ export default {
             default: () => ({}),
         },
     },
-    computed: {
-        ...authComputed,
-    },
     mounted: function() {
         // eslint-disable-next-line no-unused-vars
         var menuRef = new MetisMenu('#side-menu');

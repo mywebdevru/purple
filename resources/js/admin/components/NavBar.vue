@@ -267,9 +267,6 @@ export default {
     data() {
         return {}
     },
-    computed: {
-        ...authComputed,
-    },
     methods: {
         toggleMenu() {
             this.$parent.toggleMenu()

@@ -20,11 +20,6 @@
 <script>
 export default {
     name: "Footer",
-    components: {},
-    computed: {
-        ...authComputed,
-    },
-    methods: {},
 }
 </script>
 

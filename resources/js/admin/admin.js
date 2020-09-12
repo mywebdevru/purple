@@ -3,7 +3,6 @@ import "metismenujs";
 import VueRouter from "vue-router";
 import router from "./router/routes";
 import store from "./store";
-import "./components/_globals";
 import Index from "./Index";
 import BootstrapVue from "bootstrap-vue";
 

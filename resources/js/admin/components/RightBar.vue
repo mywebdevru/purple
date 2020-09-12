@@ -45,9 +45,6 @@
 export default {
     name: "RightBar",
     components: {},
-    computed: {
-        ...authComputed,
-    },
     methods: {
         hide() {
             this.$parent.toggleRightSidebar()
