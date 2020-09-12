@@ -5,8 +5,10 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="{{ Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)}}" alt="wallpaper" id="wallpaper">
-					</div>
+                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
+                             alt="wallpaper"
+                             id="wallpaper">
+                        </div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
@@ -32,9 +34,9 @@
                         </div>
                         @if (Route::getCurrentRoute()->getName() == 'user.show')
                         <div class="control-block-button-left">
-                            
-                            <div class="wheel wheel__red">
-      
+
+                            <div class="wheel wheel__red create_post">
+
                                 <div class="wheel__inner__red">
                                     <div class="wheel__content__red">п</div>
                                     <div class="wheel__content__red">о</div>
@@ -43,28 +45,13 @@
                                 </div>
 
                                 <div class="btn btn-control bg-red" onmouseover="changeItemRed()" onmouseout="rechangeItemRed()" data-toggle="tooltip" data-placement="top" title="">
-                                    <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>                                
-                                </div>
-                                
-                            </div>
-                                
-                            <div class="wheel wheel__green">  
-                                
-                                <div class="wheel__inner__green">
-                                    <div class="wheel__content__green">п</div>
-                                    <div class="wheel__content__green">у</div>
-                                    <div class="wheel__content__green">т</div>
-                                    <div class="wheel__content__green">ь</div>                                
-                                </div>
-
-                                <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
-                                    <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
+                                    <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
                                 </div>
 
                             </div>
-    
-                            <div class="wheel wheel__yellow">  
-                                
+
+                            <div class="wheel wheel__yellow">
+
                                 <div class="wheel__inner__yellow">
                                     <div class="wheel__content__yellow">ф</div>
                                     <div class="wheel__content__yellow">о</div>
@@ -73,11 +60,28 @@
                                 </div>
 
                                 <div class="btn btn-control bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
-                                    <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>    
+                                    <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
                                 </div>
 
                             </div>
-    
+
+                            <div class="wheel wheel__green">
+
+                                <div class="wheel__inner__green">
+                                    <div class="wheel__content__green">к</div>
+                                    <div class="wheel__content__green">а</div>
+                                    <div class="wheel__content__green">р</div>
+                                    <div class="wheel__content__green">т</div>
+                                    <div class="wheel__content__green">а</div>
+                                </div>
+
+                                <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
+                                    <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
+                                </div>
+
+                            </div>
+                            
+
                         </div>
                         @endif
 						<div class="control-block-button">

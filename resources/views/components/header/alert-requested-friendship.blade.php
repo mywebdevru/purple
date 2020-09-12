@@ -1,13 +1,13 @@
 <li>
     <div class="author-thumb">
-        <img src="{{ asset('img/spiegel.jpg') }}" alt="author">
+        <img src="{{ $request->user->avatar }}" alt="author">
     </div>
     <div class="notification-event">
     <a href="{{ route('user.show', ['user' => $request->user]) }}" class="h6 notification-friend">{{ $request->user->full_name }}</a>
         <span class="chat-message-item">{{ $request->user->location }}</span>
     </div>
     <span class="notification-icon">
-        <a class="accept-request" href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $request->id }}').submit();">
+        <a class="accept-request requested_friendship_accept" href="#" onclick="event.preventDefault(); document.getElementById('accept-request-{{ $request->id }}').submit();">
             <form id="accept-request-{{ $request->id }}" action="{{ route('user.friends.store') }}" method="POST" style="display: none;">
                 @csrf
                 <input type="hidden" name="requested_friendship" value="{{ $request }}">
@@ -16,11 +16,7 @@
                 <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
             </span>
         </a>
-        <a class="accept-request request-del" href="#" onclick="event.preventDefault(); document.getElementById('request-del-{{ $request->id }}').submit();">
-            <form id="request-del-{{ $request->id }}" action="{{ route('user.friendship_request.destroy', ['friendship_request' => $request]) }}" method="POST" style="display: none;">
-                @method('DELETE')
-                @csrf
-            </form>
+        <a class="accept-request request-del requested_friendship_delete" href="#" data-id="{{ $request->id }}">
             <span class="icon-minus">
                 <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
             </span>
