@@ -5,10 +5,14 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class WelcomePageTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     public function testGuestCanViewWelcomePage()
     {
         $this->get(route('welcome'))->assertStatus(200);
@@ -17,6 +21,8 @@ class WelcomePageTest extends TestCase
     public function testAdminCanViewWelcomePage()
     {
         $adminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
 
         $adminUser->assignRole('admin');
 
