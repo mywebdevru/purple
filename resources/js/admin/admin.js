@@ -24,10 +24,6 @@ const app = new Vue({
     el: '#app',
     store,
     router,
-    async beforeCreate() {
-        const user = (await axios.get('/api/user')).data;
-        console.log(user);
-    },
     mounted() {
         const target = document.getElementById('app-loading');
         target.remove();
