@@ -58,4 +58,28 @@
 .olymp-trophy-icon {
     width: 18px;
     height: 16px;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+.olymp-trophy-icon:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.olymp-like-post-icon {
+    width: 18px;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+.olymp-like-post-icon:hover {
+    width: 21px !important;
+    // transform: scale(1);
+    // animation: pulse 5s ease-in-out infinite;
+}
+.olymp-comments-post-icon {
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .5s ease-in-out;
+}
+.olymp-comments-post-icon:hover{
+    -webkit-transform: rotate(20deg);
+    transform: rotate(20deg);
 }
