@@ -19,9 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group([
     'namespace' => 'API',
-    'as' => 'api.'
+    'as' => 'api.',
+    'middleware' => ['auth:api'],
 ], function () {
     Route::post('/profile/upload', 'ProfileController@upload')->name('profile.upload');
     Route::get('/profile/{user}', 'ProfileController@data')->name('profile.data');
     Route::put('/profile/{user}', 'ProfileController@save')->name('profile.save');
+    Route::get('/auth-user', 'AuthUserController')->name('auth-user');
 });

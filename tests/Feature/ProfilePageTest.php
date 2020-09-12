@@ -3,10 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ProfilePageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testUserMustLoginToViewProfiles()
     {
         $this->get(route('user.show', 1))->assertRedirect('login');
@@ -16,12 +20,15 @@ class ProfilePageTest extends TestCase
     public function testAdminCanViewProfiles()
     {
         $adminUser = factory(User::class)->create();
+        factory(User::class, 2)->create();
+
+        Role::create(['name' => 'admin']);
 
         $adminUser->assignRole('admin');
 
         $this->actingAs($adminUser);
 
-        $response = $this->get(route('user.show', 10));
+        $response = $this->get(route('user.show', 2));
 
         $response->assertOk();
     }
@@ -29,11 +36,12 @@ class ProfilePageTest extends TestCase
     public function testUserCanViewProfiles()
     {
         $user = factory(User::class)->create();
+        factory(User::class)->create();
 
         $this->actingAs($user);
 
         $response1 = $this->get(route('user.show', 1));
-        $response2 = $this->get(route('user.show', 20));
+        $response2 = $this->get(route('user.show', 2));
 
 
         $response1->assertStatus(200);

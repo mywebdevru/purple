@@ -17,9 +17,9 @@
                 <div class="user-box">
                     <div class="user-img">
                         <img
-                            src="/admin/users/user-1.jpg"
+                            :src="authUser.data.attributes.avatar"
                             alt="user-img"
-                            title="Mat Helme"
+                            :title="authUser.data.attributes.name"
                             class="rounded-circle img-fluid"
                         />
                         <a href="javascript:void(0);" class="user-edit"
@@ -27,8 +27,8 @@
                         ></a>
                     </div>
 
-                    <h5><a href="javascript: void(0);">Nik G. Patel</a> </h5>
-                    <p class="text-muted mb-0"><small>Admin Head</small></p>
+                    <h5><a href="javascript: void(0);">{{ authUser.data.attributes.full_name }}</a> </h5>
+                    <p class="text-muted mb-0"><small>{{ authUser.data.attributes.roles[0] }}</small></p>
                 </div>
             </div>
             <!-- end slimscroll-menu-->
@@ -41,18 +41,22 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers';
+
+import {mapGetters} from "vuex";
 
 export default {
     name: "RightBar",
     components: {},
-    computed: {
-        ...authComputed,
-    },
     methods: {
         hide() {
             this.$parent.toggleRightSidebar()
         },
+    },
+    computed: {
+        ...mapGetters({
+            authUser: "authUser",
+            authUserLoading: "authUserLoading",
+        })
     },
 }
 </script>

@@ -37,12 +37,14 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/main.scss', 'public/css/main.css')
     .sass('resources/sass/admin/bootstrap.scss', 'public/css') //admin-panel
     .sass('resources/sass/admin/icons.scss', 'public/css') //admin-panel
-    .sass('resources/sass/admin/admin.sass', 'public/css'); //admin-panel
+    .sass('resources/sass/admin/admin.sass', 'public/css')
+    .sourceMaps(); //admin-panel
 
 mix.copyDirectory('resources/assets/fonts', 'public/fonts');
 
 mix.alias({
     '@fonts': '/resources/assets/fonts',
-    '@images': '/resources/assets/images'
+    '@images': '/resources/assets/images',
+    '@modules': '/node_modules',
 });
 

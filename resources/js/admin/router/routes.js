@@ -1,5 +1,4 @@
 import VueRouter from "vue-router";
-import store from "../state/store";
 import NotFound from "./views/NotFound";
 
 const routes = [
