@@ -33,9 +33,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Passport::routes();
-
         $this->registerPolicies();
+
+        Passport::routes();
 
         // Implicitly grant "Super Admin" role all permission checks using can()
         \Gate::before(function ($user, $ability) {

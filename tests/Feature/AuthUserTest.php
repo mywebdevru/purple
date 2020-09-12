@@ -14,7 +14,9 @@ class AuthUserTest extends TestCase
     {
         /** @var $user User */
 
-        $this->actingAs($user = factory(User::class)->create());
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($user = factory(User::class)->create(), 'api');
 
         $response = $this->get('/api/auth-user');
 
