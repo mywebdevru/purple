@@ -3,7 +3,7 @@ function rotateMainRed(value) {
     deg = 100;
     for (let item of wheelInnerRed) {
       item.style.transform = `rotate(${deg}deg)`;
-      item.style.color = 'red';
+      item.style.color = 'rgb(73, 80, 87)';
       deg += value;
     }
     return value
@@ -15,7 +15,7 @@ function rotateMainGreen(value) {
     deg = -121;
     for (let item of wheelInnerGreen) {
       item.style.transform = `rotate(${deg}deg)`;
-      item.style.color = 'green';
+      item.style.color = 'rgb(73, 80, 87)';
       deg += value;
     }
     return value
@@ -27,7 +27,7 @@ function rotateMainYellow(value) {
     deg = -111;
     for (let item of wheelInnerYellow) {
       item.style.transform = `rotate(${deg}deg)`;
-      item.style.color = 'black';
+      item.style.color = 'rgb(73, 80, 87)';
       deg += value;
     }
     return value
@@ -69,7 +69,7 @@ function changeItemRed() {
   document.querySelector('.wheel__red').style.transition = '0.5s';
   document.querySelectorAll('.wheel__inner__red')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__red')[0].style.transform = 'rotate(-79deg)';
-  document.querySelectorAll('.wheel__inner__red')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__red')[0].style.transition = 'all 1s ease-in-out';
 }
 function rechangeItemRed() {
   document.querySelector('.wheel__red').style.backgroundColor = 'unset';
@@ -81,7 +81,7 @@ function changeItemGreen() {
   document.querySelector('.wheel__green').style.transition = '0.5s';
   document.querySelectorAll('.wheel__inner__green')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__green')[0].style.transform = 'rotate(-79deg)';
-  document.querySelectorAll('.wheel__inner__green')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__green')[0].style.transition = 'all 1s ease-in-out';
 }
 function rechangeItemGreen() {
   document.querySelector('.wheel__green').style.backgroundColor = 'unset';
@@ -93,7 +93,7 @@ function changeItemYellow() {
   document.querySelector('.wheel__yellow').style.transition = '0.5s';
   document.querySelectorAll('.wheel__inner__yellow')[0].style.opacity = '1';
   document.querySelectorAll('.wheel__inner__yellow')[0].style.transform = 'rotate(-79deg)';
-  document.querySelectorAll('.wheel__inner__yellow')[0].style.transition = 'all 2s ease-in-out';
+  document.querySelectorAll('.wheel__inner__yellow')[0].style.transition = 'all 1s ease-in-out';
 }
 function rechangeItemYellow() {
   document.querySelector('.wheel__yellow').style.backgroundColor = 'unset';
