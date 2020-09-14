@@ -11,7 +11,8 @@ const actions = {
 };
 const mutations = {
     setTitle(state, title) {
-        state.title = 'Admin Panel | ' + title;
+        state.title = title + ' | Admin Panel';
+        document.title = state.title;
     }
 };
 
