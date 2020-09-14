@@ -163,12 +163,12 @@
                 <template slot="button-content">
                     <div class="nav-user mr-0 waves-effect waves-light">
                         <img
-                            src="/admin/users/user-1.jpg"
+                            :src="authUser.data.attributes.avatar"
                             alt="user-image"
                             class="rounded-circle"
                         />
                         <span class="pro-user-name ml-1">
-              {{user ? user.name : ''}} <i class="mdi mdi-chevron-down"></i>
+              {{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i>
             </span>
                     </div>
                 </template>
@@ -247,29 +247,17 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import { mapGetters } from 'vuex';
 
 export default {
     name: "NavBar",
     components: { VuePerfectScrollbar },
-    props: {
-        user: {
-            type: Object,
-            required: false,
-            default: () => ({}),
-        },
-        title: {
-            type: String,
-            required: false,
-            default: () => '',
-        },
-    },
-    data() {
-        return {}
-    },
     computed: {
-        ...authComputed,
+        ...mapGetters({
+            authUser: "authUser",
+            authUserLoading: "authUserLoading",
+        })
     },
     methods: {
         toggleMenu() {

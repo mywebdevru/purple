@@ -1,28 +1,31 @@
 <template>
     <!-- ========== Left Sidebar Start ========== -->
-    <div class="left-side-menu">
-        <VuePerfectScrollbar
-            v-if="!isCondensed"
-            v-once
-            class="slimscroll-menu"
-            :settings="settings"
-        >
-            <SideNav :user="user" />
-        </VuePerfectScrollbar>
-        <SideNav
-            v-else
-            :user="user"
-        />
+    <div>
+        <div v-if="authUserLoading"></div>
+        <div v-else class="left-side-menu">
+            <VuePerfectScrollbar
+                v-if="!isCondensed"
+                v-once
+                class="slimscroll-menu"
+                :settings="settings"
+            >
+                <SideNav :authUser="authUser" />
+            </VuePerfectScrollbar>
+            <SideNav
+                v-else
+                :authUser="authUser"
+            />
 
-        <!-- Sidebar -left -->
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
     </div>
-    <!-- Left Sidebar End -->
 </template>
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { authComputed } from '../state/helpers'
 import SideNav from './SideNav'
+import {mapGetters} from "vuex";
 export default {
     name: "SideBar",
     components: { VuePerfectScrollbar, SideNav },
@@ -30,11 +33,6 @@ export default {
         isCondensed: {
             type: Boolean,
             default: false,
-        },
-        user: {
-            type: Object,
-            required: false,
-            default: () => ({}),
         },
     },
     data() {
@@ -44,10 +42,13 @@ export default {
             },
         }
     },
-    computed: {
-        ...authComputed,
-    },
     methods: {},
+    computed: {
+        ...mapGetters({
+            authUser: "authUser",
+            authUserLoading: "authUserLoading",
+        })
+    },
 }
 </script>
 

@@ -53,19 +53,19 @@
 } 
 
 .wheel {
-    width: 70px;
-    height: 70px;
+    width: 74px;
+    height: 74px;
     text-align: center;
     margin: 0 auto;
     border-radius: 50%;
-    margin-top: -10px;
+    margin-top: -12px;
 }
 .wheel__red {}
 .wheel__green {}
 .wheel__yellow {}
 .wheel__inner__red {
     font-family: nimbusmono;
-    font-size: 12px;
+    font-size: 11px;
     position: absolute;
     top: 43%;
     left: 16%;
@@ -74,19 +74,19 @@
 }
 .wheel__inner__green {
     font-family: nimbusmono;
-    font-size: 12px;
+    font-size: 11px;
     position: absolute;
     top: 45%;
-    left: 84%;
+    left: 83%;
     transform: rotate(-40deg);
     opacity: 0;
 }
 .wheel__inner__yellow {
     font-family: nimbusmono;
-    font-size: 12px;
-    position: absolute;    
+    font-size: 11px;
+    position: absolute;
     top: 45%;
-    left: 50%;
+    left: 49%;
     transform: rotate(-40deg);
     opacity: 0;
 }

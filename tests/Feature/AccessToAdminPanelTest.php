@@ -4,11 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class AccessToAdminPanelTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testUserMustLoginToAccessToAdminPanel()
     {
         $this->get(route('admin.index'))->assertRedirect('login');
@@ -31,6 +33,8 @@ class AccessToAdminPanelTest extends TestCase
     {
         $adminUser = factory(User::class)->create();
 
+        Role::create(['name' => 'admin']);
+
         $adminUser->assignRole('admin');
 
         $this->actingAs($adminUser);
@@ -43,6 +47,8 @@ class AccessToAdminPanelTest extends TestCase
     public function testSuperAdminCanAccessToAdminPanel()
     {
         $superAdminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'super-admin']);
 
         $superAdminUser->assignRole('super-admin');
 

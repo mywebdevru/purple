@@ -7,6 +7,9 @@
 <script>
 export default {
     name: "Index",
+    mounted() {
+        this.$store.dispatch("fetchAuthUser");
+    }
 }
 </script>
 

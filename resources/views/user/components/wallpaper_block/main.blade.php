@@ -59,7 +59,7 @@
                                     <div class="wheel__content__yellow">о</div>
                                 </div>
 
-                                <div class="btn btn-control bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
+                                <div class="btn btn-control bg-yellow" id="bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
                                     <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
                                 </div>
 

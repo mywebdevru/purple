@@ -4,7 +4,7 @@ namespace App\View\Components\Header;
 
 use Illuminate\View\Component;
 
-class ControlBlock extends Component
+class AuthUser extends Component
 {
     /**
      * Create a new component instance.
@@ -13,11 +13,10 @@ class ControlBlock extends Component
      */
     public function __construct()
     {
-        $this->requstedFriendships = auth()->user()->requestedFriendships;
-    }
-
-    public function isRequested(){
-        return $this->requstedFriendships->count() > 0;
+        $this->full_name = auth()->user()->full_name;
+        $this->creed = auth()->user()->creed;
+        $this->avatar = auth()->user()->avatar;
+        $this->id = auth()->user()->id;
     }
 
     /**
@@ -27,6 +26,6 @@ class ControlBlock extends Component
      */
     public function render()
     {
-        return view('components.header.control-block', ['requestedFriendships' => $this->requstedFriendships]);
+        return view('components.header.auth-user', ['full_name' => $this->full_name, 'creed' => $this->creed, 'avatar' => $this->avatar, 'id' => $this->id]);
     }
 }
