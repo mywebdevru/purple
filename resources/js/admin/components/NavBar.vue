@@ -251,14 +251,27 @@ import Spinner from "./Spinner";
 export default {
     name: "NavBar",
     components: { VuePerfectScrollbar, Spinner },
-    computed: {
-        ...mapGetters({
-            authUser: "authUser",
-            authUserLoading: "authUserLoading",
-        }),
-        title() {
-            return this.$route.meta.title ? this.$route.meta.title : 'Dashboard untitled page'
-        }
+    props: {
+        authUser: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+        title: {
+            type: String,
+            required: false,
+            default: 'Untitled Page',
+        },
+        isMenuOpened: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     methods: {
         toggleMenu() {

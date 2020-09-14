@@ -14,7 +14,8 @@
             </div>
             <div class="slimscroll-menu">
                 <!-- User box -->
-                <div class="user-box">
+                <Spinner v-if="authUserLoading" />
+                <div class="user-box" v-else>
                     <div class="user-img">
                         <img
                             :src="authUser.data.attributes.avatar"
@@ -43,21 +44,28 @@
 <script>
 
 import {mapGetters} from "vuex";
+import Spinner from "./Spinner";
 
 export default {
     name: "RightBar",
-    components: {},
+    components: {Spinner},
     methods: {
         hide() {
             this.$parent.toggleRightSidebar()
         },
     },
-    computed: {
-        ...mapGetters({
-            authUser: "authUser",
-            authUserLoading: "authUserLoading",
-        })
-    },
+    props: {
+        authUser: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+    }
 }
 </script>
 

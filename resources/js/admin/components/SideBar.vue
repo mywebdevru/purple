@@ -14,6 +14,7 @@
             <SideNav
                 v-else
                 :authUser="authUser"
+                :authUserLoading="authUserLoading"
             />
 
             <!-- Sidebar -left -->
