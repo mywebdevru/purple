@@ -255,7 +255,10 @@ export default {
         ...mapGetters({
             authUser: "authUser",
             authUserLoading: "authUserLoading",
-        })
+        }),
+        title() {
+            return this.$route.meta.title ? this.$route.meta.title : 'Dashboard untitled page'
+        }
     },
     methods: {
         toggleMenu() {
