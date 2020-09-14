@@ -118,9 +118,6 @@
         @endcomponent
     </article>
 </div>
-@section('script')
-
-@endsection
 
 
 

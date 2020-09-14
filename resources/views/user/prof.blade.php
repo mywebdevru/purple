@@ -37,9 +37,11 @@
 
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Models\Post')
-                        @component('user.components.feed.post',['feed' => $item]) @endcomponent
+                        {{-- @component('user.components.feed.post',['feed' => $item]) @endcomponent --}}
+                        <livewire:feed.post :post="$item->feedable" :key="$item->feedable->id"/>
                     @else
-                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
+                        {{-- @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent --}}
+                        <livewire:feed.image :image="$item->feedable" :key="$item->feedable->id"/>
                     @endif
                 @endforeach
 

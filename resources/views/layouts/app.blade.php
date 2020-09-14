@@ -9,13 +9,29 @@
 
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
-
+    <livewire:styles />
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
 
     @yield('css')
+    <style>
+        @keyframes feed-hide-animation {
+            from {max-height: 300px;
+                transform: scaleY(1);
+                transform-origin: top;
+                opacity: 1;}
+            to {max-height: 0px;
+                transform: scaleY(0);
+                transform-origin: top;
+                opacity: 0;}
+        }
+        .feed-hide{
+            animation: feed-hide-animation  400ms ease-out forwards;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body class="page-has-left-panels page-has-right-panels">
@@ -67,7 +83,9 @@
 @yield('content')
 
 <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<livewire:scripts />
 <script src="{{ asset('js/x3mart.js') }}"></script>
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
@@ -96,7 +114,7 @@
                 if(!!response){
                     item.parents('.more-dropdown').find('.friend-requests').html('<div class="text-center">Запросов нет</div>')
                     item.parents('.control-icon').find('.requests_count').text('0')
-                    
+
                 }
             }
         })
