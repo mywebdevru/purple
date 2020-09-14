@@ -22,7 +22,6 @@
                     </div>
                 </form>
             </li>
-
             <b-nav-item-dropdown
                 right
                 class="notification-list"
@@ -154,22 +153,20 @@
                     </a>
                 </b-dropdown-text>
             </b-nav-item-dropdown>
-
             <b-nav-item-dropdown
                 right
                 class="notification-list"
                 menu-class="profile-dropdown"
             >
                 <template slot="button-content">
-                    <div class="nav-user mr-0 waves-effect waves-light">
+                    <Spinner v-if="authUserLoading" />
+                    <div class="nav-user mr-0 waves-effect waves-light" v-else>
                         <img
                             :src="authUser.data.attributes.avatar"
                             alt="user-image"
                             class="rounded-circle"
                         />
-                        <span class="pro-user-name ml-1">
-              {{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i>
-            </span>
+                        <span class="pro-user-name ml-1">{{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i></span>
                     </div>
                 </template>
 
@@ -249,15 +246,32 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import { mapGetters } from 'vuex';
+import Spinner from "./Spinner";
 
 export default {
     name: "NavBar",
-    components: { VuePerfectScrollbar },
-    computed: {
-        ...mapGetters({
-            authUser: "authUser",
-            authUserLoading: "authUserLoading",
-        })
+    components: { VuePerfectScrollbar, Spinner },
+    props: {
+        authUser: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+        title: {
+            type: String,
+            required: false,
+            default: 'Untitled Page',
+        },
+        isMenuOpened: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     methods: {
         toggleMenu() {

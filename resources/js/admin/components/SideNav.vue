@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="user-box text-center">
+        <Spinner v-if="authUserLoading" />
+        <div class="user-box text-center" v-else>
             <img
                 :src="authUser.data.attributes.avatar"
                 alt="user-img"
@@ -99,14 +100,20 @@
 
 <script>
 import MetisMenu from 'metismenujs/dist/metismenujs'
+import Spinner from "./Spinner";
 export default {
     name: "SideNav",
-    components: {},
+    components: {Spinner},
     props: {
         authUser: {
             type: Object,
             required: false,
             default: () => ({}),
+        },
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
         },
     },
     mounted: function() {
