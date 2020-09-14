@@ -1,5 +1,5 @@
 <template>
-<div class="d-flex justify-content-center app-loading align-items-center">
+<div class="d-flex justify-content-center align-items-center">
     <div class="lds-ring"><div></div><div></div><div></div><div></div></div><div><span class="loading-text ml-1">Загрузка...</span></div>
 </div>
 </template>

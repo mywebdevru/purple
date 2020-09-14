@@ -22,7 +22,6 @@
                     </div>
                 </form>
             </li>
-
             <b-nav-item-dropdown
                 right
                 class="notification-list"
@@ -154,23 +153,20 @@
                     </a>
                 </b-dropdown-text>
             </b-nav-item-dropdown>
-            <Spinner v-if="true" />
             <b-nav-item-dropdown
                 right
                 class="notification-list"
                 menu-class="profile-dropdown"
-                v-if="false"
             >
                 <template slot="button-content">
-                    <div class="nav-user mr-0 waves-effect waves-light">
+                    <Spinner v-if="authUserLoading" />
+                    <div class="nav-user mr-0 waves-effect waves-light" v-else>
                         <img
                             :src="authUser.data.attributes.avatar"
                             alt="user-image"
                             class="rounded-circle"
                         />
-                        <span class="pro-user-name ml-1">
-              {{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i>
-            </span>
+                        <span class="pro-user-name ml-1">{{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i></span>
                     </div>
                 </template>
 
