@@ -154,11 +154,12 @@
                     </a>
                 </b-dropdown-text>
             </b-nav-item-dropdown>
-
+            <Spinner v-if="true" />
             <b-nav-item-dropdown
                 right
                 class="notification-list"
                 menu-class="profile-dropdown"
+                v-if="false"
             >
                 <template slot="button-content">
                     <div class="nav-user mr-0 waves-effect waves-light">
@@ -249,10 +250,11 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import { mapGetters } from 'vuex';
+import Spinner from "./Spinner";
 
 export default {
     name: "NavBar",
-    components: { VuePerfectScrollbar },
+    components: { VuePerfectScrollbar, Spinner },
     computed: {
         ...mapGetters({
             authUser: "authUser",
