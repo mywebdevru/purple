@@ -1,12 +1,14 @@
 <template>
     <div id="wrapper">
         <NavBar
-            :user="user"
+            :authUser="authUser"
+            :authUserLoading="authUserLoading"
             :title="title"
         />
         <SideBar
             :is-condensed="isMenuCondensed"
-            :user="user"
+            :authUser="authUser"
+            :authUserLoading="authUserLoading"
         />
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -21,7 +23,10 @@
             </div>
             <Footer />
         </div>
-        <RightBar />
+        <RightBar
+            :authUser="authUser"
+            :authUserLoading="authUserLoading"
+        />
     </div>
 </template>
 
@@ -30,6 +35,7 @@ import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import RightBar from "../../components/RightBar";
 import Footer from "../../components/Footer";
+import {mapGetters} from "vuex";
 
 export default {
     name: "Main",
@@ -37,15 +43,17 @@ export default {
     data() {
         return {
             isMenuCondensed: false,
-            user: {
-                name: 'Rus Skazkin',
-            },
-            // user: this.$store ? this.$store.state.auth.currentUser : {} || {},
             title: this.$route ? this.$route.meta.title || '' : '',
         }
     },
     created: () => {
         document.body.classList.remove('authentication-bg')
+    },
+    computed: {
+        ...mapGetters({
+            authUser: "authUser",
+            authUserLoading: "authUserLoading",
+        }),
     },
     methods: {
         toggleMenu() {

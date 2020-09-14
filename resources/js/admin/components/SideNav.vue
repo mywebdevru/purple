@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div class="user-box text-center">
+        <Spinner v-if="authUserLoading" />
+        <div class="user-box text-center" v-else>
             <img
-                src="/admin/users/user-1.jpg"
+                :src="authUser.data.attributes.avatar"
                 alt="user-img"
                 class="rounded-circle img-thumbnail avatar-lg"
             >
@@ -10,9 +11,9 @@
                 <a
                     href="#"
                     class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                >{{user ? user.name : ''}}</a>
+                >{{ authUser.data.attributes.full_name }}</a>
             </div>
-            <p class="text-muted">Admin Head</p>
+            <p class="text-muted">{{ authUser.data.attributes.roles[0] }}</p>
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a
@@ -98,20 +99,22 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
 import MetisMenu from 'metismenujs/dist/metismenujs'
+import Spinner from "./Spinner";
 export default {
     name: "SideNav",
-    components: {},
+    components: {Spinner},
     props: {
-        user: {
+        authUser: {
             type: Object,
             required: false,
             default: () => ({}),
         },
-    },
-    computed: {
-        ...authComputed,
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
     },
     mounted: function() {
         // eslint-disable-next-line no-unused-vars
