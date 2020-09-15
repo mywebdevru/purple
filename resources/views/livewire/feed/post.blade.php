@@ -16,7 +16,7 @@
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
-                <ul class="more-dropdown"  x-show="!!show_more">
+                <ul class="more-dropdown" x-show.transition.out="!!show_more">
                     <li>
                         <a href="#"  class="edit_post dropdown_menu_item">Редактировать пост</a>
                     </li>
