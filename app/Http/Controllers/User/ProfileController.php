@@ -77,11 +77,11 @@ class ProfileController extends Controller
                 ->with('feedable.comments.likes')
                 ->with('feedable.likes.authorable')
                 ->with(['feedable' => function (MorphTo $morphTo) {
-                        $morphTo->morphWith([
-                            Image::class => ['imageable'],
-                            Post::class => ['postable'],
-                        ]);
-                    }]);
+                    $morphTo->morphWith([
+                        Image::class => ['imageable'],
+                        Post::class => ['postable'],
+                    ]);
+                }]);
         return view('user.prof',['user' => $user, 'feed' => $feed->get()]);
     }
 
