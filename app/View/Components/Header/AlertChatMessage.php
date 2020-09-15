@@ -4,7 +4,7 @@ namespace App\View\Components\Header;
 
 use Illuminate\View\Component;
 
-class ControlBlock extends Component
+class AlertChatMessage extends Component
 {
     /**
      * Create a new component instance.
@@ -13,11 +13,7 @@ class ControlBlock extends Component
      */
     public function __construct()
     {
-        $this->requstedFriendships = auth()->user()->requestedFriendships;
-    }
-
-    public function isRequested(){
-        return $this->requstedFriendships->count() > 0;
+        //
     }
 
     /**
@@ -27,6 +23,6 @@ class ControlBlock extends Component
      */
     public function render()
     {
-        return view('components.header.control-block', ['requestedFriendships' => $this->requstedFriendships]);
+        return view('components.header.alert-chat-message');
     }
 }

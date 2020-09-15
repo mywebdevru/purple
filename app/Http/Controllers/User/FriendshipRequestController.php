@@ -83,10 +83,10 @@ class FriendshipRequestController extends Controller
      * @param  \App\Models\FriendshipRequest  $friendshipRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, FriendshipRequest $friendshipRequest)
+    public function destroy(FriendshipRequest $friendshipRequest)
     {
         $result = $friendshipRequest->delete();
         abort_if(!$result, 404);
-        return back();
+        return response()->json(['deleted' => $result]);
     }
 }

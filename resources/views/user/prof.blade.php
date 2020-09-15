@@ -1,4 +1,22 @@
 @extends('layouts.app')
+@section('css')
+<style>
+    @keyframes feed-hide-animation {
+        from {max-height: 300px;
+            transform: scaleY(1);
+            transform-origin: top;
+            opacity: 1;}
+        to {max-height: 0px;
+            transform: scaleY(0);
+            transform-origin: top;
+            opacity: 0;}
+    }
+    .feed-hide{
+        animation: feed-hide-animation  400ms ease-out forwards;
+        margin: 0;
+    }
+</style>
+@endsection
 @section('content')
 
 @component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent
@@ -37,9 +55,9 @@
 
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Models\Post')
-                        @component('user.components.feed.post',['feed' => $item]) @endcomponent
+                        <livewire:feed.post :post="$item->feedable" />
                     @else
-                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
+                        <livewire:feed.image :image="$item->feedable" />
                     @endif
                 @endforeach
 
@@ -975,112 +993,8 @@
 
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
-            <div class="ui-block revealator-slideup revealator-once">
-
-				<div class="ui-block-title">
-					<h6 class="title">Друзья ({{ count($user->friends) }})</h6>
-				</div>
-				<div class="ui-block-content">
-
-					<!--друзья -->
-
-					<ul class="widget w-faved-page js-zoom-gallery">
-                        @foreach ($user->friends as $friend)
-                            <li>
-                                <a href="#">
-                                    <img src="{{ $friend->user->avatar }}" alt="author">
-                                </a>
-                            </li>
-                        @break($loop->iteration == 14)
-                        @endforeach
-                        @if (count($user->friends)-14 > 0)
-                            <li class="all-users">
-                                <a href="#">+{{ count($user->friends)-14 }}</a>
-                            </li>
-                        @endif
-					</ul>
-
-					<!-- .. окончание блока друзей -->
-				</div>
-			</div>
-
-			<div class="ui-block revealator-fade revealator-delay3 revealator-once">
-				<div class="ui-block-title">
-					<h6 class="title">Фото ({{ count($user->images) }})</h6>
-				</div>
-				<div class="ui-block-content">
-
-					<!-- Фото -->
-
-					<ul class="widget w-last-photo js-zoom-gallery">
-                        @foreach ($user->images as $item)
-                        @if ($loop->iteration < 9)
-                            <li>
-                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}">
-                                    <img src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}" alt="photo">
-                                </a>
-                            </li>
-                        @else
-                            <li style="display : none">
-                                <a href="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)}}"></a>
-                            </li>
-                        @endif
-                        @endforeach
-                        @if (count($user->images)-8 > 0)
-                            <li class="all-users">
-                                <a href="#">+{{ count($user->images)-8 }}</a>
-                            </li>
-                        @endif
-					</ul>
-
-
-					<!-- .. окончание Фото -->
-				</div>
-			</div>
-
-			{{-- <div class="ui-block revealator-slideup revealator-once">
-				<div class="ui-block-title">
-					<h6 class="title">Посты</h6>
-				</div>
-				<!-- ПОСТЫ -->
-
-				<ul class="widget w-blog-posts">
-					<li>
-						<article class="hentry post">
-
-							<a href="#" class="h4">Lorem ipsum dolor sit amet</a>
-
-							<p>Lorem ipsum dolor sit amet, consect adipisicing elit, sed do eiusmod por incidid ut labore et.</p>
-
-							<div class="post__date">
-								<time class="published" datetime="2017-03-24T18:18">
-									7 часов назад
-								</time>
-							</div>
-
-						</article>
-					</li>
-					<li>
-						<article class="hentry post">
-
-							<a href="#" class="h4">Lorem ipsum dolor sit amet</a>
-
-							<p>Lorem ipsum dolor sit amet, consect adipisicing elit, sed do eiusmod por incidid ut labore et.</p>
-
-							<div class="post__date">
-								<time class="published" datetime="2017-03-24T18:18">
-									March 18th, at 6:52pm
-								</time>
-							</div>
-
-						</article>
-					</li>
-				</ul>
-
-				<!-- .. окончание постов -->
-			</div> --}}
-
-
+            <x-friends-block :friends="$user->friends"/>
+            <x-images-block :images="$user->images"/>
 
 			<div class="ui-block revealator-slideup revealator-once">
 				<div class="ui-block-title">

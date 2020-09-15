@@ -18,14 +18,8 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
 export default {
     name: "Footer",
-    components: {},
-    computed: {
-        ...authComputed,
-    },
-    methods: {},
 }
 </script>
 

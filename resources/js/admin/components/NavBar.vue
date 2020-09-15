@@ -22,7 +22,6 @@
                     </div>
                 </form>
             </li>
-
             <b-nav-item-dropdown
                 right
                 class="notification-list"
@@ -154,22 +153,20 @@
                     </a>
                 </b-dropdown-text>
             </b-nav-item-dropdown>
-
             <b-nav-item-dropdown
                 right
                 class="notification-list"
                 menu-class="profile-dropdown"
             >
                 <template slot="button-content">
-                    <div class="nav-user mr-0 waves-effect waves-light">
+                    <Spinner v-if="authUserLoading" />
+                    <div class="nav-user mr-0 waves-effect waves-light" v-else>
                         <img
-                            src="/admin/users/user-1.jpg"
+                            :src="authUser.data.attributes.avatar"
                             alt="user-image"
                             class="rounded-circle"
                         />
-                        <span class="pro-user-name ml-1">
-              {{user ? user.name : ''}} <i class="mdi mdi-chevron-down"></i>
-            </span>
+                        <span class="pro-user-name ml-1">{{ authUser.data.attributes.full_name }} <i class="mdi mdi-chevron-down"></i></span>
                     </div>
                 </template>
 
@@ -247,29 +244,34 @@
 </template>
 
 <script>
-import { authComputed } from '../state/helpers'
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import { mapGetters } from 'vuex';
+import Spinner from "./Spinner";
 
 export default {
     name: "NavBar",
-    components: { VuePerfectScrollbar },
+    components: { VuePerfectScrollbar, Spinner },
     props: {
-        user: {
+        authUser: {
             type: Object,
             required: false,
             default: () => ({}),
         },
+        authUserLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
         title: {
             type: String,
             required: false,
-            default: () => '',
+            default: 'Untitled Page',
         },
-    },
-    data() {
-        return {}
-    },
-    computed: {
-        ...authComputed,
+        isMenuOpened: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     methods: {
         toggleMenu() {
