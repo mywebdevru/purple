@@ -1,4 +1,22 @@
 @extends('layouts.app')
+@section('css')
+<style>
+    @keyframes feed-hide-animation {
+        from {max-height: 300px;
+            transform: scaleY(1);
+            transform-origin: top;
+            opacity: 1;}
+        to {max-height: 0px;
+            transform: scaleY(0);
+            transform-origin: top;
+            opacity: 0;}
+    }
+    .feed-hide{
+        animation: feed-hide-animation  400ms ease-out forwards;
+        margin: 0;
+    }
+</style>
+@endsection
 @section('content')
 
 @component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent
@@ -37,9 +55,9 @@
 
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Models\Post')
-                        @component('user.components.feed.post',['feed' => $item]) @endcomponent
+                        <livewire:feed.post :post="$item->feedable" />
                     @else
-                        @component('user.components.feed.image',['feed' => $item, 'comment_author' => auth()->user()]) @endcomponent
+                        <livewire:feed.image :image="$item->feedable" />
                     @endif
                 @endforeach
 
