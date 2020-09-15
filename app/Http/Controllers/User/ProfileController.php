@@ -73,9 +73,9 @@ class ProfileController extends Controller
             $feed = Feed::where('authorable_type', [User::class])->where('authorable_id', $id)->orderBy('updated_at','DESC');
         }
         $user->load('usersVehicles', 'images', 'friends.user');
-        $feed->with('feedable.comments.authorable')
-                ->with('feedable.comments.likes')
-                ->with('feedable.likes.authorable')
+        $feed->with(['feedable.comments.authorable',
+                    'feedable.comments.likes',
+                    'feedable.likes.authorable'])
                 ->with(['feedable' => function (MorphTo $morphTo) {
                     $morphTo->morphWith([
                         Image::class => ['imageable'],
