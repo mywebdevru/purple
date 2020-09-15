@@ -4,6 +4,7 @@
             <div class="col-md-12">
                 <b-card>
                     This is dashboard page
+                    <UserChart></UserChart>
                 </b-card>
             </div>
         </div>
@@ -12,6 +13,7 @@
 
 <script>
 import Layout from "../layouts/Main"
+import UserChart from "../../components/dashboard/UserChart";
 
 export default {
     name: "Dashboard",
@@ -19,7 +21,7 @@ export default {
         title: 'Dashboard',
         /*meta: [{ name: 'description', content: appConfig.description }],*/
     },
-    components: { Layout },
+    components: { UserChart, Layout },
 }
 </script>
 
