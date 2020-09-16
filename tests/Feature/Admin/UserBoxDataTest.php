@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class UserBoxDataTest extends TestCase
@@ -13,11 +15,49 @@ class UserBoxDataTest extends TestCase
     public function guests_cant_fetch_users_data()
     {
         $response = $this->get('/api/users-count');
-        $response->assertRedirect('login');;
+        $response->assertRedirect('login');
     }
 
-    public function only_admin_users_can_fetch_users_data()
+    /** @test */
+    public function users_cant_fetch_users_data()
+    {
+        $this->actingAs(factory(User::class)->create(), 'api');
+        $response = $this->get('/api/users-count');
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function admins_can_fetch_users_data()
+    {
+        $adminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->assignRole('admin');
+
+        $this->actingAs($adminUser, 'api');
+
+        $response = $this->get('/api/users-count');
+        $response->assertOk();
+    }
+
+    /** @test */
+    public function super_admins_can_fetch_users_data()
     {
 
+        $superAdminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $superAdminUser->assignRole('super-admin');
+
+        $this->actingAs($superAdminUser, 'api');
+
+        $response = $this->get('/api/users-count');
+        $response->assertOk();
     }
+
+
 }
