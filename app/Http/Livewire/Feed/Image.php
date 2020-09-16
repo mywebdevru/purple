@@ -9,12 +9,10 @@ class Image extends Component
 {
     public $image;
     public $deleted;
-    public $comment_author;
 
     public function mount($deleted = 0)
     {
         $this->deleted = $deleted;
-        $this->comment_author = auth()->user();
     }
 
     // public function getImageProperty()
