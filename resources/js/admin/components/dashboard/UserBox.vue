@@ -6,16 +6,14 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                <a href="javascript:void(0);" class="dropdown-item">Управление</a>
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                <a href="javascript:void(0);" class="dropdown-item">Назначить роли</a>
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                <a href="javascript:void(0);" class="dropdown-item">Обновить</a>
             </div>
         </div>
-        <h4 class="header-title mt-0 mb-3">Users</h4>
+        <h4 class="header-title mt-0 mb-3">Пользователи</h4>
         <UserChart />
     </b-card>
 </template>
