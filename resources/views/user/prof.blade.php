@@ -1,38 +1,5 @@
 @extends('layouts.app')
-@section('css')
-<style>
-    @keyframes feed-hide-animation {
-        from {max-height: 300px;
-            transform: scaleY(1);
-            transform-origin: top;
-            opacity: 1;}
-        to {max-height: 0px;
-            transform: scaleY(0);
-            transform-origin: top;
-            opacity: 0;}
-    }
-    @keyframes feed-load-scale-x-animation {
-        from {
-            transform: scaleX(1);
-            transform-origin: center;
-            opacity: 1;}
-        50% {transform: scaleX(1.4);
-            transform-origin: center;
-            opacity: 0.6;}
-        to {transform: scaleX(1);
-            transform-origin: center;
-            opacity: 1;}
-    }
-    .feed-hide{
-        animation: feed-hide-animation  300ms ease-out forwards;
-        margin: 0;
-    }
-    .feed-load-scale-x{
-        animation: feed-load-scale-x-animation  400ms ease-out infinite;
 
-    }
-</style>
-@endsection
 @section('content')
 
 @component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent

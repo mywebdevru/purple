@@ -54,6 +54,9 @@ jobs:
       - name: Database setup
         run:  php artisan migrate --seed
 
+      - name: Passport install
+        run: php artisan passport:install
+
       - name: Run tests
         run: ./vendor/bin/phpunit
         env:
@@ -82,6 +85,7 @@ jobs:
             composer install
             composer dump-autoload
             php artisan migrate:fresh --seed
+            php artisan passport:install
             npm i
             npm run dev
             sudo php artisan cache:clear
