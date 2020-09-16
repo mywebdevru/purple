@@ -1,17 +1,14 @@
 <template>
     <Layout>
         <div class="row">
-            <div class="col-md-12">
-                <b-card>
-                    This is dashboard page
-                </b-card>
-            </div>
+            <UserBox class="col-6" />
         </div>
     </Layout>
 </template>
 
 <script>
 import Layout from "../layouts/Main"
+import UserBox from "../../components/dashboard/UserBox";
 
 export default {
     name: "Dashboard",
@@ -19,7 +16,7 @@ export default {
         title: 'Dashboard',
         /*meta: [{ name: 'description', content: appConfig.description }],*/
     },
-    components: { Layout },
+    components: {UserBox, Layout },
 }
 </script>
 
