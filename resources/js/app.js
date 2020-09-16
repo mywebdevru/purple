@@ -2,7 +2,6 @@ require('./bootstrap');
 
 
 window.Vue = require('vue');
-require('summernote/dist/summernote.css');
 require('summernote');
 /**
  * The following block of code may be used to automatically register your
