@@ -14,19 +14,25 @@
             </div>
         </div>
         <h4 class="header-title mt-0 mb-3">Пользователи</h4>
-        <UserChart />
-        <p class="card-text">
-            <small class="text-muted">Всего пользователей: 304</small>
-        </p>
+        <div v-if="loading">
+            <Spinner />
+        </div>
+        <div v-else>
+            <UserChart :data="data" :options="options" />
+            <p class="card-text mt-3">
+                <small class="text-muted">Всего пользователей: {{ total }}</small>
+            </p>
+        </div>
     </b-card>
 </template>
 
 <script>
 import UserChart from "./UserChart";
+import Spinner from "../Spinner";
 
 export default {
     name: "UserBox",
-    components: {UserChart},
+    components: {Spinner, UserChart},
     data() {
         return {
             loading: false,
@@ -34,7 +40,6 @@ export default {
             data: {
                 labels: ['Обычные пользователи', 'Админы', 'Супер-админы'],
                 datasets: [{
-                    label: '# of Votes',
                     data: [],
                     backgroundColor: ["#188ae2", "#10c469", "#f9c851"],
                     hoverBackgroundColor: ["#188ae2", "#10c469", "#f9c851"],
@@ -56,8 +61,7 @@ export default {
             const response = (await axios.get('/api/users-count')).data;
             this.total = response.total;
             const users = this.total - response.admin - response.super_admin;
-            this.data.datasets.data = [users, response.admin, response.super_admin];
-            console.log(this.data);
+            this.data.datasets[0].data = [users, response.admin, response.super_admin];
         } catch (error) {
             console.log(error);
         } finally {
