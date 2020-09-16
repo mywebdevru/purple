@@ -11,7 +11,6 @@ class UserBoxDataTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
     public function guests_cant_fetch_users_data()
     {
         $response = $this->get('/api/users-count');
