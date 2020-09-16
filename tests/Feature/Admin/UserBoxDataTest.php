@@ -62,6 +62,7 @@ class UserBoxDataTest extends TestCase
     /** @test */
     public function users_count_response_json_test()
     {
+        $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->create();
         $superAdminUser = factory(User::class)->create();
         factory(User::class, 10)->create();
@@ -80,7 +81,7 @@ class UserBoxDataTest extends TestCase
                 'count' => 12,
                 'user_roles' => [
                     'admin' => 1,
-                    'super_admin' => 1,
+                    'super-admin' => 1,
                 ]
             ],
         ]);
