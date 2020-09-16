@@ -26,7 +26,44 @@ import UserChart from "./UserChart";
 
 export default {
     name: "UserBox",
-    components: {UserChart}
+    components: {UserChart},
+    data() {
+        return {
+            loading: false,
+            total: null,
+            data: {
+                labels: ['Обычные пользователи', 'Админы', 'Супер-админы'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [],
+                    backgroundColor: ["#188ae2", "#10c469", "#f9c851"],
+                    hoverBackgroundColor: ["#188ae2", "#10c469", "#f9c851"],
+                    hoverBorderColor: "#fff"
+                }]
+            },
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: '#fff'
+                    }
+                }
+            }
+        }
+    },
+    async mounted() {
+        this.loading = true;
+        try {
+            const response = (await axios.get('/api/users-count')).data;
+            this.total = response.total;
+            const users = this.total - response.admin - response.super_admin;
+            this.data.datasets.data = [users, response.admin, response.super_admin];
+            console.log(this.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            this.loading = false;
+        }
+    }
 }
 </script>
 

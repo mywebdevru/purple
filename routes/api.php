@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'namespace' => 'Admin',
+    'as' => 'admin.',
+    'middleware' => ['auth:api'],
+], function () {
+    Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
+});
+
 Route::group([
     'namespace' => 'API',
     'as' => 'api.',
