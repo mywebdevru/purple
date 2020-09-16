@@ -15,6 +15,9 @@
         </div>
         <h4 class="header-title mt-0 mb-3">Пользователи</h4>
         <UserChart />
+        <p class="card-text">
+            <small class="text-muted">Всего пользователей: 304</small>
+        </p>
     </b-card>
 </template>
 
