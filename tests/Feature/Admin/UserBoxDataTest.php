@@ -14,6 +14,7 @@ class UserBoxDataTest extends TestCase
     /** @test */
     public function guests_cant_fetch_users_data()
     {
+        $this->withoutExceptionHandling();
         $response = $this->get('/api/users-count', ['Accept' => 'application/json']);
         $response->assertStatus(401);
     }
