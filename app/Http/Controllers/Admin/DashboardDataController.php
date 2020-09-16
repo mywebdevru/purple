@@ -18,6 +18,7 @@ class DashboardDataController extends Controller
             $roles_data[$role_name] = User::role($role_name)->count();
         }
         return response()->json([
+            'type' => 'Users Count',
             'data' => [
                 'count' => User::count(),
                 'user_roles' => $roles_data,

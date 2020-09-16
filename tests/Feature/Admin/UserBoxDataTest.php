@@ -77,6 +77,7 @@ class UserBoxDataTest extends TestCase
 
         $response = $this->get('/api/users-count');
         $response->assertOk()->assertJson([
+            'type' => 'Users Count',
             'data' => [
                 'count' => 12,
                 'user_roles' => [
