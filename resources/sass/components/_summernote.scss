@@ -1,0 +1,58 @@
+.note-btn-group {
+    margin-right: unset;
+}
+.post .btn {
+    margin-bottom: unset;
+}
+button.btn {
+    padding: 0.5rem 0.6rem;
+}
+.note-btn > span.note-icon-caret:first-child {
+    margin-left: -1px;
+    margin-right: -17px;
+}
+.note-btn > span.note-icon-caret:nth-child(2) {
+    padding-left: 3px;
+    margin-right: -17px;
+}
+.note-btn {
+    display: inline-block;
+    font-weight: 400;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #dae0e5;
+    white-space: nowrap;
+    outline: 0;
+    color: #fff;
+    background-color: #76788b;
+    border-color: #dae0e5;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-radius: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.note-btn:hover, .note-btn:focus, .note-btn.focus {
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #dae0e5;
+    background-color: #ebebeb;
+    outline: 0;
+    border-radius: 10px;
+}
+.note-recent-color {
+    background-color: #15c39a !important;
+    color: #000;
+}
+@media screen and (max-width: 425px) {
+    button.btn {
+        padding: 0.2rem 0.2rem;
+    }
+}
