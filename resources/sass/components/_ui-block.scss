@@ -79,7 +79,7 @@
 }
 
 /*START X3MArt style code*/
-/*Feed element SlideUp after delete*/
+/*Feed's element SlideUp after delete*/
 @keyframes feed-hide-animation {
     from {max-height: 300px;
         transform: scaleY(1);
@@ -94,7 +94,7 @@
     animation: feed-hide-animation  400ms ease-out forwards;
     margin: 0;
 }
-/*Feed element "more" three-dot animation while action loading*/
+/*Feed's element "more" three-dot animation while action loading*/
 @keyframes feed-load-scale-x-animation {
     from {
         transform: scaleX(1);
@@ -109,7 +109,6 @@
 }
 .feed-load-scale-x{
     animation: feed-load-scale-x-animation  400ms ease-out infinite;
-
 }
 /*END X3MArt style code*/
 
