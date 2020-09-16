@@ -78,6 +78,23 @@
     padding: 24px 23px 23px;
 }
 
+/*START Vyacheslav style code for prof.blade.php*/
+@keyframes feed-hide-animation {
+    from {max-height: 300px;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;}
+    to {max-height: 0px;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;}
+}
+.feed-hide{
+    animation: feed-hide-animation  400ms ease-out forwards;
+    margin: 0;
+}
+/*END Vyacheslav style code for prof.blade.php*/
+
 @media (max-width: 1200px) {
     .responsive-flex1200 .ui-block-title {
         display: -webkit-box;
