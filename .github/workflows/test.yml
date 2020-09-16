@@ -51,6 +51,7 @@ jobs:
         run: |
           cp .env.ci .env
           php artisan key:generate
+          php artisan passport:install
       - name: Database setup
         run:  php artisan migrate --seed
 
