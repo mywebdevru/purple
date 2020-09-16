@@ -59,5 +59,31 @@ class UserBoxDataTest extends TestCase
         $response->assertOk();
     }
 
+    /** @test */
+    public function users_count_response_json_test()
+    {
+        $adminUser = factory(User::class)->create();
+        $superAdminUser = factory(User::class)->create();
+        factory(User::class, 10)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->assignRole('admin');
+        $superAdminUser->assignRole('super-admin');
+
+        $this->actingAs($adminUser, 'api');
+
+        $response = $this->get('/api/users-count');
+        $response->assertOk()->assertJson([
+            'data' => [
+                'count' => 12,
+                'user_roles' => [
+                    'admin' => 1,
+                    'super_admin' => 1,
+                ]
+            ],
+        ]);
+    }
 
 }
