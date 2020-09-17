@@ -7,14 +7,16 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item">Управление</a>
+            <a href="javascript:void(0);" class="dropdown-item">Пользователи</a>
             <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item">Назначить роли</a>
+            <a href="javascript:void(0);" class="dropdown-item">Клубы</a>
+            <!-- item-->
+            <a href="javascript:void(0);" class="dropdown-item">Группы</a>
             <!-- item-->
             <a href="javascript:void(0);" @click.prevent="reload" class="dropdown-item">Обновить</a>
         </div>
     </div>
-    <h4 class="header-title mt-0 mb-3">Пользователи</h4>
+    <h4 class="header-title mt-0 mb-3">Участники</h4>
     <div v-if="loading">
         <Spinner />
     </div>
@@ -29,12 +31,10 @@
 </template>
 
 <script>
-import UserChart from "../Charts/DonutChart";
 import Spinner from "../Spinner";
 import DonutChart from "../Charts/DonutChart";
-
 export default {
-    name: "UserBox",
+    name: "MemberBox",
     components: {DonutChart, Spinner},
     data() {
         return {
@@ -55,7 +55,7 @@ export default {
                         fontColor: '#fff'
                     }
                 }
-            }
+            },
         }
     },
     methods: {
