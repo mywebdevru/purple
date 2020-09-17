@@ -79,7 +79,7 @@ jobs:
           script_stop: true
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
+            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \; 2>/dev/null
             mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
