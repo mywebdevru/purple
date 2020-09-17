@@ -41,11 +41,11 @@ export default {
             loading: false,
             total: null,
             data: {
-                labels: ['Обычные пользователи', 'Админы', 'Супер-админы'],
+                labels: ['Пользователи', 'Клубы', 'Группы'],
                 datasets: [{
                     data: [],
-                    backgroundColor: ["#188ae2", "#10c469", "#f9c851"],
-                    hoverBackgroundColor: ["#188ae2", "#10c469", "#f9c851"],
+                    backgroundColor: ["#ff8acc", "#5b69bc", "#f9c851"],
+                    hoverBackgroundColor: ["#ff8acc", "#5b69bc", "#f9c851"],
                     hoverBorderColor: "#fff"
                 }]
             },
