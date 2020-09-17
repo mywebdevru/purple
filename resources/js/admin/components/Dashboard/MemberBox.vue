@@ -23,7 +23,7 @@
     <div v-else>
         <DonutChart :data="data" :options="options" />
         <p class="card-text mt-3">
-            <small class="text-muted">Всего пользователей: {{ total }}</small>
+            <small class="text-muted">Всего участников: {{ total }}</small>
         </p>
     </div>
 </b-card>
