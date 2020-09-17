@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class UserBoxDataTest extends TestCase
+class UserBoxApiTest extends TestCase
 {
     use RefreshDatabase;
 
