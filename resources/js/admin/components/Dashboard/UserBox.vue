@@ -18,7 +18,7 @@
             <Spinner />
         </div>
         <div v-else>
-            <UserChart :data="data" :options="options" />
+            <DonutChart :data="data" :options="options" />
             <p class="card-text mt-3">
                 <small class="text-muted">Всего пользователей: {{ total }}</small>
             </p>
@@ -27,12 +27,13 @@
 </template>
 
 <script>
-import UserChart from "./UserChart";
+import UserChart from "../Charts/DonutChart";
 import Spinner from "../Spinner";
+import DonutChart from "../Charts/DonutChart";
 
 export default {
     name: "UserBox",
-    components: {Spinner, UserChart},
+    components: {DonutChart, Spinner},
     data() {
         return {
             loading: false,

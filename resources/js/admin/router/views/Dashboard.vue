@@ -8,7 +8,7 @@
 
 <script>
 import Layout from "../layouts/Main"
-import UserBox from "../../components/dashboard/UserBox";
+import UserBox from "../../components/Dashboard/UserBox";
 
 export default {
     name: "Dashboard",
