@@ -76,18 +76,18 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          run: |
-            cd /var/www/html/purple/dev/purple/
-            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
-            mkdir ./storage/app/avatars ./storage/app/summernote ./storage/app/wallpapers
-            sudo php artisan cache:clear
-            git pull origin dev
-            composer install
-            composer dump-autoload
-            php artisan migrate:fresh --seed
-            php artisan passport:install
-            npm i
-            npm run dev
-            sudo php artisan cache:clear
-            php artisan storage:link
-            sudo chown -R www-data:www-data ./storage/app
+        run: |
+          cd /var/www/html/purple/dev/purple/
+          sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
+          mkdir ./storage/app/avatars ./storage/app/summernote ./storage/app/wallpapers
+          sudo php artisan cache:clear
+          git pull origin dev
+          composer install
+          composer dump-autoload
+          php artisan migrate:fresh --seed
+          php artisan passport:install
+          npm i
+          npm run dev
+          sudo php artisan cache:clear
+          php artisan storage:link
+          sudo chown -R www-data:www-data ./storage/app
