@@ -80,7 +80,8 @@ jobs:
           script: |
             cd /var/www/html/purple/dev/purple/
             sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
-            mkdir ./storage/app/avatars ./storage/app/summernote ./storage/app/wallpapers
+            mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers
+            sudo chown -R www-data:www-data ./storage/app
             sudo php artisan optimize:clear
             git pull origin dev
             composer install
@@ -90,4 +91,3 @@ jobs:
             npm i
             npm run dev
             php artisan storage:link
-            sudo chown -R www-data:www-data ./storage/app
