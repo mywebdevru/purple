@@ -76,7 +76,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: |
+          run: |
             cd /var/www/html/purple/dev/purple/
             sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
             mkdir ./storage/app/avatars ./storage/app/summernote ./storage/app/wallpapers
