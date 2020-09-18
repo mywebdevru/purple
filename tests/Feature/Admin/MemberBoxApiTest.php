@@ -82,7 +82,7 @@ class MemberBoxApiTest extends TestCase
             'type' => 'Members Count',
             'data' => [
                 'count' => 31,
-                '$member_types' => [
+                'member_types' => [
                     'users' => 11,
                     'clubs' => 10,
                     'groups' => 10,

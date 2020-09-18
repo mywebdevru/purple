@@ -39,7 +39,7 @@ class DashboardDataController extends Controller
             'type' => 'Members Count',
             'data' => [
                 'count' => array_sum($member_types),
-                '$member_types' => $member_types,
+                'member_types' => $member_types,
             ],
         ]);
     }

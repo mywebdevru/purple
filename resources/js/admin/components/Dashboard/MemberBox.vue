@@ -65,10 +65,9 @@ export default {
         async fetchData() {
             this.loading = true;
             try {
-                const response = (await axios.get('/api/users-count')).data;
+                const response = (await axios.get('/api/members-count')).data;
                 this.total = response.data.count;
-                const users = this.total - response.data.user_roles.admin - response.data.user_roles["super-admin"];
-                this.data.datasets[0].data = [users, response.data.user_roles.admin, response.data.user_roles["super-admin"]];
+                this.data.datasets[0].data = Object.values(response.data.member_types);
             } catch (error) {
                 console.log(error);
             } finally {
