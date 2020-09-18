@@ -44,4 +44,21 @@ class MemberBoxApiTest extends TestCase
         $response = $this->get('/api/members-count');
         $response->assertOk();
     }
+
+    /** @test */
+    public function super_admins_can_fetch_members_data()
+    {
+
+        $superAdminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $superAdminUser->assignRole('super-admin');
+
+        $this->actingAs($superAdminUser, 'api');
+
+        $response = $this->get('/api/members-count');
+        $response->assertOk();
+    }
 }
