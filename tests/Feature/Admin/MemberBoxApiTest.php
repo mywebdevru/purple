@@ -67,7 +67,6 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function members_count_response_json_test()
     {
-        $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->create();
         Role::create(['name' => 'admin']);
         $adminUser->assignRole('admin');
