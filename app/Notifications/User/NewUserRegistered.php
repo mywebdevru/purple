@@ -2,6 +2,7 @@
 
 namespace App\Notifications\User;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +12,16 @@ class NewUserRegistered extends Notification
 {
     use Queueable;
 
+    public $user;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +32,7 @@ class NewUserRegistered extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
