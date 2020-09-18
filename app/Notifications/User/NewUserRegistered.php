@@ -2,6 +2,7 @@
 
 namespace App\Notifications\User;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,7 +13,7 @@ class NewUserRegistered extends Notification
 {
     use Queueable;
 
-    public $user;
+    public User $user;
 
     /**
      * Create a new notification instance.
@@ -57,8 +58,6 @@ class NewUserRegistered extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return new UserResource($this->user);
     }
 }
