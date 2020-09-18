@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\Club;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -60,5 +62,32 @@ class MemberBoxApiTest extends TestCase
 
         $response = $this->get('/api/members-count');
         $response->assertOk();
+    }
+
+    /** @test */
+    public function members_count_response_json_test()
+    {
+        $this->withoutExceptionHandling();
+        $adminUser = factory(User::class)->create();
+        Role::create(['name' => 'admin']);
+        $adminUser->assignRole('admin');
+
+        $this->actingAs($adminUser, 'api');
+        factory(User::class, 10)->create();
+        factory(Club::class, 10)->create();
+        factory(Group::class, 10)->create();
+
+        $response = $this->get('/api/members-count');
+        $response->assertOk()->assertJson([
+            'type' => 'Members Count',
+            'data' => [
+                'count' => 31,
+                '$member_types' => [
+                    'users' => 11,
+                    'clubs' => 10,
+                    'groups' => 10,
+                ],
+            ],
+        ]);
     }
 }
