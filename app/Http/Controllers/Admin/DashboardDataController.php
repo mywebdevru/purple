@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Club;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -22,6 +24,22 @@ class DashboardDataController extends Controller
             'data' => [
                 'count' => User::count(),
                 'user_roles' => $roles_data,
+            ],
+        ]);
+    }
+
+    public function membersCount()
+    {
+        $member_types = [
+            'users' => User::count(),
+            'clubs' => Club::count(),
+            'groups' => Group::count(),
+        ];
+        return response()->json([
+            'type' => 'Members Count',
+            'data' => [
+                'count' => array_sum($member_types),
+                'member_types' => $member_types,
             ],
         ]);
     }

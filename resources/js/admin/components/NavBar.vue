@@ -204,25 +204,22 @@
 
         <!-- LOGO -->
         <div class="logo-box">
-            <a
-                href="index.html"
-                class="logo text-center"
-            >
-        <span class="logo-lg">
-          <img
-              src="/admin/logo-light.png"
-              alt=""
-              height="16"
-          />
-        </span>
+            <router-link :to="{name: 'dashboard'}" class="logo text-center">
+                 <span class="logo-lg">
+                    <img
+                      src="/admin/logo-light.png"
+                      alt=""
+                      height="16"
+                    />
+                </span>
                 <span class="logo-sm">
-          <img
-              src="/admin/logo-sm.png"
-              alt=""
-              height="24"
-          />
-        </span>
-            </a>
+                    <img
+                      src="/admin/logo-sm.png"
+                      alt=""
+                      height="24"
+                    />
+                </span>
+            </router-link>
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
