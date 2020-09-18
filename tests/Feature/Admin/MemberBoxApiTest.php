@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class MemberBoxApiTest extends TestCase
@@ -24,5 +25,23 @@ class MemberBoxApiTest extends TestCase
         $this->actingAs(factory(User::class)->create(), 'api');
         $response = $this->get('/api/members-count');
         $response->assertForbidden();
+    }
+
+    /** @test */
+    public function admins_can_fetch_members_data()
+    {
+        $this->withoutExceptionHandling();
+
+        $adminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->assignRole('admin');
+
+        $this->actingAs($adminUser, 'api');
+
+        $response = $this->get('/api/members-count');
+        $response->assertOk();
     }
 }
