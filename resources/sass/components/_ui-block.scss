@@ -93,6 +93,7 @@
 .feed-hide{
     animation: feed-hide-animation  400ms ease-out forwards;
     margin: 0;
+    overflow: hidden;
 }
 /*Feed's element "more" three-dot animation while action loading*/
 @keyframes feed-load-scale-x-animation {
