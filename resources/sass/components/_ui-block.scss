@@ -78,7 +78,8 @@
     padding: 24px 23px 23px;
 }
 
-/*START Vyacheslav style code for prof.blade.php*/
+/*START X3MArt style code*/
+/*Feed's element SlideUp after delete*/
 @keyframes feed-hide-animation {
     from {max-height: 300px;
         transform: scaleY(1);
@@ -92,8 +93,25 @@
 .feed-hide{
     animation: feed-hide-animation  400ms ease-out forwards;
     margin: 0;
+    overflow: hidden;
 }
-/*END Vyacheslav style code for prof.blade.php*/
+/*Feed's element "more" three-dot animation while action loading*/
+@keyframes feed-load-scale-x-animation {
+    from {
+        transform: scaleX(1);
+        transform-origin: center;
+        opacity: 1;}
+    50% {transform: scaleX(1.4);
+        transform-origin: center;
+        opacity: 0.6;}
+    to {transform: scaleX(1);
+        transform-origin: center;
+        opacity: 1;}
+}
+.feed-load-scale-x{
+    animation: feed-load-scale-x-animation  400ms ease-out infinite;
+}
+/*END X3MArt style code*/
 
 @media (max-width: 1200px) {
     .responsive-flex1200 .ui-block-title {

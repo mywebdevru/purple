@@ -12,7 +12,7 @@
                 </div>
             </div>
             @can('update', $post)
-            <div class="more" x-data="{show_more: 1}">
+            <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
