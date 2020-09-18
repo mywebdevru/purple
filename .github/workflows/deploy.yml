@@ -91,4 +91,4 @@ jobs:
             php artisan passport:install
             npm i
             npm run dev
-            php artisan storage:link
+            php artisan storage:link 2>/dev/null
