@@ -84,6 +84,7 @@ return [
         public_path('summernote') => storage_path('app/summernote'),
         public_path('admin') => storage_path('app/admin'),
         public_path('img') => storage_path('app/img'),
+        public_path('photos') => storage_path('app/photos'),
     ],
 
 ];

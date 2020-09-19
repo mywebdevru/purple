@@ -29,6 +29,7 @@
     <div class="form-group">
         <label for="photos">Загрузите фотографии (можно несколько файлов)</label>
         <input multiple="multiple" name="photos[]" type="file" id="photos" class="file-path validate">
+        <input type="hidden" name="imageable_type" value="App\Models\Map">
     </div>
     <button type="submit" class="btn btn-success">Upload</button>
 </form>
