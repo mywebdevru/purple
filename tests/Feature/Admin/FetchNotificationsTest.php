@@ -87,5 +87,28 @@ class FetchNotificationsTest extends TestCase
         $this->assertEquals('App\Notifications\User\UserCreated', $notification->type);
         $this->assertEquals('App\Models\User', $notification->notifiable_type);
         $this->assertEquals($adminUser->id, $notification->notifiable_id);
+
+        $response = $this->get('/api/notifications');
+        $response->assertOk()->assertJson([
+            'data' => [
+                [
+                    'data' => [
+                        'type' => 'notifications',
+                        'notification_id' => $notification->id,
+                        'attributes' => [
+                            'type' => 'App\Notifications\User\UserCreated',
+                            'created_at' => $notification->created_at->diffForHumans(),
+                            'resd_at' => optional($notification->created_at)->diffForHumans(),
+                        ],
+                    ],
+                    'links' => [
+                        'self' => url('/admin/notifications' . $notification->id),
+                    ],
+                ]
+            ],
+            'links' => [
+                'self' => url('/admin/notifications'),
+            ]
+        ]);
     }
 }

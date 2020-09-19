@@ -16,7 +16,14 @@ class NotificationResource extends JsonResource
     {
         return [
             'data' => [
-                'data' => $this->data,
+                'type' => 'notifications',
+                'notification_id' => $this->id,
+                'attributes' => [
+                    'type' => $this->type,
+                    'data' => $this->data,
+                    'created_at' => $this->created_at->diffForHumans(),
+                    'resd_at' => optional($this->created_at)->diffForHumans(),
+                ],
             ],
             'links' => [
                 'self' => url('/admin/notifications' . $this->id),
