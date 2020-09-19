@@ -32,8 +32,6 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function admins_can_fetch_members_data()
     {
-        $this->withoutExceptionHandling();
-
         $adminUser = factory(User::class)->create();
 
         Role::create(['name' => 'admin']);
