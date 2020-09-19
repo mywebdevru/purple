@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Notification\NotificationResourceCollection;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        return auth()->user()->notifications;
+        return new NotificationResourceCollection(auth()->user()->notifications);
     }
 }

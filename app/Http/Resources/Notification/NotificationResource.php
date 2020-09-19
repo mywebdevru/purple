@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Notifications;
+namespace App\Http\Resources\Notification;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserCreated extends JsonResource
+class NotificationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
