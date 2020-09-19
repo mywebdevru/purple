@@ -71,29 +71,21 @@ class FetchNotificationsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $superAdminUser = factory(User::class)->create();
+        $adminUser = factory(User::class)->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
 
-        $superAdminUser->assignRole('super-admin');
+        $adminUser->assignRole('admin');
 
-        factory(User::class, 2)->create();
+        $user = factory(User::class)->create();
 
-        $this->actingAs($superAdminUser, 'api');
-        dd($superAdminUser->notifications);
-        $response = $this->get('/api/notifications');
-        $response->assertOk()->assertJson([
-            'data' => [
-                [
-                    'data' => [
-                        'data' => (new UserResource($superAdminUser))->toArray(null),
-                    ],
-                ]
-            ],
-            'links' => [
-                'self' => url('/admin/notifications'),
-            ],
-        ]);
+        $this->actingAs($adminUser, 'api');
+
+        $notification = $adminUser->notifications()->first();
+
+        $this->assertEquals('App\Notifications\User\UserCreated', $notification->type);
+        $this->assertEquals('App\Models\User', $notification->notifiable_type);
+        $this->assertEquals($adminUser->id, $notification->notifiable_id);
     }
 }
