@@ -1,5 +1,4 @@
-*
-!public/
-!admin/
-!img/
-!.gitignore
+avatars/
+photos/
+summernote/
+wallpapers/

@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'Skazkin',
                 'email' => 'ruslan@skazkin.su',
                 'password' => '$2y$10$Hv7RJYtTrhrSTcgFVKcz0.aUfVWkQIBB13BpTbHTrknSkwgpQzvim',
-                'avatar' => 'https://lorempixel.com/200/200/people/',
-                'wallpaper' => 'https://lorempixel.com/1200/400/transport/',
+                'avatar' => '/admin/users/super-admin.png',
+                'wallpaper' => '/admin/users/super-admin-wp.jpg',
             ]);
 
             $ruslan->assignRole('super-admin');
