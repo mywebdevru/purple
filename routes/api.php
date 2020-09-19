@@ -26,6 +26,7 @@ Route::group([
 ], function () {
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
     Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
 });
 
 Route::group([
