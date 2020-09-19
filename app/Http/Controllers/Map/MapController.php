@@ -48,7 +48,7 @@ class MapController extends Controller
         $map = Map::create($request->all());
         if ($request->photos) {
             foreach ($request->photos as $photo) {
-                $filename = $photo->store('img');
+                $filename = $photo->store('photos');
                 Image::create([
                     'imageable_id' => $map->id,
                     'imageable_type' => $request->imageable_type,
