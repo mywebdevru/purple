@@ -47,9 +47,16 @@ button.btn {
     outline: 0;
     border-radius: 10px;
 }
+
 .note-recent-color {
     background-color: #15c39a !important;
     color: #000;
+}
+.panel {
+    padding-top: unset;
+}
+.note-toolbar {
+    background-color: unset;
 }
 @media screen and (max-width: 425px) {
     button.btn {
