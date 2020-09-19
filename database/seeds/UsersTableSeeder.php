@@ -23,6 +23,11 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$Hv7RJYtTrhrSTcgFVKcz0.aUfVWkQIBB13BpTbHTrknSkwgpQzvim',
                 'avatar' => '/admin/users/super-admin.png',
                 'wallpaper' => '/admin/users/super-admin-wp.jpg',
+                'creed' => 'De omnibus dubito',
+                'gender' => 'Мужчина',
+                'birth_date' => '1975-05-29',
+                'city' => 'Краснодар',
+                'country' => 'Россия',
             ]);
 
             $ruslan->assignRole('super-admin');
