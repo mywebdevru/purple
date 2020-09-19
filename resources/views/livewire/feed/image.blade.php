@@ -16,8 +16,8 @@
                 </div>
             </div>
             @can('update', $image)
-                <div class="more" x-data="{show_more: 1}">
-                    <svg class="olymp-three-dots-icon">
+                <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
+                    <svg class="olymp-three-dots-icon" wire:loading.class="feed-load-scale-x">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
                     <ul class="more-dropdown" x-show.transition.out="!!show_more">

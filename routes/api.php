@@ -22,9 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'namespace' => 'Admin',
     'as' => 'admin.',
-    'middleware' => ['auth:api'],
+    'middleware' => ['role:admin|super-admin', 'auth:api'],
 ], function () {
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
+    Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
 });
 
 Route::group([

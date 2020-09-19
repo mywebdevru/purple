@@ -48,8 +48,11 @@ class Map extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-    public function maps()
+    /**
+     * Get the Map's Images.
+     */
+    public function images()
     {
-        return $this->hasMany('App\Models\MapsPhoto');
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 }
