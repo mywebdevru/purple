@@ -12,11 +12,11 @@
                 </div>
             </div>
             @can('update', $post)
-            <div class="more" x-data="{show_more: 1}">
+            <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
-                <ul class="more-dropdown"  x-show="!!show_more">
+                <ul class="more-dropdown" x-show.transition.out="!!show_more">
                     <li>
                         <a href="#"  class="edit_post dropdown_menu_item">Редактировать пост</a>
                     </li>

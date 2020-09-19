@@ -8,7 +8,7 @@ const routes = [
         component: () => lazyLoadView(import('./views/Dashboard')),
         meta: {
             authRequired: true,
-            title: 'Dashboard',
+            title: 'Панель управления',
         },
         //props: (route) => ({ user: store.state.auth.currentUser || {}}),
     },

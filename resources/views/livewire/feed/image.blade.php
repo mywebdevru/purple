@@ -16,11 +16,11 @@
                 </div>
             </div>
             @can('update', $image)
-                <div class="more" x-data="{show_more: 1}">
-                    <svg class="olymp-three-dots-icon">
+                <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
+                    <svg class="olymp-three-dots-icon" wire:loading.class="feed-load-scale-x">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
-                    <ul class="more-dropdown" x-show="!!show_more">
+                    <ul class="more-dropdown" x-show.transition.out="!!show_more">
                         {{-- <li>
                             <a href="#">Редактировать пост</a>
                         </li> --}}
@@ -45,7 +45,7 @@
                     <input type="hidden" name="likeable_type" value="App\Models\Image">
                     <input type="hidden" name="likeable_id" value="{{ $image['id'] }}">
                     <input type="hidden" name="authorable_type" value="App\Models\User">
-                    <input type="hidden" name="authorable_id" value="{{ $comment_author->id }}">
+                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
                 </form>
             </a>
             <ul class="friends-harmonic">
@@ -106,7 +106,7 @@
 
         </div>
         <a href="#" class="more-comments show_comments">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $image->comments, 'comment_author' => $comment_author,'feed' => 'image_'.$image['id']])@endcomponent
+        @component('user.components.feed.comments',['comments' => $image->comments])@endcomponent
         @component('user.components.feed.write_comment')
         @slot('commentable_id')
          {{ $image['id'] }}

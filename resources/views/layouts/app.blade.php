@@ -13,8 +13,7 @@
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
-    @livewireStyles
+    <livewire:styles />
     @yield('css')
 </head>
 
@@ -67,14 +66,13 @@
 @yield('content')
 
 <!-- Scripts -->
+<livewire:scripts />
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/x3mart.js') }}"></script>
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
-@livewireScripts
+{{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script> --}}
 @yield('scripts')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <script>
     function acceptFriendshipRequest(item)
     {
