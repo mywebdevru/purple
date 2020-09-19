@@ -48,6 +48,7 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function super_admins_can_fetch_notifications()
     {
+        $this->withoutExceptionHandling();
 
         $superAdminUser = factory(User::class)->create();
 
