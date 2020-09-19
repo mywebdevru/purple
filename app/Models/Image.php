@@ -42,9 +42,9 @@ class Image extends Model
         'imageable_id', 'imageable_type', 'image'
     ];
 
-    public function postable()
+    public function imageable()
     {
-        return $this->morphTo('imageable');
+        return $this->morphTo();
     }
 
     public function feed()

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Map;
 
 use App\Http\Controllers\Controller;
+use DB;
 use App\Models\Map;
-use App\Models\MapsPhoto;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Requests\MapRequest;
 use Storage;
+
 
 class MapController extends Controller
 {
@@ -46,11 +48,11 @@ class MapController extends Controller
         $map = Map::create($request->all());
         if ($request->photos) {
             foreach ($request->photos as $photo) {
-                $filename = $photo->store('public/photos');
-                $filename = str_replace('public/', '', $filename);
-                MapsPhoto::create([
-                    'map_id' => $map->id,
-                    'filename' => $filename
+                $filename = $photo->store('img');
+                Image::create([
+                    'imageable_id' => $map->id,
+                    'imageable_type' => $request->imageable_type,
+                    'image' => $filename
                 ]);
             }
         }
@@ -65,7 +67,7 @@ class MapController extends Controller
      */
     public function show(Map $map)
     {
-        $photos = MapsPhoto::where('map_id', $map->id)->get();
+        $photos = Image::where('imageable_type', 'App\Models\Map')->where('imageable_id', $map->id)->get();
         return view('maps.showMap', [
             'map' => $map,
             'photos' => $photos
@@ -106,11 +108,12 @@ class MapController extends Controller
      */
     public function destroy(Map $map)
     {
-        $photos = MapsPhoto::where('map_id', $map->id)->get();
-        foreach ($photos as $photo) {
-            Storage::delete($photo->filename);
-        }
-        $map->delete();
+        DB::transaction(function () use ($map) {
+            $images = $map->images()->pluck('image')->toArray();
+            Storage::delete($images);
+            $map->images()->forceDelete();
+            $map->delete();
+        });
         return redirect()->route('map.index');
     }
 }
