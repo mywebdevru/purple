@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardDataController;
+use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,7 @@ Route::group([
 ], function () {
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
     Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
-    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 });
 
 Route::group([

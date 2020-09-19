@@ -8,15 +8,12 @@ use Tests\TestCase;
 
 class FetchNotificationsTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test */
+    public function guests_cant_fetch_notifications()
+    {
+        $response = $this->get('/api/notifications', ['Accept' => 'application/json']);
+        $response->assertStatus(401);
     }
 }
