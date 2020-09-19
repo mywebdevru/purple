@@ -17,7 +17,7 @@ class NotificationResourceCollection extends ResourceCollection
         return [
             'data' => $this->collection,
             'links' => [
-                'self' => url('/admin')
+                'self' => url('/admin/notifications'),
             ]
         ];
     }

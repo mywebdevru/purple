@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
-use App\Notifications\User\NewUserRegistered;
+use App\Notifications\User\UserCreated;
 use Illuminate\Support\Facades\Notification;
 use Spatie\Permission\Models\Role;
 
@@ -18,10 +18,10 @@ class UserObserver
     public function created(User $user)
     {
         if(Role::where('name', 'admin')->count()) {
-            Notification::send(User::role('admin')->get(), new NewUserRegistered($user));
+            Notification::send(User::role('admin')->get(), new UserCreated($user));
         }
         if(Role::where('name', 'super-admin')->count()) {
-            Notification::send(User::role('super-admin')->get(), new NewUserRegistered($user));
+            Notification::send(User::role('super-admin')->get(), new UserCreated($user));
         }
     }
 

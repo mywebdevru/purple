@@ -14,6 +14,13 @@ class NotificationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'data' => [
+                'data' => $this->data,
+            ],
+            'links' => [
+                'self' => url('/admin/notifications' . $this->id),
+            ],
+        ];
     }
 }
