@@ -28,6 +28,7 @@ Route::group([
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
     Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notifications.unread');
 });
 
 Route::group([
