@@ -15,6 +15,7 @@ class NotificationResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
+            'count' => $this->count(),
             'data' => $this->collection,
             'links' => [
                 'self' => url('/admin/notifications'),

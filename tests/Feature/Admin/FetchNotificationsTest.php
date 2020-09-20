@@ -74,7 +74,7 @@ class FetchNotificationsTest extends TestCase
 
         $adminUser->assignRole('admin');
 
-        $user = factory(User::class)->create();
+        factory(User::class)->create();
 
         $this->actingAs($adminUser, 'api');
 
@@ -86,6 +86,7 @@ class FetchNotificationsTest extends TestCase
 
         $response = $this->get('/api/notifications');
         $response->assertOk()->assertJson([
+            'count' => 1,
             'data' => [
                 [
                     'data' => [
