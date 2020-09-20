@@ -63,8 +63,6 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function admin_can_get_user_created_notifications()
     {
-        $this->withoutExceptionHandling();
-
         $adminUser = factory(User::class)->create();
 
         Role::create(['name' => 'admin']);

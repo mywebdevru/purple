@@ -60,4 +60,30 @@ class FetchUnreadNotificationsTest extends TestCase
         $response = $this->get('/api/notifications/unread');
         $response->assertOk();
     }
+
+    /** @test */
+    public function admin_get_only_unread_notifications()
+    {
+
+        $adminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->assignRole('admin');
+
+        factory(User::class, 3)->create();
+
+        $this->actingAs($adminUser, 'api');
+
+        $adminUser->notifications()->first()->markAsRead();
+
+        $response = $this->get('/api/notifications/unread');
+        $response->assertOk()->assertJson([
+            'count' => 2,
+            'links' => [
+                'self' => url('/admin/notifications'),
+            ]
+        ]);
+    }
 }
