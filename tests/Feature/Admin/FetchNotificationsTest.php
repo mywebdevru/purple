@@ -29,7 +29,6 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function admins_can_fetch_notifications()
     {
-        $this->withoutExceptionHandling();
 
         $adminUser = factory(User::class)->create();
 
@@ -47,7 +46,6 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function super_admins_can_fetch_notifications()
     {
-        $this->withoutExceptionHandling();
 
         $superAdminUser = factory(User::class)->create();
 
