@@ -12,4 +12,9 @@ class NotificationController extends Controller
     {
         return new NotificationResourceCollection(auth()->user()->notifications);
     }
+
+    public function unread()
+    {
+        return new NotificationResourceCollection(auth()->user()->unreadNotifications);
+    }
 }
