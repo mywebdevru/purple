@@ -31,7 +31,7 @@
                     class="nav-link dropdown-toggle  waves-effect waves-light"
                 >
                     <i class="fe-bell noti-icon"></i>
-                    <span class="badge badge-danger noti-icon-badge">{{ unreadNotificationsCount }}</span>
+                    <span class="badge badge-danger noti-icon-badge" v-if="unreadNotificationsCount">{{ unreadNotificationsCount }}</span>
                 </template>
 
                 <b-dropdown-text
@@ -39,13 +39,16 @@
                     class="dropdown-item noti-title"
                 >
                     <h5 class="m-0">
-            <span class="float-right">
-              <a
-                  href=""
-                  class="text-dark"
-              >
-                <small>Очистить все</small>
-              </a> </span>Уведомления
+                        <span class="float-right">
+                          <a
+                              href=""
+                              class="text-dark"
+                              @click.prevent="markAllNotificationsAsRead"
+                              v-if="unreadNotificationsCount"
+                          >
+                            <small>Очистить все</small>
+                          </a> </span>
+                        Уведомления
                     </h5>
                 </b-dropdown-text>
 
@@ -53,7 +56,12 @@
                     href="#"
                     class="p-0"
                 >
-                    <Spinner v-if="unreadNotificationsLoading" />
+                    <div class="no-notifications-wrapper" v-if="!unreadNotificationsCount || unreadNotificationsLoading">
+                        <Spinner v-if="unreadNotificationsLoading" class="notifications-spinner" />
+                        <div class="no-notifications-text" v-else-if="!unreadNotificationsCount">
+                            Нет новых уведомлнеий
+                        </div>
+                    </div>
                     <VuePerfectScrollbar
                         v-once
                         class="noti-scroll"
@@ -64,6 +72,7 @@
                             href="javascript:void(0);"
                             class="dropdown-item notify-item"
                             v-for="notification in unreadNotifications.data"
+                            :key="notification.data.notification_id + unreadNotifications.count"
                         >
                             <div class="notify-icon">
                                 <img
@@ -183,8 +192,10 @@ export default {
     components: { VuePerfectScrollbar, Spinner },
     computed: {
         ...mapGetters({
-
         }),
+        showNotifications() {
+            return this.unreadNotificationsCount = 0 ? false : true;
+        }
     },
     props: {
         authUser: {
@@ -235,12 +246,25 @@ export default {
         },
         toggleRightSidebar() {
             this.$parent.toggleRightSidebar()
+        },
+        async markAllNotificationsAsRead()
+        {
+            this.$store.commit("setUnreadNotificationsLoading", true);
+            try {
+                await axios.get('/api/notifications/all-read');
+                 await this.$store.dispatch("fetchUnreadNotificationsCount");
+                 await this.$store.dispatch("fetchUnreadNotifications");
+            } catch (error) {
+                console.log(error)
+            } finally {
+                this.$store.commit("setUnreadNotificationsLoading", false);
+            }
         }
     },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .noti-scroll {
     height: 220px;
 }
@@ -256,5 +280,21 @@ export default {
 }
 .button-menu-mobile {
     outline: none !important;
+}
+.notification-list .noti-title {
+    min-width: 300px;
+}
+.no-notifications-text {
+    color: #adb5bd;
+    text-align: center;
+    margin: auto;
+}
+.no-notifications-wrapper {
+    min-height: 260px;
+    position: relative;
+    display: flex;
+}
+.notifications-spinner {
+    margin: auto;
 }
 </style>

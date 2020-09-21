@@ -60,7 +60,7 @@ class UserCreated extends Notification
         return [
             'type' => 'user_created',
             'title' => 'Новый пользователь ' . $this->user->email,
-            'image' => $this->user->avatar ?: '/img/default-avatar.jpg',
+            'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
             'data' => new UserResource($this->user),
         ];
