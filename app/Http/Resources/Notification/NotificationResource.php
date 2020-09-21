@@ -22,7 +22,7 @@ class NotificationResource extends JsonResource
                     'type' => $this->type,
                     'data' => $this->data,
                     'created_at' => $this->created_at->diffForHumans(),
-                    'resd_at' => optional($this->created_at)->diffForHumans(),
+                    'read_at' => optional($this->read_at)->diffForHumans(),
                 ],
             ],
             'links' => [

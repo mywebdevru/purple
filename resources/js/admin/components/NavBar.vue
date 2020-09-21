@@ -69,7 +69,7 @@
                     >
                         <!-- item-->
                         <a
-                            href="javascript:void(0);"
+                            :href=""
                             class="dropdown-item notify-item"
                             v-for="notification in unreadNotifications.data"
                             :key="notification.data.notification_id + unreadNotifications.count"
