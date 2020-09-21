@@ -30,6 +30,7 @@ Route::group([
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notifications.unread');
     Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread_count');
+    Route::get('/notifications/all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.all-read');
 });
 
 Route::group([

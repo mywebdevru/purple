@@ -25,4 +25,10 @@ class NotificationController extends Controller
             'count' => (new NotificationResourceCollection(auth()->user()->unreadNotifications))->count(),
         ]);
     }
+
+    public function markAllAsRead()
+    {
+        auth()->user()->notifications->markAsRead();
+        return response()->json([], 204);
+    }
 }
