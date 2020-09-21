@@ -6,6 +6,9 @@
             :title="title"
             :unreadNotificationsCount="unreadNotificationsCount"
             :unreadNotificationsCountLoading = "unreadNotificationsCountLoading"
+            :unreadNotifications="unreadNotifications"
+            :unreadNotificationsLoading = "unreadNotificationsLoading"
+
         />
         <SideBar
             :is-condensed="isMenuCondensed"
@@ -57,6 +60,8 @@ export default {
             authUserLoading: "authUserLoading",
             unreadNotificationsCount: "unreadNotificationsCount",
             unreadNotificationsCountLoading: "unreadNotificationsCountLoading",
+            unreadNotifications: "unreadNotifications",
+            unreadNotificationsLoading: "unreadNotificationsLoading",
         }),
     },
     methods: {

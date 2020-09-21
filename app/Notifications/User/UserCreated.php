@@ -53,11 +53,16 @@ class UserCreated extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
-        return new UserResource($this->user);
+        return [
+            'type' => 'user_created',
+            'title' => 'Новый пользователь ' . $this->user->email,
+            'image' => $this->user->avatar ?: '/img/default-avatar.jpg',
+            'link' => url('/user/' . $this->user->id),
+            'data' => new UserResource($this->user),
+        ];
     }
 }

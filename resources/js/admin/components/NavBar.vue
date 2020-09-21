@@ -25,7 +25,6 @@
             <b-nav-item-dropdown
                 right
                 class="notification-list"
-                @show.bs.dropdown="showUnreadNotifications"
             >
                 <template
                     slot="button-content"
@@ -54,93 +53,26 @@
                     href="#"
                     class="p-0"
                 >
+                    <Spinner v-if="unreadNotificationsLoading" />
                     <VuePerfectScrollbar
                         v-once
                         class="noti-scroll"
+                        v-else
                     >
+                        <!-- item-->
                         <a
                             href="javascript:void(0);"
-                            class="dropdown-item notify-item active"
+                            class="dropdown-item notify-item"
+                            v-for="notification in unreadNotifications.data"
                         >
                             <div class="notify-icon">
                                 <img
-                                    src="/admin/users/user-1.jpg"
+                                    :src="notification.data.attributes.data.image"
                                     class="img-fluid rounded-circle"
-                                    alt=""
-                                /> </div>
-                            <p class="notify-details">Cristina Pride</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Hi, How are you? What about our next meeting</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-primary">
-                                <i class="mdi mdi-comment-account-outline"></i>
+                                    alt="notification icon" />
                             </div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin
-                                <small class="text-muted">1 min ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon">
-                                <img
-                                    src="/admin/users/user-4.jpg"
-                                    class="img-fluid rounded-circle"
-                                    alt=""
-                                /> </div>
-                            <p class="notify-details">Karen Robinson</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Wow ! this admin looks good and awesome design</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-warning">
-                                <i class="mdi mdi-account-plus"></i>
-                            </div>
-                            <p class="notify-details">New user registered.
-                                <small class="text-muted">5 hours ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-info">
-                                <i class="mdi mdi-comment-account-outline"></i>
-                            </div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin
-                                <small class="text-muted">4 days ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
-                            </div>
-                            <p class="notify-details">Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
+                            <p class="notify-details">{{ notification.data.attributes.data.title }}
+                                <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
                             </p>
                         </a>
                     </VuePerfectScrollbar>
@@ -244,10 +176,16 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import Spinner from "./Spinner";
+import {mapGetters} from "vuex";
 
 export default {
     name: "NavBar",
     components: { VuePerfectScrollbar, Spinner },
+    computed: {
+        ...mapGetters({
+
+        }),
+    },
     props: {
         authUser: {
             type: Object,
@@ -265,6 +203,16 @@ export default {
             default: () => ({}),
         },
         unreadNotificationsCountLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+        unreadNotifications: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        unreadNotificationsLoading: {
             type: Boolean,
             required: false,
             default: () => false,
@@ -287,9 +235,6 @@ export default {
         },
         toggleRightSidebar() {
             this.$parent.toggleRightSidebar()
-        },
-        showUnreadNotifications() {
-            console.log('FIRE');
         }
     },
 }
