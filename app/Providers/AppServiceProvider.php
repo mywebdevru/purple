@@ -8,6 +8,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use App\Console\Commands\ModelMakeCommand;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Observers\PostObserver;
+use App\Observers\CommentObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale(config('app.locale'));
+        Post::observe(PostObserver::class);
+        Comment::observe(CommentObserver::class);
 
         // Using class based composers...
         View::composer(
