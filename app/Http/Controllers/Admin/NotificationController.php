@@ -17,4 +17,12 @@ class NotificationController extends Controller
     {
         return new NotificationResourceCollection(auth()->user()->unreadNotifications->splice(0, 5));
     }
+
+    public function unreadCount()
+    {
+        return response()->json([
+            'title' => 'Unread notifications count',
+            'count' => (new NotificationResourceCollection(auth()->user()))->count(),
+        ]);
+    }
 }

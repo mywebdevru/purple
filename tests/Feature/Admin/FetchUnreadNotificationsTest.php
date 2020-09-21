@@ -106,8 +106,6 @@ class FetchUnreadNotificationsTest extends TestCase
 
         $response = $this->get('/api/notifications/unread');
 
-        //$this->assertEquals();
-
         $response->assertOk()->assertJson([
             'count' => 5,
             'links' => [
