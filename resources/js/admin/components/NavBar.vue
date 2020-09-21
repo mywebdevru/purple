@@ -25,6 +25,7 @@
             <b-nav-item-dropdown
                 right
                 class="notification-list"
+                @show.bs.dropdown="showUnreadNotifications"
             >
                 <template
                     slot="button-content"
@@ -287,6 +288,9 @@ export default {
         toggleRightSidebar() {
             this.$parent.toggleRightSidebar()
         },
+        showUnreadNotifications() {
+            console.log('FIRE');
+        }
     },
 }
 </script>
