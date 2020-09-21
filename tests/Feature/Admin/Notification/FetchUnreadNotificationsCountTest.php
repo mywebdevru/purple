@@ -56,7 +56,14 @@ class FetchUnreadNotificationsCountTest extends TestCase
 
         $this->actingAs($superAdminUser, 'api');
 
+        factory(User::class, 7)->create();
+
         $response = $this->get('/api/notifications/unread-count');
-        $response->assertOk();
+        $response->assertOk()->assertJson([
+            'title' => 'Unread notifications count',
+            'count' => 7,
+        ]);
     }
+
+
 }
