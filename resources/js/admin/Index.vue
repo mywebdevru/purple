@@ -9,6 +9,7 @@ export default {
     name: "Index",
     mounted() {
         this.$store.dispatch("fetchAuthUser");
+        this.$store.dispatch("fetchUnreadNotificationsCount");
     },
     created() {
         this.$store.dispatch("setPageTitle", this.$route.meta.title);
