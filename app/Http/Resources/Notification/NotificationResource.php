@@ -26,7 +26,7 @@ class NotificationResource extends JsonResource
                 ],
             ],
             'links' => [
-                'self' => url('/admin/notifications' . $this->id),
+                'self' => url('/admin/notifications/' . $this->id),
             ],
         ];
     }
