@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Notification;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Notifications\DatabaseNotification;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -119,7 +120,7 @@ class FetchNotificationsTest extends TestCase
 
         $this->actingAs($adminUser, 'api');
 
-        $notification_created = $adminUser->notifications()->first();
+        $notification_created = DatabaseNotification::all()->first();
 
         $this->assertEquals('App\Notifications\User\UserCreated', $notification_created->type);
         $this->assertEquals('App\Models\User', $notification_created->notifiable_type);
@@ -129,7 +130,7 @@ class FetchNotificationsTest extends TestCase
             'name' => 'PHPUnit',
         ]);
 
-        $notification_updated = $adminUser->notifications->last();
+        $notification_updated = DatabaseNotification::all()->last();;
 
         $response = $this->get('/api/notifications');
 
