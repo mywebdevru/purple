@@ -31,7 +31,7 @@
                     class="nav-link dropdown-toggle  waves-effect waves-light"
                 >
                     <i class="fe-bell noti-icon"></i>
-                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                    <span class="badge badge-danger noti-icon-badge" v-if="unreadNotificationsCount">{{ unreadNotificationsCount }}</span>
                 </template>
 
                 <b-dropdown-text
@@ -39,13 +39,16 @@
                     class="dropdown-item noti-title"
                 >
                     <h5 class="m-0">
-            <span class="float-right">
-              <a
-                  href=""
-                  class="text-dark"
-              >
-                <small>Clear All</small>
-              </a> </span>Notification
+                        <span class="float-right">
+                          <a
+                              href=""
+                              class="text-dark"
+                              @click.prevent="markAllNotificationsAsRead"
+                              v-if="unreadNotificationsCount"
+                          >
+                            <small>Очистить все</small>
+                          </a> </span>
+                        Уведомления
                     </h5>
                 </b-dropdown-text>
 
@@ -53,93 +56,32 @@
                     href="#"
                     class="p-0"
                 >
+                    <div class="no-notifications-wrapper" v-if="!unreadNotificationsCount || unreadNotificationsLoading">
+                        <Spinner v-if="unreadNotificationsLoading" class="notifications-spinner" />
+                        <div class="no-notifications-text" v-else-if="!unreadNotificationsCount">
+                            Нет новых уведомлнеий
+                        </div>
+                    </div>
                     <VuePerfectScrollbar
                         v-once
                         class="noti-scroll"
+                        v-else
                     >
+                        <!-- item-->
                         <a
                             href="javascript:void(0);"
-                            class="dropdown-item notify-item active"
+                            class="dropdown-item notify-item"
+                            v-for="notification in unreadNotifications.data"
+                            :key="notification.data.notification_id + unreadNotifications.count"
                         >
                             <div class="notify-icon">
                                 <img
-                                    src="/admin/users/user-1.jpg"
+                                    :src="notification.data.attributes.data.image"
                                     class="img-fluid rounded-circle"
-                                    alt=""
-                                /> </div>
-                            <p class="notify-details">Cristina Pride</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Hi, How are you? What about our next meeting</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-primary">
-                                <i class="mdi mdi-comment-account-outline"></i>
+                                    alt="notification icon" />
                             </div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin
-                                <small class="text-muted">1 min ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon">
-                                <img
-                                    src="/admin/users/user-4.jpg"
-                                    class="img-fluid rounded-circle"
-                                    alt=""
-                                /> </div>
-                            <p class="notify-details">Karen Robinson</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Wow ! this admin looks good and awesome design</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-warning">
-                                <i class="mdi mdi-account-plus"></i>
-                            </div>
-                            <p class="notify-details">New user registered.
-                                <small class="text-muted">5 hours ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-info">
-                                <i class="mdi mdi-comment-account-outline"></i>
-                            </div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin
-                                <small class="text-muted">4 days ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
-                            </div>
-                            <p class="notify-details">Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
+                            <p class="notify-details">{{ notification.data.attributes.data.title }}
+                                <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
                             </p>
                         </a>
                     </VuePerfectScrollbar>
@@ -242,12 +184,19 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import { mapGetters } from 'vuex';
 import Spinner from "./Spinner";
+import {mapGetters} from "vuex";
 
 export default {
     name: "NavBar",
     components: { VuePerfectScrollbar, Spinner },
+    computed: {
+        ...mapGetters({
+        }),
+        showNotifications() {
+            return this.unreadNotificationsCount = 0 ? false : true;
+        }
+    },
     props: {
         authUser: {
             type: Object,
@@ -259,6 +208,27 @@ export default {
             required: false,
             default: () => false,
         },
+        unreadNotificationsCount: {
+            type: Number,
+            required: false,
+            default: () => ({}),
+        },
+        unreadNotificationsCountLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+        unreadNotifications: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
+        unreadNotificationsLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+
         title: {
             type: String,
             required: false,
@@ -277,11 +247,24 @@ export default {
         toggleRightSidebar() {
             this.$parent.toggleRightSidebar()
         },
+        async markAllNotificationsAsRead()
+        {
+            this.$store.commit("setUnreadNotificationsLoading", true);
+            try {
+                await axios.get('/api/notifications/all-read');
+                 await this.$store.dispatch("fetchUnreadNotificationsCount");
+                 await this.$store.dispatch("fetchUnreadNotifications");
+            } catch (error) {
+                console.log(error)
+            } finally {
+                this.$store.commit("setUnreadNotificationsLoading", false);
+            }
+        }
     },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .noti-scroll {
     height: 220px;
 }
@@ -297,5 +280,21 @@ export default {
 }
 .button-menu-mobile {
     outline: none !important;
+}
+.notification-list .noti-title {
+    min-width: 300px;
+}
+.no-notifications-text {
+    color: #adb5bd;
+    text-align: center;
+    margin: auto;
+}
+.no-notifications-wrapper {
+    min-height: 260px;
+    position: relative;
+    display: flex;
+}
+.notifications-spinner {
+    margin: auto;
 }
 </style>

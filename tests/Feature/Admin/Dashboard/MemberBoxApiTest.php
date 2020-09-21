@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Dashboard;
 
 use App\Models\Club;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -32,8 +31,6 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function admins_can_fetch_members_data()
     {
-        $this->withoutExceptionHandling();
-
         $adminUser = factory(User::class)->create();
 
         Role::create(['name' => 'admin']);

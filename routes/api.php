@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardDataController;
+use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::group([
 ], function () {
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
     Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notifications.unread');
+    Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread_count');
+    Route::get('/notifications/all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.all-read');
 });
 
 Route::group([
