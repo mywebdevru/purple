@@ -95,7 +95,7 @@ class FetchNotificationsTest extends TestCase
                         ],
                     ],
                     'links' => [
-                        'self' => url('/admin/notifications' . $notification->id),
+                        'self' => url('/admin/notifications/' . $notification->id),
                     ],
                 ]
             ],
