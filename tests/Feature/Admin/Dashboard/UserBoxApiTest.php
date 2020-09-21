@@ -1,36 +1,33 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Dashboard;
 
-use App\Models\Club;
-use App\Models\Group;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class MemberBoxApiTest extends TestCase
+class UserBoxApiTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cant_fetch_members_data()
+    public function guests_cant_fetch_users_data()
     {
-        $response = $this->get('/api/members-count', ['Accept' => 'application/json']);
+        $response = $this->get('/api/users-count', ['Accept' => 'application/json']);
         $response->assertStatus(401);
     }
 
     /** @test */
-    public function users_cant_fetch_members_data()
+    public function users_cant_fetch_users_data()
     {
         $this->actingAs(factory(User::class)->create(), 'api');
-        $response = $this->get('/api/members-count');
+        $response = $this->get('/api/users-count');
         $response->assertForbidden();
     }
 
     /** @test */
-    public function admins_can_fetch_members_data()
+    public function admins_can_fetch_users_data()
     {
         $adminUser = factory(User::class)->create();
 
@@ -41,12 +38,12 @@ class MemberBoxApiTest extends TestCase
 
         $this->actingAs($adminUser, 'api');
 
-        $response = $this->get('/api/members-count');
+        $response = $this->get('/api/users-count');
         $response->assertOk();
     }
 
     /** @test */
-    public function super_admins_can_fetch_members_data()
+    public function super_admins_can_fetch_users_data()
     {
 
         $superAdminUser = factory(User::class)->create();
@@ -58,33 +55,36 @@ class MemberBoxApiTest extends TestCase
 
         $this->actingAs($superAdminUser, 'api');
 
-        $response = $this->get('/api/members-count');
+        $response = $this->get('/api/users-count');
         $response->assertOk();
     }
 
     /** @test */
-    public function members_count_response_json_test()
+    public function users_count_response_json_test()
     {
         $adminUser = factory(User::class)->create();
+        $superAdminUser = factory(User::class)->create();
+        factory(User::class, 10)->create();
+
         Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
         $adminUser->assignRole('admin');
+        $superAdminUser->assignRole('super-admin');
 
         $this->actingAs($adminUser, 'api');
-        factory(User::class, 10)->create();
-        factory(Club::class, 10)->create();
-        factory(Group::class, 10)->create();
 
-        $response = $this->get('/api/members-count');
+        $response = $this->get('/api/users-count');
         $response->assertOk()->assertJson([
-            'type' => 'Members Count',
+            'type' => 'Users Count',
             'data' => [
-                'count' => 31,
-                'member_types' => [
-                    'users' => 11,
-                    'clubs' => 10,
-                    'groups' => 10,
-                ],
+                'count' => 12,
+                'user_roles' => [
+                    'admin' => 1,
+                    'super-admin' => 1,
+                ]
             ],
         ]);
     }
+
 }
