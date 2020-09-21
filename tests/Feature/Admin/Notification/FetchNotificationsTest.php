@@ -104,4 +104,70 @@ class FetchNotificationsTest extends TestCase
             ]
         ]);
     }
+
+    /** @test */
+    public function admin_can_get_user_created_and_updated_notifications()
+    {
+        $adminUser = factory(User::class)->create();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->assignRole('admin');
+
+        $user = factory(User::class)->create();
+
+        $this->actingAs($adminUser, 'api');
+
+        $notification_created = $adminUser->notifications()->first();
+
+        $this->assertEquals('App\Notifications\User\UserCreated', $notification_created->type);
+        $this->assertEquals('App\Models\User', $notification_created->notifiable_type);
+        $this->assertEquals($adminUser->id, $notification_created->notifiable_id);
+
+        $user->update([
+            'name' => 'PHPUnit',
+        ]);
+
+        $notification_updated = $adminUser->notifications->last();
+
+        $response = $this->get('/api/notifications');
+
+        $response->assertOk()->assertJson([
+            'count' => 2,
+            'data' => [
+                [
+                    'data' => [
+                        'type' => 'notification',
+                        'notification_id' => $notification_created->id,
+                        'attributes' => [
+                            'type' => 'App\Notifications\User\UserCreated',
+                            'created_at' => $notification_created->created_at->diffForHumans(),
+                            'read_at' => optional($notification_created->read_at)->diffForHumans(),
+                        ],
+                    ],
+                    'links' => [
+                        'self' => url('/admin/notifications/' . $notification_created->id),
+                    ],
+                ],
+                [
+                   'data' => [
+                       'type' => 'notification',
+                       'notification_id' => $notification_updated->id,
+                       'attributes' => [
+                           'type' => 'App\Notifications\User\UserUpdated',
+                           'created_at' => $notification_updated->created_at->diffForHumans(),
+                           'read_at' => optional($notification_updated->read_at)->diffForHumans(),
+                       ],
+                   ],
+                   'links' => [
+                       'self' => url('/admin/notifications/' . $notification_updated->id),
+                   ],
+               ],
+            ],
+            'links' => [
+                'self' => url('/admin/notifications'),
+            ]
+        ]);
+    }
 }
