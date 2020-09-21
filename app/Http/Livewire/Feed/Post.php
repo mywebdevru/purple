@@ -24,19 +24,7 @@ class Post extends Component
 
     public function deletePost()
     {
-        DB::transaction(function () {
-            foreach ($this->post->comments as $comment){
-                $comment->likes()->forceDelete();
-            }
-            $images = $this->post->images()->pluck('image')->toArray();
-            Storage::delete($images);
-            $this->post->images()->forceDelete();
-            $this->post->comments()->forceDelete();
-            $this->post->likes()->forceDelete();
-            $this->post->feed()->forceDelete();
-            $this->post->delete();
-        });
-        $this->deleted = true;
+        return $this->deleted = $this->post->delete();
     }
 
     public function render()
