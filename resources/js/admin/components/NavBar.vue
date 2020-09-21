@@ -31,7 +31,7 @@
                     class="nav-link dropdown-toggle  waves-effect waves-light"
                 >
                     <i class="fe-bell noti-icon"></i>
-                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                    <span class="badge badge-danger noti-icon-badge">{{ unreadNotificationsCount }}</span>
                 </template>
 
                 <b-dropdown-text
@@ -44,8 +44,8 @@
                   href=""
                   class="text-dark"
               >
-                <small>Clear All</small>
-              </a> </span>Notification
+                <small>Очистить все</small>
+              </a> </span>Уведомления
                     </h5>
                 </b-dropdown-text>
 
@@ -242,7 +242,6 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import { mapGetters } from 'vuex';
 import Spinner from "./Spinner";
 
 export default {
@@ -259,6 +258,17 @@ export default {
             required: false,
             default: () => false,
         },
+        unreadNotificationsCount: {
+            type: Number,
+            required: false,
+            default: () => ({}),
+        },
+        unreadNotificationsCountLoading: {
+            type: Boolean,
+            required: false,
+            default: () => false,
+        },
+
         title: {
             type: String,
             required: false,

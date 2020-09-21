@@ -3,7 +3,7 @@ const state = {
     unreadNotificationsCountLoading: false,
 };
 const getters = {
-    notificationsCount: state => state.unreadNotificationsCount,
+    unreadNotificationsCount: state => state.unreadNotificationsCount,
     unreadNotificationsCountLoading: state => state.unreadNotificationsCountLoading,
 };
 const actions = {
