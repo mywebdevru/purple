@@ -60,7 +60,8 @@ class UserUpdated extends Notification
     {
         return [
             'type' => 'user_created',
-            'title' => 'Профиль пользователя ' . $this->user->email . ' обновлен',
+            'title' => 'Профиль пользователя обновлен',
+            'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
             'data' => new UserResource($this->user),
