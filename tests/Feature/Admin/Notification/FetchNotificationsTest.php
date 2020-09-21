@@ -91,7 +91,7 @@ class FetchNotificationsTest extends TestCase
                         'attributes' => [
                             'type' => 'App\Notifications\User\UserCreated',
                             'created_at' => $notification->created_at->diffForHumans(),
-                            'resd_at' => optional($notification->created_at)->diffForHumans(),
+                            'read_at' => optional($notification->read_at)->diffForHumans(),
                         ],
                     ],
                     'links' => [
