@@ -4,6 +4,11 @@
             :authUser="authUser"
             :authUserLoading="authUserLoading"
             :title="title"
+            :unreadNotificationsCount="unreadNotificationsCount"
+            :unreadNotificationsCountLoading = "unreadNotificationsCountLoading"
+            :unreadNotifications="unreadNotifications"
+            :unreadNotificationsLoading = "unreadNotificationsLoading"
+
         />
         <SideBar
             :is-condensed="isMenuCondensed"
@@ -53,6 +58,10 @@ export default {
         ...mapGetters({
             authUser: "authUser",
             authUserLoading: "authUserLoading",
+            unreadNotificationsCount: "unreadNotificationsCount",
+            unreadNotificationsCountLoading: "unreadNotificationsCountLoading",
+            unreadNotifications: "unreadNotifications",
+            unreadNotificationsLoading: "unreadNotificationsLoading",
         }),
     },
     methods: {
