@@ -9,12 +9,13 @@ class Image extends Component
 {
     public $image;
     public $deleted;
+    public $commentsIsLoaded;
 
-    public function mount($deleted = 0)
+    public function mount($deleted = 0, $commentsIsLoaded = false)
     {
         $this->deleted = $deleted;
+        $this->commentsIsLoaded =$commentsIsLoaded;
     }
-
     // public function getImageProperty()
     // {
     //     return Image::find($this->imageId);
@@ -35,6 +36,14 @@ class Image extends Component
             $this->deleted = true;
         }
     }
+
+    public function showComments(){
+        if (!$this->commentsIsLoaded){
+            $this->image->loadMissing('comments.likes.authorable', 'comments.authorable');
+            $this->commentsIsLoaded =!$this->commentsIsLoaded;
+        }
+    }
+
     public function render()
     {
         return view('livewire.feed.image');
