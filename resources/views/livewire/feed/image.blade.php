@@ -1,4 +1,4 @@
-<div class="ui-block"  x-data x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block"  x-data="{'show_comments' : 0}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <!-- Пост -->
     <article class="hentry post has-post-thumbnail shared-photo">
 
@@ -105,16 +105,20 @@
             </a>
 
         </div>
-        <a href="#" class="more-comments show_comments">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $image->comments])@endcomponent
-        @component('user.components.feed.write_comment')
+        @if ($commentsIsLoaded)
+            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments">Показать комментарии <span>+</span></a>
+            <livewire:feed.comment-list :comments="$image->comments" />
+        @else
+            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+</span></a>
+        @endif
+        {{-- @component('user.components.feed.write_comment')
         @slot('commentable_id')
          {{ $image['id'] }}
         @endslot
         @slot('commentable_type')
         App\Models\Image
         @endslot
-        @endcomponent
+        @endcomponent --}}
     </article>
 </div>
 
