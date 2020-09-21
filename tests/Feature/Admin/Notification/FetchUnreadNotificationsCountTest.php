@@ -28,8 +28,6 @@ class FetchUnreadNotificationsCountTest extends TestCase
     /** @test */
     public function admins_can_fetch_unread_notifications()
     {
-        $this->withoutExceptionHandling();
-
         $adminUser = factory(User::class)->create();
 
         Role::create(['name' => 'admin']);
@@ -39,8 +37,13 @@ class FetchUnreadNotificationsCountTest extends TestCase
 
         $this->actingAs($adminUser, 'api');
 
+        factory(User::class, 3)->create();
+
         $response = $this->get('/api/notifications/unread-count');
-        $response->assertOk();
+        $response->assertOk()->assertJson([
+            'title' => 'Unread notifications count',
+            'count' => 3,
+        ]);
     }
 
     /** @test */
@@ -64,6 +67,4 @@ class FetchUnreadNotificationsCountTest extends TestCase
             'count' => 7,
         ]);
     }
-
-
 }
