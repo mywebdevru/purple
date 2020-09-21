@@ -86,7 +86,7 @@ class FetchNotificationsTest extends TestCase
             'data' => [
                 [
                     'data' => [
-                        'type' => 'notifications',
+                        'type' => 'notification',
                         'notification_id' => $notification->id,
                         'attributes' => [
                             'type' => 'App\Notifications\User\UserCreated',
