@@ -1,4 +1,4 @@
-<div class="ui-block" x-data x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block" x-data="{'show_comments' : 0}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <!-- Пост -->
     <article  class="hentry post" data-id="{{ $post['id'] }}">
         <div class="post__author author vcard inline-items">
@@ -12,7 +12,7 @@
                 </div>
             </div>
             @can('update', $post)
-            <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
+            <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x" wire:target ="deletePost">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
@@ -105,15 +105,19 @@
             </a>
 
         </div>
-        <a href="#" class="more-comments show_comments">Показать комментарии <span>+</span></a>
-        @component('user.components.feed.comments',['comments' => $post->comments])@endcomponent
-        @component('user.components.feed.write_comment')
+        @if ($commentsIsLoaded)
+            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments">Показать комментарии <span>+</span></a>
+            <livewire:feed.comment-list :comments="$post->comments" />
+        @else
+            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+</span></a>
+        @endif
+        {{-- @component('user.components.feed.write_comment')
             @slot('commentable_id')
             {{ $post['id'] }}
             @endslot
             @slot('commentable_type')
             App\Models\Post
             @endslot
-        @endcomponent
+        @endcomponent --}}
     </article>
 </div>
