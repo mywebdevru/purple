@@ -105,11 +105,9 @@
             </a>
 
         </div>
+        <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+ {{$commentsIsLoaded}}</span></a>
         @if ($commentsIsLoaded)
-            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments">Показать комментарии <span>+</span></a>
             <livewire:feed.comment-list :comments="$image->comments" />
-        @else
-            <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+</span></a>
         @endif
         {{-- @component('user.components.feed.write_comment')
         @slot('commentable_id')
