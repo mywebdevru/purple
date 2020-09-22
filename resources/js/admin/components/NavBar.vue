@@ -289,7 +289,6 @@ export default {
                 toastr.info(e.message);
                 this.$store.dispatch("fetchUnreadNotificationsCount");
                 this.$store.dispatch("fetchUnreadNotifications");
-                this.$forceUpdate();
             });
     }
 }
