@@ -8,18 +8,8 @@ use Illuminate\Support\Facades\DB;
 class Image extends Component
 {
     public $image;
-    public $deleted;
-    public $commentsIsLoaded;
-
-    public function mount($deleted = 0, $commentsIsLoaded = false)
-    {
-        $this->deleted = $deleted;
-        $this->commentsIsLoaded =$commentsIsLoaded;
-    }
-    // public function getImageProperty()
-    // {
-    //     return Image::find($this->imageId);
-    // }
+    public $deleted = 0;
+    public $commentsIsLoaded = 0;
 
     public function deleteImage()
     {
@@ -40,7 +30,9 @@ class Image extends Component
     public function showComments(){
         if (!$this->commentsIsLoaded){
             $this->image->loadMissing('comments.likes.authorable', 'comments.authorable');
-            $this->commentsIsLoaded =!$this->commentsIsLoaded;
+            $this->commentsIsLoaded = !$this->commentsIsLoaded;
+        } else {
+            $this->skipRender();
         }
     }
 
