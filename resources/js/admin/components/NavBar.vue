@@ -69,9 +69,10 @@
                     >
                         <!-- item-->
                         <a
-                            href="javascript:void(0);"
+                            :href="notification.data.attributes.data.link"
                             class="dropdown-item notify-item"
                             v-for="notification in unreadNotifications.data"
+                            target="_blank"
                             :key="notification.data.notification_id + unreadNotifications.count"
                         >
                             <div class="notify-icon">
@@ -80,9 +81,13 @@
                                     class="img-fluid rounded-circle"
                                     alt="notification icon" />
                             </div>
-                            <p class="notify-details">{{ notification.data.attributes.data.title }}
-                                <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
-                            </p>
+                            <div class="notify-details">
+                                <div>{{ notification.data.attributes.data.title }}</div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">{{ notification.data.attributes.data.subtitle }}</small>
+                                    <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
+                                </div>
+                            </div>
                         </a>
                     </VuePerfectScrollbar>
 
@@ -193,9 +198,6 @@ export default {
     computed: {
         ...mapGetters({
         }),
-        showNotifications() {
-            return this.unreadNotificationsCount = 0 ? false : true;
-        }
     },
     props: {
         authUser: {
@@ -252,8 +254,8 @@ export default {
             this.$store.commit("setUnreadNotificationsLoading", true);
             try {
                 await axios.get('/api/notifications/all-read');
-                 await this.$store.dispatch("fetchUnreadNotificationsCount");
-                 await this.$store.dispatch("fetchUnreadNotifications");
+                await this.$store.dispatch("fetchUnreadNotificationsCount");
+                await this.$store.dispatch("fetchUnreadNotifications");
             } catch (error) {
                 console.log(error)
             } finally {

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserCreated extends Notification
+class UserUpdated extends Notification
 {
     use Queueable;
 
@@ -53,13 +53,14 @@ class UserCreated extends Notification
     /**
      * Get the array representation of the notification.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
             'type' => 'user_created',
-            'title' => 'Новый пользователь',
+            'title' => 'Профиль пользователя обновлен',
             'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
