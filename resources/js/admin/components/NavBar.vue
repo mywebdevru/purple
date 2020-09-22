@@ -253,6 +253,7 @@ export default {
         async markAllNotificationsAsRead()
         {
             this.$store.commit("setUnreadNotificationsLoading", true);
+            this.$store.commit("setUnreadNotifications", null);
             try {
                 await axios.get('/api/notifications/all-read');
                 await this.$store.dispatch("fetchUnreadNotificationsCount");
