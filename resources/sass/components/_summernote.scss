@@ -2,7 +2,7 @@
     margin-right: unset;
 }
 .post .btn {
-    margin-bottom: unset;
+    // margin-bottom: unset;
 }
 button.btn {
     padding: 0.5rem 0.6rem;
@@ -57,6 +57,12 @@ button.btn {
 }
 .note-toolbar {
     background-color: unset;
+}
+.note-btn-group > .note-btn:not(:last-child):not(.dropdown-toggle), .note-btn-group > .note-btn-group:not(:last-child) > .note-btn {
+    margin-bottom: unset;
+}
+.note-btn-group > .note-btn:not(:first-child), .note-btn-group > .note-btn-group:not(:first-child) > .note-btn {
+    margin-bottom: unset;
 }
 @media screen and (max-width: 425px) {
     button.btn {
