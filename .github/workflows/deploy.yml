@@ -79,7 +79,6 @@ jobs:
           script_stop: true
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo php artisan optimize:clear
             sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \; 2>/dev/null
             mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers
             sudo chown -R www-data:www-data ./storage/app
@@ -94,3 +93,4 @@ jobs:
             npm i
             npm run dev
             php artisan storage:link 2>/dev/null
+            sudo php artisan optimize:clear
