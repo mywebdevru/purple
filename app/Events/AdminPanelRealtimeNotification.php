@@ -25,9 +25,4 @@ class AdminPanelRealtimeNotification implements ShouldBroadcast
     {
         return ['my-channel'];
     }
-
-    /*public function broadcastAs()
-    {
-        return 'my-event';
-    }*/
 }

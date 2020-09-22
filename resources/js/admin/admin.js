@@ -27,6 +27,9 @@ const app = new Vue({
     mounted() {
         const target = document.getElementById('app-loading');
         target.remove();
+
+        console.log(process.env.MIX_PUSHER_APP_CLUSTER);
+
         Pusher.logToConsole = true;
         Echo.channel('my-channel')
             .listen('AdminPanelRealtimeNotification', (e) => {
