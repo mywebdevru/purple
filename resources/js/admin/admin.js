@@ -29,7 +29,7 @@ const app = new Vue({
         target.remove();
         Pusher.logToConsole = true;
         Echo.channel('my-channel')
-            .listen('UserCreatedBroadcast', (e) => {
+            .listen('AdminPanelRealtimeNotification', (e) => {
                 console.log('Before message')
                 console.log(e.message);
             });
