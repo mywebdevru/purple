@@ -11,13 +11,6 @@ export default {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchUnreadNotificationsCount");
         this.$store.dispatch("fetchUnreadNotifications");
-
-        Pusher.logToConsole = true;
-        Echo.channel('my-channel')
-            .listen('AdminPanelRealtimeNotification', (e) => {
-                console.log('Before message')
-                console.log(e.message);
-            });
     },
     created() {
         this.$store.dispatch("setPageTitle", this.$route.meta.title);

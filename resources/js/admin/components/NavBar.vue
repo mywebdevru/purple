@@ -261,8 +261,16 @@ export default {
             } finally {
                 this.$store.commit("setUnreadNotificationsLoading", false);
             }
-        }
+        },
     },
+    mounted() {
+        Pusher.logToConsole = true;
+        Echo.channel('my-channel')
+            .listen('AdminPanelRealtimeNotification', (e) => {
+                this.$store.dispatch("fetchUnreadNotificationsCount");
+                this.$store.dispatch("fetchUnreadNotifications");
+            });
+    }
 }
 </script>
 
