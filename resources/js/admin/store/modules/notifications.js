@@ -26,6 +26,7 @@ const actions = {
     },
     async fetchUnreadNotifications({commit}) {
         commit("setUnreadNotificationsLoading", true);
+        commit("setUnreadNotifications", null);
         try {
             const notifications = (await axios.get('/api/notifications/unread')).data;
             commit("setUnreadNotifications", notifications);
