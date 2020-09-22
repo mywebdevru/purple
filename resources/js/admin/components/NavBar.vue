@@ -191,6 +191,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import Spinner from "./Spinner";
 import {mapGetters} from "vuex";
+import toastr from "toastr";
 
 export default {
     name: "NavBar",
@@ -252,6 +253,7 @@ export default {
         async markAllNotificationsAsRead()
         {
             this.$store.commit("setUnreadNotificationsLoading", true);
+            this.$store.commit("setUnreadNotifications", null);
             try {
                 await axios.get('/api/notifications/all-read');
                 await this.$store.dispatch("fetchUnreadNotificationsCount");
@@ -261,12 +263,38 @@ export default {
             } finally {
                 this.$store.commit("setUnreadNotificationsLoading", false);
             }
-        }
+        },
     },
+    mounted() {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": 300,
+            "closeDuration": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 10000,
+            "showEasing": "swing",
+            "closeEasing": "linear",
+            "showMethod": "fadeIn",
+            "closeMethod": "fadeOut"
+        }
+        Pusher.logToConsole = true;
+        Echo.channel('my-channel')
+            .listen('AdminPanelRealtimeNotification', (e) => {
+                toastr.info(e.message);
+                this.$store.dispatch("fetchUnreadNotificationsCount");
+                this.$store.dispatch("fetchUnreadNotifications");
+            });
+    }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .noti-scroll {
     height: 220px;
 }

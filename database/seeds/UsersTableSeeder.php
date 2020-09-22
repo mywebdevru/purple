@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
@@ -13,6 +14,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        User::unsetEventDispatcher();
+
+        factory(User::class, 300)->create();
+
         $user = User::where('email', 'ruslan@skazkin.su')->first();
 
         if(!$user) {
@@ -48,7 +53,5 @@ class UsersTableSeeder extends Seeder
 
             $slava->assignRole('admin');
         }
-
-        factory(User::class, 300)->create();
     }
 }
