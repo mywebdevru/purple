@@ -191,6 +191,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import Spinner from "./Spinner";
 import {mapGetters} from "vuex";
+import toastr from "toastr";
 
 export default {
     name: "NavBar",
@@ -267,6 +268,24 @@ export default {
         Pusher.logToConsole = true;
         Echo.channel('my-channel')
             .listen('AdminPanelRealtimeNotification', (e) => {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": 0,
+                    "extendedTimeOut": 0,
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.info(e.message);
                 this.$store.dispatch("fetchUnreadNotificationsCount");
                 this.$store.dispatch("fetchUnreadNotifications");
             });
@@ -274,7 +293,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .noti-scroll {
     height: 220px;
 }
