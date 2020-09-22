@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\UserCreatedBroadcast;
 use App\Models\User;
 use App\Notifications\User\UserCreated;
 use App\Notifications\User\UserUpdated;
@@ -24,6 +25,7 @@ class UserObserver
         if(Role::where('name', 'super-admin')->count()) {
             Notification::send(User::role('super-admin')->get(), new UserCreated($user));
         }
+        event(new UserCreatedBroadcast($user->name));
     }
 
     /**
@@ -40,6 +42,7 @@ class UserObserver
         if(Role::where('name', 'super-admin')->count()) {
             Notification::send(User::role('super-admin')->get(), new UserUpdated($user));
         }
+        event(new UserCreatedBroadcast($user->name));
     }
 
     /**
