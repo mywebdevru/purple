@@ -27,27 +27,5 @@ const app = new Vue({
     mounted() {
         const target = document.getElementById('app-loading');
         target.remove();
-
-        console.log(process.env.MIX_PUSHER_APP_CLUSTER);
-
-        Pusher.logToConsole = true;
-        Echo.channel('my-channel')
-            .listen('AdminPanelRealtimeNotification', (e) => {
-                console.log('Before message')
-                console.log(e.message);
-            });
-        /*Pusher.logToConsole = true;
-        var pusher = new Pusher('4ff599c52e3d67dea909', {
-            encrypted: true,
-            cluster: 'eu',
-        });
-
-// Subscribe to the channel we specified in our Laravel Event
-        var channel = pusher.subscribe('my-channel');
-
-// Bind a function to a Event (the full Laravel class)
-        channel.bind('my-event', function(data) {
-            console.log(data);
-        });*/
     }
 });
