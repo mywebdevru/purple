@@ -41,3 +41,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 window.swal = require('bootstrap-sweetalert')
+
+import Echo from "laravel-echo"
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '4ff599c52e3d67dea909',
+    cluster: 'eu',
+    forceTLS: true
+});

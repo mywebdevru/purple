@@ -14,28 +14,20 @@ class UserCreatedBroadcast implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $username;
-
     public $message;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct($username)
+    public function __construct($message)
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
+        $this->message = $message;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
     public function broadcastOn()
     {
-        return ['status-liked'];
+        return ['my-channel'];
     }
+
+    /*public function broadcastAs()
+    {
+        return 'my-event';
+    }*/
 }

@@ -24,5 +24,22 @@
 </div>
 
 <!-- Scripts -->
+{{--<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4ff599c52e3d67dea909', {
+        encrypted: true
+    });
+
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('my-channel');
+
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('my-event', function(data) {
+        console.log(data);
+    });
+</script>--}}
 </body>
 </html>

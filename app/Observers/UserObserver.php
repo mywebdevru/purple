@@ -42,7 +42,7 @@ class UserObserver
         if(Role::where('name', 'super-admin')->count()) {
             Notification::send(User::role('super-admin')->get(), new UserUpdated($user));
         }
-        event(new UserCreatedBroadcast($user->name));
+        event(new UserCreatedBroadcast('it works'));
     }
 
     /**
