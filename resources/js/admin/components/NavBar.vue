@@ -284,7 +284,7 @@ export default {
             "closeMethod": "fadeOut"
         }
         Pusher.logToConsole = true;
-        Echo.channel('my-channel')
+        Echo.channel('admin-notifications')
             .listen('AdminPanelRealtimeNotification', (e) => {
                 toastr.info(e.message);
                 this.$store.dispatch("fetchUnreadNotificationsCount");
