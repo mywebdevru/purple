@@ -1,7 +1,7 @@
 const state = {
     unreadNotificationsCount: null,
     unreadNotificationsCountLoading: false,
-    unreadNotifications: null,
+    unreadNotifications: {data: []},
     unreadNotificationsLoading: false,
 
 };
@@ -26,7 +26,6 @@ const actions = {
     },
     async fetchUnreadNotifications({commit}) {
         commit("setUnreadNotificationsLoading", true);
-        commit("setUnreadNotifications", null);
         try {
             const notifications = (await axios.get('/api/notifications/unread')).data;
             commit("setUnreadNotifications", notifications);
@@ -45,8 +44,8 @@ const mutations = {
     setUnreadNotificationsCountLoading(state, loading) {
         state.unreadNotificationsCountLoading = loading;
     },
-    setUnreadNotifications(state, count) {
-        state.unreadNotifications = count;
+    setUnreadNotifications(state, response) {
+        Vue.set(state.unreadNotifications, 'data', response.data);
     },
     setUnreadNotificationsLoading(state, loading) {
         state.unreadNotificationsLoading = loading;

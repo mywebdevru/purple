@@ -71,9 +71,9 @@
                         <a
                             :href="notification.data.attributes.data.link"
                             class="dropdown-item notify-item"
-                            v-for="notification in unreadNotifications.data"
+                            v-for="(notification, index) in unreadNotifications.data"
                             target="_blank"
-                            :key="notification.data.notification_id + unreadNotifications.count"
+                            :key="index"
                         >
                             <div class="notify-icon">
                                 <img
@@ -253,7 +253,6 @@ export default {
         async markAllNotificationsAsRead()
         {
             this.$store.commit("setUnreadNotificationsLoading", true);
-            this.$store.commit("setUnreadNotifications", null);
             try {
                 await axios.get('/api/notifications/all-read');
                 await this.$store.dispatch("fetchUnreadNotificationsCount");
