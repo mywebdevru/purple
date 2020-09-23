@@ -44,8 +44,14 @@
                             Уведомления
                         </h5>
                     </div>
+                    <div class="no-notifications-wrapper" v-if="!unreadNotificationsCount || unreadNotificationsLoading">
+                        <Spinner v-if="unreadNotificationsLoading" class="notifications-spinner" />
+                        <div class="no-notifications-text" v-else-if="!unreadNotificationsCount">
+                            Нет новых уведомлнеий
+                        </div>
+                    </div>
 
-                    <div class="slimscroll noti-scroll">
+                    <div class="slimscroll noti-scroll" v-else>
                         <!-- item-->
                         <a
                             :href="notification.data.attributes.data.link"
