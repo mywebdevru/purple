@@ -8,7 +8,6 @@
             :unreadNotificationsCountLoading = "unreadNotificationsCountLoading"
             :unreadNotifications="unreadNotifications"
             :unreadNotificationsLoading = "unreadNotificationsLoading"
-
         />
         <SideBar
             :is-condensed="isMenuCondensed"

@@ -45,7 +45,7 @@ const mutations = {
         state.unreadNotificationsCountLoading = loading;
     },
     setUnreadNotifications(state, response) {
-        Vue.set(state.unreadNotifications, 'data', response.data);
+        state.unreadNotifications = response;
     },
     setUnreadNotificationsLoading(state, loading) {
         state.unreadNotificationsLoading = loading;

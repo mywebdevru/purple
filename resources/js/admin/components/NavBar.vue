@@ -22,6 +22,63 @@
                     </div>
                 </form>
             </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="fe-bell noti-icon"></i>
+                    <span class="badge badge-danger noti-icon-badge" v-if="unreadNotificationsCount">{{ unreadNotificationsCount }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                    <!-- item-->
+                    <div class="dropdown-item noti-title">
+                        <h5 class="m-0">
+                        <span class="float-right">
+                          <a
+                              href=""
+                              class="text-dark"
+                              @click.prevent="markAllNotificationsAsRead"
+                              v-if="unreadNotificationsCount"
+                          >
+                            <small>Очистить все</small>
+                          </a> </span>
+                            Уведомления
+                        </h5>
+                    </div>
+
+                    <div class="slimscroll noti-scroll">
+                        <!-- item-->
+                        <a
+                            :href="notification.data.attributes.data.link"
+                            class="dropdown-item notify-item"
+                            v-for="(notification, index) in unreadNotifications.data"
+                            target="_blank"
+                            :key="index"
+                        >
+                            <div class="notify-icon">
+                                <img
+                                    :src="notification.data.attributes.data.image"
+                                    class="img-fluid rounded-circle"
+                                    alt="notification icon" />
+                            </div>
+                            <div class="notify-details">
+                                <div>{{ notification.data.attributes.data.title }}</div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">{{ notification.data.attributes.data.subtitle }}</small>
+                                    <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <!-- All-->
+                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        View all
+                        <i class="fi-arrow-right"></i>
+                    </a>
+
+                </div>
+            </li>
             <b-nav-item-dropdown
                 right
                 class="notification-list"
@@ -231,7 +288,6 @@ export default {
             required: false,
             default: () => false,
         },
-
         title: {
             type: String,
             required: false,
