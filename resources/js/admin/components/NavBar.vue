@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="slimscroll noti-scroll" v-else>
+                    <div class="slimscroll noti-scroll" id="notifications-scroll" v-else>
                         <!-- item-->
                         <a
                             :href="notification.data.attributes.data.link"
@@ -85,84 +85,7 @@
 
                 </div>
             </li>
-            <b-nav-item-dropdown
-                right
-                class="notification-list"
-            >
-                <template
-                    slot="button-content"
-                    class="nav-link dropdown-toggle  waves-effect waves-light"
-                >
-                    <i class="fe-bell noti-icon"></i>
-                    <span class="badge badge-danger noti-icon-badge" v-if="unreadNotificationsCount">{{ unreadNotificationsCount }}</span>
-                </template>
 
-                <b-dropdown-text
-                    href="#"
-                    class="dropdown-item noti-title"
-                >
-                    <h5 class="m-0">
-                        <span class="float-right">
-                          <a
-                              href=""
-                              class="text-dark"
-                              @click.prevent="markAllNotificationsAsRead"
-                              v-if="unreadNotificationsCount"
-                          >
-                            <small>Очистить все</small>
-                          </a> </span>
-                        Уведомления
-                    </h5>
-                </b-dropdown-text>
-
-                <b-dropdown-text
-                    href="#"
-                    class="p-0"
-                >
-                    <div class="no-notifications-wrapper" v-if="!unreadNotificationsCount || unreadNotificationsLoading">
-                        <Spinner v-if="unreadNotificationsLoading" class="notifications-spinner" />
-                        <div class="no-notifications-text" v-else-if="!unreadNotificationsCount">
-                            Нет новых уведомлнеий
-                        </div>
-                    </div>
-                    <VuePerfectScrollbar
-                        v-once
-                        class="noti-scroll"
-                        v-else
-                    >
-                        <!-- item-->
-                        <a
-                            :href="notification.data.attributes.data.link"
-                            class="dropdown-item notify-item"
-                            v-for="(notification, index) in unreadNotifications.data"
-                            target="_blank"
-                            :key="index"
-                        >
-                            <div class="notify-icon">
-                                <img
-                                    :src="notification.data.attributes.data.image"
-                                    class="img-fluid rounded-circle"
-                                    alt="notification icon" />
-                            </div>
-                            <div class="notify-details">
-                                <div>{{ notification.data.attributes.data.title }}</div>
-                                <div class="d-flex justify-content-between">
-                                    <small class="text-muted">{{ notification.data.attributes.data.subtitle }}</small>
-                                    <small class="text-muted">{{ notification.data.attributes.created_at }}</small>
-                                </div>
-                            </div>
-                        </a>
-                    </VuePerfectScrollbar>
-
-                    <a
-                        href="javascript:void(0);"
-                        class="dropdown-item text-center text-primary notify-item notify-all"
-                    >
-                        View all
-                        <i class="fi-arrow-right"></i>
-                    </a>
-                </b-dropdown-text>
-            </b-nav-item-dropdown>
             <b-nav-item-dropdown
                 right
                 class="notification-list"
@@ -255,6 +178,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import Spinner from "./Spinner";
 import {mapGetters} from "vuex";
 import toastr from "toastr";
+import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
     name: "NavBar",
@@ -327,6 +251,16 @@ export default {
         },
     },
     mounted() {
+        let ps;
+        window.addEventListener("load", function () {
+            const container = document.querySelector('#notifications-scroll');
+            ps = new PerfectScrollbar(container, {
+                wheelSpeed: 2,
+                wheelPropagation: true,
+                minScrollbarLength: 20
+            });
+        });
+
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -350,8 +284,10 @@ export default {
                 toastr.info(e.message);
                 this.$store.dispatch("fetchUnreadNotificationsCount");
                 this.$store.dispatch("fetchUnreadNotifications");
+                ps.update();
             });
-    }
+    },
+
 }
 </script>
 
