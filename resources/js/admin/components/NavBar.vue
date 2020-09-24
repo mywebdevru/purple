@@ -178,7 +178,6 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import Spinner from "./Spinner";
 import {mapGetters} from "vuex";
 import toastr from "toastr";
-import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
     name: "NavBar",
