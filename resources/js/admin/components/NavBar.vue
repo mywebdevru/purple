@@ -251,16 +251,6 @@ export default {
         },
     },
     mounted() {
-        let ps;
-        window.addEventListener("load", function () {
-            const container = document.querySelector('#notifications-scroll');
-            ps = new PerfectScrollbar(container, {
-                wheelSpeed: 2,
-                wheelPropagation: true,
-                minScrollbarLength: 20
-            });
-        });
-
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -280,11 +270,10 @@ export default {
         }
         Pusher.logToConsole = true;
         Echo.channel('admin-notifications')
-            .listen('AdminPanelRealtimeNotification', (e) => {
+            .listen('AdminPanelRealtimeNotification', async (e) => {
                 toastr.info(e.message);
-                this.$store.dispatch("fetchUnreadNotificationsCount");
-                this.$store.dispatch("fetchUnreadNotifications");
-                ps.update();
+                await this.$store.dispatch("fetchUnreadNotificationsCount");
+                await this.$store.dispatch("fetchUnreadNotifications");
             });
     },
 
