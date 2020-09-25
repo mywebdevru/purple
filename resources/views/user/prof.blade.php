@@ -38,9 +38,9 @@
 
                 @foreach ($feed as $item)
                     @if($item['feedable_type'] == 'App\Models\Post')
-                        <livewire:feed.post :post="$item->feedable" />
+                        <livewire:feed.post :post="$item->feedable" :key="'post'.$post->id"/>
                     @else
-                        <livewire:feed.image :image="$item->feedable" />
+                        <livewire:feed.image :image="$item->feedable" :key="'image'.$image->id"/>
                     @endif
                 @endforeach
 

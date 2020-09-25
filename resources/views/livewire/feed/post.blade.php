@@ -1,4 +1,4 @@
-<div class="ui-block" x-data="{'show_comments' : 0}" x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block" x-data="{'show_comments' : @entangle('commentsIsShown')}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <!-- Пост -->
     <article  class="hentry post" data-id="{{ $post['id'] }}">
         <div class="post__author author vcard inline-items">
@@ -67,7 +67,7 @@
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span class="comments_count">{{ count($post->comments) }}</span>
+                    <span class="comments_count">{{ $commentsCount }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -105,17 +105,18 @@
             </a>
 
         </div>
-    <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+ {{$commentsIsLoaded}}</span></a>
-        @if ($commentsIsLoaded)
-            <livewire:feed.comment-list :comments="$post->comments" />
+        @if (!!$commentsCount)
+            <div class="more-comments-wrapper">
+                {!! $showCommentsButton !!}
+            </div>
+            @if ($commentsIsLoaded)
+                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+                    @foreach ($post->comments->sortByDesc('created_at') as $comment)
+                        <livewire:feed.comment :comment="$comment" :key="'comment'.$comment->id"/>
+                    @endforeach
+                </ul>
+            @endif
         @endif
-        {{-- @component('user.components.feed.write_comment')
-            @slot('commentable_id')
-            {{ $post['id'] }}
-            @endslot
-            @slot('commentable_type')
-            App\Models\Post
-            @endslot
-        @endcomponent --}}
+        <livewire:feed.write-comment :feedItem="$post" :key="'create_post_comment'.$post->id"/>
     </article>
 </div>

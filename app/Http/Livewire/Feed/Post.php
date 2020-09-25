@@ -12,18 +12,59 @@ class Post extends Component
     public $post;
     public $deleted = 0;
     public $commentsIsLoaded = 0;
+    public $commentsIsShown = 0;
+    public $showCommentsButton;
+    public $commentsCount;
+
+    public function mount()
+    {
+        $this->showCommentsButton = $this->getButton();
+        $this->commentsCount = $this->getCommentsCount();
+    }
+
+    protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
 
     public function deletePost()
     {
-        return $this->deleted = $this->post->delete();
+        $this->deleted = $this->post->delete();
     }
 
-    public function showComments(){
-        if (!$this->commentsIsLoaded){
-            $this->post->loadMissing('comments.likes.authorable', 'comments.authorable');
-            $this->commentsIsLoaded = !$this->commentsIsLoaded;
+    protected function getButton()
+    {
+        if (!$this->commentsIsShown) {
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Показать комментарии </a><div wire:loading.class="comments-loading"> + </div>';
         } else {
-            $this->skipRender();
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Скрыть комментарии </a><div wire:loading.class="comments-loading"> - </div>';
+        }
+    }
+
+    public function getCommentsCount()
+    {
+       $this->commentsCount = $this->post->comments->count();
+       return $this->commentsCount;
+    }
+
+    public function showNewComment()
+    {
+        if (!$this->commentsIsShown){
+            $this->commentsIsShown = !$this->commentsIsShown;
+        }
+        $this->showComments();
+    }
+
+    public function changeIsShownCommentsStatus()
+    {
+        $this->commentsIsShown = !$this->commentsIsShown;
+        $this->showComments();
+    }
+
+    protected function showComments()
+    {
+        $this->post->load('comments.likes.authorable', 'comments.authorable');
+        $this->showCommentsButton = $this->getButton();
+        $this->commentsCount = $this->getCommentsCount();
+        if (!$this->commentsIsLoaded){
+            $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }
     }
 
