@@ -79,13 +79,13 @@ jobs:
           script_stop: true
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo php artisan optimize:clear
+            sudo php artisan optimize:clear 2>/dev/null
             sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \; 2>/dev/null
             mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers storage/app/photos
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
             git stash 2>/dev/null
-            git stash clear 2>/dev/null
+            git stash clear
             git pull origin dev
             composer install
             composer dump-autoload
