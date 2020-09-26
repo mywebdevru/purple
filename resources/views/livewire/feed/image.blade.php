@@ -1,4 +1,4 @@
-<div class="ui-block"  x-data="{'show_comments' : 0}" x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block"  x-data="{'show_comments' : @entangle('commentsIsShown')}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <!-- Пост -->
     <article class="hentry post has-post-thumbnail shared-photo">
 

@@ -72,6 +72,14 @@
             height: 38px;
             transition: all 0.3s ease;
         }
+        .comment-form .edit-comment {
+            height: auto;
+            transition: all .3s ease;
+        }
+
+        .comment-form textarea:focus {
+            min-height: 100px;
+        }
     </style>
 </head>
 
