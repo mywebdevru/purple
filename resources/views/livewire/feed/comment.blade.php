@@ -12,26 +12,28 @@
             </div>
         </div>
         {{-- @can('update', $comment) --}}
-        <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x" wire:target ="deleteComment">
+        <div class="more"  wire:loading.class="feed-load-scale-x" wire:target ="setEditStatus">
             <svg class="olymp-three-dots-icon">
                 <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
             </svg>
-            <ul class="more-dropdown" x-show.transition.out="!!show_more">
+            <ul class="more-dropdown" wire:loading.remove wire:target ="setEditStatus">
                 <li>
-                    <a href="#" @click.prevent="show_more = 0" wire:click="setEditStatus">Редактировать коммент</a>
+                    <a href="#" wire:click.prevent="setEditStatus">Редактировать коммент</a>
                 </li>
                 <li>
-                    <a href="#" @click.prevent="show_comment = 0" wire:click="deleteComment">Удалить коммент</a>
+                    <a href="#" wire:click.prevent="deleteComment" x-on:click="show_comment = 0">Удалить коммент</a>
                 </li>
             </ul>
         </div>
         {{-- @endcan --}}
     </div>
-    @if (!$nowEdit)
-        <p>{{ $comment['text'] }}</p>
-    @else
-        <livewire:feed.write-comment :comment="$comment" />
-    @endif
+    <div>
+        @if (!$nowEdit)
+            <p>{{ $comment['text'] }}</p>
+        @else
+            <livewire:feed.write-comment :comment="$comment" :key="'edit_comment'.$comment->id"/>
+        @endif
+    </div>
     <a href="#" data-model="{{ Comment::class }}" data-id="{{ $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}} likes">
         <form  method="POST">
             @csrf
