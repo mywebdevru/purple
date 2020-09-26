@@ -105,18 +105,22 @@
             </a>
 
         </div>
+        <div>
         @if (!!$commentsCount)
             <div class="more-comments-wrapper">
                 {!! $showCommentsButton !!}
             </div>
-            @if ($commentsIsLoaded)
-                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
-                    @foreach ($post->comments->sortByDesc('created_at') as $comment)
-                        <livewire:feed.comment :comment="$comment" :key="'comment'.$comment->id"/>
-                    @endforeach
-                </ul>
-            @endif
+            <div>
+                @if ($commentsIsLoaded)
+                    <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+                        @foreach ($post->comments->sortByDesc('created_at') as $comment)
+                            <livewire:feed.comment :comment="$comment" :key="'comment'.$comment->id"/>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
         @endif
+    </div>
         <livewire:feed.write-comment :feedItem="$post" :key="'create_post_comment'.$post->id"/>
     </article>
 </div>
