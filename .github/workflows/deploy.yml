@@ -84,8 +84,8 @@ jobs:
             mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers storage/app/photos
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
-            git stash
-            git stash clear
+            git stash 2>/dev/null
+            git stash clear 2>/dev/null
             git pull origin dev
             composer install
             composer dump-autoload
