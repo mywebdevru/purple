@@ -1,5 +1,5 @@
-<ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments}">
-        @foreach ($comments as $item)
-            @component('user.components.feed.comment_body', ['item' => $item])@endcomponent
+<ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+        @foreach ($comments as $comment)
+           <livewire:feed.comment :comment="$comment" />
         @endforeach
 </ul>

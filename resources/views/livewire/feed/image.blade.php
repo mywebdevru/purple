@@ -105,18 +105,19 @@
             </a>
 
         </div>
-        <a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии <span>+ {{$commentsIsLoaded}}</span></a>
-        @if ($commentsIsLoaded)
-            <livewire:feed.comment-list :comments="$image->comments" />
+        @if (!!$commentsCount)
+            <div class="more-comments-wrapper">
+                {!! $showCommentsButton !!}
+            </div>
+            @if ($commentsIsLoaded)
+                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+                    @foreach ($image->comments as $comment)
+                    <livewire:feed.comment :comment="$comment" :key="$comment->id"/>
+                    @endforeach
+                </ul>
+            @endif
         @endif
-        {{-- @component('user.components.feed.write_comment')
-        @slot('commentable_id')
-         {{ $image['id'] }}
-        @endslot
-        @slot('commentable_type')
-        App\Models\Image
-        @endslot
-        @endcomponent --}}
+        <livewire:feed.write-comment :feedItem="$image" :key="'create_image_comment'.$image->id"/>
     </article>
 </div>
 
