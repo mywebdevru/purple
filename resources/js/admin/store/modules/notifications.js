@@ -1,7 +1,7 @@
 const state = {
     unreadNotificationsCount: null,
     unreadNotificationsCountLoading: false,
-    unreadNotifications: null,
+    unreadNotifications: {data: []},
     unreadNotificationsLoading: false,
 
 };
@@ -44,8 +44,8 @@ const mutations = {
     setUnreadNotificationsCountLoading(state, loading) {
         state.unreadNotificationsCountLoading = loading;
     },
-    setUnreadNotifications(state, count) {
-        state.unreadNotifications = count;
+    setUnreadNotifications(state, response) {
+        state.unreadNotifications = response;
     },
     setUnreadNotificationsLoading(state, loading) {
         state.unreadNotificationsLoading = loading;

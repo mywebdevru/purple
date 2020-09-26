@@ -23,6 +23,6 @@ class AdminPanelRealtimeNotification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return ['admin-notifications'];
     }
 }

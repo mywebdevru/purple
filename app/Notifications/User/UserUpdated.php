@@ -59,7 +59,7 @@ class UserUpdated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'type' => 'user_created',
+            'type' => 'user_updated',
             'title' => 'Профиль пользователя обновлен',
             'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
