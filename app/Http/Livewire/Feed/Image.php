@@ -20,7 +20,7 @@ class Image extends Component
         $this->commentsCount = $this->getCommentsCount();
     }
 
-    protected $listeners = ['commentDeleted' => 'getCommentsCount'];
+    protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
 
 
     public function deleteImage()
@@ -42,9 +42,9 @@ class Image extends Component
     protected function getButton()
     {
         if (!$this->commentsIsShown) {
-            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Показать комментарии </a><div wire:loading.class="comments-loading"> + </div>';
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Показать комментарии </a><div wire:loading.class="comments-loading"> + </div>';
         } else {
-            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="showComments">Скрыть комментарии </a><div wire:loading.class="comments-loading"> - </div>';
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Скрыть комментарии </a><div wire:loading.class="comments-loading"> - </div>';
         }
     }
 
@@ -54,11 +54,25 @@ class Image extends Component
        return $this->commentsCount;
     }
 
-    public function showComments()
+    public function showNewComment()
+    {
+        if (!$this->commentsIsShown){
+            $this->commentsIsShown = !$this->commentsIsShown;
+        }
+        $this->showComments();
+    }
+
+    public function changeIsShownCommentsStatus()
     {
         $this->commentsIsShown = !$this->commentsIsShown;
+        $this->showComments();
+    }
+
+    protected function showComments()
+    {
+        $this->image->load('comments.likes.authorable', 'comments.authorable');
         $this->showCommentsButton = $this->getButton();
-        $this->image->loadMissing('comments.likes.authorable', 'comments.authorable');
+        $this->commentsCount = $this->getCommentsCount();
         if (!$this->commentsIsLoaded){
             $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }
