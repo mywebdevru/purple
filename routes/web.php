@@ -67,7 +67,6 @@ Route::group([
 });
 
 Route::resource('user','User\ProfileController')->except(['index', 'store'])->middleware('auth');
-Route::resource('comment','Comment\CommentController')->except(['index',])->middleware('auth');
 Route::resource('like','Like\LikeController')->except(['index',])->middleware('auth');
 
 Route::group([

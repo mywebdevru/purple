@@ -72,27 +72,6 @@ function editPost(post, newPost = 0)
     }
 }
 
-function deletePost(item)
-{
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    let post = item.parent('.ui-block')
-    $.ajax({
-        type: "delete",
-        url: `${document.location.origin}/post/${item.data('id')}`,
-        data: '',
-        dataType: "JSON",
-        success: function (response) {
-            if(!!response['deleted']){
-                post.slideUp(300)
-            }
-        }
-    })
-}
-
 function startSummernote(post_id)
 {
     var post_id = post_id

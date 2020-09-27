@@ -63,11 +63,11 @@
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items show_comments">
+                <a href="#" class="post-add-icon inline-items" wire:click.prevent="toggleComments">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span class="comments_count">{{ $commentsCount }}</span>
+                    <span>{{ $commentsCount }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -110,7 +110,7 @@
                 {!! $showCommentsButton !!}
             </div>
             @if ($commentsIsLoaded)
-                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'comments-show' : !!show_comments}">
                     @foreach ($post->comments->sortByDesc('created_at') as $comment)
                         <livewire:feed.comment :comment="$comment" :key="'comment'.$comment->id"/>
                     @endforeach

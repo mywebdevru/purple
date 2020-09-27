@@ -32,9 +32,9 @@ class Post extends Component
     protected function getButton()
     {
         if (!$this->commentsIsShown) {
-            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Показать комментарии </a><div wire:loading.class="comments-loading"> + </div>';
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="toggleComments">Показать комментарии </a><div wire:loading.class="comments-loading"> + </div>';
         } else {
-            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="changeIsShownCommentsStatus">Скрыть комментарии </a><div wire:loading.class="comments-loading"> - </div>';
+            return '<a href="#" @click.prevent="show_comments = !show_comments"  class="more-comments" wire:click="toggleComments">Скрыть комментарии </a><div wire:loading.class="comments-loading"> - </div>';
         }
     }
 
@@ -52,7 +52,7 @@ class Post extends Component
         $this->showComments();
     }
 
-    public function changeIsShownCommentsStatus()
+    public function toggleComments()
     {
         $this->commentsIsShown = !$this->commentsIsShown;
         $this->showComments();

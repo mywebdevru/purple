@@ -1,6 +1,32 @@
+@keyframes load-comments {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+}
+
+@keyframes show-comments {
+    from {max-height: 0px;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;}
+    to {max-height: 500px;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;}
+}
+
+.comments-loading {
+    animation: load-comments 500ms linear infinite;
+    color: #ff5e3a;
+}
+
+.comments-show {
+    animation: show-comments  400ms ease-in forwards;
+    overflow-y: scroll;
+}
+
 .comments-list {
     margin-bottom: 0;
-    
+    max-height: 0;
 
     .comment-item {
         padding: 15px;
@@ -159,6 +185,28 @@
     color: #888da8;
 }
 
+.more-comments-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    &:hover div {
+        color: #ff5e3a;
+    }
+
+    div {
+        font-size: 15px;
+        transition: all .3s ease;
+    }
+
+    .more-comments {
+        padding: 15px 5px;
+        border-bottom: none;
+        margin: 0;
+    }
+}
+
 .more-comments {
     text-align: center;
     padding: 15px 0;
@@ -187,6 +235,21 @@
     padding-bottom: 0;
     border-top: 1px solid #e6ecf5;
     overflow: hidden;
+
+    .edit-comment {
+        height: auto;
+        transition: all .3s ease;
+    }
+
+    textarea {
+        min-height: 38px;
+        height: 38px;
+        transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+        min-height: 100px;
+    }
 
     button + button {
         margin-right: 15px;
@@ -230,17 +293,6 @@
     width: 100%;
     margin-left: auto;
 }
-
-.comment-form textarea {
-    min-height: 60px;
-    height: 60px;
-    transition: all .3s ease;
-}
-
-.comment-form textarea:focus {
-    min-height: 100px;
-}
-
 
 /*================= Responsive Mode ============*/
 @media (max-width: 768px) {
