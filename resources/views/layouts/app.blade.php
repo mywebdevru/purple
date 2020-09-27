@@ -15,12 +15,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
     <livewire:styles />
     @yield('css')
-    <style>
-
-
-
-        
-    </style>
 </head>
 
 <body class="page-has-left-panels page-has-right-panels">

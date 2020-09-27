@@ -67,11 +67,11 @@
                 @endif
             </div>
             <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items show_comments">
+                <a href="#" class="post-add-icon inline-items" wire:click.prevent="toggleComments">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span class="comments_count">{{ count($image->comments) }}</span>
+                    <span>{{ count($image->comments) }}</span>
                 </a>
 
                 <a href="#" class="post-add-icon inline-items">
