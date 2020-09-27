@@ -19,7 +19,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/map/map_edit', 'public/js/map')
     .js('resources/js/map/map_show', 'public/js/map')
     .scripts(['resources/js/main/like.js',
-            'resources/js/main/comment.js',
             'resources/js/main/post.js',
             'resources/js/main/listener.js'], 'public/js/x3mart.js')
     .scripts(['resources/js/libs/fm.revealator.jquery.js',
