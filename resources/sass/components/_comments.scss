@@ -245,10 +245,10 @@
         min-height: 38px;
         height: 38px;
         transition: all 0.3s ease;
-    }
 
-    textarea:focus {
-        min-height: 100px;
+        &:focus {
+            min-height: 100px;
+        }
     }
 
     button + button {
