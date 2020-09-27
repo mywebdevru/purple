@@ -110,7 +110,7 @@
                 {!! $showCommentsButton !!}
             </div>
             @if ($commentsIsLoaded)
-                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'feed-show' : !!show_comments}">
+                <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'comments-show' : !!show_comments}">
                     @foreach ($image->comments as $comment)
                     <livewire:feed.comment :comment="$comment" :key="$comment->id"/>
                     @endforeach
