@@ -111,7 +111,7 @@
             </div>
             @if ($commentsIsLoaded)
                 <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'comments-show' : !!show_comments}">
-                    @foreach ($image->comments as $comment)
+                    @foreach ($image->comments->sortByDesc('created_at') as $comment)
                     <livewire:feed.comment :comment="$comment" :key="$comment->id"/>
                     @endforeach
                 </ul>
