@@ -12,13 +12,13 @@
                 </div>
             </div>
             @can('update', $post)
-            <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x" wire:target ="deletePost">
+            <div class="more" x-data="{show_more:  @entangle('showMore')}" wire:loading.class="feed-load-scale-x" wire:target ="deletePost">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
                 <ul class="more-dropdown" x-show.transition.out="!!show_more">
                     <li>
-                        <a href="#"  class="edit_post dropdown_menu_item">Редактировать пост</a>
+                        <a href="#" @click.prevent="show_more = 0" wire:click="toggleEdit">Редактировать пост</a>
                     </li>
                     <li>
                         <a href="#" @click.prevent="show_more = 0" wire:click="deletePost">Удалить пост</a>
@@ -27,8 +27,69 @@
             </div>
             @endcan
         </div>
-        <div class="can_edit post_body">
-            {!! $post['text'] !!}
+        <div>
+            @if (!$editPost)
+                {!! $text !!}
+            @else
+            <form wire:submit.prevent="savePost" method="post">
+                <div class="form-group" wire:ignore>
+                    <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
+                <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
+                </div>
+                <button type="submit" class="btn btn-success" wire.loading.attr="disabled">
+                    Сохранить
+                </button>
+            </form>
+                <script>
+                    startSummernote()
+                    function startSummernote()
+                    {
+                        var post_id = {{ $post->id }}
+                        const editor = $(`#post${post_id}`),
+                            config = {
+                                lang: 'ru-RU',
+                                shortcuts: false,
+                                airMode: false,
+                                focus: true,
+                                disableDragAndDrop: false,
+                                toolbar: [
+                                    // [groupName, [list of button]]
+                                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                                    ['color', ['color']],
+                                    ['para', ['ul', 'ol', 'paragraph']],
+                                    ['insert', ['link', 'picture', 'video']],
+                                ],
+                                callbacks: {
+                                    onImageUpload: function (files) {
+                                        @this.upload('photo', files[0], (image) => {
+                                            @this.savePhoto()
+                                            @this.on('photoSaved', (image)=>{
+                                                editor.summernote('insertImage', '/' + image, function ($image) {
+                                                    $image.css('width', '100%');
+                                                });
+                                            })
+                                            // for (let i = 0; i < images.length; i++) {
+
+                                            // }
+                                        }, (error) => {
+                                            console.log(error)
+                                        })
+                                    },
+                                    onMediaDelete: function ($target) {
+                                        const url = $target[0].src,
+                                            cut = `${document.location.origin}/`,
+                                            image = url.replace(cut, '');
+                                        @this.deleteImage(image);
+                                    },
+                                    onChange: function(contents, $editable) {
+                                        @this.set('text',contents);
+                                    }
+                                }
+                            };
+                        editor.summernote(config);
+                    }
+                </script>
+            @endif
         </div>
         <div class="post-additional-info inline-items">
             <a href="#" data-model="{{ Post::class }}" data-id="{{ $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}} likes">
