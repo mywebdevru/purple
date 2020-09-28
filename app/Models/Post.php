@@ -49,6 +49,13 @@ class Post extends Model
         'text'
     ];
 
+    /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = ['feed'];
+
     public function postable()
     {
         return $this->morphTo();
