@@ -10,20 +10,12 @@ import Layout from "../layouts/Main";
 export default {
     name: "Users",
     components: { Layout },
-    data(){
-        return {
-            loading: false,
-            users: null,
-        }
-    },
     async mounted(){
-        this.loading = true;
         try {
-            this.users = (await axios.get('/api/users')).data;
+            const response = (await axios.get('/api/users')).data;
+            console.log(response);
         } catch (e) {
-            console.log(e);
-        } finally {
-            this.loading = false;
+
         }
     }
 }
