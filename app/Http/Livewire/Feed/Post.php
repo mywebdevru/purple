@@ -68,6 +68,9 @@ class Post extends Component
 
     public function savePhoto()
     {
+        $this->validate([
+            'photo' => 'image|max:10240', // 10MB Max
+        ]);
         $this->link = $this->photo->store('summernote');
         $this->emit('photoSaved', $this->link);
     }
