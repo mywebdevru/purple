@@ -1,6 +1,7 @@
 <template>
 <Layout>
-    <table id="datatable" class="table table-bordered dt-responsive nowrap">
+    <Spinner class="mt-5" v-if="loading" />
+    <table id="datatable" class="table table-bordered dt-responsive nowrap" v-else>
         <thead>
         <tr>
             <th>Имя</th>
@@ -11,8 +12,6 @@
             <th>Salary</th>
         </tr>
         </thead>
-
-
         <tbody>
         <tr v-for="user in users.data">
             <td>{{ user.data.attributes.full_name }}</td>
@@ -36,14 +35,15 @@ import 'datatables.net-buttons-bs4';
 import 'datatables.net-keytable-bs4';
 import 'datatables.net-responsive-bs4';
 import 'datatables.net-select-bs4';
+import Spinner from "../../components/Spinner";
 
 export default {
     name: "Users",
-    components: { Layout },
+    components: {Spinner, Layout },
     data(){
         return {
             loading: false,
-            users: null,
+            users: [],
         }
     },
     async mounted(){
