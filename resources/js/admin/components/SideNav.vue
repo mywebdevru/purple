@@ -47,13 +47,35 @@
                     <router-link
                         tag="a"
                         to="/admin"
-                        class="active"
+                        :class="$route.name === 'dashboard' ? 'active' : ''"
                     >
                         <i class="mdi mdi-view-dashboard"></i>
                         <span> Dashboard </span>
                     </router-link>
                 </li>
 
+                <li>
+                    <a
+                        href="javascript: void(0);"
+                        class="waves-effect"
+                        :class="$route.name === 'users' ? 'active' : ''"
+                    >
+                        <i class="mdi mdi-account-multiple-outline"></i>
+                        <span> Пользователи </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul
+                        class="nav-second-level nav"
+                        aria-expanded="false"
+                    >
+                        <li>
+                            <router-link :to="{name: 'users'}">Управление</router-link>
+                        </li>
+                        <li>
+                            <router-link :to="{name: 'users'}">Роли</router-link>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a
                         href="javascript: void(0);"
@@ -91,6 +113,7 @@
                         </li>
                     </ul>
                 </li>
+
             </ul>
             <div class="clearfix"></div>
         </div>
