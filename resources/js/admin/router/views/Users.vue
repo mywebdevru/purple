@@ -1,10 +1,15 @@
 <template>
-<h1>Пользователя</h1>
+<Layout>
+<h1>Пользователи</h1>
+</Layout>
 </template>
 
 <script>
+import Layout from "../layouts/Main";
+
 export default {
-    name: "Users"
+    name: "Users",
+    components: { Layout },
 }
 </script>
 
