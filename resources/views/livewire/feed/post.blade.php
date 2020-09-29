@@ -41,53 +41,46 @@
                 </button>
             </form>
                 <script>
-                    startSummernote()
-                    function startSummernote()
-                    {
-                        var post_id = {{ $post->id }}
-                        const editor = $(`#post${post_id}`),
-                            config = {
-                                lang: 'ru-RU',
-                                shortcuts: false,
-                                airMode: false,
-                                focus: true,
-                                disableDragAndDrop: false,
-                                toolbar: [
-                                    // [groupName, [list of button]]
-                                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                                    ['color', ['color']],
-                                    ['para', ['ul', 'ol', 'paragraph']],
-                                    ['insert', ['link', 'picture', 'video']],
-                                ],
-                                callbacks: {
-                                    onImageUpload: function (files) {
-                                        @this.upload('photo', files[0], (image) => {
-                                            @this.savePhoto()
-                                            @this.on('photoSaved', (image)=>{
-                                                editor.summernote('insertImage', '/' + image, function ($image) {
-                                                    $image.css('width', '100%');
-                                                });
-                                            })
-                                            // for (let i = 0; i < images.length; i++) {
-
-                                            // }
-                                        }, (error) => {
-                                            console.log(error)
+                    var post_id = {{ $post->id }}
+                    const editor = $(`#post${post_id}`),
+                        config = {
+                            lang: 'ru-RU',
+                            shortcuts: false,
+                            airMode: false,
+                            focus: true,
+                            disableDragAndDrop: false,
+                            toolbar: [
+                                // [groupName, [list of button]]
+                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['insert', ['link', 'picture', 'video']],
+                            ],
+                            callbacks: {
+                                onImageUpload: function (files) {
+                                    @this.upload('photo', files[0], (image) => {
+                                        @this.savePhoto()
+                                        @this.on('photoSaved', (image)=>{
+                                            editor.summernote('insertImage', '/' + image, function ($image) {
+                                                $image.css('width', '100%');
+                                            });
                                         })
-                                    },
-                                    onMediaDelete: function ($target) {
-                                        const url = $target[0].src,
-                                            cut = `${document.location.origin}/`,
-                                            image = url.replace(cut, '');
-                                        @this.deleteImage(image);
-                                    },
-                                    onChange: function(contents, $editable) {
-                                        @this.set('text',contents);
-                                    }
+                                    }, () => {
+                                        swal("Беда!", "Грузите что то большое или неправильное" , "error");
+                                    })
+                                },
+                                onMediaDelete: function ($target) {
+                                    const url = $target[0].src,
+                                        cut = `${document.location.origin}/`,
+                                        image = url.replace(cut, '');
+                                    @this.deletePhoto(image);
+                                },
+                                onChange: function(contents, $editable) {
+                                    @this.set('text',contents);
                                 }
-                            };
-                        editor.summernote(config);
-                    }
+                            }
+                        };
+                    editor.summernote(config);
                 </script>
             @endif
         </div>

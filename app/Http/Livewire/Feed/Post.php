@@ -68,11 +68,14 @@ class Post extends Component
 
     public function savePhoto()
     {
+        $this->validate([
+            'photo' => 'image|max:2048', // 2MB Max
+        ]);
         $this->link = $this->photo->store('summernote');
         $this->emit('photoSaved', $this->link);
     }
 
-    public function deleteImage($name)
+    public function deletePhoto($name)
     {
         Storage::delete($name);
     }
