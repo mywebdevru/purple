@@ -76,7 +76,7 @@
                                     const url = $target[0].src,
                                         cut = `${document.location.origin}/`,
                                         image = url.replace(cut, '');
-                                    @this.deleteImage(image);
+                                    @this.deletePhoto(image);
                                 },
                                 onChange: function(contents, $editable) {
                                     @this.set('text',contents);

@@ -72,7 +72,7 @@ class Post extends Component
         $this->emit('photoSaved', $this->link);
     }
 
-    public function deleteImage($name)
+    public function deletePhoto($name)
     {
         Storage::delete($name);
     }
