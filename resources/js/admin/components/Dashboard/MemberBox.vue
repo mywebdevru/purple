@@ -7,7 +7,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item">Пользователи</a>
+            <router-link :to="{name: 'users'}" class="dropdown-item">Управление</router-link>
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item">Клубы</a>
             <!-- item-->
