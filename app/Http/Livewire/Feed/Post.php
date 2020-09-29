@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Feed;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
 
 use Livewire\Component;
 
@@ -72,6 +73,13 @@ class Post extends Component
             'photo' => 'image|max:2048', // 2MB Max
         ]);
         $this->link = $this->photo->store('summernote');
+        $img = Image::make($this->link);
+        if ($img->width() > 1024){
+            $img->resize(1024, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+        }
         $this->emit('photoSaved', $this->link);
     }
 
