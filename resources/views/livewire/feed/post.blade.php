@@ -65,11 +65,8 @@
                                                 $image.css('width', '100%');
                                             });
                                         })
-                                        // for (let i = 0; i < images.length; i++) {
-
-                                        // }
-                                    }, (error) => {
-                                        console.log(error)
+                                    }, () => {
+                                        swal("Беда!", "Грузите что то большое или неправильное" , "error");
                                     })
                                 },
                                 onMediaDelete: function ($target) {
