@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Resources\UserResourceCollection;
 use App\Models\FriendshipRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
@@ -14,11 +13,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return UserResourceCollection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return new UserResourceCollection(User::all());
+        return view('admin.users.index')->with('users', User::paginate(12));
     }
 
     /**
