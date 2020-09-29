@@ -10,17 +10,8 @@ const routes = [
             authRequired: true,
             title: 'Панель управления',
         },
+        //props: (route) => ({ user: store.state.auth.currentUser || {}}),
     },
-    {
-        path: '/admin/users/',
-        name: 'users',
-        component: () => lazyLoadView(import('./views/Users')),
-        meta: {
-            authRequired: true,
-            title: 'Пользователи',
-        },
-    },
-
     {
         path: '/admin/404/',
         name: '404',
