@@ -6,21 +6,25 @@
         <thead>
         <tr>
             <th>Имя</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Д/рождения</th>
+            <th>Регистрация</th>
+            <th>Город</th>
+            <th>Страна</th>
+            <th>Опции</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="user in users.data">
             <td>{{ user.data.attributes.full_name }}</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
+            <td>{{ user.data.attributes.birth_date }}</td>
+            <td>{{ user.data.attributes.created_at }}</td>
+            <td>{{ user.data.attributes.city }}</td>
+            <td class="user-country">{{ user.data.attributes.country }}</td>
+            <td>
+                <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-success"> <i class="far fa-xs fa-eye"></i> </button>
+                <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-info"> <i class="fas fa-xs fa-pen"></i> </button>
+                <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -56,6 +60,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+.user-country
+    max-width: 150px
+    overflow: hidden
+.btn.btn-xs
+    line-height: 1.125
+    padding: .2rem .4rem
 </style>
