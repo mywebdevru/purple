@@ -1,5 +1,6 @@
 <template>
 <Layout>
+    <Table>
     <Spinner class="mt-5" v-if="loading" />
     <table id="datatable" class="table table-bordered dt-responsive nowrap" v-else>
         <thead>
@@ -23,23 +24,18 @@
         </tr>
         </tbody>
     </table>
+    </Table>
 </Layout>
 </template>
 
 <script>
 import Layout from "../layouts/Main";
-import 'jszip';
-import 'pdfmake';
-import 'datatables.net-bs4';
-import 'datatables.net-buttons-bs4';
-import 'datatables.net-keytable-bs4';
-import 'datatables.net-responsive-bs4';
-import 'datatables.net-select-bs4';
 import Spinner from "../../components/Spinner";
+import Table from "../../components/Table";
 
 export default {
     name: "Users",
-    components: {Spinner, Layout },
+    components: {Table, Spinner, Layout },
     data(){
         return {
             loading: false,
@@ -56,9 +52,6 @@ export default {
             this.loading = false;
             $("#datatable").DataTable();
         }
-    },
-    updated() {
-        $("#datatable").DataTable();
     },
 }
 </script>
