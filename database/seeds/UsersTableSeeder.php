@@ -16,6 +16,8 @@ class UsersTableSeeder extends Seeder
     {
         User::unsetEventDispatcher();
 
+        factory(User::class, 300)->create();
+
         $user = User::where('email', 'ruslan@skazkin.su')->first();
 
         if(!$user) {
@@ -51,7 +53,5 @@ class UsersTableSeeder extends Seeder
 
             $slava->assignRole('admin');
         }
-
-        factory(User::class, 300)->create();
     }
 }
