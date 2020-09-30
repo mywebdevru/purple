@@ -1,6 +1,10 @@
 <template>
-<div>
+<div class="mt-3 row">
+<div class="col-12">
+<div class="card-box">
 <slot />
+</div>
+</div>
 </div>
 </template>
 

@@ -17,7 +17,7 @@ const routes = [
         component: () => lazyLoadView(import('./views/Users')),
         meta: {
             authRequired: true,
-            title: 'Пользователи',
+            title: 'Управление пользователями',
         },
     },
 

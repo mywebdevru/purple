@@ -1,7 +1,7 @@
 <template>
 <Layout>
     <Table>
-    <Spinner class="mt-5" v-if="loading" />
+    <Spinner class="my-5" v-if="loading" />
     <table id="datatable" class="table table-bordered dt-responsive nowrap" v-else>
         <thead>
         <tr>
