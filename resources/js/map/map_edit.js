@@ -1,11 +1,22 @@
 ymaps.ready(init);
 
 function init() {
-    // Создание карты.
-    strJson = strJson.split('&quot;').join('"');
-    obj = JSON.parse(strJson)
+    let coord, obj
+    //Получаем координаты для централизации карты (либо Москва, либо координаты первого эл-та маршрута)
+    if (typeof strJson !== 'undefined') {
+        strJson = strJson.split('&quot;').join('"');
+        obj = JSON.parse(strJson)
+        if (obj["0"].data.type == "Placemark") {
+            coord = obj[0].coord
+        } else {
+            coord = obj[0].coord[0]
+        }
+    } else {
+        coord = [55.76, 37.64]
+    }
+    //Создание карты
     var myMap = new ymaps.Map("map", {
-        center: obj["0"].coord, //центрируем по координатам первой метки
+        center: coord, 
         zoom: 12,
         type: 'yandex#hybrid', //гибридный слой при открытии
     })
@@ -251,7 +262,6 @@ function init() {
                     title: "Удалить линию",
                     onClick: function () {
                         myMap.geoObjects.remove(myPolyline);
-                        currentId--;
                     }
                 });
                 return items;
@@ -297,7 +307,6 @@ function init() {
                     title: "Удалить многоугольник",
                     onClick: function () {
                         myMap.geoObjects.remove(myPolygon);
-                        currentId--;
                     }
                 });
                 return items;
