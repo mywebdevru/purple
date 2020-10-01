@@ -1,7 +1,5 @@
 <div class="ui-block"  x-data="{'show_comments' : @entangle('commentsIsShown')}" x-bind:class="{'feed-hide' : $wire.deleted}">
-    <!-- Пост -->
     <article class="hentry post has-post-thumbnail shared-photo">
-
         <div class="post__author author vcard inline-items">
             <img src="{{ Str::startsWith($image->imageable['avatar'], 'http') ? $image->imageable['avatar'] : asset($image->imageable['avatar'])}}" alt="author">
 
@@ -21,9 +19,6 @@
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
                     <ul class="more-dropdown" x-show.transition.out="!!show_more">
-                        {{-- <li>
-                            <a href="#">Редактировать пост</a>
-                        </li> --}}
                         <li>
                             <a href="#" @click.prevent="show_more = 0" wire:click="deleteImage">Удалить фото</a>
                         </li>

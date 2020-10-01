@@ -10,7 +10,7 @@
 
 		<!-- Главный контент -->
 
-		<livewire:feed :feed="$feed" />
+		<livewire:feed :user="$user" :key="'feed'.time()" />
 
 		<!-- ... окончание Главного контента -->
 
