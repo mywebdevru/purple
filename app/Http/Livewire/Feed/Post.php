@@ -56,7 +56,7 @@ class Post extends Component
         }
     }
 
-    protected function getCommentsCount()
+    public function getCommentsCount()
     {
        $this->commentsCount = $this->post->comments->count();
        return $this->commentsCount;
