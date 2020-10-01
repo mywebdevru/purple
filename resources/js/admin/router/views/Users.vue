@@ -2,7 +2,7 @@
 <Layout>
     <Table>
     <Spinner class="my-5" v-if="loading" />
-    <table id="datatable" class="table table-bordered dt-responsive nowrap" v-else>
+    <table id="datatable" class="table table-bordered dt-responsive table-striped nowrap" v-else>
         <thead>
         <tr>
             <th>Имя</th>
