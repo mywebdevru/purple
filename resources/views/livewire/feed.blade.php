@@ -9,7 +9,7 @@
             @endif
         @endforeach
     </div>
-    <a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="" data-container="newsfeed-items-grid" wire:click.prevent="$emit('createNewPost')">
+    <a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="" data-container="newsfeed-items-grid">
         <svg class="olymp-three-dots-icon">
             <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
         </svg>
