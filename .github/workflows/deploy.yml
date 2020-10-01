@@ -36,7 +36,7 @@ jobs:
 #        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
 
       - name: Run npm
-        run: npm i && npm run i
+        run: npm i && npm run dev
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
