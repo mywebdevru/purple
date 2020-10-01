@@ -58,30 +58,10 @@ class ProfileController extends Controller
     {
         $id=$user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
-            $groups = $user->subscribes()->where('subscrable_type', Group::class)->pluck('subscrable_id');
-            $users = $user->subscribes()->where('subscrable_type', User::class)->pluck('subscrable_id');
-            $clubs = $user->subscribes()->where('subscrable_type', Club::class)->pluck('subscrable_id');
-            $feed = Feed::where(function ($query) use ($users){
-                return $query->where('authorable_type', [User::class])->whereIn('authorable_id', $users);
-                })->orWhere(function ($query) use ($clubs){
-                    return $query->where('authorable_type', [Club::class])->whereIn('authorable_id', $clubs);
-                })->orWhere(function ($query) use ($groups){
-                        return $query->where('authorable_type', [Group::class])->whereIn('authorable_id', $groups);
-                })->orderBy('updated_at','DESC');
             $user = auth()->user();
-        } else {
-            $feed = Feed::where('authorable_type', [User::class])->where('authorable_id', $id)->orderBy('updated_at','DESC');
         }
         $user->load('usersVehicles', 'images', 'friends.user');
-        $feed->with(['feedable.comments',
-                    'feedable.likes.authorable'])
-                ->with(['feedable' => function (MorphTo $morphTo) {
-                    $morphTo->morphWith([
-                        Image::class => ['imageable'],
-                        Post::class => ['postable'],
-                    ]);
-                }]);
-        return view('user.prof',['user' => $user, 'feed' => $feed->get()]);
+        return view('user.prof',['user' => $user]);
     }
 
     /**
