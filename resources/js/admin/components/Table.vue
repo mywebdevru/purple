@@ -26,12 +26,12 @@ export default {
     name: "Table",
     updated() {
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
-        const table = $("#datatable").DataTable({lengthChange: !1, buttons: ["copy", "print", "pdfHtml5", "colvis"], keys: !0});
-        table.buttons().container().appendTo("#datatable_wrapper .col-md-6:eq(0)");
+        const table = $("#datatable").DataTable({lengthChange: !0, buttons: ["copy", "print", "pdf", "csv"], keys: !0});
+        table.buttons().container().appendTo("#datatable_wrapper .col-md-5:eq(0)");
     }
 }
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
 
 </style>
