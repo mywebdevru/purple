@@ -56,7 +56,7 @@ jobs:
 #        run:  php artisan migrate --seed
 
       - name: Passport install
-        run: php artisan passport:install
+        run: php artisan passport:keys
 
       - name: Run tests
         run: ./vendor/bin/pest
