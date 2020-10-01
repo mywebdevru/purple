@@ -30,13 +30,13 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
-      - name: Create offroad testing database
-        env:
-          PORT: ${{ job.services.mysql.ports[3306] }}
-        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
+#      - name: Create offroad testing database
+#        env:
+#          PORT: ${{ job.services.mysql.ports[3306] }}
+#        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
 
-      - name: Run yarn
-        run: yarn && yarn dev
+      - name: Run npm
+        run: npm i && npm run dev
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -52,11 +52,11 @@ jobs:
           cp .env.ci .env
           php artisan key:generate
 
-      - name: Database setup
-        run:  php artisan migrate --seed
+#      - name: Database setup
+#        run:  php artisan migrate --seed
 
       - name: Passport install
-        run: php artisan passport:install
+        run: php artisan passport:keys
 
       - name: Run tests
         run: ./vendor/bin/pest
