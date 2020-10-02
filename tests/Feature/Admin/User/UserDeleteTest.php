@@ -20,9 +20,11 @@ test('users_cant_delete_user', function () {
 
 test('admins_can_delete_user', function () {
     /* @var \Tests\TestCase $this */
+    $this->withoutExceptionHandling();
 
     $adminUser = factory(User::class)->create();
     $superAdminUser = factory(User::class)->create();
+    $user1 = factory(User::class)->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
@@ -32,13 +34,13 @@ test('admins_can_delete_user', function () {
 
     $this->actingAs($adminUser, 'api');
 
-    $response = $this->delete('/api/users/delete', []);
-    $response->assertOk();
+    $response = $this->delete('/api/users/delete', ['user_id' => $user1->id]);
+    $response->assertStatus(204);
 
     $this->actingAs($superAdminUser, 'api');
 
-    $response = $this->delete('/api/users/delete', []);
-    $response->assertOk();
+    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser->id]);
+    $response->assertStatus(204);
 });
 
 test('user_can_be_deleted', function () {

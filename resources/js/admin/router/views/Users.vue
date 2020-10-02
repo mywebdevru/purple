@@ -70,7 +70,14 @@ export default {
                     cancelButtonText: "Отмена",
                     closeOnConfirm: false
                 },
-                function(){
+                async function(){
+                    try {
+
+                    } catch (error) {
+
+                    } finally {
+
+                    }
                     swal("Deleted!", "Your imaginary file has been deleted.", "success");
                 });
         }
