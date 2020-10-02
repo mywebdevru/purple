@@ -14,11 +14,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="user in users.data">
+        <tr v-for="(user, index) in users.data" :key="user.data.user_id" :id="`user-row-${user.data.user_id}`">
             <td>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-success"> <i class="far fa-xs fa-eye"></i> </button>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-info"> <i class="fas fa-xs fa-pen"></i> </button>
-                <button @click.prevent="deleteUser(user.data.user_id)" class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
+                <button @click.prevent="deleteUser(user.data.user_id, index)" class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
             </td>
             <td>{{ user.data.attributes.full_name }}</td>
             <td>{{ user.data.attributes.birth_date }}</td>
@@ -36,6 +36,7 @@
 import Layout from "../layouts/Main";
 import Spinner from "../../components/Spinner";
 import Table from "../../components/Table";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 export default {
     name: "Users",
@@ -45,6 +46,7 @@ export default {
             loading: false,
             userDeleting: false,
             users: [],
+            table: null,
         }
     },
     async mounted(){
@@ -55,7 +57,6 @@ export default {
             console.log(e);
         } finally {
             this.loading = false;
-            $("#datatable").DataTable();
         }
     },
     methods: {
@@ -75,15 +76,23 @@ export default {
                     self.userDeleting = true;
                     try {
                         await axios.delete('/api/users/delete', {data: {'user_id': user_id}});
+                        const row = document.getElementById(`user-row-${user_id}`);
+                        row.remove();
+                        console.log(row);
                         swal("Deleted!", "Your imaginary file has been deleted.", "success");
                     } catch (error) {
-                        console.log(error.data);
+                        console.log(error);
                     } finally {
                         self.userDeleting = false;
                     }
                 });
         }
     },
+    updated() {
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        this.table = $("#datatable").DataTable({lengthChange: !0, buttons: ["copy", "print", "pdf", "csv"], keys: !0});
+        this.table.buttons().container().appendTo("#datatable_wrapper .col-md-5:eq(0)");
+    }
 }
 </script>
 
