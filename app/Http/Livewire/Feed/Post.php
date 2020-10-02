@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Feed;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
 
@@ -56,7 +55,7 @@ class Post extends Component
         }
     }
 
-    protected function getCommentsCount()
+    public function getCommentsCount()
     {
        $this->commentsCount = $this->post->comments->count();
        return $this->commentsCount;

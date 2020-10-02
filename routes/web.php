@@ -23,7 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
 
