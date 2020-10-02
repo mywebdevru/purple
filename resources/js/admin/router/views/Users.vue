@@ -60,7 +60,7 @@ export default {
         }
     },
     methods: {
-        deleteUser(user_id) {
+        deleteUser(user_id, index) {
             const self = this;
             swal({
                     title: "Уверен?",
@@ -70,16 +70,15 @@ export default {
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Да, удалить!",
                     cancelButtonText: "Отмена",
-                    closeOnConfirm: false
+                    closeOnConfirm: true,
                 },
                 async function(){
                     self.userDeleting = true;
                     try {
                         await axios.delete('/api/users/delete', {data: {'user_id': user_id}});
-                        const row = document.getElementById(`user-row-${user_id}`);
-                        row.remove();
-                        console.log(row);
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        self.table.destroy();
+                        self.users.data.splice(index, 1);
+                        swal("Готово!", "Пользователь был удален.", "success");
                     } catch (error) {
                         console.log(error);
                     } finally {
