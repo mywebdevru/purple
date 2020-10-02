@@ -77,10 +77,10 @@ test('only_super_admin_can_delete_admin', function () {
     $superAdminUser->assignRole('super-admin');
 
     $this->actingAs($adminUser1, 'api');
-    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser2->id]);
+    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser2->id], ['Accept' => 'application/json']);
     $response->assertForbidden();
 
     $this->actingAs($superAdminUser, 'api');
-    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser1->id]);
+    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser1->id], ['Accept' => 'application/json']);
     $response->assertStatus(204);
 });

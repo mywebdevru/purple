@@ -64,7 +64,17 @@ class UserController extends Controller
         $data = request()->validate([
             'user_id' => 'required'
         ]);
-        User::findOrFail($data['user_id'])->forceDelete();
+
+
+        $user = User::findOrFail($data['user_id']);
+
+        $userRoles = $user->getRoleNames();
+        $authRoles = auth()->user()->getRoleNames();
+
+        abort_if($userRoles->contains('super-admin'), 403, 'Нельзя удалить супер-админа');
+        abort_if($userRoles->contains('admin') && !$authRoles->contains('super-admin'), 403, 'Вы не можете удалять админов');
+
+        $user->forceDelete();
         return response()->json([], 204);
     }
 }
