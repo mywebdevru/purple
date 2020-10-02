@@ -5,26 +5,26 @@
     <table id="datatable" class="table table-bordered dt-responsive table-striped nowrap" v-else>
         <thead>
         <tr>
+            <th>Опции</th>
             <th>Имя</th>
             <th>Д/рождения</th>
             <th>Регистрация</th>
             <th>Город</th>
             <th>Страна</th>
-            <th>Опции</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="user in users.data">
-            <td>{{ user.data.attributes.full_name }}</td>
-            <td>{{ user.data.attributes.birth_date }}</td>
-            <td>{{ user.data.attributes.created_at }}</td>
-            <td>{{ user.data.attributes.city }}</td>
-            <td class="user-country">{{ user.data.attributes.country }}</td>
             <td>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-success"> <i class="far fa-xs fa-eye"></i> </button>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-info"> <i class="fas fa-xs fa-pen"></i> </button>
-                <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
+                <button @click.prevent="deleteUser" class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
             </td>
+            <td>{{ user.data.attributes.full_name }}</td>
+            <td>{{ user.data.attributes.birth_date }}</td>
+            <td>{{ user.data.attributes.created_at }}</td>
+            <td class="user-city">{{ user.data.attributes.city }}</td>
+            <td class="user-country">{{ user.data.attributes.country }}</td>
         </tr>
         </tbody>
     </table>
@@ -57,12 +57,32 @@ export default {
             $("#datatable").DataTable();
         }
     },
+    methods: {
+        deleteUser() {
+            console.log('delete user function');
+            swal({
+                    title: "Are you sure?",
+                    text: "Your will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                },
+                function(){
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                });
+        }
+    },
 }
 </script>
 
 <style lang="sass" scoped>
 .user-country
-    max-width: 150px
+    max-width: 125px
+    overflow: hidden
+.user-city
+    max-width: 100px
     overflow: hidden
 .btn.btn-xs
     line-height: 1.125
