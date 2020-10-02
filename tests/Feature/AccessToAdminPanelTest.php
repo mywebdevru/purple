@@ -13,9 +13,8 @@ class AccessToAdminPanelTest extends TestCase
 
     public function testUserMustLoginToAccessToAdminPanel()
     {
-        $this->get(route('admin.index'))->assertRedirect('login');
-        $this->get(route('admin.user.index'))->assertRedirect('login');
-        $this->get(route('admin.post.index'))->assertRedirect('login');
+        $this->get('/admin')->assertRedirect('login');
+        $this->get('/admin/users')->assertRedirect('login');
     }
 
     public function testUsersCannotAccessToAdminPanel()
@@ -24,7 +23,7 @@ class AccessToAdminPanelTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get(route('admin.index'));
+        $response = $this->get('/admin');
 
         $response->assertForbidden();
     }
@@ -39,7 +38,7 @@ class AccessToAdminPanelTest extends TestCase
 
         $this->actingAs($adminUser);
 
-        $response = $this->get(route('admin.index'));
+        $response = $this->get('/admin');
 
         $response->assertOk();
     }
@@ -54,7 +53,7 @@ class AccessToAdminPanelTest extends TestCase
 
         $this->actingAs($superAdminUser);
 
-        $response = $this->get(route('admin.index'));
+        $response = $this->get('/admin');
 
         $response->assertOk();
     }
