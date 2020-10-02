@@ -61,12 +61,13 @@ export default {
         deleteUser() {
             console.log('delete user function');
             swal({
-                    title: "Are you sure?",
-                    text: "Your will not be able to recover this imaginary file!",
+                    title: "Уверен?",
+                    text: "Удаление пользователя необратимо!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonText: "Да, удалить!",
+                    cancelButtonText: "Отмена",
                     closeOnConfirm: false
                 },
                 function(){

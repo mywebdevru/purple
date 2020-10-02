@@ -24,7 +24,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
 
@@ -38,7 +37,6 @@ Route::group([
     'middleware' => ['auth', 'role:admin|super-admin'],
     'as' => 'admin.'
 ], function () {
-    Route::resource('user', 'UserController')->except(['create', 'store']);
     Route::resource('post', 'PostController')->except(['create', 'store']);
     Route::resource('friend', 'FriendController')->only(['destroy']);
     Route::resource('request', 'FriendshipRequestController')->only(['destroy']);
