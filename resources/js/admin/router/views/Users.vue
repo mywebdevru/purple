@@ -80,7 +80,8 @@ export default {
                         self.users.data.splice(index, 1);
                         swal("Готово!", "Пользователь был удален.", "success");
                     } catch (error) {
-                        console.log(error);
+                        console.error(error.response);
+                        swal(error.response.status + ' | ' + error.response.statusText, error.response.data.message, "error")
                     } finally {
                         self.userDeleting = false;
                     }
