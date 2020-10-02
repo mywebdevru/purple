@@ -1,4 +1,4 @@
-<div class="ui-block" x-data x-show="$wire.create == 'post'">
+<div class="ui-block" style="display:none" x-data x-show="$wire.create == 'post'">
     @if ($create == 'post')
     <article  class="hentry post" data-id="{{ $post['id'] }}">
         <form wire:submit.prevent="savePost">
