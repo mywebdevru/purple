@@ -20,7 +20,6 @@ test('users_cant_delete_user', function () {
 
 test('admins_can_delete_user', function () {
     /* @var \Tests\TestCase $this */
-    $this->withoutExceptionHandling();
 
     $adminUser = factory(User::class)->create();
     $superAdminUser = factory(User::class)->create();
@@ -60,5 +59,28 @@ test('user_can_be_deleted', function () {
 
     $this->assertEquals(1, User::count());
     $this->assertNull(User::find($user->id));
+    $response->assertStatus(204);
+});
+
+test('only_super_admin_can_delete_admin', function () {
+    /* @var \Tests\TestCase $this */
+
+    $adminUser1 = factory(User::class)->create();
+    $adminUser2 = factory(User::class)->create();
+    $superAdminUser = factory(User::class)->create();
+
+    Role::create(['name' => 'admin']);
+    Role::create(['name' => 'super-admin']);
+
+    $adminUser1->assignRole('admin');
+    $adminUser2->assignRole('admin');
+    $superAdminUser->assignRole('super-admin');
+
+    $this->actingAs($adminUser1, 'api');
+    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser2->id]);
+    $response->assertForbidden();
+
+    $this->actingAs($superAdminUser, 'api');
+    $response = $this->delete('/api/users/delete', ['user_id' => $adminUser1->id]);
     $response->assertStatus(204);
 });
