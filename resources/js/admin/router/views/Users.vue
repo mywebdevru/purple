@@ -18,7 +18,7 @@
             <td>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-success"> <i class="far fa-xs fa-eye"></i> </button>
                 <button class="btn btn-icon btn-xs waves-effect waves-light btn-outline-info"> <i class="fas fa-xs fa-pen"></i> </button>
-                <button @click.prevent="deleteUser" class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
+                <button @click.prevent="deleteUser(user.data.user_id)" class="btn btn-icon btn-xs waves-effect waves-light btn-outline-danger"> <i class="far fa-xs fa-trash-alt"></i> </button>
             </td>
             <td>{{ user.data.attributes.full_name }}</td>
             <td>{{ user.data.attributes.birth_date }}</td>
@@ -43,6 +43,7 @@ export default {
     data(){
         return {
             loading: false,
+            userDeleting: false,
             users: [],
         }
     },
@@ -58,8 +59,8 @@ export default {
         }
     },
     methods: {
-        deleteUser() {
-            console.log('delete user function');
+        deleteUser(user_id) {
+            const self = this;
             swal({
                     title: "Уверен?",
                     text: "Удаление пользователя необратимо!",
@@ -71,14 +72,15 @@ export default {
                     closeOnConfirm: false
                 },
                 async function(){
+                    self.userDeleting = true;
                     try {
-
+                        await axios.delete('/api/users/delete', {data: {'user_id': user_id}});
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
                     } catch (error) {
-
+                        console.log(error.data);
                     } finally {
-
+                        self.userDeleting = false;
                     }
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
                 });
         }
     },

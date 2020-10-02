@@ -65,7 +65,6 @@ class UserController extends Controller
             'user_id' => 'required'
         ]);
 
-
         $user = User::findOrFail($data['user_id']);
 
         $userRoles = $user->getRoleNames();
