@@ -6,9 +6,10 @@
                 <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
             <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
             </div>
-            <button type="submit" class="btn btn-success" wire.loading.attr="disabled">
+            <button type="submit" class="btn btn-md-2 btn-primary comment-form__button" wire.loading.attr="disabled">
                 Сохранить
             </button>
+            <button x-on.click.prevent wire:click.prevent="cancelPost" class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
         </form>
     </article>
     <script>

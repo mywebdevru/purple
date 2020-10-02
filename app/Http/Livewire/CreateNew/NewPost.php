@@ -20,15 +20,10 @@ class NewPost extends Component
 
     protected $listeners = ['createNewPost' => 'createPost'];
 
-    // public function mount()
-    // {
-    //     $this->post = $this->createPost();
-    // }
-
     public function createPost()
     {
-            $this->create = 'post';
-            $this->post = User::find(auth()->user()->id)->posts()->create();
+        $this->create = 'post';
+        $this->post = User::find(auth()->user()->id)->posts()->create();
     }
 
     public function savePost()
@@ -40,6 +35,12 @@ class NewPost extends Component
         $this->emitUp('postCreated');
     }
 
+    public function cancelPost()
+    {
+        $this->post->delete();
+        $this->create = '';
+        $this->text = '';
+    }
 
     public function savePhoto()
     {
