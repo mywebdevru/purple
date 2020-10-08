@@ -1,6 +1,7 @@
 <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
     <div id="newsfeed-items-grid">
         <livewire:create-new.new-post :key="time().'new_post'" />
+        <livewire:create-new.new-image :key="time().'new_image'" />
         @foreach ($feed as $item)
             @if($item['feedable_type'] == 'App\Models\Post')
                 <livewire:feed.post :post="$item->feedable" :key="time().'post'.$item->feedable->id"/>

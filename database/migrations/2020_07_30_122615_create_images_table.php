@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->integer('imageable_id');
             $table->string('imageable_type');
             $table->string('image');
+            $table->text('description')->nullable();
         });
     }
 

@@ -4,7 +4,7 @@
         <form wire:submit.prevent="savePost">
             <div class="form-group" wire:ignore>
                 <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
-            <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
+                <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
             </div>
             <button type="submit" class="btn btn-md-2 btn-primary comment-form__button" wire.loading.attr="disabled">
                 Сохранить
