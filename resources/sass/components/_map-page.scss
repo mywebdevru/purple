@@ -79,3 +79,32 @@
 .map-form{
     display:none;
 }
+.btn-primary {
+    padding: 0.5rem 0.54rem;
+    background-color: #3f4257;
+    border-color: #3f4257;
+}
+.btn-primary:active {
+    background-color:#767778;
+    border-color:#767778;
+}
+.btn-primary:focus {
+    background-color:#767778;
+    border-color:#767778;
+}
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    background-color: unset;
+    border-color: unset;
+}
+.upload__photo {
+    border: 0.5px solid grey;
+    padding: 5px;
+}
+// .upload__photo:hover {
+//     background-color: #3f4257;
+//     color: #fff
+// }
+#map {
+    width: 800px;
+    height: 500px
+}

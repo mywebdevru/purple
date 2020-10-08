@@ -2,7 +2,7 @@
 @section('content')
 <main class="container">
 <h1>Конструктор карты</h1>
-<div id="map" style="width: 800px; height: 600px"></div>
+<div id="map"></div>
 <button id="save-map">сохранить карту</button>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -27,7 +27,12 @@
         <label for="description">Добавьте описание</label>
         <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$map->description ?? ""}}</textarea>
     </div>
-    <button type="submit" class="btn btn-success">Upload</button>
+    <div class="form-group">
+        <label for="photos">Загрузите фотографии (можно несколько файлов)</label>
+        <input multiple="multiple" name="photos[]" type="file" id="photos" class="file-path validate">
+        <input type="hidden" name="imageable_type" value="App\Models\Map">
+    </div>
+    <button type="submit" class="btn btn-success">Сохранить</button>
 </form>
 </main>
 @endsection
