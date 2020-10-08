@@ -14,6 +14,58 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
     <livewire:styles />
+    <style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            margin: 10px;
+        }
+        .new-image-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .new-image-wrapper .message {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-img-wrapper {
+            background-color: rgba(255, 255, 255, .8);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left:0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ff5e3a;
+            font-weight : 800;
+            font-size: 3rem;
+        }
+
+        .loading-img-wrapper .skills-item-meter {
+            width: 80%;
+            height: 10px;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        input[type=file]:hover {
+            cursor: pointer;
+        }
+
+        /* .loading-img-wrapper div progress {
+            width: 100%;
+            background-color:#ff5e3a;
+        } */
+    </style>
     @yield('css')
 </head>
 

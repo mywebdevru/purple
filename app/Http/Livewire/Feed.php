@@ -16,7 +16,7 @@ class Feed extends Component
     public $feed;
     public $user;
 
-    protected $listeners = ['postCreated' => 'resetCreate'];
+    protected $listeners = ['postCreated' => 'resetCreate', 'photoCreated' => 'resetCreate'];
 
     public function mount($user)
     {

@@ -49,7 +49,7 @@
 
                             </div>
 
-                            <div class="wheel wheel__yellow">
+                            <div class="wheel wheel__yellow" wire:click.prevent="$emit('createNewImage')">
 
                                 <div class="wheel__inner__yellow">
                                     <div class="wheel__content__yellow">ф</div>
