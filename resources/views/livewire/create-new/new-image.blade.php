@@ -1,4 +1,4 @@
-<div class="ui-block" x-data="{ progress : 0, isUploading : false, create : $wire.create }"
+<div class="ui-block" x-data="{ progress : 0, isUploading : false, create : @entangle('create') }" x-show="create"
     x-on:livewire-upload-start="isUploading = true"
     x-on:livewire-upload-finish="isUploading = false"
     x-on:livewire-upload-error="isUploading = false"
