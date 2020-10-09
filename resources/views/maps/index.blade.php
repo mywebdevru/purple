@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Maps</h1>
+    <h1 class="container">Карты</h1>
     <div class="container">
         <hr>
         <a href="{{route('map.create')}}" class="btn btn-primary pull-right"><i class="fa fa-plus-square-o"></i> Создать новую карту</a>
