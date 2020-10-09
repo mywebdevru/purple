@@ -2,7 +2,7 @@
 @section('content')
 <main class="container">
 <h1>{{$map->title}}</h1>
-<div id="map" style="width: 800px; height: 600px"></div>
+<div id="map"></div>
 
 <div>
     <p>{{$map->description}}</p>
