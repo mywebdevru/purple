@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardDataController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::group([
     'as' => 'admin.',
     'middleware' => ['role:admin|super-admin', 'auth:api'],
 ], function () {
+    Route::apiResource('users', 'UserController')->only('index', 'destroy');
     Route::get('/users-count', [DashboardDataController::class, 'usersCount'])->name('dashboard.users');
     Route::get('/members-count', [DashboardDataController::class, 'membersCount'])->name('dashboard.members');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

@@ -2,7 +2,7 @@
 @section('content')
 <main class="container">
 <h1>Конструктор карты</h1>
-<div id="map" style="width: 800px; height: 600px"></div>
+<div id="map"></div>
 <button id="save-map">сохранить карту</button>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -27,16 +27,13 @@
         <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
     </div>
     <div class="form-group">
-        <label for="photos">Загрузите фотографии (можно несколько файлов)</label>
-        <input multiple="multiple" name="photos[]" type="file" id="photos" class="file-path validate">
-        <input type="hidden" name="imageable_type" value="App\Models\Map">
+        <button class="btn btn-outline-dark auth-btn reg text-white" for="photos">Загрузите фотографии (можно несколько файлов)</button>
+        <!-- <input multiple="multiple" name="photos[]" type="file" id="photos" class="file-path validate">
+        <input type="hidden" name="imageable_type" value="App\Models\Map"> -->
     </div>
-    <button type="submit" class="btn btn-success">Upload</button>
-</form>
-</main>
+    <button type="submit" class="btn btn-success">Сохранить</button>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/maps.css')}}">
     <style>
         .map-form input:not([type=submit]) {
             border-color: black;

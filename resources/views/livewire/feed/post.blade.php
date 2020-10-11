@@ -85,37 +85,7 @@
             @endif
         </div>
         <div class="post-additional-info inline-items">
-            <a href="#" data-model="{{ Post::class }}" data-id="{{ $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $post->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}} likes">
-                <svg class="olymp-heart-icon">
-                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-                </svg>
-                <span>{{ count($post->likes) }}</span>
-                <form  method="POST">
-                    @csrf
-                    <input type="hidden" name="likeable_type" value="App\Models\Post">
-                    <input type="hidden" name="likeable_id" value="{{ $post['id'] }}">
-                    <input type="hidden" name="authorable_type" value="App\Models\User">
-                    <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
-                </form>
-            </a>
-            <ul class="friends-harmonic">
-                @foreach ($post->likes->slice(-2) as $item)
-                <li>
-                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">
-                        <img src="{{ asset($item->authorable['avatar']) }}" alt="автор">
-                    </a>
-                </li>
-                @endforeach
-            </ul>
-            <div class="names-people-likes">
-                @foreach ($post->likes->slice(-2) as $item)
-                    <a href="{{ route('user.show', ['user' => $item->authorable['id']]) }}">{{ $item->authorable['name'] }}</a>
-                @endforeach
-                @if (count($post->likes) > 2)
-                    и еще
-                    <br>{{ count($post->likes) - 2 }} человк(а)
-                @endif
-            </div>
+            <livewire:like :item="$post" :key="'likes'.$post->id" />
             <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items" wire:click.prevent="toggleComments">
                     <svg class="olymp-speech-balloon-icon">

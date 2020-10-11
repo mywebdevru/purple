@@ -34,19 +34,9 @@
             <livewire:feed.write-comment :comment="$comment" :key="'edit_comment'.$comment->id"/>
         @endif
     </div>
-    <a href="#" data-model="{{ Comment::class }}" data-id="{{ $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->first()->id : 0 }}" class="post-add-icon inline-items can_like {{ $comment->likes->where('authorable_id', auth()->user()->id)->where('authorable_type', 'App\Models\User')->isNotEmpty() ? 'like_it' : ''}} likes">
-        <form  method="POST">
-            @csrf
-            <input type="hidden" name="likeable_type" value="App\Models\Comment">
-            <input type="hidden" name="likeable_id" value="{{ $comment['id'] }}">
-            <input type="hidden" name="authorable_type" value="App\Models\User">
-            <input type="hidden" name="authorable_id" value="{{ auth()->user()->id }}">
-        </form>
-        <svg class="olymp-heart-icon">
-            <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
-        </svg>
-        <span>{{ count($comment->likes) }}</span>
-    </a>
-    <a href="#" class="reply">Ответить</a>
+    <div class="inline-items">
+        <livewire:like :item="$comment" :key="'likes'.$comment->id" />
+        {{-- <a href="#" class="reply">Ответить</a> --}}
+    </div>
 </li>
 

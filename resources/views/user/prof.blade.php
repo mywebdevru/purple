@@ -1,32 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
-@component('user.components.wallpaper_block.main', ['user' => $user])@endcomponent
-
-{{-- @dd($feed->first()->feedable()->first()->comments->first()->likes->first()->authorable->full_name) --}}
+<livewire:wallpaper-block :user="$user" :key="'wallpaper'.time()" />
 <div class="container">
 	<div class="row">
-
-		<!-- Главный контент -->
-
-		<livewire:feed :feed="$feed" />
-
-		<!-- ... окончание Главного контента -->
-
-
-		<!-- Лева колонка -->
-
+		<livewire:feed :user="$user" :key="'feed'.time()" />
+		<!-- Левая колонка -->
 		<div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
-
 			<div class="ui-block revealator-fade revealator-delay1 revealator-once">
 				<div class="ui-block-title">
 					<h6 class="title">Профиль</h6>
 				</div>
 				<div class="ui-block-content">
-
 					<!-- Обо мне -->
-
 					<ul class="widget w-personal-info item-block">
 						<li>
                             <span class="title">{{ $user->full_name }}</span>

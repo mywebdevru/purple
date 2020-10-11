@@ -23,28 +23,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::resource('post', 'Post\PostController');
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
 
 Route::get('/admin/{any?}', function () {
     return view('admin.admin.index');
 })->where('any', '^[\/\w\.-]*')->middleware(['auth', 'role:admin|super-admin']);
-
-Route::group([
-    'namespace' => 'Admin',
-    'prefix' => 'admin',
-    'middleware' => ['auth', 'role:admin|super-admin'],
-    'as' => 'admin.'
-], function () {
-    Route::resource('user', 'UserController')->except(['create', 'store']);
-    Route::resource('post', 'PostController')->except(['create', 'store']);
-    Route::resource('friend', 'FriendController')->only(['destroy']);
-    Route::resource('request', 'FriendshipRequestController')->only(['destroy']);
-    Route::resource('vehicle', 'VehicleController')->only(['store', 'destroy']);
-    Route::get('/', [AdminController::class, 'index'])->name('index');
-});
 
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
 Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');

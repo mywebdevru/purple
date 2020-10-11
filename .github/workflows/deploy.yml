@@ -30,13 +30,13 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
-      - name: Create daybyday testing database
-        env:
-          PORT: ${{ job.services.mysql.ports[3306] }}
-        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
+#      - name: Create daybyday testing database
+#        env:
+#          PORT: ${{ job.services.mysql.ports[3306] }}
+#        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
 
-      - name: Run yarn
-        run: yarn && yarn dev
+      - name: Run npm
+        run: npm i && npm run dev
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -51,14 +51,14 @@ jobs:
         run: |
           cp .env.ci .env
           php artisan key:generate
-      - name: Database setup
-        run:  php artisan migrate --seed
+#      - name: Database setup
+#        run:  php artisan migrate --seed
 
       - name: Passport install
-        run: php artisan passport:install
+        run: php artisan passport:keys
 
       - name: Run tests
-        run: ./vendor/bin/phpunit
+        run: ./vendor/bin/pest
         env:
           ELASTICSEARCH_PORT: ${{ job.services.elasticsearch.ports[9200] }}
 
@@ -76,16 +76,14 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script_stop: true
+          script_stop: false
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo php artisan optimize:clear 2>/dev/null
-            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \; 2>/dev/null
+            sudo php artisan optimize:clear
+            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
             mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers storage/app/photos
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
-            git stash 2>/dev/null
-            git stash clear
             git pull origin dev
             composer install
             composer dump-autoload
@@ -93,5 +91,7 @@ jobs:
             php artisan passport:install
             npm i
             npm run dev
-            php artisan storage:link 2>/dev/null
+            git stash
+            git stash drop
+            php artisan storage:link
             sudo php artisan optimize:clear

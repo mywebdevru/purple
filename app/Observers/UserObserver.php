@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Events\AdminPanelRealtimeNotification;
 use App\Models\User;
 use App\Notifications\User\UserCreated;
+use App\Notifications\User\UserDeleted;
 use App\Notifications\User\UserUpdated;
 use Illuminate\Support\Facades\Notification;
 use Spatie\Permission\Models\Role;
@@ -53,7 +54,13 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        //
+        if(Role::where('name', 'admin')->count()) {
+            Notification::send(User::role('admin')->get(), new UserDeleted($user));
+        }
+        if(Role::where('name', 'super-admin')->count()) {
+            Notification::send(User::role('super-admin')->get(), new UserDeleted($user));
+        }
+        event(new AdminPanelRealtimeNotification('Удален пользователь ' . $user->email));
     }
 
     /**
@@ -75,6 +82,12 @@ class UserObserver
      */
     public function forceDeleted(User $user)
     {
-        //
+        if(Role::where('name', 'admin')->count()) {
+            Notification::send(User::role('admin')->get(), new UserDeleted($user));
+        }
+        if(Role::where('name', 'super-admin')->count()) {
+            Notification::send(User::role('super-admin')->get(), new UserDeleted($user));
+        }
+        event(new AdminPanelRealtimeNotification('Удален пользователь ' . $user->email));
     }
 }
