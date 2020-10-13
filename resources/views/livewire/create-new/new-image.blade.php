@@ -1,4 +1,4 @@
-<div class="ui-block" x-data="{ progress : 0, isUploading : false, create : @entangle('create') }" x-show="create"
+<div class="ui-block" style="display: none" x-data="{ progress : 0, isUploading : false, create : @entangle('create') }" x-show.transition.duration.400ms="create"
     x-on:livewire-upload-start="isUploading = true"
     x-on:livewire-upload-finish="isUploading = false"
     x-on:livewire-upload-error="isUploading = false"
@@ -36,6 +36,7 @@
                             <textarea id="description" class="form-control" name="description">{!! $description !!}</textarea>
                         </div>
                         <button type="submit" class="btn btn-file btn-md-2 btn-success comment-form__button"  wire:loading.attr="disabled">Сохранить</button>
+                        <button x-on.click.prevent wire:click.prevent="toggleCreate" class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
                         <script>
                             const editor = $('#description'),
                                 config = {

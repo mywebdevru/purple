@@ -1,4 +1,4 @@
-<div class="ui-block"  x-data="{'show_comments' : @entangle('commentsIsShown')}" x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block"  x-data="{'show_comments' : @entangle('commentsIsShown'), show_more:  @entangle('showMore')}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <article class="hentry post has-post-thumbnail shared-photo">
         <div class="post__author author vcard inline-items">
             <img src="{{ Str::startsWith($image->imageable['avatar'], 'http') ? $image->imageable['avatar'] : asset($image->imageable['avatar'])}}" alt="author">
@@ -14,11 +14,14 @@
                 </div>
             </div>
             @can('update', $image)
-                <div class="more" x-data="{show_more: 1}" wire:loading.class="feed-load-scale-x">
+                <div class="more"  wire:loading.class="feed-load-scale-x">
                     <svg class="olymp-three-dots-icon" wire:loading.class="feed-load-scale-x">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                     </svg>
                     <ul class="more-dropdown" x-show.transition.out="!!show_more">
+                        <li>
+                            <a href="#" @click.prevent="show_more = 0" wire:click="toggleEdit">Редактировать описание</a>
+                        </li>
                         <li>
                             <a href="#" @click.prevent="show_more = 0" wire:click="deleteImage">Удалить фото</a>
                         </li>
@@ -28,6 +31,43 @@
         </div>
         <div class="post-thumb">
             <img src="{{ Str::startsWith($image['image'], 'http') ? $image['image'] : asset($image['image'])}}" alt="photo">
+        </div>
+        <div>
+            @if (!$editDescription)
+                {!! $image->description !!}
+            @else
+            <form wire:submit.prevent="saveDescription" method="post">
+                <div class="form-group" wire:ignore>
+                    <label for="image{{ $image->id }}">Описание фото!</label>
+                <textarea id="image{{ $image->id }}" class="form-control" name="text">{!! $description !!}</textarea>
+                </div>
+                <button type="submit" class="btn btn-success" wire.loading.attr="disabled">
+                    Сохранить
+                </button>
+            </form>
+            <script>
+               let image_id = {{ $image->id }}
+                const editor = $(`#image${image_id}`),
+                    config = {
+                        lang: 'ru-RU',
+                        shortcuts: false,
+                        airMode: false,
+                        focus: false,
+                        disableDragAndDrop: false,
+                        toolbar: [
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                        ],
+                        callbacks: {
+                            onChange: function(contents, $editable) {
+                                @this.set('description',contents);
+                            }
+                        }
+                    };
+                editor.summernote(config);
+            </script>
+            @endif
         </div>
         <div class="post-additional-info inline-items">
             <livewire:like :item="$image" :key="'likes'.$image->id" />
