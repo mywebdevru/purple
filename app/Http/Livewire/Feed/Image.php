@@ -13,11 +13,15 @@ class Image extends Component
     public $commentsIsShown = 0;
     public $showCommentsButton;
     public $commentsCount;
+    public $editDescription = false;
+    public $description;
+    public $showMore = true;
 
     public function mount()
     {
         $this->showCommentsButton = $this->getButton();
         $this->commentsCount = $this->getCommentsCount();
+        $this->description = $this->getDescription();
     }
 
     protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
@@ -54,6 +58,11 @@ class Image extends Component
        return $this->commentsCount;
     }
 
+    protected function getDescription()
+    {
+        return $this->image->description;
+    }
+
     public function showNewComment()
     {
         if (!$this->commentsIsShown){
@@ -76,6 +85,19 @@ class Image extends Component
         if (!$this->commentsIsLoaded){
             $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }
+    }
+
+    public function toggleEdit()
+    {
+        $this->editDescription = !$this->editDescription;
+    }
+
+    public function saveDescription()
+    {
+        $this->image->description = $this->description;
+        $this->image->save();
+        $this->toggleEdit();
+        $this->showMore = true;
     }
 
     public function render()
