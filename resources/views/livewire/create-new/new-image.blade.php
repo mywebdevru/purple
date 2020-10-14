@@ -36,7 +36,6 @@
                             <textarea id="description" class="form-control" name="description">{!! $description !!}</textarea>
                         </div>
                         <button type="submit" class="btn btn-file btn-md-2 btn-success comment-form__button"  wire:loading.attr="disabled">Сохранить</button>
-                        <button x-on.click.prevent wire:click.prevent="toggleCreate" class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
                         <script>
                             const editor = $('#description'),
                                 config = {
@@ -59,6 +58,7 @@
                             editor.summernote(config);
                         </script>
                     @endif
+                    <button x-on.click.prevent wire:click.prevent="toggleCreate" class="btn btn-file btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
                 </form>
             </div>
         </article>
