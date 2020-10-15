@@ -39,7 +39,7 @@ class Feed extends Component
                         return $query->where('authorable_type', [Group::class])->whereIn('authorable_id', $groups);
                 })->orderBy('updated_at','DESC');
         } else {
-            $feeds = $this->user->feeds();
+            $feeds = $this->user->feeds()->orderBy('updated_at','DESC');
         }
         $feeds->with(['feedable.comments',
                     'feedable.likes.authorable'])
