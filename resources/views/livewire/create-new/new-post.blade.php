@@ -1,16 +1,14 @@
 <div class="ui-block" style="display:none" x-data x-show="$wire.create == 'post'">
     @if ($create == 'post')
     <article  class="hentry post" data-id="{{ $post['id'] }}">
-        <form wire:submit.prevent="savePost">
-            <div class="form-group" wire:ignore>
-                <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
-                <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
-            </div>
-            <button type="submit" class="btn btn-md-2 btn-primary comment-form__button" wire.loading.attr="disabled">
-                Сохранить
-            </button>
-            <button x-on.click.prevent wire:click.prevent="cancelPost" class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
-        </form>
+        <div class="form-group" wire:ignore>
+            <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
+            <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
+        </div>
+        <button type="submit" wire:click.prevent="savePost" class="btn btn-md-2 btn-primary comment-form__button" wire.loading.attr="disabled">
+            Сохранить
+        </button>
+        <button x-on.click.prevent wire:click.prevent="cancelPost" class="cancel btn btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
     </article>
     <script>
         let post_id = {{ $post->id }}
@@ -23,7 +21,7 @@
                 disableDragAndDrop: false,
                 toolbar: [
                     // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['style', ['bold', 'italic', 'underline', 'strikethrough']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['insert', ['link', 'picture', 'video']],

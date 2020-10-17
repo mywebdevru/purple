@@ -36,15 +36,13 @@
             @if (!$editDescription)
                 {!! $image->description !!}
             @else
-            <form wire:submit.prevent="saveDescription" method="post">
                 <div class="form-group" wire:ignore>
                     <label for="image{{ $image->id }}">Описание фото!</label>
-                <textarea id="image{{ $image->id }}" class="form-control" name="text">{!! $description !!}</textarea>
+                <div id="image{{ $image->id }}" class="form-control" name="text">{!! $description !!}</div>
                 </div>
-                <button type="submit" class="btn btn-success" wire.loading.attr="disabled">
+                <button type="submit" wire:click.prevent="saveDescription" class="btn btn-success" wire.loading.attr="disabled">
                     Сохранить
                 </button>
-            </form>
             <script>
                let image_id = {{ $image->id }}
                 const editor = $(`#image${image_id}`),
@@ -55,7 +53,7 @@
                         focus: false,
                         disableDragAndDrop: false,
                         toolbar: [
-                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['style', ['bold', 'italic', 'underline', 'strikethrough']],
                             ['color', ['color']],
                             ['para', ['ul', 'ol', 'paragraph']],
                         ],
