@@ -123,6 +123,7 @@
 <script src="{{ asset('js/x3mart.js') }}"></script>
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/chat.js') }}"></script>
 {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script> --}}
 @yield('scripts')
 <script>

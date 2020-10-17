@@ -15,6 +15,7 @@ require('laravel-mix-alias');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/admin.js', 'public/js')
     .js('resources/js/edit.js', 'public/js')
+    .js('resources/js/chat.js', 'public/js')
     .js('resources/js/map/map_constructor', 'public/js/map')
     .js('resources/js/map/map_edit', 'public/js/map')
     .js('resources/js/map/map_show', 'public/js/map')
