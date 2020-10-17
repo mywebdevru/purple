@@ -6,7 +6,7 @@
             <div class="mCustomScrollbar" data-mcs-theme="dark">
                 <ul class="chat-users">
 <!--                    loop -->
-                    <li class="inline-items js-chat-open">
+                    <li class="inline-items js-chat-open" @click="startChat">
                         <div class="author-thumb">
                             <img alt="author" src="/img/spiegel.jpg" class="avatar">
                             <span class="icon-status online"></span>
@@ -311,7 +311,12 @@
     <!-- ... окончание правого сайдбара под мобилу -->
     <!-- Блок чата -->
 
-    <div class="ui-block popup-chat popup-chat-responsive" tabindex="-1" role="dialog" aria-labelledby="popup-chat-responsive" aria-hidden="true">
+    <div class="ui-block popup-chat popup-chat-responsive"
+         :class="[{'popup-chat open-chat' : chatShow}]"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="popup-chat-responsive"
+         aria-hidden="true">
 
         <div class="modal-content">
             <div class="modal-header">
@@ -319,7 +324,7 @@
                 <h6 class="title" >Чат</h6>
                 <div class="more">
                     <svg class="olymp-three-dots-icon"><use href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-                    <svg class="olymp-little-delete js-chat-open"><use href="/svg-icons/sprites/icons.svg#olymp-little-delete"></use></svg>
+                    <svg class="olymp-little-delete js-chat-open" @click="chatClose"><use href="/svg-icons/sprites/icons.svg#olymp-little-delete"></use></svg>
                 </div>
             </div>
             <div class="modal-body">
@@ -521,7 +526,21 @@
 
 <script>
 export default {
-    name: "RightSidebar"
+    name: "RightSidebar",
+    data: () => {
+        return {
+            chatShow: false,
+        }
+    },
+    methods: {
+        startChat() {
+            this.chatShow = true;
+        },
+        chatClose()
+        {
+            this.chatShow = false;
+        }
+    }
 }
 </script>
 
