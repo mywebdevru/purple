@@ -184,7 +184,7 @@
 
 
                         <div class="author-thumb">
-                            <img alt="author" src="img/spiegel.jpg" class="avatar">
+                            <img alt="author" src="/img/spiegel.jpg" class="avatar">
                             <span class="icon-status online"></span>
                         </div>
 
@@ -252,7 +252,7 @@
 
 
                         <div class="author-thumb">
-                            <img alt="author" src="img/spiegel.jpg" class="avatar">
+                            <img alt="author" src="/img/spiegel.jpg" class="avatar">
                             <span class="icon-status disconected"></span>
                         </div>
 
@@ -327,7 +327,7 @@
                     <ul class="notification-list chat-message chat-message-field">
                         <li>
                             <div class="author-thumb">
-                                <img src="img/spiegel.jpg" alt="author" class="mCS_img_loaded">
+                                <img src="/img/spiegel.jpg" alt="author" class="mCS_img_loaded">
                             </div>
                             <div class="notification-event">
                                 <span class="chat-message-item">Lorem Lorem Lorem Lorem Lorem</span>
@@ -337,7 +337,7 @@
 
                         <li>
                             <div class="author-thumb">
-                                <img src="img/ii.jpg" alt="author" class="mCS_img_loaded">
+                                <img src="/img/ii.jpg" alt="author" class="mCS_img_loaded">
                             </div>
                             <div class="notification-event">
                                 <span class="chat-message-item">Lorem Lorem Lorem Lorem</span>
