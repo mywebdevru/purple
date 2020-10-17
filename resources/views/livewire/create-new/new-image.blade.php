@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <form wire:submit.prevent="save">
+                <div>
                     <button  class="btn btn-file  btn-md-2 btn-primary comment-form__button" wire:loading.attr="disabled">
                         Выберите фото
                         <input type="file" wire:model="photo" name="photo"  wire:loading.attr="disabled">
@@ -33,9 +33,9 @@
                     @if ($photo)
                         <div class="form-group" wire:ignore>
                             <label for="description">Добавьте описание</label>
-                            <textarea id="description" class="form-control" name="description">{!! $description !!}</textarea>
+                            <div id="description" class="form-control" name="description">{!! $description !!}</div>
                         </div>
-                        <button type="submit" class="btn btn-file btn-md-2 btn-success comment-form__button"  wire:loading.attr="disabled">Сохранить</button>
+                        <button type="submit" wire:click.prevent="saveImage" class="btn btn-file btn-md-2 btn-success comment-form__button"  wire:loading.attr="disabled">Сохранить</button>
                         <script>
                             const editor = $('#description'),
                                 config = {
@@ -45,7 +45,7 @@
                                     focus: false,
                                     disableDragAndDrop: false,
                                     toolbar: [
-                                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                                        ['style', ['bold', 'italic', 'underline', 'strikethrough']],
                                         ['color', ['color']],
                                         ['para', ['ul', 'ol', 'paragraph']],
                                     ],
@@ -59,7 +59,7 @@
                         </script>
                     @endif
                     <button x-on.click.prevent wire:click.prevent="toggleCreate" class="btn btn-file btn-md-2 btn-border-think c-grey btn-transparent custom-color" wire:loading.attr="disabled">Отмена</button>
-                </form>
+                </div>
             </div>
         </article>
     @endif

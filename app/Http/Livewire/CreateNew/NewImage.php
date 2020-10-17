@@ -29,7 +29,7 @@ class NewImage extends Component
         ]);
     }
 
-    public function save()
+    public function saveImage()
     {
         $this->validate([
             'photo' => 'image|max:2048', // 2MB Max
