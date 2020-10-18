@@ -44,4 +44,5 @@ Route::group([
     Route::get('/profile/{user}', 'ProfileController@data')->name('profile.data');
     Route::put('/profile/{user}', 'ProfileController@save')->name('profile.save');
     Route::get('/auth-user', 'AuthUserController')->name('auth-user');
+    Route::apiResource('messages', 'MessageController');
 });
