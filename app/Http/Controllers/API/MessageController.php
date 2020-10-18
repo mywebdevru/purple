@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MessageResource;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -20,8 +21,7 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return MessageResource
      */
     public function store()
     {
@@ -31,9 +31,7 @@ class MessageController extends Controller
         ]);
 
         $message = request()->user()->messages()->create($data);
-        return response([], 201);
-
-
+        return new MessageResource($message);
     }
 
     /**
