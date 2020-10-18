@@ -47,8 +47,8 @@ class UsersTableSeeder extends Seeder
                 'email' => 'x3mart@purple.team',
                 'password' => Hash::make('123'),
                 'creed' => 'Too old to die young',
-                'avatar' => 'https://lorempixel.com/200/200/people/',
-                'wallpaper' => 'https://lorempixel.com/1200/400/transport/',
+                'avatar' => 'https://thispersondoesnotexist.com/image',
+                'wallpaper' => 'https://picsum.photos/id/1049/1200/400',
             ]);
 
             $slava->assignRole('admin');
