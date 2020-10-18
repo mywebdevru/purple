@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Feed;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Component
 {
@@ -37,6 +38,7 @@ class Image extends Component
                 $this->image->comments()->forceDelete();
                 $this->image->likes()->forceDelete();
                 $this->image->feed()->forceDelete();
+                Storage::delete($this->image->image);
                 $this->image->delete();
             });
             $this->deleted = true;
