@@ -19,8 +19,8 @@ class MessageResource extends JsonResource
                 'type' => 'messages',
                 'message_id' => $this->id,
                 'attributes' => [
-                    'posted_by' => new UserResource($this->user),
-                    'posted_to' => new UserResource($this->recipient),
+                    'sent_by' => new UserResource($this->user),
+                    'sent_to' => new UserResource($this->recipient),
                     'body' => $this->body,
                 ],
             ],

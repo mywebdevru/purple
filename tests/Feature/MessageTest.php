@@ -29,14 +29,14 @@ test('a_user_can_send_a_message', function () {
             'type' => 'messages',
             'message_id' => $message->id,
             'attributes' => [
-                'posted_by' => [
+                'sent_by' => [
                     'data' => [
                         'attributes' => [
                             'name' => $user->name,
                         ],
                     ],
                 ],
-                'posted_to' => [
+                'sent_to' => [
                     'data' => [
                         'attributes' => [
                             'name' => $anotherUser->name,
