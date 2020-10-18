@@ -266,4 +266,9 @@ class User extends Authenticatable
     {
         return $value ? (Str::startsWith($value , 'http') ? $value : asset($value)) : asset('img/default-avatar.jpg');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

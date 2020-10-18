@@ -23,9 +23,17 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $data = request()->validate([
+            'recipient_id' => '',
+            'body' => '',
+        ]);
+
+        $message = request()->user()->messages()->create($data);
+        return response([], 201);
+
+
     }
 
     /**
