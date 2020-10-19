@@ -1,32 +1,7 @@
 <template>
 <div>
     <div class="fixed-sidebar right">
-        <div class="fixed-sidebar-right sidebar--small" id="sidebar-right">
-
-            <div class="mCustomScrollbar" data-mcs-theme="dark">
-                <ul class="chat-users">
-<!--                    loop -->
-                    <li class="inline-items js-chat-open" @click="startChat">
-                        <div class="author-thumb">
-                            <img alt="author" src="/img/spiegel.jpg" class="avatar">
-                            <span class="icon-status online"></span>
-                        </div>
-                    </li>
-<!--                    /loop -->
-                </ul>
-            </div>
-
-            <div class="search-friend inline-items">
-                <a href="#" class="js-sidebar-open">
-                    <svg class="olymp-menu-icon"><use href="/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
-                </a>
-            </div>
-
-            <a href="#" class="olympus-chat inline-items js-chat-open">
-                <svg class="olymp-chat---messages-icon"><use href="/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-            </a>
-
-        </div>
+        <SmallSidebar class="fixed-sidebar-right sidebar--small" />
 
         <div class="fixed-sidebar-right sidebar--large" id="sidebar-right-1">
 
@@ -526,9 +501,11 @@
 
 <script>
 import {mapGetters} from "vuex";
+import SmallSidebar from "./SmallSidebar";
 
 export default {
     name: "RightSidebar",
+    components: {SmallSidebar},
     data: () => {
         return {
             chatShow: false,
