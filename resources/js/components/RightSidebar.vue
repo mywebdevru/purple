@@ -525,6 +525,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: "RightSidebar",
     data: () => {
@@ -540,7 +542,15 @@ export default {
         {
             this.chatShow = false;
         }
-    }
+    },
+    computed: {
+        ...mapGetters({
+            authUser: "authUser",
+        }),
+    },
+    mounted() {
+        this.$store.dispatch("fetchAuthUser");
+    },
 }
 </script>
 
