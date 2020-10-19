@@ -95,7 +95,7 @@ it('get_proper_users_json', function () {
             ],
         ],
         'links' => [
-            'self' => url('/admin/users')
+            'self' => url('/users')
         ]
     ]);
 
