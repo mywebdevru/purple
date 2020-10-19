@@ -148,10 +148,12 @@ class User extends Authenticatable
     /**
      * Get the user's friends User models.
      */
-    public function getFriendsUsers()
+
+    public function friendsUsers()
     {
-        return User::find($this->friends->pluck('friend_id')->all());
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
+
 
     /**
      * Get the friendship requests that makes the user.

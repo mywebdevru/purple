@@ -15,6 +15,6 @@ class AuthUserFriendsController extends Controller
      */
     public function __invoke()
     {
-        return new UserResourceCollection(auth()->user()->getFriendsUsers());
+        return new UserResourceCollection(auth()->user()->friendsUsers);
     }
 }
