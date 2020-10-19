@@ -30,9 +30,9 @@ const actions = {
             // TODO Тест для этого роута
             const friends = (await axios.get('/api/auth-user-friends')).data;
             commit("setAuthUserFriends", friends);
-            commit("setAuthUserFriendsStatusStatus", "success");
+            commit("setAuthUserFriendsStatus", "success");
         } catch (error) {
-            commit("setAuthUserFriendsStatusStatus", "error");
+            commit("setAuthUserFriendsStatus", "error");
         }
     },
 };

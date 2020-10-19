@@ -546,10 +546,12 @@ export default {
     computed: {
         ...mapGetters({
             authUser: "authUser",
+            authUserFriends: "authUserFriends",
         }),
     },
     mounted() {
         this.$store.dispatch("fetchAuthUser");
+        this.$store.dispatch("fetchAuthUserFriends");
     },
 }
 </script>
