@@ -146,6 +146,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's friends User models.
+     */
+    public function getFriendsUsers()
+    {
+        return User::find($this->friends->pluck('friend_id')->all());
+    }
+
+    /**
      * Get the friendship requests that makes the user.
      */
     public function friendshipRequests()
