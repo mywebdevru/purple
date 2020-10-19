@@ -17,7 +17,7 @@ class UserResourceCollection extends ResourceCollection
         return [
         'data' => $this->collection,
         'links' => [
-            'self' => url('/admin/users'),
+            'self' => url('/users'),
         ]
     ];
     }
