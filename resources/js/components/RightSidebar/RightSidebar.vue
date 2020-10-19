@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="fixed-sidebar right">
-        <SmallSidebar class="fixed-sidebar-right sidebar--small" />
+        <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="authUserFriends.data" />
 
         <div class="fixed-sidebar-right sidebar--large" id="sidebar-right-1">
 
@@ -512,8 +512,9 @@ export default {
         }
     },
     methods: {
-        startChat() {
+        startChat(userId) {
             this.chatShow = true;
+            console.log(userId);
         },
         chatClose()
         {

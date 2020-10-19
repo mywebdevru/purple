@@ -3,9 +3,9 @@
     <div class="mCustomScrollbar" data-mcs-theme="dark">
         <ul class="chat-users">
             <!--                    loop -->
-            <li class="inline-items js-chat-open" @click="startChat">
+            <li class="inline-items js-chat-open" @click="$parent.startChat(friend.data.user_id)" v-for="(friend, index) in friends" :key="index">
                 <div class="author-thumb">
-                    <img alt="author" src="/img/spiegel.jpg" class="avatar">
+                    <img alt="author" :src="friend.data.attributes.avatar" class="avatar">
                     <span class="icon-status online"></span>
                 </div>
             </li>
@@ -27,7 +27,13 @@
 
 <script>
 export default {
-    name: "SmallSidebar"
+    name: "SmallSidebar",
+    props: {
+        friends: {
+            type: Array,
+            required: false,
+        }
+    },
 }
 </script>
 
