@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="modal-body">
-            <div v-if="messagesStatus === 'loading'" class="text-center py-3">Загрузка сообщений...</div>
+            <div v-if="messages === null" class="text-center py-3">Сообщения не загружены</div>
+            <div v-else-if="messagesStatus === 'loading'" class="text-center py-3">Загрузка сообщений...</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
                 <ul class="notification-list chat-message chat-message-field">
