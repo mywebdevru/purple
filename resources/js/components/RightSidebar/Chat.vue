@@ -45,10 +45,10 @@
                 </ul>
             </div>
 
-            <form class="need-validation">
+            <form class="need-validation" @keyup.enter="$parent.sendMessage">
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Введите сообщение..."></textarea>
+                    <textarea class="form-control" placeholder="Введите сообщение..." v-model="$parent.message"></textarea>
                     <div class="add-options-message">
                         <a href="#" class="options-message">
                             <svg class="olymp-computer-icon"><use href="/svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
@@ -210,6 +210,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+.btn-outline-success:not(:hover)
+    color: #38c172
 </style>

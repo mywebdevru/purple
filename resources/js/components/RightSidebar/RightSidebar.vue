@@ -306,17 +306,36 @@ export default {
     data: () => {
         return {
             chatShow: false,
+            message: null,
+            recipient: null,
         }
     },
     methods: {
         startChat(userId) {
             this.chatShow = false;
             this.chatShow = true;
-            console.log(userId);
+            this.recipient = userId;
         },
         chatClose()
         {
             this.chatShow = false;
+            this.recipient = null;
+        },
+        async sendMessage() {
+            if(this.message === null || this.recipient === null) {
+                return;
+            }
+            console.log(this.message);
+            console.log(this.recipient);
+            try {
+                const message = (await axios.post('/api/messages', { recipient_id: this.recipient, body: this.message })).data;
+                console.log(message);
+                // commit("pushPost", post);
+                // commit("updateMessage", "");
+            } catch (error) {
+                console.log('Unable to fetch posts, ' + error.response.status);
+            }
+            this.message = null;
         }
     },
     computed: {
