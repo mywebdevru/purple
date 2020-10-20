@@ -10,9 +10,9 @@
             </div>
         </div>
         <div class="modal-body">
-            <div v-if="messagesStatus === 'loading'">Загрузка сообщений...</div>
-            <div v-else-if="messages === null">Этот чат пуст</div>
-            <div v-else class="mCustomScrollbar">
+            <div v-if="messagesStatus === 'loading'" class="text-center py-3">Загрузка сообщений...</div>
+            <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
+            <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
                 <ul class="notification-list chat-message chat-message-field">
                    <li class="" v-for="(message,index) in messages.data" :key="index">
                         <div class="author-thumb">

@@ -312,7 +312,7 @@ export default {
     },
     methods: {
         startChat(userId) {
-            this.chatShow = false;
+            this.chatClose();
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
@@ -321,6 +321,7 @@ export default {
         {
             this.chatShow = false;
             this.recipient = null;
+            this.$store.commit("setMessages", null);
         },
         async sendMessage() {
             if(this.message === null || this.recipient === null) {
