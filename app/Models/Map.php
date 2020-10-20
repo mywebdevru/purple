@@ -33,6 +33,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Map whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Map whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
  */
 class Map extends Model
 {

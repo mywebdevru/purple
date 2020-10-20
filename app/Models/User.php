@@ -91,6 +91,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $subscribers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscrable[] $subscribes
  * @property-read int|null $subscribes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $friendsUsers
+ * @property-read int|null $friends_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
+ * @property-read int|null $messages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read int|null $tokens_count
  */
 class User extends Authenticatable
 {
@@ -144,6 +152,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Friend');
     }
+
+    /**
+     * Get the user's friends User models.
+     */
+
+    public function friendsUsers()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
+    }
+
 
     /**
      * Get the friendship requests that makes the user.
@@ -265,5 +283,10 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         return $value ? (Str::startsWith($value , 'http') ? $value : asset($value)) : asset('img/default-avatar.jpg');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

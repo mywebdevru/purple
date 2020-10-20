@@ -4,21 +4,21 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class UserResourceCollection extends ResourceCollection
+class MessageResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-        'data' => $this->collection,
-        'links' => [
-            'self' => url('/users'),
-        ]
-    ];
+            'data' => $this->collection,
+            'links' => [
+                'self' => url('/messages'),
+            ]
+        ];
     }
 }
