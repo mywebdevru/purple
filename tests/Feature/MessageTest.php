@@ -120,7 +120,7 @@ test('a_user_can_fetch_chat_messages', function () {
         'body' => 'Third user message',
     ]);
 
-    $response = $this->get('/api/messages', ['user_id' => $anotherUser->id]);
+    $response = $this->call('GET', '/api/messages', ['recipient_id' => $anotherUser->id]);
 
     $response->assertOk();
     $response->assertJsonCount(2);

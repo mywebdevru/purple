@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageResource;
+use App\Http\Resources\MessageResourceCollection;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -11,11 +13,17 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return MessageResourceCollection
      */
     public function index()
     {
-        //
+        $data = request()->validate([
+            'recipient_id' => ''
+        ]);
+        $messages = Message::where(['user_id' => auth()->user()->id, 'recipient_id' => $data['recipient_id']])
+            ->orWhere(['recipient_id' => auth()->user()->id, 'user_id' => $data['recipient_id']])->get();
+
+        return new MessageResourceCollection($messages);
     }
 
     /**

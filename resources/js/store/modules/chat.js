@@ -11,10 +11,10 @@ const getters = {
     },
 };
 const actions = {
-    async fetchChatMessages({commit}){
+    async fetchChatMessages({commit}, recipientId){
         commit("messagesStatus", "loading");
         try {
-            const messages = (await axios.get('/api/messages')).data;
+            const messages = (await axios.get('/api/messages', {params: {recipient_id: recipientId}})).data;
             commit("setMessages", messages);
             commit("setMessagesStatus", "success");
         } catch (error) {
