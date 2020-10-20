@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Message;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MessageResource extends JsonResource
@@ -14,6 +15,7 @@ class MessageResource extends JsonResource
      */
     public function toArray($request)
     {
+        /** @var Message $this */
         return [
             'data' => [
                 'type' => 'messages',
@@ -22,6 +24,8 @@ class MessageResource extends JsonResource
                     'sent_by' => new UserResource($this->user),
                     'sent_to' => new UserResource($this->recipient),
                     'body' => $this->body,
+                    'user_message' => $this->user->id === auth()->user()->id,
+                    'sent_at' => $this->created_at->diffForHomans(),
                 ],
             ],
             'links' => [
