@@ -25,7 +25,7 @@ class MessageResource extends JsonResource
                     'sent_to' => new UserResource($this->recipient),
                     'body' => $this->body,
                     'user_message' => $this->user->id === auth()->user()->id,
-                    'sent_at' => $this->created_at->diffForHomans(),
+                    'sent_at' => $this->created_at->diffForHumans(),
                 ],
             ],
             'links' => [
