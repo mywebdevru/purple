@@ -91,6 +91,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $subscribers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscrable[] $subscribes
  * @property-read int|null $subscribes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $friendsUsers
+ * @property-read int|null $friends_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
+ * @property-read int|null $messages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read int|null $tokens_count
  */
 class User extends Authenticatable
 {
