@@ -12,7 +12,7 @@ const getters = {
 };
 const actions = {
     async fetchChatMessages({commit}, recipientId){
-        commit("messagesStatus", "loading");
+        commit("setMessagesStatus", "loading");
         try {
             const messages = (await axios.get('/api/messages', {params: {recipient_id: recipientId}})).data;
             commit("setMessages", messages);

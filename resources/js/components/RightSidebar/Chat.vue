@@ -10,36 +10,17 @@
             </div>
         </div>
         <div class="modal-body">
-            <div class="mCustomScrollbar">
+            <div v-if="messagesStatus === 'loading'">Загрузка сообщений...</div>
+            <div v-else-if="messages === null">Этот чат пуст</div>
+            <div v-else class="mCustomScrollbar">
                 <ul class="notification-list chat-message chat-message-field">
-                    <li>
+                   <li class="" v-for="(message,index) in messages.data" :key="index">
                         <div class="author-thumb">
-                            <img src="/img/spiegel.jpg" alt="author" class="mCS_img_loaded">
+                            <img :src="message.data.attributes.sent_by.data.attributes.avatar" alt="author" class="mCS_img_loaded">
                         </div>
                         <div class="notification-event">
-                            <span class="chat-message-item">Lorem Lorem Lorem Lorem Lorem</span>
-                            <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:10pm</time></span>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="author-thumb">
-                            <img src="/img/ii.jpg" alt="author" class="mCS_img_loaded">
-                        </div>
-                        <div class="notification-event">
-                            <span class="chat-message-item">Lorem Lorem Lorem Lorem</span>
-                            <span class="chat-message-item">Lorem Lorem Lorem Lorem</span>
-                            <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:29pm</time></span>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="author-thumb">
-                            <img src="/img/spiegel.jpg" alt="author" class="mCS_img_loaded">
-                        </div>
-                        <div class="notification-event">
-                            <span class="chat-message-item">Lorem Lorem Lorem Lorem Lorem Lorem</span>
-                            <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Вчера at 8:10pm</time></span>
+                            <span class="chat-message-item">{{ message.data.attributes.body }}</span>
+                            <span class="notification-date">{{ message.data.attributes.sent_at }}</span>
                         </div>
                     </li>
                 </ul>
@@ -205,12 +186,20 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-    name: "Chat"
+    name: "Chat",
+    computed: {
+        ...mapGetters({
+            messages: "messages",
+            messagesStatus: "messagesStatus",
+        }),
+    },
 }
 </script>
 
 <style scoped lang="sass">
-.btn-outline-success:not(:hover)
-    color: #38c172
+.popup-chat-responsive.open-chat .mCustomScrollbar
+    overflow-y: scroll
 </style>

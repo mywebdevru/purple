@@ -315,6 +315,7 @@ export default {
             this.chatShow = false;
             this.chatShow = true;
             this.recipient = userId;
+            this.$store.dispatch("fetchChatMessages", this.recipient);
         },
         chatClose()
         {
@@ -342,6 +343,8 @@ export default {
         ...mapGetters({
             authUser: "authUser",
             authUserFriends: "authUserFriends",
+            messages: "messages",
+            messagesStatus: "messagesStatus",
         }),
     },
     mounted() {
