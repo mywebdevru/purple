@@ -15,10 +15,11 @@
             <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
                 <ul class="notification-list chat-message chat-message-field">
-                   <li class=""
+                   <li class="chat-message-wrap"
                        v-for="(message,index) in messages.data"
                        :key="index"
-                       :class="{ 'friend-message' : !message.data.attributes.user_message}">
+                       :class="{ 'friend-message' : !message.data.attributes.user_message}"
+                       ref="message">
                         <div class="author-thumb">
                             <img :src="message.data.attributes.sent_by.data.attributes.avatar" alt="author" class="mCS_img_loaded">
                         </div>
@@ -200,6 +201,18 @@ export default {
             messagesStatus: "messagesStatus",
         }),
     },
+    methods: {
+        scrollToMessage() {
+            console.log(this.$refs.message);
+            const index = this.$refs.message.length - 1;
+            const el = this.$refs.message[index];
+            console.log(index);
+            console.log(el);
+            if (el) {
+                el.scrollIntoView({behavior: "smooth"});
+            }
+        }
+    }
 }
 </script>
 
