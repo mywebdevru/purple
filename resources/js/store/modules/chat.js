@@ -29,6 +29,9 @@ const mutations = {
     setMessagesStatus(state, status) {
         state.messagesStatus = status;
     },
+    pushMessage(state, message) {
+        state.messages.data.push(message);
+    }
 };
 
 export default { state, getters, actions, mutations };

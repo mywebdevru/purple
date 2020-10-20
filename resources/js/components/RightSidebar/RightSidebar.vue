@@ -327,15 +327,11 @@ export default {
             if(this.message === null || this.recipient === null) {
                 return;
             }
-            console.log(this.message);
-            console.log(this.recipient);
             try {
                 const message = (await axios.post('/api/messages', { recipient_id: this.recipient, body: this.message })).data;
-                console.log(message);
-                // commit("pushPost", post);
-                // commit("updateMessage", "");
+                this.$store.commit("pushMessage", message);
             } catch (error) {
-                console.log('Unable to fetch posts, ' + error.response.status);
+                console.log('Unable to fetch posts, ' + error.response);
             }
             this.message = null;
         }
