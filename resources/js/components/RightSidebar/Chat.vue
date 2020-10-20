@@ -15,7 +15,10 @@
             <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
                 <ul class="notification-list chat-message chat-message-field">
-                   <li class="" v-for="(message,index) in messages.data" :key="index">
+                   <li class=""
+                       v-for="(message,index) in messages.data"
+                       :key="index"
+                       :class="{ 'friend-message' : !message.data.attributes.user_message}">
                         <div class="author-thumb">
                             <img :src="message.data.attributes.sent_by.data.attributes.avatar" alt="author" class="mCS_img_loaded">
                         </div>
@@ -203,6 +206,9 @@ export default {
 <style scoped lang="sass">
 .popup-chat-responsive.open-chat .mCustomScrollbar
     overflow-y: scroll
-.recipient-message
-
+.popup-chat .chat-message-field .friend-message .author-thumb
+    float: right
+.popup-chat .chat-message-field .friend-message .chat-message-item
+    background-color: #7c5ac2
+    color: #fff
 </style>
