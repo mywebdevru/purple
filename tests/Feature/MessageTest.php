@@ -7,8 +7,6 @@ use App\Models\User;
 test('a_user_can_send_a_message', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
-
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
 
@@ -56,8 +54,6 @@ test('a_user_can_send_a_message', function () {
 test('a_user_can_get_his_friends', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
-
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $firstUsersFriend = factory(User::class)->create(['id' => 123]);
     $secondUsersFriend = factory(User::class)->create(['id' => 234]);
@@ -98,4 +94,104 @@ test('a_user_can_get_his_friends', function () {
             'self' => url('/users'),
         ]
     ]);
+});
+
+test('a_user_can_fetch_chat_messages', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->withoutExceptionHandling();
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $anotherUser = factory(User::class)->create(['id' => 123]);
+
+    $message1 = Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => $anotherUser->id,
+        'body' => 'First user message',
+    ]);
+    $message2 = Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Second user message',
+    ]);
+    Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => 256,
+        'body' => 'Third user message',
+    ]);
+
+    $response = $this->get('/api/messages', ['user_id' => $anotherUser->id]);
+
+    $response->assertOk();
+    $response->assertJsonCount(2);
+    $response->assertJson([
+        'data' => [
+            [
+                'data' => [
+                    'type' => 'messages',
+                    'message_id' => $message2->id,
+                    'attributes' => [
+                        'sent_by' => [
+                            'data' => [
+                                'user_id' => $anotherUser->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $anotherUser->name,
+                                ],
+                            ],
+                        ],
+                        'sent_to' => [
+                            'data' => [
+                                'user_id' => $user->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $user->name,
+                                ],
+                            ],
+                        ],
+                        'body' => $message2->body,
+                        'sent_at' => $message2->created_at->diffForHumans(),
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/messages/' . $message2->id),
+                ],
+            ],
+            [
+                'data' => [
+                    'type' => 'messages',
+                    'message_id' => $message1->id,
+                    'attributes' => [
+                        'sent_by' => [
+                            'data' => [
+                                'user_id' => $user->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $user->name,
+                                ],
+                            ],
+                        ],
+                        'sent_to' => [
+                            'data' => [
+                                'user_id' => $anotherUser->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $anotherUser->name,
+                                ],
+                            ],
+                        ],
+                        'body' => $message1->body,
+                        'sent_at' => $message1->created_at->diffForHumans(),
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/messages/' . $message1->id),
+                ],
+            ],
+        ],
+        'links' => [
+            'self' => url('/messages'),
+        ],
+    ]);
+
 });
