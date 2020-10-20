@@ -203,4 +203,6 @@ export default {
 <style scoped lang="sass">
 .popup-chat-responsive.open-chat .mCustomScrollbar
     overflow-y: scroll
+.recipient-message
+
 </style>

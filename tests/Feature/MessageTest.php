@@ -129,37 +129,6 @@ test('a_user_can_fetch_chat_messages', function () {
             [
                 'data' => [
                     'type' => 'messages',
-                    'message_id' => $message2->id,
-                    'attributes' => [
-                        'sent_by' => [
-                            'data' => [
-                                'user_id' => $anotherUser->id,
-                                'type' => 'users',
-                                'attributes' => [
-                                    'name' => $anotherUser->name,
-                                ],
-                            ],
-                        ],
-                        'sent_to' => [
-                            'data' => [
-                                'user_id' => $user->id,
-                                'type' => 'users',
-                                'attributes' => [
-                                    'name' => $user->name,
-                                ],
-                            ],
-                        ],
-                        'body' => $message2->body,
-                        'sent_at' => $message2->created_at->diffForHumans(),
-                    ],
-                ],
-                'links' => [
-                    'self' => url('/messages/' . $message2->id),
-                ],
-            ],
-            [
-                'data' => [
-                    'type' => 'messages',
                     'message_id' => $message1->id,
                     'attributes' => [
                         'sent_by' => [
@@ -186,6 +155,37 @@ test('a_user_can_fetch_chat_messages', function () {
                 ],
                 'links' => [
                     'self' => url('/messages/' . $message1->id),
+                ],
+            ],
+            [
+                'data' => [
+                    'type' => 'messages',
+                    'message_id' => $message2->id,
+                    'attributes' => [
+                        'sent_by' => [
+                            'data' => [
+                                'user_id' => $anotherUser->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $anotherUser->name,
+                                ],
+                            ],
+                        ],
+                        'sent_to' => [
+                            'data' => [
+                                'user_id' => $user->id,
+                                'type' => 'users',
+                                'attributes' => [
+                                    'name' => $user->name,
+                                ],
+                            ],
+                        ],
+                        'body' => $message2->body,
+                        'sent_at' => $message2->created_at->diffForHumans(),
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/messages/' . $message2->id),
                 ],
             ],
         ],
