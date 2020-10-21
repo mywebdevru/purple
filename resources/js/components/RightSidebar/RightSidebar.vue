@@ -368,6 +368,7 @@ export default {
                     chatOpened = true
                 }
                 if (!chatOpened && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
+                    e.message.data.attributes.user_message = false;
                     this.$store.commit("pushMessage", e.message);
                 }
             });
