@@ -290,7 +290,8 @@
           tabindex="-1"
           role="dialog"
           aria-labelledby="popup-chat-responsive"
-          aria-hidden="true" />
+          aria-hidden="true"
+          ref="chat" />
     <!-- Конец блока Чата -->
 </div>
 </template>
@@ -299,6 +300,7 @@
 import {mapGetters} from "vuex";
 import SmallSidebar from "./SmallSidebar";
 import Chat from "./Chat";
+import toastr from "toastr";
 
 export default {
     name: "RightSidebar",
@@ -312,30 +314,32 @@ export default {
     },
     methods: {
         startChat(userId) {
+            console.log(userId);
             this.chatClose();
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$store.commit("setChatId", userId);
+            this.$refs.chat.focus();
         },
         chatClose()
         {
             this.chatShow = false;
             this.recipient = null;
+            this.message = null;
             this.$store.commit("setMessages", null);
+            this.$store.commit("setChatId", null);
+
         },
         async sendMessage() {
             if(this.message === null || this.recipient === null) {
                 return;
             }
-            console.log(this.message);
-            console.log(this.recipient);
             try {
                 const message = (await axios.post('/api/messages', { recipient_id: this.recipient, body: this.message })).data;
-                console.log(message);
-                // commit("pushPost", post);
-                // commit("updateMessage", "");
+                this.$store.commit("pushMessage", message);
             } catch (error) {
-                console.log('Unable to fetch posts, ' + error.response.status);
+                console.log('Unable to fetch posts, ' + error.response);
             }
             this.message = null;
         }
@@ -346,11 +350,28 @@ export default {
             authUserFriends: "authUserFriends",
             messages: "messages",
             messagesStatus: "messagesStatus",
+            chatId: "chatId",
         }),
     },
     mounted() {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchAuthUserFriends");
+        Pusher.logToConsole = true;
+        Echo.channel('chat-message')
+            .listen('MessageSentEvent', async (e) => {
+                let chatOpened = false;
+                if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
+                    return;
+                }
+                if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
+                    this.startChat(e.message.data.attributes.sent_by.data.user_id);
+                    chatOpened = true
+                }
+                if (!chatOpened && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
+                    e.message.data.attributes.user_message = false;
+                    this.$store.commit("pushMessage", e.message);
+                }
+            });
     },
 }
 </script>

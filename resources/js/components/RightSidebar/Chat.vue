@@ -14,11 +14,12 @@
             <div v-else-if="messagesStatus === 'loading'" class="text-center py-3">Загрузка сообщений...</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
-                <ul class="notification-list chat-message chat-message-field">
-                   <li class=""
+                <ul class="notification-list chat-message chat-message-field" ref="messages-wrap">
+                   <li class="chat-message-wrap"
                        v-for="(message,index) in messages.data"
                        :key="index"
-                       :class="{ 'friend-message' : !message.data.attributes.user_message}">
+                       :class="{ 'friend-message' : !message.data.attributes.user_message}"
+                       ref="message">
                         <div class="author-thumb">
                             <img :src="message.data.attributes.sent_by.data.attributes.avatar" alt="author" class="mCS_img_loaded">
                         </div>
@@ -33,7 +34,7 @@
             <form class="need-validation" @keyup.enter="$parent.sendMessage">
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Введите сообщение..." v-model="$parent.message"></textarea>
+                    <textarea class="form-control" placeholder="Введите сообщение..." v-model="$parent.message" ref="input"></textarea>
                     <div class="add-options-message">
                         <a href="#" class="options-message">
                             <svg class="olymp-computer-icon"><use href="/svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
@@ -200,6 +201,24 @@ export default {
             messagesStatus: "messagesStatus",
         }),
     },
+    methods: {
+        scrollToMessage() {
+            if (!this.$refs.message) {
+                return;
+            }
+            const index = this.$refs.message.length - 1;
+            const el = this.$refs.message[index];
+            if (el) {
+                el.scrollIntoView({behavior: "smooth", block: "start"});
+            }
+        },
+        focus: function () {
+            this.$refs.input.focus()
+        },
+    },
+    updated() {
+        this.scrollToMessage();
+    }
 }
 </script>
 
