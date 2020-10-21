@@ -34,7 +34,7 @@
             <form class="need-validation" @keyup.enter="$parent.sendMessage">
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Введите сообщение..." v-model="$parent.message"></textarea>
+                    <textarea class="form-control" placeholder="Введите сообщение..." v-model="$parent.message" ref="input"></textarea>
                     <div class="add-options-message">
                         <a href="#" class="options-message">
                             <svg class="olymp-computer-icon"><use href="/svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
@@ -211,7 +211,10 @@ export default {
             if (el) {
                 el.scrollIntoView({behavior: "smooth"});
             }
-        }
+        },
+        focus: function () {
+            this.$refs.input.focus()
+        },
     }
 }
 </script>

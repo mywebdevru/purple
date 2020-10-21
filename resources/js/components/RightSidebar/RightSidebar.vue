@@ -317,11 +317,13 @@ export default {
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$refs.chat.focus();
         },
         chatClose()
         {
             this.chatShow = false;
             this.recipient = null;
+            this.message = null;
             this.$store.commit("setMessages", null);
         },
         async sendMessage() {
