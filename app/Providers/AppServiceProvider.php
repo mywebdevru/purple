@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 
+use App\Models\Message;
 use App\Models\User;
+use App\Observers\MessageObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Post::observe(PostObserver::class);
         Comment::observe(CommentObserver::class);
+        Message::observe(MessageObserver::class);
 
         // Using class based composers...
         View::composer(
