@@ -333,7 +333,6 @@ export default {
             try {
                 const message = (await axios.post('/api/messages', { recipient_id: this.recipient, body: this.message })).data;
                 this.$store.commit("pushMessage", message);
-                this.$refs.chat.scrollToMessage();
             } catch (error) {
                 console.log('Unable to fetch posts, ' + error.response);
             }

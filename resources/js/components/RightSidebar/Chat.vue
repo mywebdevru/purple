@@ -14,7 +14,7 @@
             <div v-else-if="messagesStatus === 'loading'" class="text-center py-3">Загрузка сообщений...</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length === 0" class="text-center py-3">Этот чат пуст</div>
             <div v-else-if="messagesStatus === 'success' && messages.data.length > 0" class="mCustomScrollbar">
-                <ul class="notification-list chat-message chat-message-field">
+                <ul class="notification-list chat-message chat-message-field" ref="messages-wrap">
                    <li class="chat-message-wrap"
                        v-for="(message,index) in messages.data"
                        :key="index"
@@ -207,14 +207,19 @@ export default {
                 return;
             }
             const index = this.$refs.message.length - 1;
+            console.log(index);
             const el = this.$refs.message[index];
+            console.log(el);
             if (el) {
-                el.scrollIntoView({behavior: "smooth"});
+                el.scrollIntoView({behavior: "smooth", block: "start"});
             }
         },
         focus: function () {
             this.$refs.input.focus()
         },
+    },
+    updated() {
+        this.scrollToMessage();
     }
 }
 </script>
