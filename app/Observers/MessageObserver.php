@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Message;
+use App\Models\Message;
 
 class MessageObserver
 {
