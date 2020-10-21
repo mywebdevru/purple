@@ -207,9 +207,7 @@ export default {
                 return;
             }
             const index = this.$refs.message.length - 1;
-            console.log(index);
             const el = this.$refs.message[index];
-            console.log(el);
             if (el) {
                 el.scrollIntoView({behavior: "smooth", block: "start"});
             }

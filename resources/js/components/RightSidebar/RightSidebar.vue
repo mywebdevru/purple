@@ -300,6 +300,7 @@
 import {mapGetters} from "vuex";
 import SmallSidebar from "./SmallSidebar";
 import Chat from "./Chat";
+import toastr from "toastr";
 
 export default {
     name: "RightSidebar",
@@ -313,10 +314,12 @@ export default {
     },
     methods: {
         startChat(userId) {
+            console.log(userId);
             this.chatClose();
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$store.commit("setChatId", userId);
             this.$refs.chat.focus();
         },
         chatClose()
@@ -345,11 +348,25 @@ export default {
             authUserFriends: "authUserFriends",
             messages: "messages",
             messagesStatus: "messagesStatus",
+            chatId: "chatId",
         }),
     },
     mounted() {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchAuthUserFriends");
+        Pusher.logToConsole = true;
+        Echo.channel('chat-message')
+            .listen('MessageSentEvent', async (e) => {
+                if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
+                    return;
+                }
+                console.log(this.chatId !== e.message.data.attributes.sent_by.data.user_id);
+                if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
+                    this.startChat(e.message.data.attributes.sent_by.data.user_id);
+                }
+
+                console.log(e.message);
+            });
     },
 }
 </script>

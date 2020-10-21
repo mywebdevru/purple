@@ -1,6 +1,7 @@
 const state = {
     messages: null,
     messagesStatus: null,
+    chatId: null,
 };
 const getters = {
     messages: state => {
@@ -9,6 +10,9 @@ const getters = {
     messagesStatus: state => {
         return state.messagesStatus;
     },
+    chatId: state => {
+        return state.chatId;
+    }
 };
 const actions = {
     async fetchChatMessages({commit}, recipientId){
@@ -31,6 +35,9 @@ const mutations = {
     },
     pushMessage(state, message) {
         state.messages.data.push(message);
+    },
+    setChatId(state, id) {
+        state.chatId = id;
     }
 };
 
