@@ -328,6 +328,8 @@ export default {
             this.recipient = null;
             this.message = null;
             this.$store.commit("setMessages", null);
+            this.$store.commit("setChatId", null);
+
         },
         async sendMessage() {
             if(this.message === null || this.recipient === null) {
@@ -357,15 +359,17 @@ export default {
         Pusher.logToConsole = true;
         Echo.channel('chat-message')
             .listen('MessageSentEvent', async (e) => {
+                let chatOpened = false;
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
                     return;
                 }
-                console.log(this.chatId !== e.message.data.attributes.sent_by.data.user_id);
                 if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
                     this.startChat(e.message.data.attributes.sent_by.data.user_id);
+                    chatOpened = true
                 }
-
-                console.log(e.message);
+                if (!chatOpened && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
+                    this.$store.commit("pushMessage", e.message);
+                }
             });
     },
 }
