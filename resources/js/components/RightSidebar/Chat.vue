@@ -203,11 +203,11 @@ export default {
     },
     methods: {
         scrollToMessage() {
-            console.log(this.$refs.message);
+            if (!this.$refs.message) {
+                return;
+            }
             const index = this.$refs.message.length - 1;
             const el = this.$refs.message[index];
-            console.log(index);
-            console.log(el);
             if (el) {
                 el.scrollIntoView({behavior: "smooth"});
             }
