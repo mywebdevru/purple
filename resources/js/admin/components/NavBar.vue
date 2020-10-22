@@ -268,7 +268,7 @@ export default {
             "closeMethod": "fadeOut"
         }
         Pusher.logToConsole = true;
-        Echo.channel('admin-notifications')
+        Echo.private('admin-notifications')
             .listen('AdminPanelRealtimeNotification', async (e) => {
                 toastr.info(e.message);
                 await this.$store.dispatch("fetchUnreadNotificationsCount");
