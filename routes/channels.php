@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -16,8 +17,8 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('admin-notifications', function () {
-    return true;
+Broadcast::channel('admin-notifications', function ($user) {
+    return in_array($user->id, User::role(['admin', 'super-admin'])->pluck('id')->toArray());
 });
 Broadcast::channel('chat-message', function () {
     return true;
