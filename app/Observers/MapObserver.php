@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Map;
+use App\Models\Post;
 
 class MapObserver
 {
@@ -36,7 +37,7 @@ class MapObserver
      */
     public function deleting(Map $map)
     {
-        $map->post()->delete();
+        Post::find($map->post->id)->delete();
     }
 
     /**

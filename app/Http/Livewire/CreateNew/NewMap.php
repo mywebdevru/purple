@@ -56,6 +56,7 @@ class NewMap extends Component
             });
             $img->save();
         }
+        $this->map->post->images()->create(['image' => $this->link]);
         $this->emit('photoSaved', $this->link);
     }
 
