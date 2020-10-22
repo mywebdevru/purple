@@ -34,6 +34,5 @@ class MessageSentEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('chat-message');
-        // return ['chat-message'];
     }
 }
