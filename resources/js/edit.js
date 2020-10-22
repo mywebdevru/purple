@@ -1,3 +1,5 @@
+window.Vue = require('vue');
+
 import ProfileEditForm from "./components/profile/ProfileEditForm";
 
 const app = new Vue({
