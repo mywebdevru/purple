@@ -38,7 +38,7 @@ use Illuminate\Support\Str;
  */
 class Map extends Model
 {
-    protected $fillable = ['user_id', 'title' , 'slug', 'description', 'map_data', 'published'];
+    protected $fillable = ['user_id', 'title' , 'slug', 'map_data', 'published'];
 
     //Mutators
     public function setSlugAttribute($value){
@@ -53,8 +53,8 @@ class Map extends Model
     /**
      * Get the Map's Images.
      */
-    public function images()
+    public function post()
     {
-        return $this->morphMany('App\Models\Image', 'imageable');
+        return $this->morphOne('App\Models\Post', 'postable');
     }
 }

@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\View;
 use App\Console\Commands\ModelMakeCommand;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Map;
 use App\Observers\PostObserver;
 use App\Observers\CommentObserver;
+use App\Observers\MapObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(config('app.locale'));
         User::observe(UserObserver::class);
+        Map::observe(MapObserver::class);
         Post::observe(PostObserver::class);
         Comment::observe(CommentObserver::class);
         Message::observe(MessageObserver::class);

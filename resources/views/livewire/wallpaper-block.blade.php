@@ -4,10 +4,8 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}"
-                             alt="wallpaper"
-                             id="wallpaper">
-                        </div>
+                        <img src="{{ $user->wallpaper ? (Str::startsWith($user->wallpaper, 'http') ? $user->wallpaper : asset($user->wallpaper)) : $wallpaper = asset('img/default-wallpaper.jpg') }}" alt="wallpaper" id="wallpaper">
+                    </div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
@@ -64,7 +62,7 @@
 
                             </div>
 
-                            <div class="wheel wheel__green">
+                            <div class="wheel wheel__green" wire:click.prevent="$emit('createNewMap')">
 
                                 <div class="wheel__inner__green">
                                     <div class="wheel__content__green">к</div>
