@@ -38,7 +38,7 @@ use Illuminate\Support\Str;
  */
 class Map extends Model
 {
-    protected $fillable = ['user_id', 'title' , 'slug', 'description', 'map_data', 'published'];
+    protected $fillable = ['user_id', 'title' , 'slug', 'map_data', 'published'];
 
     //Mutators
     public function setSlugAttribute($value){
