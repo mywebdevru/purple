@@ -53,8 +53,8 @@ class Map extends Model
     /**
      * Get the Map's Images.
      */
-    public function images()
+    public function post()
     {
-        return $this->morphMany('App\Models\Image', 'imageable');
+        return $this->morphOne('App\Models\Post', 'postable');
     }
 }
