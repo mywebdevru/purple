@@ -61,6 +61,11 @@
             cursor: pointer;
         }
 
+        .map-name {
+            border-color: none;
+            padding: 0.5rem;
+        }
+
         /* .loading-img-wrapper div progress {
             width: 100%;
             background-color:#ff5e3a;
@@ -123,7 +128,7 @@
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/chat.js') }}"></script>
-{{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script> --}}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 @yield('scripts')
 <script>
     function acceptFriendshipRequest(item)
