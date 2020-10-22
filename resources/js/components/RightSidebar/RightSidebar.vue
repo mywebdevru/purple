@@ -357,7 +357,7 @@ export default {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchAuthUserFriends");
         Pusher.logToConsole = true;
-        Echo.channel('chat-message')
+        Echo.private('chat-message')
             .listen('MessageSentEvent', async (e) => {
                 let chatOpened = false;
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
