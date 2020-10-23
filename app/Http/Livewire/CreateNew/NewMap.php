@@ -20,6 +20,11 @@ class NewMap extends Component
     public $photo;
     public $name;
 
+    protected $messages = [
+        'title.required' => 'Введите название карты.',
+        'title.min' => 'Название не короче пяти символов.',
+    ];
+
     public function mount()
     {
         $this->createMap();
@@ -32,7 +37,12 @@ class NewMap extends Component
 
     public function saveMap()
     {
-        $this->map->fill(['title' => $this->title, 'map_data' => $this->map_data])->save();
+        $this->validate([
+            'title' => 'required|min:5',
+            'map_data' => 'json',
+            'description' => 'string|nullable'
+        ]);
+        $this->map->update(['title' => $this->title, 'map_data' => $this->map_data]);
         $this->map->post()->update(['text' => $this->description]);
         $this->emit('mapCreated', $this->map->id);
     }

@@ -4,9 +4,11 @@
         <div class="ui-block">
             <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
         </div>
-        <div class="ui-block w-75 mx-auto p-2">
-            <div>{!! $description !!}</div>
-        </div>
+        @if (!!$description)
+            <div class="ui-block w-75 mx-auto p-2">
+                <div>{!! $description !!}</div>
+            </div>
+        @endif
         <div class="text-center">
             <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Опубликовать</button>
             <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Черновик</button>

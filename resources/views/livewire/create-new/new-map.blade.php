@@ -1,4 +1,5 @@
 <div class="container">
+    @error('title')<div class="mx-auto text-center text-danger">{{ $message }}</div> @enderror
     <input wire:model.defer="title" type="text" name="name" placeholder="Название карты" class="map-name w-75 mx-auto text-center">
     <div class="col-md-12" wire:ignore>
         <div class="ui-block">
@@ -119,12 +120,10 @@
                     '<div class="baloon-content">$[properties.balloonContent]</div>' +
                 '</div>'
             );
-
             //Добавление кнопок конструктора на карту
             myMap.controls.add(placemarkBtn, { floatIndex: 2 });
             myMap.controls.add(lineBtn, { floatIndex: 1 });
             myMap.controls.add(polygonBtn, { floatIndex: 0 });
-
             //Функция включения создания меток при нажтии на кнопку placemarkBtn
             placemarkBtn.events.add('select', function () {
                 //проверяем зажаты ли другие кнопки
@@ -215,8 +214,6 @@
                     });
                 }
             };
-
-
             //Функция включения создания ломаных при нажтии на кнопку lineBtn
             lineBtn.events.add('select', function () {
                 //проверяем зажаты ли другие кнопки
@@ -259,8 +256,6 @@
                 //Отключение построения ломаной
                 myMap.events.remove('click', lineMapClick);
             });
-
-
             //Функция включения создания многоугольников при нажтии на кнопку polygonBtn
             polygonBtn.events.add('select', function () {
                 //проверяем зажаты ли другие кнопки
@@ -304,14 +299,11 @@
                 //Отключение построения ломаной
                 myMap.events.remove('click', polygonMapClick);
             });
-
-
             //Сохранение данных геообъектов
             $('#save-map').click(function () {
                 if (currentId === 0) {
-                    alert("Карта не должна быть пустой. Пожалуйста, нарисуйте свой путь!")
+                    swal("Беда!", "Карта не должна быть пустой. Пожалуйста, нарисуйте свой путь!" , "error");
                 } else {
-                    console.log(myMap.geoObjects)
                     object = [];
                     for (let i = 0; i < currentId; i++) {
                         console.log(myMap.geoObjects.get(i))
@@ -321,7 +313,6 @@
                         });
                     }
                     let objectJson = JSON.stringify(object)
-                    console.log('WOW ' + objectJson)
                     @this.map_data = objectJson
                     @this.saveMap()
                 }
