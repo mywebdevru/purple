@@ -20,11 +20,8 @@ class MessageController extends Controller
         $data = request()->validate([
             'recipient_id' => ''
         ]);
-        $recipient = $data['recipient_id'];
 
-        $messages = Message::chatMessages($recipient);
-
-        return new MessageResourceCollection($messages);
+        return new MessageResourceCollection(Message::chatMessages($data['recipient_id']));
     }
 
     /**
