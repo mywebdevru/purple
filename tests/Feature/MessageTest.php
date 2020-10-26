@@ -120,7 +120,6 @@ test('a_user_can_fetch_chat_messages', function () {
     $response = $this->call('GET', '/api/messages', ['recipient_id' => $anotherUser->id]);
 
     $response->assertOk();
-    $response->assertJsonCount(2);
     $response->assertJson([
         'data' => [
             [
