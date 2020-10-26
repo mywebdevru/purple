@@ -63,7 +63,6 @@ class UserDeleted extends Notification
             'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
-            'data' => new UserResource($this->user),
         ];
     }
 }

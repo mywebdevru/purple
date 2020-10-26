@@ -55,7 +55,7 @@ class UserCreated extends Notification
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
             'type' => 'user_created',
@@ -63,7 +63,6 @@ class UserCreated extends Notification
             'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
-            'data' => new UserResource($this->user),
         ];
     }
 }
