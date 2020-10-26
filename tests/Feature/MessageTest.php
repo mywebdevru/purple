@@ -203,18 +203,18 @@ test('a_user_can_fetch_unread_messages_count', function () {
     Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
 
     $message = Message::create([
-        'user_id' => $user->id,
-        'recipient_id' => $anotherUser->id,
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
         'body' => 'First user message',
     ]);
     Message::create([
-        'user_id' => $user->id,
-        'recipient_id' => $anotherUser->id,
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
         'body' => 'Second user message',
     ]);
     Message::create([
-        'user_id' => $user->id,
-        'recipient_id' => $anotherUser->id,
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
         'body' => 'Third user message',
     ]);
 

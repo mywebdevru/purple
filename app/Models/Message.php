@@ -81,6 +81,6 @@ class Message extends Model
 
         return (new static())->where(function () use ($recipientId) {
             return static::chatMessagesQuery($recipientId);
-        })->whereNull('read_at')->count();
+        })->where('user_id', $recipientId)->whereNull('read_at')->count();
     }
 }
