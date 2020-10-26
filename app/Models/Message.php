@@ -39,4 +39,25 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'recipient_id', 'id');
     }
+
+    private static function chatMessagesQuery($recipientId)
+    {
+        return (new static())->where(function ($query) use ($recipientId) {
+            return $query->where([
+                'user_id' => auth()->user()->id,
+                'recipient_id' => $recipientId,
+            ]);
+        })
+            ->orWhere(function ($query) use ($recipientId) {
+                return $query->where([
+                    'user_id' => $recipientId,
+                    'recipient_id' => auth()->user()->id,
+                ]);
+            });
+    }
+
+    public static function chatMessages($recipientId)
+    {
+        return static::chatMessagesQuery($recipientId)->get();
+    }
 }

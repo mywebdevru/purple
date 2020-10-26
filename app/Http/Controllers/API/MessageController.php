@@ -22,18 +22,7 @@ class MessageController extends Controller
         ]);
         $recipient = $data['recipient_id'];
 
-        $messages = Message::where(function ($query) use ($recipient) {
-            return $query->where([
-                'user_id' => auth()->user()->id,
-                'recipient_id' => $recipient,
-            ]);
-        })
-            ->orWhere(function ($query) use ($recipient) {
-                return $query->where([
-                    'user_id' => $recipient,
-                    'recipient_id' => auth()->user()->id,
-                ]);
-            })->get();
+        $messages = Message::chatMessages($recipient);
 
         return new MessageResourceCollection($messages);
     }
