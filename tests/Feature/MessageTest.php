@@ -202,7 +202,7 @@ test('a_user_can_fetch_unread_messages_count', function () {
     $anotherUser = factory(User::class)->create(['id' => 123]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
 
-    Message::create([
+    $message = Message::create([
         'user_id' => $user->id,
         'recipient_id' => $anotherUser->id,
         'body' => 'First user message',
@@ -214,8 +214,11 @@ test('a_user_can_fetch_unread_messages_count', function () {
     ]);
     Message::create([
         'user_id' => $user->id,
-        'recipient_id' => 256,
+        'recipient_id' => $anotherUser->id,
         'body' => 'Third user message',
+    ]);
+
+    $message->update([
         'read_at' => now(),
     ]);
 

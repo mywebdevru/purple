@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Message
@@ -40,6 +41,10 @@ class Message extends Model
         return $this->belongsTo(User::class, 'recipient_id', 'id');
     }
 
+    /**
+     * @param $recipientId
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     private static function chatMessagesQuery($recipientId)
     {
         return (new static())->where(function ($query) use ($recipientId) {
@@ -59,5 +64,23 @@ class Message extends Model
     public static function chatMessages($recipientId)
     {
         return static::chatMessagesQuery($recipientId)->get();
+    }
+
+    public static function chatMessagesCount($recipientId)
+    {
+        return static::chatMessagesQuery($recipientId)->count();
+    }
+
+    public static function chatUnreadMessagesCount($recipientId)
+    {
+        /*$sub = static::chatMessagesQuery($recipientId);
+        return DB::table( DB::raw("({$sub->toSql()}) as sub") )
+            ->mergeBindings($sub->getQuery())
+            ->whereNull('read_at')
+            ->get();*/
+
+        return (new static())->where(function () use ($recipientId) {
+            return static::chatMessagesQuery($recipientId);
+        })->whereNull('read_at')->count();
     }
 }
