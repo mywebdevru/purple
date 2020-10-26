@@ -99,8 +99,6 @@ test('a_user_can_get_his_friends', function () {
 test('a_user_can_fetch_chat_messages', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
-
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
 
