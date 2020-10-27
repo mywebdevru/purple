@@ -25,6 +25,17 @@ const actions = {
             commit("setMessagesStatus", "error");
         }
     },
+    async markChatIsRead({commit}, recipientId){
+        commit("setAuthUserFriendsStatus", "loading");
+        try {
+            const friends = (await axios.get('/api/mark-chat-is-read', {params: {recipient_id: recipientId}})).data;
+            commit("setAuthUserFriends", friends);
+            commit("setAuthUserFriendsStatus", "success");
+        } catch (error) {
+            commit("setAuthUserFriendsStatus", "error");
+        }
+    },
+
 };
 const mutations = {
     setMessages(state, messages) {

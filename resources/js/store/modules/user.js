@@ -27,7 +27,6 @@ const actions = {
     async fetchAuthUserFriends({commit}){
         commit("setAuthUserFriendsStatus", "loading");
         try {
-            // TODO Тест для этого роута
             const friends = (await axios.get('/api/auth-user-friends')).data;
             commit("setAuthUserFriends", friends);
             commit("setAuthUserFriendsStatus", "success");

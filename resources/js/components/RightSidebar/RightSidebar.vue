@@ -319,6 +319,7 @@ export default {
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$store.dispatch("markChatIsRead",  this.recipient);
             this.$store.commit("setChatId", userId);
             this.$refs.chat.focus();
         },
