@@ -45,5 +45,6 @@ Route::group([
     Route::put('/profile/{user}', 'ProfileController@save')->name('profile.save');
     Route::get('/auth-user', 'AuthUserController')->name('auth-user');
     Route::get('/auth-user-friends', 'AuthUserFriendsController')->name('auth-user-friends');
+    Route::get('/mark-chat-is-read', 'MarkChatIsReadController')->name('mark-chat-is-read');
     Route::apiResource('messages', 'MessageController');
 });

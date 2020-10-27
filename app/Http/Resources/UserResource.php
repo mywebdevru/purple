@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Message;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\User;
 
@@ -16,6 +17,7 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         /** @var $this User */
+
         return [
             'data' => [
                 'type' => 'users',
@@ -34,6 +36,10 @@ class UserResource extends JsonResource
                     'country' => $this->country,
                     'creed' => $this->creed,
                     'roles' => $this->getRoleNames(),
+                ],
+                'chat' => [
+                    'messages_count' => Message::chatMessagesCount($this->id),
+                    'unread_messages_count' => $this->unreadChatMessages()->count(),
                 ],
             ],
             'links' => [

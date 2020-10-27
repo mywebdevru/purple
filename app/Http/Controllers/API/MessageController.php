@@ -20,22 +20,8 @@ class MessageController extends Controller
         $data = request()->validate([
             'recipient_id' => ''
         ]);
-        $recipient = $data['recipient_id'];
 
-        $messages = Message::where(function ($query) use ($recipient) {
-            return $query->where([
-                'user_id' => auth()->user()->id,
-                'recipient_id' => $recipient,
-            ]);
-        })
-            ->orWhere(function ($query) use ($recipient) {
-                return $query->where([
-                    'user_id' => $recipient,
-                    'recipient_id' => auth()->user()->id,
-                ]);
-            })->get();
-
-        return new MessageResourceCollection($messages);
+        return new MessageResourceCollection(Message::chatMessages($data['recipient_id']));
     }
 
     /**

@@ -12,6 +12,18 @@ class FetchNotificationsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp() : void
+    {
+        // first include all the normal setUp operations
+        parent::setUp();
+
+        // now re-register all the roles and permissions
+        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'super-admin']);
+    }
+
     /** @test */
     public function guests_cant_fetch_notifications()
     {
@@ -33,9 +45,6 @@ class FetchNotificationsTest extends TestCase
 
         $adminUser = factory(User::class)->create();
 
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-admin']);
-
         $adminUser->assignRole('admin');
 
         $this->actingAs($adminUser, 'api');
@@ -50,9 +59,6 @@ class FetchNotificationsTest extends TestCase
 
         $superAdminUser = factory(User::class)->create();
 
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-admin']);
-
         $superAdminUser->assignRole('super-admin');
 
         $this->actingAs($superAdminUser, 'api');
@@ -65,9 +71,6 @@ class FetchNotificationsTest extends TestCase
     public function admin_can_get_user_created_notifications()
     {
         $adminUser = factory(User::class)->create();
-
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-admin']);
 
         $adminUser->assignRole('admin');
 
@@ -110,9 +113,6 @@ class FetchNotificationsTest extends TestCase
     public function admin_can_get_user_created_and_updated_notifications()
     {
         $adminUser = factory(User::class)->create();
-
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-admin']);
 
         $adminUser->assignRole('admin');
 

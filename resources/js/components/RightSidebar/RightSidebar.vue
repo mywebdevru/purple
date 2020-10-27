@@ -319,6 +319,7 @@ export default {
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$store.dispatch("markChatIsRead",  this.recipient);
             this.$store.commit("setChatId", userId);
             this.$refs.chat.focus();
         },
@@ -361,6 +362,10 @@ export default {
             .listen('MessageSentEvent', async (e) => {
                 let chatOpened = false;
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
+                    return;
+                }
+                if(document.hidden) {
+                    await this.$store.dispatch("fetchAuthUserFriends");
                     return;
                 }
                 if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {

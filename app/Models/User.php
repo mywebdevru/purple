@@ -289,4 +289,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function unreadChatMessages()
+    {
+        return $this->hasMany(Message::class)->where(['recipient_id' => auth()->user()->id, 'read_at' => null]);
+    }
 }
