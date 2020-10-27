@@ -18,10 +18,15 @@ class Map extends Component
 
     }
 
+    public function editMap()
+    {
+        $this->emit('editMap', $this->map->id);
+    }
+
     public function deleteMap()
     {
         $this->map->delete();
-        $this->emit('cancelCreateMap');
+        $this->emit('showFeed');
     }
 
     public function render()

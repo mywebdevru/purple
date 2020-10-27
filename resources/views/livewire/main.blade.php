@@ -1,8 +1,8 @@
 <div>
     <div class="container">
         <div class="row">
-            @if (!!$createMap)
-                <livewire:create-new.new-map :key="'map'.time()" />
+            @if (!!$actionMap)
+                <livewire:create-new.new-map :action="$actionMap" :key="'map'.time()" />
             @elseif(!!$showNewMap)
                 <livewire:main.map :mapId="$showNewMap" :key="'newMap'.time()" />
             @else

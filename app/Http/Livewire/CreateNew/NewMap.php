@@ -19,38 +19,51 @@ class NewMap extends Component
     public $post;
     public $photo;
     public $name;
+    public $action;
 
     protected $messages = [
         'title.required' => 'Введите название карты.',
         'title.min' => 'Название не короче пяти символов.',
+        'map_data.min' => 'Нарисуйте свой маршрут',
     ];
 
     public function mount()
     {
-        $this->createMap();
+            $this->getMap();
     }
 
-    public function createMap()
+    public function getMap()
     {
-        $this->map = User::find(auth()->user()->id)->maps()->create();
+        if($this->action == 'create'){
+            $this->map = User::find(auth()->user()->id)->maps()->create();
+        }else{
+            $this->map = User::find(auth()->user()->id)->maps()->orderBy('created_at', 'DESC')->first();
+            $this->title = $this->map->title;
+            $this->description =$this->map->post->text;
+        }
     }
 
-    public function saveMap()
+    public function previewMap()
+    {
+        $this->saveMap();
+        $this->emit('showMap', $this->map->id);
+    }
+
+    protected function saveMap()
     {
         $this->validate([
             'title' => 'required|min:5',
-            'map_data' => 'json',
+            'map_data' => 'json|min:8',
             'description' => 'string|nullable'
         ]);
         $this->map->update(['title' => $this->title, 'map_data' => $this->map_data]);
         $this->map->post()->update(['text' => $this->description]);
-        $this->emit('mapCreated', $this->map->id);
     }
 
     public function deleteMap()
     {
         $this->map->delete();
-        $this->emit('cancelCreateMap');
+        $this->emit('showFeed');
     }
 
     public function savePhoto()

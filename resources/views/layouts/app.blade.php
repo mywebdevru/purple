@@ -61,9 +61,12 @@
             cursor: pointer;
         }
 
-        .map-name {
-            border-color: none;
+        .map-title {
             padding: 0.5rem;
+        }
+
+        .ui-block .map-title:focus {
+            border: 1px gray;
         }
 
         /* .loading-img-wrapper div progress {

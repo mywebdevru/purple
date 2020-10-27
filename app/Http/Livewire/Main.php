@@ -8,24 +8,29 @@ use App\Models\Map;
 class Main extends Component
 {
     public $user;
-    public $createMap = false;
+    public $actionMap = '';
     public $showNewMap = 0;
 
-    protected $listeners = ['createNewMap' => 'toggleCreateMap', 'mapCreated', 'cancelCreateMap' => 'showFeed'];
+    protected $listeners = ['createNewMap' => 'createMap', 'editMap' => 'editMap', 'showMap', 'showFeed'];
 
-    public function toggleCreateMap()
+    public function createMap()
     {
-        $this->createMap =!$this->createMap;
+        $this->actionMap = 'create';
     }
 
-    public function mapCreated(Map $map)
+    public function editMap(Map $map)
     {
-        $this->toggleCreateMap();
+        $this->actionMap = 'edit';
+    }
+
+    public function showMap(Map $map)
+    {
+        $this->actionMap = '';
         $this->showNewMap = $map->id;
     }
 
     public function showFeed(){
-            $this->createMap = false;
+            $this->actionMap = '';
             $this->showNewMap = 0;
     }
 
