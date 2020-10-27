@@ -76,11 +76,18 @@ class Message extends Model
         /*$sub = static::chatMessagesQuery($recipientId);
         return DB::table( DB::raw("({$sub->toSql()}) as sub") )
             ->mergeBindings($sub->getQuery())
+            ->where('user_id', $recipientId)
             ->whereNull('read_at')
-            ->get();*/
+            ->count();*/
 
-        return (new static())->where(function () use ($recipientId) {
+        /*return (new static())->where(function () use ($recipientId) {
             return static::chatMessagesQuery($recipientId);
-        })->where('user_id', $recipientId)->whereNull('read_at')->count();
+        })->where('user_id', $recipientId)->whereNull('read_at')->count();*/
+
+        $friend = User::find($recipientId);
+
+        return $friend->messages()
+            ->where(['recipient_id' => auth()->user()->id, 'read_at' => null])
+            ->count();
     }
 }

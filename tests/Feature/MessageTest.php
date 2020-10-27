@@ -212,14 +212,31 @@ test('a_user_can_fetch_unread_messages_count', function () {
         'body' => 'Second user message',
     ]);
     Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => $anotherUser->id,
+        'body' => 'Answer message',
+    ]);
+    Message::create([
         'user_id' => $anotherUser->id,
         'recipient_id' => $user->id,
         'body' => 'Third user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Fourth user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => 234,
+        'body' => 'Message for user 234',
     ]);
 
     $message->update([
         'read_at' => now(),
     ]);
+
+    // dd(Message::chatMessages($anotherUser->id));
 
     $response = $this->get('/api/auth-user-friends');
 
@@ -234,8 +251,8 @@ test('a_user_can_fetch_unread_messages_count', function () {
                         'name' => $anotherUser->name,
                     ],
                     'chat' => [
-                        'messages_count' => 3,
-                        'unread_messages_count' => 2,
+                        'messages_count' => 5,
+                        'unread_messages_count' => 3,
                     ],
                 ],
                 'links' => [
