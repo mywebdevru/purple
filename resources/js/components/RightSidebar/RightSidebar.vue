@@ -363,6 +363,10 @@ export default {
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
                     return;
                 }
+                if(document.hidden) {
+                    await this.$store.dispatch("fetchAuthUserFriends");
+                    return;
+                }
                 if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
                     this.startChat(e.message.data.attributes.sent_by.data.user_id);
                     chatOpened = true
