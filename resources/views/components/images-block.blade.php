@@ -34,7 +34,7 @@
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<div class="photo-item">
-									<img src="https://static1.bocoup.com/assets/2015/11/05183211/font-face.jpg" alt="">
+									<img src="{{ $imgSrc($item->image) }}" alt="">
 								</div>
 							</div>
 						</div>
@@ -47,12 +47,17 @@
                                 <a class="h6 post__author-name fn" href="">Author / Photogrpher</a>
                                 <div class="post__date">
                                     <time class="published" datetime="">
-
+                                        <h6>Дата опубликования</h6>
                                     </time>
                                 </div>
+                                <svg class="olymp-heart-icon">
+                                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
+                                </svg>
                             </div>
 					    </div>
-					</article>
+                    </article>
+                    <article class="hentry post"><h6>Комменты</h6></article>
+
 				</div>
 			</div>
 		</div>
