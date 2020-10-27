@@ -195,8 +195,6 @@ test('a_user_can_fetch_chat_messages', function () {
 test('a_user_can_fetch_unread_messages_count', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
-
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
@@ -236,8 +234,6 @@ test('a_user_can_fetch_unread_messages_count', function () {
         'read_at' => now(),
     ]);
 
-    // dd(Message::chatMessages($anotherUser->id));
-
     $response = $this->get('/api/auth-user-friends');
 
     $response->assertOk();
@@ -253,6 +249,74 @@ test('a_user_can_fetch_unread_messages_count', function () {
                     'chat' => [
                         'messages_count' => 5,
                         'unread_messages_count' => 3,
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/users/' . $anotherUser->id),
+                ],
+            ],
+        ],
+        'links' => [
+            'self' => url('/users'),
+        ]
+    ]);
+});
+
+test('a_user_can_mark_unread_messages_as_read', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->withoutExceptionHandling();
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $anotherUser = factory(User::class)->create(['id' => 123]);
+    Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
+
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'First user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Second user message',
+    ]);
+    Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => $anotherUser->id,
+        'body' => 'Answer message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Third user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Fourth user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => 234,
+        'body' => 'Message for user 234',
+    ]);
+
+    $response = $this->call('GET','/api/mark-chat-is-read', ['recipient_id' => $anotherUser->id]);
+
+    $response->assertOk();
+    $response->assertJson([
+        'data' => [
+            [
+                'data' => [
+                    'type' => 'users',
+                    'user_id' => $anotherUser->id,
+                    'attributes' => [
+                        'name' => $anotherUser->name,
+                    ],
+                    'chat' => [
+                        'messages_count' => 5,
+                        'unread_messages_count' => 0,
                     ],
                 ],
                 'links' => [
