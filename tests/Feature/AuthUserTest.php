@@ -38,7 +38,7 @@ class AuthUserTest extends TestCase
                 ],
             ],
             'links' => [
-                'self' => url('/users/' . $user->id),
+                'self' => url('/user/' . $user->id),
             ],
         ]);
     }
