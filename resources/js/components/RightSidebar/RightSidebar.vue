@@ -14,14 +14,14 @@
 
                 <ul class="chat-users">
 <!--                    loop-->
-                    <li class="inline-items js-chat-open">
+                    <li v-for="(friend, index) in authUserFriends.data" :key="index" class="inline-items js-chat-open">
                         <div class="author-thumb">
-                            <img alt="author" src="/img/spiegel.jpg" class="avatar">
+                            <img alt="author" :src="friend.data.attributes.avatar" class="avatar">
                             <span class="icon-status online"></span>
                         </div>
 
                         <div class="author-status">
-                            <a href="#" class="h6 author-name">Name</a>
+                            <a :href="friend.links.self" class="h6 author-name">{{ friend.data.attributes.full_name }}</a>
                             <span class="status">ONLINE</span>
                         </div>
                         <div class="more"><svg class="olymp-three-dots-icon"><use href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
