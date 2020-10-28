@@ -27,7 +27,7 @@
                         <div class="more"><svg class="olymp-three-dots-icon"><use href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
 
                             <ul class="more-icons">
-                                <li>
+                                <li @click="startChat(friend.data.user_id)">
                                     <svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use href="/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
                                 </li>
 
