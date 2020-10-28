@@ -15,7 +15,7 @@
     </div>
 
     <div class="search-friend inline-items">
-        <a href="#" class="js-sidebar-open">
+        <a href="#" class="js-sidebar-open" @click.prevent="$parent.sidebarToggle">
             <svg class="olymp-menu-icon"><use href="/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
         </a>
     </div>

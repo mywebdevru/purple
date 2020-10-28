@@ -76,7 +76,7 @@ it('get_proper_users_json', function () {
                     'user_id' => $superAdminUser->id,
                 ],
                 'links' => [
-                    'self' => url('/users/' . $superAdminUser->id),
+                    'self' => url('/user/' . $superAdminUser->id),
                 ],
             ],
             [
@@ -90,7 +90,7 @@ it('get_proper_users_json', function () {
                     'user_id' => $user->id,
                 ],
                 'links' => [
-                    'self' => url('/users/' . $user->id),
+                    'self' => url('/user/' . $user->id),
                 ],
             ],
         ],

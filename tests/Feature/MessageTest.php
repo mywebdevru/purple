@@ -73,7 +73,7 @@ test('a_user_can_fetch_his_friends', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $firstUsersFriend->id),
+                    'self' => url('/user/' . $firstUsersFriend->id),
                 ],
             ],
             [
@@ -85,7 +85,7 @@ test('a_user_can_fetch_his_friends', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $secondUsersFriend->id),
+                    'self' => url('/user/' . $secondUsersFriend->id),
                 ],
             ],
         ],
@@ -252,7 +252,7 @@ test('a_user_can_fetch_unread_messages_count', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $anotherUser->id),
+                    'self' => url('/user/' . $anotherUser->id),
                 ],
             ],
         ],
@@ -320,7 +320,7 @@ test('a_user_can_mark_unread_messages_as_read', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $anotherUser->id),
+                    'self' => url('/user/' . $anotherUser->id),
                 ],
             ],
         ],
