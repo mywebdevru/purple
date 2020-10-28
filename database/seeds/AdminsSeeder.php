@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class AdminsSeeder extends Seeder
      */
     public function run()
     {
+        $adminIds = [];
+
         $user = User::where('email', 'ruslan@skazkin.su')->first();
 
         if(!$user) {
@@ -30,6 +33,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $ruslan->assignRole('super-admin');
+            array_push($adminIds, $ruslan->id);
         }
 
         $user = User::where('email', 'x3mart@purple.team')->first();
@@ -46,6 +50,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $slava->assignRole('admin');
+            array_push($adminIds, $slava->id);
         }
 
         $user = User::where('email', 'alex@purple.team')->first();
@@ -62,6 +67,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $alex->assignRole('admin');
+            array_push($adminIds, $alex->id);
         }
         $user = User::where('email', 'evgeniy@purple.team')->first();
 
@@ -77,6 +83,17 @@ class AdminsSeeder extends Seeder
             ]);
 
             $evgen->assignRole('admin');
+            array_push($adminIds, $evgen->id);
         }
+
+        array_map(function ($userId) use ($adminIds) {
+            foreach ($adminIds as $otherUserId) {
+                if ($userId !== $otherUserId) {
+                    if (!Friend::where(['user_id' => $userId, 'friend_id' => $otherUserId])->first()) {
+                        Friend::makeFriends($userId, $otherUserId);
+                    }
+                }
+            }
+        }, $adminIds);
     }
 }

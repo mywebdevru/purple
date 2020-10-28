@@ -46,16 +46,16 @@ class Friend extends Model
         return $this->belongsTo('App\Models\User', 'friend_id');
     }
 
-    public static function makeFriends(int $userid, int $anotherUserId) : void
+    public static function makeFriends(int $userId, int $anotherUserId) : void
     {
-        DB::transaction(function () use ($userid, $anotherUserId) {
+        DB::transaction(function () use ($userId, $anotherUserId) {
             static::create([
-                'user_id' => $userid,
+                'user_id' => $userId,
                 'friend_id' => $anotherUserId,
             ]);
             static::create([
                 'user_id' => $anotherUserId,
-                'friend_id' => $userid,
+                'friend_id' => $userId,
             ]);
         });
     }
