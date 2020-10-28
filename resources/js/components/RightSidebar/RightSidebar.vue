@@ -317,6 +317,7 @@ export default {
         startChat(userId) {
             console.log(userId);
             this.chatClose();
+            this.sidebarOpen = false;
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
@@ -333,6 +334,7 @@ export default {
         },
         sidebarToggle() {
             console.log('click');
+            this.chatClose();
             this.sidebarOpen = !this.sidebarOpen;
         },
         async sendMessage() {
