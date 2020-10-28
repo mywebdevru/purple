@@ -47,7 +47,7 @@ class AdminsSeeder extends Seeder
                 'email' => 'x3mart@purple.team',
                 'password' => Hash::make('123'),
                 'creed' => 'Too old to die young',
-                'avatar' => 'https://thispersondoesnotexist.com/image',
+                'avatar' => '/admin/users/slava-avatar.jpeg',
                 'wallpaper' => 'https://picsum.photos/id/1049/1200/400',
             ]);
 
@@ -64,7 +64,7 @@ class AdminsSeeder extends Seeder
                 'email' => 'alex@purple.team',
                 'password' => Hash::make('123'),
                 'creed' => 'Too old to die young',
-                'avatar' => 'https://thispersondoesnotexist.com/image',
+                'avatar' => '',
                 'wallpaper' => 'https://picsum.photos/id/1049/1200/400',
             ]);
 
@@ -80,7 +80,7 @@ class AdminsSeeder extends Seeder
                 'email' => 'evgeniy@purple.team',
                 'password' => Hash::make('123'),
                 'creed' => 'Too old to die young',
-                'avatar' => 'https://thispersondoesnotexist.com/image',
+                'avatar' => '/img/ii.jpg',
                 'wallpaper' => 'https://picsum.photos/id/1049/1200/400',
             ]);
 
