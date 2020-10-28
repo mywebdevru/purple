@@ -13,6 +13,8 @@ class AdminsSeeder extends Seeder
      */
     public function run()
     {
+        User::unsetEventDispatcher();
+
         $adminIds = [];
 
         $user = User::where('email', 'ruslan@skazkin.su')->first();

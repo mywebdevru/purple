@@ -49,14 +49,8 @@ class Friend extends Model
     public static function makeFriends(int $userId, int $anotherUserId) : void
     {
         DB::transaction(function () use ($userId, $anotherUserId) {
-            static::create([
-                'user_id' => $userId,
-                'friend_id' => $anotherUserId,
-            ]);
-            static::create([
-                'user_id' => $anotherUserId,
-                'friend_id' => $userId,
-            ]);
+            User::find($userId)->friends()->create(['friend_id' => $anotherUserId]);
+            User::find($anotherUserId)->friends()->create(['friend_id' => $userId]);
         });
     }
 }
