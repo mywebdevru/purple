@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="fixed-sidebar right">
+    <div class="fixed-sidebar right" :class="[{'open' : sidebarOpen}]">
         <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="authUserFriends.data" />
 
         <div class="fixed-sidebar-right sidebar--large" id="sidebar-right-1">
@@ -55,7 +55,7 @@
                     <svg class="olymp-settings-icon"><use href="/svg-icons/sprites/icons.svg#olymp-settings-icon"></use></svg>
                 </a>
 
-                <a href="#" class="js-sidebar-open">
+                <a href="#" class="js-sidebar-open" @click.prevent="sidebarToggle">
                     <svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
                 </a>
             </div>
@@ -310,6 +310,7 @@ export default {
             chatShow: false,
             message: null,
             recipient: null,
+            sidebarOpen: false,
         }
     },
     methods: {
@@ -323,14 +324,16 @@ export default {
             this.$store.commit("setChatId", userId);
             this.$refs.chat.focus();
         },
-        chatClose()
-        {
+        chatClose() {
             this.chatShow = false;
             this.recipient = null;
             this.message = null;
             this.$store.commit("setMessages", null);
             this.$store.commit("setChatId", null);
-
+        },
+        sidebarToggle() {
+            console.log('click');
+            this.sidebarOpen = !this.sidebarOpen;
         },
         async sendMessage() {
             if(this.message === null || this.recipient === null) {
