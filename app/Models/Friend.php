@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Friend
@@ -43,5 +44,13 @@ class Friend extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'friend_id');
+    }
+
+    public static function makeFriends(int $userId, int $anotherUserId) : void
+    {
+        DB::transaction(function () use ($userId, $anotherUserId) {
+            User::find($userId)->friends()->create(['friend_id' => $anotherUserId]);
+            User::find($anotherUserId)->friends()->create(['friend_id' => $userId]);
+        });
     }
 }
