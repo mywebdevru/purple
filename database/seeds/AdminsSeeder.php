@@ -88,14 +88,13 @@ class AdminsSeeder extends Seeder
             array_push($adminIds, $evgen->id);
         }
 
-        array_map(function ($userId) use ($adminIds) {
+        foreach ($adminIds as $userId) {
             foreach ($adminIds as $otherUserId) {
                 if ($userId !== $otherUserId) {
-                    if (!Friend::where(['user_id' => $userId, 'friend_id' => $otherUserId])->first()) {
-                        Friend::makeFriends($userId, $otherUserId);
-                    }
+                    Friend::makeFriends($userId, $otherUserId);
                 }
             }
-        }, $adminIds);
+            array_splice($adminIds, 0, 1);
+        }
     }
 }
