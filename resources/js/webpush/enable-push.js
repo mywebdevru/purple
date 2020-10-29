@@ -14,14 +14,16 @@ function initSW() {
     }
 
     //register the service worker
-    navigator.serviceWorker.register('sw.js')
-        .then(() => {
-            console.log('serviceWorker installed!')
-            initPush();
-        })
-        .catch((err) => {
-            console.log(err)
-        });
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/js/sw.js')
+            .then(() => {
+                console.log('serviceWorker installed!')
+                initPush();
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
 }
 
 function initPush() {
