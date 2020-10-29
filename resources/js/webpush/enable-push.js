@@ -55,9 +55,7 @@ function subscribeUser() {
             console.log('here');
             const subscribeOptions = {
                 userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(
-                    'BE-gtGuLkz4zbQXUjYAoIBkSuAqL_ZyZwub_9HHCF0m-j-7rXNIYxPHQaS_GVmWNWs0gcr-0pUD6sFJFO8_jGxA'
-                )
+                applicationServerKey: urlBase64ToUint8Array(process.env.MIX_WEBPUSHER_PUBLIC_KEY)
             };
 
             return registration.pushManager.subscribe(subscribeOptions);
