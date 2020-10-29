@@ -94,7 +94,7 @@ class AdminsSeeder extends Seeder
                     Friend::makeFriends($userId, $otherUserId);
                 }
             }
-            array_splice($adminIds, 0, 1);
+            array_shift($adminIds);
         }
     }
 }
