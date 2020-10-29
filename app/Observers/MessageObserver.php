@@ -20,7 +20,7 @@ class MessageObserver
     public function created(Message $message)
     {
         event(new MessageSentEvent(new MessageResource($message)));
-        Notification::send(User::all(), new NewChatMessage);
+        Notification::send(User::all(), new NewChatMessage(User::find($message->user_id)));
     }
 
     /**
