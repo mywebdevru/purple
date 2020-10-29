@@ -15,7 +15,7 @@ function initSW() {
 
     //register the service worker
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/js/sw.js')
+        navigator.serviceWorker.register('/sw.js')
             .then(() => {
                 console.log('serviceWorker installed!')
                 initPush();
@@ -49,12 +49,14 @@ function initPush() {
 }
 
 function subscribeUser() {
+    console.log('subscribe!');
     navigator.serviceWorker.ready
         .then((registration) => {
+            console.log('here');
             const subscribeOptions = {
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(
-                    'YOUR_VAPID_PUBLIC_KEY'
+                    'BE-gtGuLkz4zbQXUjYAoIBkSuAqL_ZyZwub_9HHCF0m-j-7rXNIYxPHQaS_GVmWNWs0gcr-0pUD6sFJFO8_jGxA'
                 )
             };
 
@@ -67,6 +69,7 @@ function subscribeUser() {
 }
 
 function urlBase64ToUint8Array(base64String) {
+    console.log('encrypt!');
     var padding = '='.repeat((4 - base64String.length % 4) % 4);
     var base64 = (base64String + padding)
         .replace(/\-/g, '+')
@@ -82,6 +85,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function storePushSubscription(pushSubscription) {
+    console.log('store!');
     const token = document.querySelector('meta[name=csrf-token]').getAttribute('content');
 
     fetch('/push', {

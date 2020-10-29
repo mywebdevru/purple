@@ -5,6 +5,9 @@ namespace App\Observers;
 use App\Events\MessageSentEvent;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use App\Models\User;
+use App\Notifications\NewChatMessage;
+use Illuminate\Support\Facades\Notification;
 
 class MessageObserver
 {
@@ -17,6 +20,7 @@ class MessageObserver
     public function created(Message $message)
     {
         event(new MessageSentEvent(new MessageResource($message)));
+        Notification::send(User::all(), new NewChatMessage);
     }
 
     /**

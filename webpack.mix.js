@@ -20,7 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/map/map_edit', 'public/js/map')
     .js('resources/js/map/map_show', 'public/js/map')
     .js('resources/js/webpush/enable-push', 'public/js')
-    .js('resources/js/webpush/sw', 'public/js')
+    .js('resources/js/webpush/sw', 'public')
     .scripts(['resources/js/libs/fm.revealator.jquery.js',
             'resources/js/libs/jquery.appear.js',
             'resources/js/libs/jquery.magnific-popup.js',

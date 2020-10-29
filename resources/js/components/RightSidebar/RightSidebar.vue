@@ -362,7 +362,7 @@ export default {
     mounted() {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchAuthUserFriends");
-        Pusher.logToConsole = true;
+        Pusher.logToConsole = false;
         Echo.private('chat-message')
             .listen('MessageSentEvent', async (e) => {
                 let chatOpened = false;
