@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Models\Map;
 use Livewire\WithFileUploads;
 
 class NewMap extends Component
@@ -39,8 +40,23 @@ class NewMap extends Component
         }else{
             $this->map = User::find(auth()->user()->id)->maps()->orderBy('created_at', 'DESC')->first();
             $this->title = $this->map->title;
-            $this->description =$this->map->post->text;
+            $this->description = $this->map->post->text;
         }
+    }
+
+    public function saveDraft()
+    {
+        $this->saveMap();
+        $this->emitUp('showFeed');
+    }
+
+    public function publishMap()
+    {
+        $this->saveMap();
+        $this->map->update(['published' => true]);
+        return redirect()->route('map.index', [
+            'maps' => Map::orderBy('created_at', 'desc')->paginate(10)
+        ]);
     }
 
     public function previewMap()

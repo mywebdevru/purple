@@ -11,7 +11,7 @@
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a href="#">Моя страница</a>
+										<a href="#" wire:click.prevent="$emit('showUsersMaps')">Мои карты</a>
 									</li>
 									<li>
 										<a href="#">Друзья</a>

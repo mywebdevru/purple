@@ -1,19 +1,20 @@
 <div class="container">
-<div class="map-name w-75 mx-auto text-center">{{ $map->title }}</div>
-    <div class="col-md-12">
-        <div class="ui-block">
-            <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
-        </div>
-        @if (!!$description)
-            <div class="ui-block w-75 mx-auto p-2">
-                <div>{!! $description !!}</div>
+    <div class="map-name w-75 mx-auto text-center">{{ $map->title }}</div>
+        <div class="col-md-12">
+            <div class="ui-block">
+                <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
             </div>
-        @endif
-        <div class="text-center">
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Опубликовать</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Сохранить Черновик</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="editMap" wire:loading.attr="disabled">Редактировать</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
+            @if (!!$description)
+                <div class="ui-block w-75 mx-auto p-2">
+                    <div>{!! $description !!}</div>
+                </div>
+            @endif
+            <div class="text-center">
+                <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Опубликовать</button>
+                <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Сохранить Черновик</button>
+                <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="editMap" wire:loading.attr="disabled">Редактировать</button>
+                <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
+            </div>
         </div>
     </div>
     <script>
