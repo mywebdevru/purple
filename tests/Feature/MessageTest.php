@@ -51,7 +51,7 @@ test('a_user_can_send_a_message', function () {
     ]);
 });
 
-test('a_user_can_get_his_friends', function () {
+test('a_user_can_fetch_his_friends', function () {
     /* @var \Tests\TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
@@ -62,7 +62,6 @@ test('a_user_can_get_his_friends', function () {
     $response = $this->get('/api/auth-user-friends');
 
     $response->assertOk();
-    $response->assertJsonCount(2);
     $response->assertJson([
         'data' => [
             [
@@ -74,7 +73,7 @@ test('a_user_can_get_his_friends', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $firstUsersFriend->id),
+                    'self' => url('/user/' . $firstUsersFriend->id),
                 ],
             ],
             [
@@ -86,7 +85,7 @@ test('a_user_can_get_his_friends', function () {
                     ],
                 ],
                 'links' => [
-                    'self' => url('/users/' . $secondUsersFriend->id),
+                    'self' => url('/user/' . $secondUsersFriend->id),
                 ],
             ],
         ],
@@ -98,8 +97,6 @@ test('a_user_can_get_his_friends', function () {
 
 test('a_user_can_fetch_chat_messages', function () {
     /* @var \Tests\TestCase $this */
-
-    $this->withoutExceptionHandling();
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
@@ -123,7 +120,6 @@ test('a_user_can_fetch_chat_messages', function () {
     $response = $this->call('GET', '/api/messages', ['recipient_id' => $anotherUser->id]);
 
     $response->assertOk();
-    $response->assertJsonCount(2);
     $response->assertJson([
         'data' => [
             [
@@ -194,4 +190,142 @@ test('a_user_can_fetch_chat_messages', function () {
         ],
     ]);
 
+});
+
+test('a_user_can_fetch_unread_messages_count', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $anotherUser = factory(User::class)->create(['id' => 123]);
+    Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
+
+    $message = Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'First user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Second user message',
+    ]);
+    Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => $anotherUser->id,
+        'body' => 'Answer message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Third user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Fourth user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => 234,
+        'body' => 'Message for user 234',
+    ]);
+
+    $message->update([
+        'read_at' => now(),
+    ]);
+
+    $response = $this->get('/api/auth-user-friends');
+
+    $response->assertOk();
+    $response->assertJson([
+        'data' => [
+            [
+                'data' => [
+                    'type' => 'users',
+                    'user_id' => $anotherUser->id,
+                    'attributes' => [
+                        'name' => $anotherUser->name,
+                    ],
+                    'chat' => [
+                        'messages_count' => 5,
+                        'unread_messages_count' => 3,
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/user/' . $anotherUser->id),
+                ],
+            ],
+        ],
+        'links' => [
+            'self' => url('/users'),
+        ]
+    ]);
+});
+
+test('a_user_can_mark_unread_messages_as_read', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->withoutExceptionHandling();
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $anotherUser = factory(User::class)->create(['id' => 123]);
+    Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
+
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'First user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Second user message',
+    ]);
+    Message::create([
+        'user_id' => $user->id,
+        'recipient_id' => $anotherUser->id,
+        'body' => 'Answer message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Third user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => $user->id,
+        'body' => 'Fourth user message',
+    ]);
+    Message::create([
+        'user_id' => $anotherUser->id,
+        'recipient_id' => 234,
+        'body' => 'Message for user 234',
+    ]);
+
+    $response = $this->call('GET','/api/mark-chat-is-read', ['recipient_id' => $anotherUser->id]);
+
+    $response->assertOk();
+    $response->assertJson([
+        'data' => [
+            [
+                'data' => [
+                    'type' => 'users',
+                    'user_id' => $anotherUser->id,
+                    'attributes' => [
+                        'name' => $anotherUser->name,
+                    ],
+                    'chat' => [
+                        'messages_count' => 5,
+                        'unread_messages_count' => 0,
+                    ],
+                ],
+                'links' => [
+                    'self' => url('/user/' . $anotherUser->id),
+                ],
+            ],
+        ],
+        'links' => [
+            'self' => url('/users'),
+        ]
+    ]);
 });

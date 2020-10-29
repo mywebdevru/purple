@@ -7,6 +7,7 @@
                 <div class="author-thumb">
                     <img alt="author" :src="friend.data.attributes.avatar" class="avatar">
                     <span class="icon-status online"></span>
+                    <span v-if="friend.data.chat.unread_messages_count" class="badge badge-danger">{{ friend.data.chat.unread_messages_count }}</span>
                 </div>
             </li>
             <!--                    /loop -->
@@ -14,7 +15,7 @@
     </div>
 
     <div class="search-friend inline-items">
-        <a href="#" class="js-sidebar-open">
+        <a href="#" class="js-sidebar-open" @click.prevent="$parent.sidebarToggle">
             <svg class="olymp-menu-icon"><use href="/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
         </a>
     </div>
@@ -37,6 +38,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+.author-thumb
+    position: relative
+    .badge
+        position: absolute
+        top: -5px
+        right: -5px
+        z-index: 5
 </style>

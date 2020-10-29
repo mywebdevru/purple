@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Message
@@ -38,5 +39,55 @@ class Message extends Model
     public function recipient()
     {
         return $this->belongsTo(User::class, 'recipient_id', 'id');
+    }
+
+    /**
+     * @param $recipientId
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    private static function chatMessagesQuery($recipientId)
+    {
+        return (new static())->where(function ($query) use ($recipientId) {
+            return $query->where([
+                'user_id' => auth()->user()->id,
+                'recipient_id' => $recipientId,
+            ]);
+        })
+            ->orWhere(function ($query) use ($recipientId) {
+                return $query->where([
+                    'user_id' => $recipientId,
+                    'recipient_id' => auth()->user()->id,
+                ]);
+            });
+    }
+
+    public static function chatMessages($recipientId)
+    {
+        return static::chatMessagesQuery($recipientId)->get();
+    }
+
+    public static function chatMessagesCount($recipientId)
+    {
+        return static::chatMessagesQuery($recipientId)->count();
+    }
+
+    public static function chatUnreadMessagesCount($recipientId)
+    {
+        /*$sub = static::chatMessagesQuery($recipientId);
+        return DB::table( DB::raw("({$sub->toSql()}) as sub") )
+            ->mergeBindings($sub->getQuery())
+            ->where('user_id', $recipientId)
+            ->whereNull('read_at')
+            ->count();*/
+
+        /*return (new static())->where(function () use ($recipientId) {
+            return static::chatMessagesQuery($recipientId);
+        })->where('user_id', $recipientId)->whereNull('read_at')->count();*/
+
+        $friend = User::find($recipientId);
+
+        return $friend->messages()
+            ->where(['recipient_id' => auth()->user()->id, 'read_at' => null])
+            ->count();
     }
 }

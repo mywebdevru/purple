@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="fixed-sidebar right">
+    <div class="fixed-sidebar right" :class="[{'open' : sidebarOpen}]">
         <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="authUserFriends.data" />
 
         <div class="fixed-sidebar-right sidebar--large" id="sidebar-right-1">
@@ -14,20 +14,20 @@
 
                 <ul class="chat-users">
 <!--                    loop-->
-                    <li class="inline-items js-chat-open">
+                    <li v-for="(friend, index) in authUserFriends.data" :key="index" class="inline-items js-chat-open">
                         <div class="author-thumb">
-                            <img alt="author" src="/img/spiegel.jpg" class="avatar">
+                            <img alt="author" :src="friend.data.attributes.avatar" class="avatar">
                             <span class="icon-status online"></span>
                         </div>
 
                         <div class="author-status">
-                            <a href="#" class="h6 author-name">Name</a>
+                            <a :href="friend.links.self" class="h6 author-name">{{ friend.data.attributes.full_name }}</a>
                             <span class="status">ONLINE</span>
                         </div>
                         <div class="more"><svg class="olymp-three-dots-icon"><use href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
 
                             <ul class="more-icons">
-                                <li>
+                                <li @click="startChat(friend.data.user_id)">
                                     <svg data-toggle="tooltip" data-placement="top" data-original-title="START CONVERSATION" class="olymp-comments-post-icon"><use href="/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
                                 </li>
 
@@ -55,7 +55,7 @@
                     <svg class="olymp-settings-icon"><use href="/svg-icons/sprites/icons.svg#olymp-settings-icon"></use></svg>
                 </a>
 
-                <a href="#" class="js-sidebar-open">
+                <a href="#" class="js-sidebar-open" @click.prevent="sidebarToggle">
                     <svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
                 </a>
             </div>
@@ -310,26 +310,32 @@ export default {
             chatShow: false,
             message: null,
             recipient: null,
+            sidebarOpen: false,
         }
     },
     methods: {
         startChat(userId) {
             console.log(userId);
             this.chatClose();
+            this.sidebarOpen = false;
             this.chatShow = true;
             this.recipient = userId;
             this.$store.dispatch("fetchChatMessages", this.recipient);
+            this.$store.dispatch("markChatIsRead",  this.recipient);
             this.$store.commit("setChatId", userId);
             this.$refs.chat.focus();
         },
-        chatClose()
-        {
+        chatClose() {
             this.chatShow = false;
             this.recipient = null;
             this.message = null;
             this.$store.commit("setMessages", null);
             this.$store.commit("setChatId", null);
-
+        },
+        sidebarToggle() {
+            console.log('click');
+            this.chatClose();
+            this.sidebarOpen = !this.sidebarOpen;
         },
         async sendMessage() {
             if(this.message === null || this.recipient === null) {
@@ -361,6 +367,10 @@ export default {
             .listen('MessageSentEvent', async (e) => {
                 let chatOpened = false;
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
+                    return;
+                }
+                if(document.hidden) {
+                    await this.$store.dispatch("fetchAuthUserFriends");
                     return;
                 }
                 if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
