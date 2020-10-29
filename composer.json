@@ -25,7 +25,8 @@
         "pusher/pusher-php-server": "~3.0",
         "spatie/laravel-blade-javascript": "^2.5",
         "spatie/laravel-permission": "^3.13",
-        "thomaswelton/laravel-gravatar": "~1.0"
+        "thomaswelton/laravel-gravatar": "~1.0",
+      "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
