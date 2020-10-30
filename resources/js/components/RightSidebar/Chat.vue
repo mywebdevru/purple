@@ -48,10 +48,10 @@
                             </svg>
                         </div>
                       <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
-                        <div>
-                          <div>
-                            <input type="text" v-model="search">
-                          </div>
+                          <div class="emoji-picker" :style="{ top: display.y + 'px', left: display.x + 'px' }">
+                              <div class="emoji-picker__search">
+                                  <input type="text" v-model="search" v-focus>
+                              </div>
                           <div>
                             <div v-for="(emojiGroup, category) in emojis" :key="category">
                               <h5>{{ category }}</h5>
@@ -116,7 +116,14 @@ export default {
     },
     updated() {
         this.scrollToMessage();
-    }
+    },
+    directives: {
+        focus: {
+            inserted(el) {
+                el.focus()
+            },
+        },
+    },
 }
 </script>
 
@@ -128,10 +135,12 @@ export default {
 .popup-chat .chat-message-field .friend-message .chat-message-item
     background-color: #7c5ac2
     color: #fff
+.form-group
+    padding: .5rem
 .emoji-invoker
     position: absolute
-    top: 0.5rem
-    right: 0.5rem
+    top: 1rem
+    right: 1rem
     width: 1.5rem
     height: 1.5rem
     border-radius: 50%
@@ -144,26 +153,22 @@ export default {
     fill: #b1c6d0
 
 .emoji-picker
-    position: absolute
-    z-index: 1
-    font-family: Montserrat
-    border: 1px solid #ccc
-    width: 15rem
+    width: 100%
     height: 20rem
     overflow: scroll
     padding: 1rem
     box-sizing: border-box
-    border-radius: 0.5rem
     background: #fff
-    box-shadow: 1px 1px 8px #c7dbe6
 .emoji-picker__search
     display: flex
+    margin-bottom: 1rem
 .emoji-picker__search > input
     flex: 1
-    border-radius: 10rem
+    border-radius: .5rem
     border: 1px solid #ccc
-    padding: 0.5rem 1rem
+    padding: .25rem .5rem
     outline: none
+    font-size: .75rem
 .emoji-picker h5
     margin-bottom: 0
     color: #b1b1b1
