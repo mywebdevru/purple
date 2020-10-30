@@ -28,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /**
+         * Auto set path to App\Model\ when Model creating
+         */
         $this->app->extend('command.model.make', function ($command, $app) {
             return new ModelMakeCommand($app['files']);
         });
@@ -46,20 +49,5 @@ class AppServiceProvider extends ServiceProvider
         Post::observe(PostObserver::class);
         Comment::observe(CommentObserver::class);
         Message::observe(MessageObserver::class);
-
-        // Using class based composers...
-        View::composer(
-            [
-                'layouts.app', 'user.prof'
-
-            ], 'App\Http\View\Composers\ProfileComposer'
-        );
-
-        // Using Closure based composers...
-        View::composer([
-            'layouts.app',
-        ], function ($view) {
-            //
-        });
     }
 }
