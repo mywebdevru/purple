@@ -267,7 +267,7 @@ export default {
             "showMethod": "fadeIn",
             "closeMethod": "fadeOut"
         }
-        Pusher.logToConsole = true;
+        Pusher.logToConsole = false;
         Echo.private('admin-notifications')
             .listen('AdminPanelRealtimeNotification', async (e) => {
                 toastr.info(e.message);
