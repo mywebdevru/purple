@@ -34,14 +34,7 @@
 
                             <div class="wheel wheel__red create_post" wire:click.prevent="$emit('createNewPost')">
 
-                                <div class="wheel__inner__red">
-                                    <div class="wheel__content__red">п</div>
-                                    <div class="wheel__content__red">о</div>
-                                    <div class="wheel__content__red">с</div>
-                                    <div class="wheel__content__red">т</div>
-                                </div>
-
-                                <div class="btn btn-control bg-red" onmouseover="changeItemRed()" onmouseout="rechangeItemRed()" data-toggle="tooltip" data-placement="top" title="">
+                                <div class="btn btn-control bg-red" data-placement="top" title="">
                                     <svg class="olymp-blog-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-blog-icon') }}"></use></svg>
                                 </div>
 
@@ -49,14 +42,7 @@
 
                             <div class="wheel wheel__yellow" wire:click.prevent="$emit('createNewImage')">
 
-                                <div class="wheel__inner__yellow">
-                                    <div class="wheel__content__yellow">ф</div>
-                                    <div class="wheel__content__yellow">о</div>
-                                    <div class="wheel__content__yellow">т</div>
-                                    <div class="wheel__content__yellow">о</div>
-                                </div>
-
-                                <div class="btn btn-control bg-yellow" id="bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
+                                <div class="btn btn-control bg-yellow" id="bg-yellow" data-placement="top" title="">
                                     <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
                                 </div>
 
@@ -64,15 +50,7 @@
 
                             <div class="wheel wheel__green" wire:click.prevent="$emit('createNewMap')">
 
-                                <div class="wheel__inner__green">
-                                    <div class="wheel__content__green">к</div>
-                                    <div class="wheel__content__green">а</div>
-                                    <div class="wheel__content__green">р</div>
-                                    <div class="wheel__content__green">т</div>
-                                    <div class="wheel__content__green">а</div>
-                                </div>
-
-                                <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
+                                <div class="btn btn-control bg-green" data-placement="top" title="">
                                     <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
                                 </div>
 
