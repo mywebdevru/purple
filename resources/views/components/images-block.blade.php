@@ -7,7 +7,7 @@
             @foreach ($images as $item)
                 @if ($loop->iteration < 9)
                     <li>
-                    <a href="" data-toggle="modal" data-target="#open-photo-popup">
+                        <a href="" data-toggle="modal" data-target="#open-photo-popup" data-src="{{ $imgSrc($item->image) }}" class="photo-src">
                             <img src="{{ $imgSrc($item->image) }}" alt="photo">
                         </a>
                     </li>
@@ -34,7 +34,9 @@
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<div class="photo-item">
-									<img src="https://static1.bocoup.com/assets/2015/11/05183211/font-face.jpg" alt="">
+
+                                    <img class="modal-img" src="" alt="">
+
 								</div>
 							</div>
 						</div>
@@ -58,3 +60,19 @@
 		</div>
 	</div>
 </div>
+<script>
+    function img() {
+        var dataSrc = document.getElementsByClassName("photo-src");
+        var modalImg = document.getElementsByClassName("modal-img");
+        console.log(modalImg);
+        for (let i = 0; i < dataSrc.length; i++) {
+            var currentSrc = dataSrc[i].getAttribute('data-src');
+            console.log(currentSrc);
+        }
+        for (let l = 0; l < modalImg.length; l++) {
+            modalImg[l].setAttribute('src', currentSrc);
+            console.log(modalImg[l])
+        }
+    }
+    img();
+</script>
