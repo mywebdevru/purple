@@ -353,6 +353,7 @@ button:hover {
     width: 22px;
 }
 
+/*------------- #BUTTONS-action with icons --------------*/
 .icon-add {
     position: relative;
     display: inline-block;
@@ -445,39 +446,6 @@ button:hover {
     width: 48%;
 }
 
-.olymp-blog-icon {
-
-}
-.bg-red::after {
-    content: "\F067";
-    display: block;
-    position: absolute;
-    right: 8px;
-    top: -16px;
-    color: inherit;
-    font-size: 12px;
-    font-family: "PhpDebugbarFontAwesome";
-}
-.bg-yellow::after {
-    content: "\F067";
-    display: block;
-    position: absolute;
-    right: 8px;
-    top: -16px;
-    color: inherit;
-    font-size: 12px;
-    font-family: "PhpDebugbarFontAwesome";
-}
-.bg-green::after {
-    content: "\F067";
-    display: block;
-    position: absolute;
-    right: 8px;
-    top: -16px;
-    color: inherit;
-    font-size: 12px;
-    font-family: "PhpDebugbarFontAwesome";
-}
 /* .file-upload {
     position: relative;
     display: inline-block;
