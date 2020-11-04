@@ -63,10 +63,41 @@
 
         .map-title {
             padding: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .ui-block .map-title:focus {
+        .map-title input:focus {
             border: 1px gray;
+        }
+
+        .map-list-item{
+            width: 100%
+        }
+
+        .map-list-item__basic{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: baseline;
+            padding:15px;
+        }
+
+        .map-list-item__basic .btn{
+            margin: 0;
+        }
+
+        .map-list-item__basic a{
+            font-size: 1.1rem;
+        }
+
+        .map-list-item__additional {
+            padding: 10px 10% 0;
+            border-top: 1px solid #e6ecf5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* .loading-img-wrapper div progress {
@@ -131,8 +162,7 @@
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/chat.js') }}"></script>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-@yield('scripts')
+@stack('scripts')
 <script>
     function acceptFriendshipRequest(item)
     {

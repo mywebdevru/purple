@@ -11,7 +11,7 @@
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a href="#" wire:click.prevent="$emit('showUsersMaps')">Мои карты</a>
+                                    <a href="{{ route('user.maps', $user) }}">Мои карты</a>
 									</li>
 									<li>
 										<a href="#">Друзья</a>
@@ -29,7 +29,7 @@
 								</ul>
 							</div>
                         </div>
-                        @if (Route::getCurrentRoute()->getName() == 'user.show')
+                        @if (!!$isOwner)
                         <div class="control-block-button-left">
 
                             <div class="wheel wheel__red create_post" wire:click.prevent="$emit('createNewPost')">
@@ -46,23 +46,18 @@
                                 </div>
 
                             </div>
-
-                            <div class="wheel wheel__yellow" wire:click.prevent="$emit('createNewImage')">
-
-                                <div class="wheel__inner__yellow">
-                                    <div class="wheel__content__yellow">ф</div>
-                                    <div class="wheel__content__yellow">о</div>
-                                    <div class="wheel__content__yellow">т</div>
-                                    <div class="wheel__content__yellow">о</div>
+                                <div class="wheel wheel__yellow" wire:click.prevent="$emit('createNewImage')">
+                                    <div class="wheel__inner__yellow">
+                                        <div class="wheel__content__yellow">ф</div>
+                                        <div class="wheel__content__yellow">о</div>
+                                        <div class="wheel__content__yellow">т</div>
+                                        <div class="wheel__content__yellow">о</div>
+                                    </div>
+                                    <div class="btn btn-control bg-yellow" id="bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
+                                        <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
+                                    </div>
                                 </div>
-
-                                <div class="btn btn-control bg-yellow" id="bg-yellow" onmouseover="changeItemYellow()" onmouseout="rechangeItemYellow()" data-toggle="tooltip" data-placement="top" title="">
-                                    <svg class="olymp-photos-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-photos-icon') }}"></use></svg>
-                                </div>
-
-                            </div>
-
-                            <div class="wheel wheel__green" wire:click.prevent="$emit('createNewMap')">
+                            <div class="wheel wheel__green" wire:click.prevent="createMap">
 
                                 <div class="wheel__inner__green">
                                     <div class="wheel__content__green">к</div>
@@ -75,14 +70,11 @@
                                 <div class="btn btn-control bg-green" onmouseover="changeItemGreen()" onmouseout="rechangeItemGreen()" data-toggle="tooltip" data-placement="top" title="">
                                     <svg class="olymp-add-a-place-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use></svg>
                                 </div>
-
                             </div>
-
-
                         </div>
                         @endif
 						<div class="control-block-button">
-
+                            @if(!$isOwner)
                                 @if (auth()->user()->requestedFriendships->where('user_id', $user->id)->isEmpty() && $user->id !=auth()->user()->id && auth()->user()->friends->where('friend_id', $user->id)->isEmpty() && auth()->user()->friendshipRequests->where('friend_id', $user->id)->isEmpty())
                                     <div class="btn btn-control bg-blue more append">
                                         <svg class="olymp-happy-face-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-happy-face-icon') }}"></use></svg>
@@ -159,27 +151,27 @@
                                         </ul>
                                     </div>
                                 @endif
-                                    <a href="#" class="btn btn-control bg-purple" id="bg-purple">
-                                        <svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
-                                    </a>
-                                @can('update', $user)
-                                    <div class="btn btn-control bg-primary more append">
-                                        <svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
+                            @endif
+                                <a href="#" class="btn btn-control bg-purple" id="bg-purple">
+                                    <svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
+                                </a>
+                            @can('update', $user)
+                                <div class="btn btn-control bg-primary more append">
+                                    <svg class="olymp-settings-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-settings-icon') }}"></use></svg>
 
-                                        <ul class="more-dropdown more-with-triangle triangle-bottom-right">
-                                            <li>
-                                                <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="avatar">Фото профиля</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="wallpaper">Главное Фото</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('user.edit', $user->id) }}">Настройки профиля</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                @endcan
-
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="avatar">Фото профиля</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="profile-photo-modal-link" data-toggle="modal" data-target="#update-header-photo" data-upload-type="wallpaper">Главное Фото</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('user.edit', $user->id) }}">Настройки профиля</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endcan
 						</div>
 					</div>
 					<div class="top-header-author">

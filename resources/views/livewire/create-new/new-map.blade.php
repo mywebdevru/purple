@@ -1,11 +1,15 @@
 <div class="container">
+    <div>
+        <livewire:wallpaper-block :user="$user" :key="'wallpaper'.time()" />
+    </div>
     <div class="col-md-12" wire:ignore>
         <div class="ui-block">
             <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
         </div>
-        <div class="ui-block w-75 mx-auto">
-            <input wire:model.defer="title" id="map_title" type="text" name="name" placeholder="Название карты" class="map-title">
-            <label for="description{{ $map->id }}">Добавьте описание с фотографиями</label>
+        <div class="ui-block p-2 w-100">
+            <label class="pl-2" for="title">Обязательно добавьте название карты</label>
+            <input wire:model.defer="title" id="map_title" type="text" name="title" placeholder="Название карты" class="map-title">
+            <label class="pl-2" for="description{{ $map->id }}">Добавьте описание с фотографиями</label>
             <div id="description{{ $map->id }}">{!! $description !!}</div>
         </div>
     </div>
@@ -19,7 +23,8 @@
         <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" id="preview-map" wire:loading.attr="disabled">Предпросмотр</button>
         <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
     </div>
-
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    @push('scripts')
     <script>
         const editor = $(`#description{{ $map->id }}`),
         config = {
@@ -409,5 +414,6 @@
             });
         }
     </script>
+    @endpush
 </div>
 

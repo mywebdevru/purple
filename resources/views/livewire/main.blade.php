@@ -1,12 +1,11 @@
 <div>
+    <livewire:wallpaper-block :user="$user" :key="'wallpaper'.time()" />
     <div class="container">
         <div class="row">
-            @if (!!$actionMap)
-                <livewire:create-new.new-map :action="$actionMap" :key="'map'.time()" />
-            @elseif(!!$showNewMap)
-                <livewire:main.map :mapId="$showNewMap" :key="'newMap'.time()" />
-            @elseif(!!$showMapList)
-                <livewire:main.users-maps :user="$user" :key="'usersMaps'.time()" />
+            @if ($actionMap == 'create' || $actionMap == 'edit')
+                <livewire:create-new.new-map :action="$actionMap" :map="$map" :key="'newMap'.time()" />
+            @elseif(!!$actionMap == 'preview')
+                <livewire:main.map :map="$map" :user="$user" preview="1" :key="'previewMap'.time()" />
             @else
                 <livewire:feed :user="$user" :key="'feed'.time()" />
                 <livewire:main.left-column :user="$user" :key="'left-column'.time()" />

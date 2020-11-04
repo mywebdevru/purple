@@ -47,7 +47,6 @@
                                 <a class="h6 post__author-name fn" href="">Author / Photogrpher</a>
                                 <div class="post__date">
                                     <time class="published" datetime="">
-
                                     </time>
                                 </div>
                             </div>
@@ -56,5 +55,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
 </div>
