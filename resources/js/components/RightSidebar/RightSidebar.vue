@@ -308,7 +308,7 @@ export default {
     data: () => {
         return {
             chatShow: false,
-            message: null,
+            message: '',
             recipient: null,
             sidebarOpen: false,
         }
@@ -328,7 +328,7 @@ export default {
         chatClose() {
             this.chatShow = false;
             this.recipient = null;
-            this.message = null;
+            this.message = '';
             this.$store.commit("setMessages", null);
             this.$store.commit("setChatId", null);
         },

@@ -116,7 +116,9 @@
 @component('user.components.header.mobile.mobile_header')@endcomponent
 @auth
     <x-left-sidebar/>
-    <x-right-sidebar/>
+    <div id="right-sidebar">
+        <right-sidebar></right-sidebar>
+    </div>
 @endauth
 <div class="header-spacer"></div>
 

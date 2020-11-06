@@ -15,7 +15,7 @@ class AdminsSeeder extends Seeder
     {
         User::unsetEventDispatcher();
 
-        $adminIds = [];
+        $admins = [];
 
         $user = User::where('email', 'ruslan@skazkin.su')->first();
 
@@ -35,7 +35,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $ruslan->assignRole('super-admin');
-            array_push($adminIds, $ruslan->id);
+            array_push($admins, $ruslan);
         }
 
         $user = User::where('email', 'x3mart@purple.team')->first();
@@ -52,7 +52,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $slava->assignRole('admin');
-            array_push($adminIds, $slava->id);
+            array_push($admins, $slava);
         }
 
         $user = User::where('email', 'alex@purple.team')->first();
@@ -69,7 +69,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $alex->assignRole('admin');
-            array_push($adminIds, $alex->id);
+            array_push($admins, $alex);
         }
         $user = User::where('email', 'evgeniy@purple.team')->first();
 
@@ -85,16 +85,16 @@ class AdminsSeeder extends Seeder
             ]);
 
             $evgen->assignRole('admin');
-            array_push($adminIds, $evgen->id);
+            array_push($admins, $evgen);
         }
 
-        foreach ($adminIds as $userId) {
-            foreach ($adminIds as $otherUserId) {
-                if ($userId !== $otherUserId) {
-                    Friend::makeFriends($userId, $otherUserId);
+        foreach ($admins as $user) {
+            foreach ($admins as $otherUser) {
+                if ($user !== $otherUser) {
+                    Friend::makeFriends($user, $otherUser);
                 }
             }
-            array_shift($adminIds);
+            array_shift($admins);
         }
     }
 }
