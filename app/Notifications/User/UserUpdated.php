@@ -8,6 +8,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class UserUpdated extends Notification
 {
@@ -33,7 +35,7 @@ class UserUpdated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', WebPushChannel::class];
     }
 
     /**
@@ -66,4 +68,14 @@ class UserUpdated extends Notification
             'link' => url('/user/' . $this->user->id),
         ];
     }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+            ->title('Профиль обновлен')
+            ->icon($this->user->avatar)
+            ->body('Пользователь: ' . $this->user->full_name)
+            ->action('Открыть профиль пользователя', url('/user/' . $this->user->id));
+    }
+
 }
