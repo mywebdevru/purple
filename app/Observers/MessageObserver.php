@@ -20,7 +20,12 @@ class MessageObserver
     public function created(Message $message)
     {
         event(new MessageSentEvent(new MessageResource($message)));
-        Notification::send(User::all(), new NewChatMessage(User::find($message->user_id)));
+
+        //web pushes
+        if(false) {
+            // TODO: add settings for these notifications
+            Notification::send(User::all(), new NewChatMessage(User::find($message->user_id)));
+        }
     }
 
     /**
