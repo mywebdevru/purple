@@ -10,8 +10,8 @@
 
 
 
-                        <a href="#" class="open-image-modal" data-path="{{ $imgSrc($item->image) }}">
-                                <img src="{{ $imgSrc($item->image) }}" alt="photo">
+                        <a href="#" class="photo" data-modal="#modal_project_1" data-path="{{ $imgSrc($item->image) }}">
+                                <img class="photo__image" src="{{ $imgSrc($item->image) }}" alt="photo">
                         </a>
                     </li>
                 @else
@@ -29,94 +29,96 @@
     </div>
 </div>
 
-<div class="portfolio" id="portfolio">
-            <div class="portfolio__col" data-cat="app">
-                <div class="work" data-modal="#modal_project_1">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+<!-- <div class="modal-for-photo" id="modal-for-photo">
+            <div class="modal-for-photo__col" data-cat="app">
+                <div class="photo" data-modal="#modal_project_1">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
 
-            <div class="portfolio__col" data-cat="website">
-                <div class="work" data-modal="#modal_project_2">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+            <div class="modal-for-photo__col" data-cat="website">
+                <div class="photo" data-modal="#modal_project_2">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
 
-            <div class="portfolio__col" data-cat="interaction">
-                <div class="work">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+            <div class="modal-for-photo__col" data-cat="interaction">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
 
-            <div class="portfolio__col" data-cat="website">
-                <div class="work">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+            <div class="modal-for-photo__col" data-cat="website">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
 
-            <div class="portfolio__col" data-cat="interaction">
-                <div class="work">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+            <div class="modal-for-photo__col" data-cat="interaction">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
 
-            <div class="portfolio__col" data-cat="app">
-                <div class="work">
-                    <img class="work__image" src="https://placehold.it/370x300" alt="">
+            <div class="modal-for-photo__col" data-cat="app">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
                 </div>
             </div>
-        </div><!-- /.portfolio -->
+        </div>-->
 
 <div class="modal" id="modal_project_1">
     <div class="modal__dialog">
 
         <button class="modal__close" type="button" data-close>
-            <img src="{{ asset('img/modal-close.svg') }}" alt="Close">
+            <svg class="olymp-close-icon">
+                <use xlink:href="http://127.0.0.1:8000/svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+            </svg>
         </button>
 
-        <div class="modal-work">
-            <div class="modal-work__preview">
+        <div class="modal-photo">
+            <div class="modal-photo__preview">
                 <div data-slider="slick">
                     <div>
-                        <img class="modal-work__photo" src="https://placehold.it/790x780" alt="">
+                        <img class="modal-photo__photo" src="{{ $imgSrc($item->image) }}" alt="">
                     </div>
                     <div>
-                        <img class="modal-work__photo" src="https://placehold.it/790x780/333" alt="">
+                        <img class="modal-photo__photo" src="{{ $imgSrc($item->image) }}" alt="">
                     </div>
                 </div>
             </div>
-            <div class="modal-work__content">
+            <div class="modal-photo__content">
 
-                <div class="modal-work__header">
-                    <h3 class="modal-work__title">Project title</h3>
-                    <div class="modal-work__info">
-                        category <span class="modal-work__info-divider">|</span> 2018
+                <div class="modal-photo__header">
+                    <h3 class="modal-photo__title">Название</h3>
+                    <div class="modal-photo__info">
+                        Место <span class="modal-photo__info-divider">|</span> Дата
                     </div>
                 </div>
 
-                <div class="modal-work__client">
-                    <div class="modal-work__client-title">Client:</div>
-                    <div class="modal-work__client-company">Creative Agency</div>
+                <div class="modal-photo__client">
+                    <div class="modal-photo__client-title">Пользователь:</div>
+                    <div class="modal-photo__client-company">John Smith</div>
                 </div>
 
-                <div class="modal-work__text">
+                <div class="modal-photo__text">
+                    <p>Комментарий</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dicta, recusandae debitis iusto quos voluptatum at. Dolorum a, velit rerum dicta aut sapiente, optio accusantium? Sunt sed praesentium est minima.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dicta, recusandae debitis iusto quos voluptatum at. Dolorum a, velit rerum dicta aut sapiente, optio accusantium? Sunt sed praesentium est minima.</p>
                 </div>
 
-                <div class="modal-work__footer">
-                    <button class="modal-work__btn slickPrev" type="button">
-                        <img src="{{ asset('img/back.svg') }}" height="11" alt="">
-                        Previous
+                <div class="modal-photo__footer">
+                    <button class="modal-photo__btn slickPrev" type="button">
+                        <img class="modal-arrow" src="{{ asset('img/back.svg') }}" height="11" alt="">
+                        ПРЕД
                     </button>
-                    <button class="modal-work__btn slickNext" type="button">
-                        Next
-                        <img src="{{ asset('img/next.svg') }}" height="11" alt="">
+                    <button class="modal-photo__btn slickNext" type="button">
+                        СЛЕД
+                        <img class="modal-arrow" src="{{ asset('img/next.svg') }}" height="11" alt="">
                     </button>
                 </div>
 
-            </div><!-- /.modal-work__content -->
-        </div><!--/.modal-work -->
+            </div><!-- /.modal-photo__content -->
+        </div><!--/.modal-photo -->
 
     </div><!-- /.modal__dialog -->
 </div><!-- /.modal -->

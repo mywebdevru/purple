@@ -1,6 +1,6 @@
 $(function() {
 
-    const worksSlider = $('[data-slider="slick"]');
+    const photosSlider = $('[data-slider="slick"]');
 
     /* Filter
     =====================*/
@@ -15,9 +15,9 @@ $(function() {
             $("[data-cat]").removeClass("hide");
         } else {
             $("[data-cat]").each(function() {
-                let workCat = $(this).data('cat');
+                let photoCat = $(this).data('cat');
 
-                if(workCat != cat) {
+                if(photoCat != cat) {
                     $(this).addClass('hide');
                 } else {
                     $(this).removeClass('hide');
@@ -50,7 +50,7 @@ $(function() {
             });
         }, 200);
 
-        worksSlider.slick('setPosition');
+        photosSlider.slick('setPosition');
     });
 
 
@@ -93,7 +93,7 @@ $(function() {
     /* Slider: https://kenwheeler.github.io/slick/
     =====================*/
 
-    worksSlider.slick({
+    photosSlider.slick({
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
