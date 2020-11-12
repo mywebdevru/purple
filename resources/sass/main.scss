@@ -1,8 +1,8 @@
 //vedor
 
-@import './components/vendor/slick';
-@import './components/vendor/modal-slider';
-@import './components/vendor/slick-theme';
+@import '@modules/slick-carousel/slick/slick';
+@import './components/modal-slider';
+@import '@modules/slick-carousel/slick/slick-theme';
 
 
 @import 'variables';

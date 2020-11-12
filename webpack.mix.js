@@ -28,7 +28,7 @@ mix.js('resources/js/app.js', 'public/js')
             'resources/js/libs/perfect-scrollbar.js',
             'resources/js/libs/owl.carousel.min.js',
             'resources/js/libs/jquery.lettering.js',
-            'resources/js/slider/slick.min.js'], 'public/js/libs.js')
+            '@modules/slick-carousel/slick/slick.min.js'], 'public/js/libs.js')
     .scripts(['resources/js/slider/app.js',
             'resources/js/main/main.js',
             'resources/js/libs/libs-init.js',
