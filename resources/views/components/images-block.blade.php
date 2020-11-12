@@ -80,10 +80,10 @@
             <div class="modal-photo__preview">
                 <div data-slider="slick">
                     <div>
-                        <img class="modal-photo__photo" src="{{ $imgSrc($item->image) }}" alt="">
+                        <img class="modal-photo__photo" src="" alt="">
                     </div>
                     <div>
-                        <img class="modal-photo__photo" src="{{ $imgSrc($item->image) }}" alt="">
+                        <img class="modal-photo__photo" src="" alt="">
                     </div>
                 </div>
             </div>
