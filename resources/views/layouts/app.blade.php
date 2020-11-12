@@ -115,7 +115,9 @@
 @component('user.components.header.mobile.mobile_header')@endcomponent
 @auth
     <x-left-sidebar/>
-    <x-right-sidebar/>
+    <div id="right-sidebar">
+        <right-sidebar></right-sidebar>
+    </div>
 @endauth
 <div class="header-spacer"></div>
 
@@ -126,8 +128,14 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/chat.js') }}"></script>
+
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+@auth
+<script src="{{ asset('js/chat.js') }}"></script>
+<script src="{{ asset('js/enable-push.js') }}"></script>
+@endauth
+
 @yield('scripts')
 <script>
     function acceptFriendshipRequest(item)
