@@ -72,7 +72,7 @@
 
         <button class="modal__close" type="button" data-close>
             <svg class="olymp-close-icon">
-                <use xlink:href="http://127.0.0.1:8000/svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+                <use xlink:href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use>
             </svg>
         </button>
 
