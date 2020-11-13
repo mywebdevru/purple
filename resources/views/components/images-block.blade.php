@@ -80,10 +80,13 @@
             <div class="modal-photo__preview">
                 <div data-slider="slick">
                     <div>
-                        <img class="modal-photo__photo" src="" alt="">
+                        <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt="">
                     </div>
                     <div>
-                        <img class="modal-photo__photo" src="" alt="">
+                        <img class="modal-photo__photo" src="https://look.com.ua/pic/201311/1280x720/look.com.ua-83727.jpg" alt="">
+                    </div>
+                    <div>
+                        <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt="">
                     </div>
                 </div>
             </div>
