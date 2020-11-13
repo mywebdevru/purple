@@ -1,6 +1,6 @@
 // Скрипты для страницы редактирования профиля
 
-$(document).ready(function() 
+$(document).ready(function()
 {
 // $(function () {
 //     $('[data-toggle="tooltip"]').tooltip()
@@ -20,7 +20,7 @@ $('#js-carousel').owlCarousel({
     items: 2,
     nav: false,
     dots: false,
-  
+
     responsive: {
       600: {
         items: 3
@@ -64,28 +64,28 @@ $(function () {
 });
 
 
-    var oldText, newText; 
+    var oldText, newText;
     $(".change_text").bind("dblclick", replaceHTML);
-	 
-	 
+
+
 	$(document).on("click", ".btnSave", function(){
             newText = $(this).siblings("form")
                                 .children(".editBox")
                                 .val().replace(/"/g, "&quot;");
-                                
+
             $(this).parent()
                     .html(newText)
-                    .removeClass("noPad")                    
+                    .removeClass("noPad")
                     .bind("dblclick", replaceHTML);
-        }); 
-	
+        });
+
 	$(document).on("click", ".btnDiscard", function(){
             $(this).parent()
                     .html(oldText)
                     .removeClass("noPad")
                     .bind("dblclick", replaceHTML);
-        }); 
-	
+        });
+
 	function replaceHTML()
         {
             oldText = $(this).html()
@@ -113,7 +113,7 @@ var CRUMINA = {};
 		$document = $(document),
 		$body = $('body'),
         $sidebar = $('.fixed-sidebar');
-		
+
 
 	// Плавный скролл вверх
         jQuery('.back-to-top').on('click', function () {
@@ -121,7 +121,7 @@ var CRUMINA = {};
                 scrollTop: 0
             }, 1200);
             return false;
-        });    
+        });
 
 	// Выпадающее меню
 
@@ -242,7 +242,7 @@ var CRUMINA = {};
 	});
 
 
-	
+
 
 	CRUMINA.perfectScrollbarInit = function () {
 		var $chatContainer = $('.popup-chat .mCustomScrollbar');
@@ -259,10 +259,10 @@ var CRUMINA = {};
 	};
 
 
-	
+
 	$document.ready(function () {
 
-		
+
 
 		CRUMINA.perfectScrollbarInit();
 
@@ -271,7 +271,7 @@ var CRUMINA = {};
             $('#mediaplayer').mediaelementplayer({
                 "features": ['prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume']
             });
-        }		
+        }
 
 	});
 })(jQuery);

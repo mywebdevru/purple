@@ -1,4 +1,4 @@
-<div class="ui-block revealator-fade revealator-delay3 revealator-once">
+<div class="ui-block">
     <div class="ui-block-title">
         <h6 class="title">Фото ({{ $imagesCount() }})</h6>
     </div>
@@ -7,8 +7,11 @@
             @foreach ($images as $item)
                 @if ($loop->iteration < 9)
                     <li>
-                    <a href="" data-toggle="modal" data-target="#open-photo-popup">
-                            <img src="{{ $imgSrc($item->image) }}" alt="photo">
+
+
+
+                        <a href="#" class="photo" data-modal="#modal_project_1" data-path="{{ $imgSrc($item->image) }}">
+                                <img class="photo__image" src="{{ $imgSrc($item->image) }}" alt="photo">
                         </a>
                     </li>
                 @else
@@ -25,36 +28,97 @@
         </ul>
     </div>
 </div>
-<div class="modal fade modal-has-swiper" id="open-photo-popup">
-	<div class="modal-dialog window-popup open-photo-popup">
-		<div class="modal-content">
-			<div class="modal-body-gallery">
-				<div class="open-photo-thumb">
-					<div class="swiper-container" data-slide="fade">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<div class="photo-item">
-									<img src="https://static1.bocoup.com/assets/2015/11/05183211/font-face.jpg" alt="">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="open-photo-content">
-					<article class="hentry post">
-						<div class="post__author author vcard inline-items">
-                            <div class="author-date">
-                                <a class="h6 post__author-name fn" href="">Author / Photogrpher</a>
-                                <div class="post__date">
-                                    <time class="published" datetime="">
 
-                                    </time>
-                                </div>
-                            </div>
-					    </div>
-					</article>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- <div class="modal-for-photo" id="modal-for-photo">
+            <div class="modal-for-photo__col" data-cat="app">
+                <div class="photo" data-modal="#modal_project_1">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+
+            <div class="modal-for-photo__col" data-cat="website">
+                <div class="photo" data-modal="#modal_project_2">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+
+            <div class="modal-for-photo__col" data-cat="interaction">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+
+            <div class="modal-for-photo__col" data-cat="website">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+
+            <div class="modal-for-photo__col" data-cat="interaction">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+
+            <div class="modal-for-photo__col" data-cat="app">
+                <div class="photo">
+                    <img class="photo__image" src="" alt="">
+                </div>
+            </div>
+        </div>-->
+
+<div class="modal" id="modal_project_1">
+    <div class="modal__dialog">
+
+        <button class="modal__close" type="button" data-close>
+            <svg class="olymp-close-icon">
+                <use xlink:href="http://127.0.0.1:8000/svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+            </svg>
+        </button>
+
+        <div class="modal-photo">
+            <div class="modal-photo__preview">
+                <div data-slider="slick">
+                    <div>
+                        <img class="modal-photo__photo" src="" alt="">
+                    </div>
+                    <div>
+                        <img class="modal-photo__photo" src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-photo__content">
+
+                <div class="modal-photo__header">
+                    <h3 class="modal-photo__title">Название</h3>
+                    <div class="modal-photo__info">
+                        Место <span class="modal-photo__info-divider">|</span> Дата
+                    </div>
+                </div>
+
+                <div class="modal-photo__client">
+                    <div class="modal-photo__client-title">Пользователь:</div>
+                    <div class="modal-photo__client-company">John Smith</div>
+                </div>
+
+                <div class="modal-photo__text">
+                    <p>Комментарий</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dicta, recusandae debitis iusto quos voluptatum at. Dolorum a, velit rerum dicta aut sapiente, optio accusantium? Sunt sed praesentium est minima.</p>
+                </div>
+
+                <div class="modal-photo__footer">
+                    <button class="modal-photo__btn slickPrev" type="button">
+                        <img class="modal-arrow" src="{{ asset('img/back.svg') }}" height="11" alt="">
+                        ПРЕД
+                    </button>
+                    <button class="modal-photo__btn slickNext" type="button">
+                        СЛЕД
+                        <img class="modal-arrow" src="{{ asset('img/next.svg') }}" height="11" alt="">
+                    </button>
+                </div>
+
+            </div><!-- /.modal-photo__content -->
+        </div><!--/.modal-photo -->
+
+    </div><!-- /.modal__dialog -->
+</div><!-- /.modal -->

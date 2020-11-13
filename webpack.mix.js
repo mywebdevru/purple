@@ -27,11 +27,14 @@ mix.js('resources/js/app.js', 'public/js')
             'resources/js/libs/material.min.js',
             'resources/js/libs/perfect-scrollbar.js',
             'resources/js/libs/owl.carousel.min.js',
-            'resources/js/libs/jquery.lettering.js'], 'public/js/libs.js')
-    .scripts(['resources/js/main/main.js',
+            'resources/js/libs/jquery.lettering.js',
+            '@modules/slick-carousel/slick/slick.min.js'], 'public/js/libs.js')
+    .scripts(['resources/js/slider/app.js',
+            'resources/js/main/main.js',
             'resources/js/libs/libs-init.js',
             'resources/js/main/append.js',
-            'resources/js/main/wheel.js'] ,'public/js/main.js')
+            'resources/js/main/wheel.js',
+            ] ,'public/js/main.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/main.scss', 'public/css/main.css')
     .sass('resources/sass/admin/bootstrap.scss', 'public/css') //admin-panel

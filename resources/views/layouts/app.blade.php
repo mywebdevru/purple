@@ -9,7 +9,6 @@
 
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
-
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
