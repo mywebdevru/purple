@@ -1,3 +1,4 @@
+@role('admin|super-admin')
 <!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
@@ -104,3 +105,9 @@ window.onload = function() {
 </body>
 
 </html>
+@else
+    @extends('errors.minimal')
+    @section('title', __('Forbidden'))
+    @section('code', '403')
+    @section('message', __('Forbidden'))
+@endrole
