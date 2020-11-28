@@ -11,14 +11,14 @@
         }
     ],
     "paths": {
-        "/polls/answers": {
+        "/mark-chat-is-read": {
             "get": {
                 "tags": [
-                    "Опросы"
+                    "Chat"
                 ],
-                "summary": "Список ответов",
-                "description": "Получить полный список ответов",
-                "operationId": "getAnswersList",
+                "summary": "Mark chat messages read",
+                "description": "Mark chat messages read",
+                "operationId": "markChatisRead",
                 "responses": {
                     "403": {
                         "description": "Доступ запрещен"
@@ -45,8 +45,8 @@
     },
     "tags": [
         {
-            "name": "Опросы",
-            "description": "Опросы, голосование"
+            "name": "Chat",
+            "description": "Real-time chat routes"
         }
     ],
     "security": [

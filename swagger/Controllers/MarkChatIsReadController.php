@@ -1,19 +1,19 @@
 <?php
 /**
  * @OA\Tag(
- *     name="Опросы",
- *     description="Опросы, голосование",
+ *     name="Chat",
+ *     description="Real-time chat routes",
  * )
  */
 
 /**
  * @OA\Get(
- *      path="/polls/answers",
+ *      path="/mark-chat-is-read",
  *      security={{"bearerAuth":{}}},
- *      operationId="getAnswersList",
- *      tags={"Опросы"},
- *      summary="Список ответов",
- *      description="Получить полный список ответов",
+ *      operationId="markChatisRead",
+ *      tags={"Chat"},
+ *      summary="Mark chat messages read",
+ *      description="Mark chat messages read",
  *      @OA\Response(response=403, description="Доступ запрещен"),
  *      @OA\Response(response=200, description="OK"),
  * )
