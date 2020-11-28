@@ -1,7 +1,7 @@
 <?php
 /**
 * @OA\Get(path="/user",
-*   tags={"user"},
+*   tags={"User"},
 *   summary="Get the details of an authenticated user",
 *   description="",
 *   operationId="getAuthUser",
@@ -32,3 +32,15 @@
 *     }
 * )
 */
+
+/**
+ * @OA\Get(
+ *      path="/users",
+ *      operationId="markChatisRead",
+ *      tags={"User"},
+ *      summary="Users list",
+ *      description="Users list",
+ *      @OA\Response(response=403, description="Доступ запрещен"),
+ *      @OA\Response(response=200, description="OK"),
+ * )
+ */
