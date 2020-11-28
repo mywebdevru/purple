@@ -9,7 +9,9 @@
 /**
  * @OA\Get(
  *      path="/mark-chat-is-read",
- *      security={{"bearerAuth":{}}},
+ *      security={
+ *       {"api_key": {}}
+ *     },
  *      operationId="markChatisRead",
  *      tags={"Chat"},
  *      summary="Mark chat messages read",
