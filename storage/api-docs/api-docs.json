@@ -1,0 +1,55 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Offroad Paradise API",
+        "description": "Offroad Paradise API description",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/polls/answers": {
+            "get": {
+                "tags": [
+                    "Опросы"
+                ],
+                "summary": "Список ответов",
+                "description": "Получить полный список ответов",
+                "operationId": "getAnswersList",
+                "responses": {
+                    "403": {
+                        "description": "Доступ запрещен"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Опросы",
+            "description": "Опросы, голосование"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
