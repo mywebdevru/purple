@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class Main extends Component
 {
-    public $user;
-    public $map;
+    public $user, $map;
     public $actionMap = '';
     public $showNewMap = 0;
     public $showMapList = 0;
