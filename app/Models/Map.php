@@ -35,6 +35,7 @@ use Illuminate\Support\Str;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
+ * @property-read \App\Models\Post|null $post
  */
 class Map extends Model
 {

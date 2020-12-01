@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $read_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Message whereReadAt($value)
  */
 class Message extends Model
 {

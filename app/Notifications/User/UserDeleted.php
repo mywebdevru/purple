@@ -8,6 +8,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class UserDeleted extends Notification
 {
@@ -32,7 +34,7 @@ class UserDeleted extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', WebPushChannel::class];
     }
 
     /**
@@ -64,5 +66,14 @@ class UserDeleted extends Notification
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+            ->title('Удален пользователь')
+            ->icon($this->user->avatar)
+            ->body('Пользователь: ' . $this->user->email)
+            ->action('Открыть профиль пользователя', url('/user/' . $this->user->id));
     }
 }
