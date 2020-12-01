@@ -4,33 +4,60 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Map;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class Main extends Component
 {
-    public $user;
-    public $createMap = false;
+    public $user, $map;
+    public $actionMap = '';
     public $showNewMap = 0;
+    public $showMapList = 0;
 
-    protected $listeners = ['createNewMap' => 'toggleCreateMap', 'mapCreated', 'cancelCreateMap' => 'showFeed'];
+    protected $listeners = ['createNewMap' => 'createMap', 'editMap', 'showMap', 'showFeed', 'showUsersMaps'];
 
-    public function toggleCreateMap()
+    public function mount(User $user, Request $request)
     {
-        $this->createMap =!$this->createMap;
+        if($request->action == 'edit'){
+            $this->actionMap = 'edit';
+            $this->map = Map::find($request->map);
+        }
+        $this->user = $user;
     }
 
-    public function mapCreated(Map $map)
+    public function createMap()
     {
-        $this->toggleCreateMap();
-        $this->showNewMap = $map->id;
+        $this->actionMap = 'create';
     }
 
-    public function showFeed(){
-            $this->createMap = false;
-            $this->showNewMap = 0;
+    public function editMap()
+    {
+        $this->actionMap = 'edit';
+    }
+
+    public function showMap(Map $map)
+    {
+        $this->actionMap = 'preview';
+        $this->map = $map;
+    }
+
+    public function showUsersMaps()
+    {
+        $this->actionMap = '';
+        $this->showNewMap = 0;
+        $this->showMapList = 1;
+    }
+
+    public function showFeed()
+    {
+        $this->actionMap = '';
+        $this->showNewMap = 0;
     }
 
     public function render()
     {
-        return view('livewire.main');
+        return view('livewire.main')
+            ->extends('layouts.app', ['user' => $this->user])
+            ->section('content');
     }
 }

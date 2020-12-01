@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Post;
+use App\Models\Map;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class MapPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class PostPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
+     * @param  \App\Map  $map
      * @return mixed
      */
-    public function view(User $user, Post $post)
+    public function view(User $user, Map $map)
     {
         //
     }
@@ -41,35 +41,17 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->id === auth()->user()->id;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
+     * @param  \App\Map  $map
      * @return mixed
      */
-    public function update(?User $user, Post $post)
-    {
-        if(!$user){
-            return false;
-        }
-        if ($user->can('edit posts')) {
-            return true;
-        }
-        return $user->id === $post->postable_id && $post->postable_type == 'App\Models\User';
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
-     * @return mixed
-     */
-    public function delete(?User $user, Post $post)
+    public function update(User $user, Map $map)
     {
         if(!$user){
             return false;
@@ -77,17 +59,35 @@ class PostPolicy
         if($user->id != auth()->user()->id){
             return false;
         }
-        return $user->id === $post->postable()->first()->id;
+        return $user->id === $map->user()->first()->id;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Map  $map
+     * @return mixed
+     */
+    public function delete(User $user, Map $map)
+    {
+        if(!$user){
+            return false;
+        }
+        if($user->id != auth()->user()->id){
+            return false;
+        }
+        return $user->id === $map->user()->first()->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
+     * @param  \App\Map  $map
      * @return mixed
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user, Map $map)
     {
         //
     }
@@ -96,10 +96,10 @@ class PostPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
+     * @param  \App\Map  $map
      * @return mixed
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user, Map $map)
     {
         if(!$user){
             return false;
@@ -107,6 +107,6 @@ class PostPolicy
         if($user->id != auth()->user()->id){
             return false;
         }
-        return $user->id === $post->postable()->first()->id;
+        return $user->id === $map->user()->first()->id;
     }
 }

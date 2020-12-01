@@ -19,8 +19,8 @@ class CreateMapsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title')->default('Без названия');
             $table->string('slug')->unique()->nullable();
-            $table->text('map_data')->nullable();
-            $table->boolean('published')->default(0);
+            $table->json('map_data')->nullable();
+            $table->boolean('published')->nullable();
             $table->timestamps();
         });
     }

@@ -76,7 +76,6 @@
                     </svg>
                     <span>{{ count($image->comments) }}</span>
                 </a>
-
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
@@ -84,7 +83,6 @@
                     <span>16</span>
                 </a>
             </div>
-
         </div>
 
         <div class="control-block-button post-control-button">

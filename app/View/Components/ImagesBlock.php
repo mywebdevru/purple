@@ -17,6 +17,7 @@ class ImagesBlock extends Component
     public function __construct($images)
     {
         $this->images = $images;
+        // $this->images->load('comments.likes.authorable', 'likes.authorable', 'comments.authorable');
     }
 
     public function imagesCount()

@@ -1,21 +1,57 @@
-<div class="container">
-<div class="map-name w-75 mx-auto text-center">{{ $map->title }}</div>
-    <div class="col-md-12">
-        <div class="ui-block">
-            <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
-        </div>
-        @if (!!$description)
-            <div class="ui-block w-75 mx-auto p-2">
-                <div>{!! $description !!}</div>
+<div class="container mb-3" x-data="{'show_comments' : @entangle('commentsIsShown')}">
+    <livewire:wallpaper-block :user="$user" :key="'wallpaper'.time()" />
+    <div class="map-title text-center">{{ $map->title }}</div>
+        <div class="col-md-12">
+            <div class="ui-block" wire:ignore>
+                <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
             </div>
-        @endif
-        <div class="text-center">
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Опубликовать</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Черновик</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="$emit('cancelCreateMap')" wire:loading.attr="disabled">Редактировать</button>
-            <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
+            <div class="ui-block w-100 p-2">
+                @if (!!$description)
+                    <div>{!! $description !!}</div>
+                @endif
+                @if ($mode == 'show')
+                    <div class="map-list-item__additional inline-items">
+                        <livewire:like :item="$map" :key="'likes'.$map->id" />
+                        <div class="comments-shared">
+                            <a href="#" class="post-add-icon inline-items" wire:click.prevent="toggleComments">
+                                <svg class="olymp-speech-balloon-icon">
+                                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
+                                </svg>
+                                <span>{{ count($map->comments) }}</span>
+                            </a>
+                            <a href="#" class="post-add-icon inline-items">
+                                <svg class="olymp-share-icon">
+                                    <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
+                                </svg>
+                                <span>16</span>
+                            </a>
+                        </div>
+                    </div>
+                    @if (!!$commentsCount)
+                        <div class="more-comments-wrapper">
+                            {!! $showCommentsButton !!}
+                        </div>
+                    @endif
+                    @if ($commentsIsLoaded)
+                        <ul class="comments-list"  x-bind:class="{'feed-hide' : !!!show_comments, 'comments-show' : !!show_comments}">
+                            @foreach ($map->comments->sortByDesc('created_at') as $comment)
+                                <livewire:feed.comment :comment="$comment" :key="'comment'.$comment->id"/>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <livewire:feed.write-comment :feedItem="$map" :key="'create_post_comment'.$map->id"/>
+                @endif
+            </div>
+            @if($mode == 'preview')
+                <div class="text-center">
+                    <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="publishMap" wire:loading.attr="disabled">Опубликовать</button>
+                    <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" wire:click.prevent="editMap" wire:loading.attr="disabled">Редактировать</button>
+                    <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
+                </div>
+            @endif
         </div>
     </div>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script>
         ymaps.ready(init);
         function init() {

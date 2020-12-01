@@ -6,51 +6,78 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Models\Map;
 use Livewire\WithFileUploads;
 
 class NewMap extends Component
 {
     use WithFileUploads;
 
-    public $description='';
-    public $title='';
-    public $map_data;
-    public $map;
-    public $post;
-    public $photo;
-    public $name;
+    public $map_data, $map, $post, $photo, $name, $action, $user, $description, $title;
 
     protected $messages = [
         'title.required' => 'Введите название карты.',
         'title.min' => 'Название не короче пяти символов.',
+        'map_data.min' => 'Нарисуйте свой маршрут',
     ];
 
-    public function mount()
+    public function mount(User $user, $action, Map $map)
     {
-        $this->createMap();
+        abort_if($this->user->cant('update', $this->map), 403, 'Это не ваша карта!');
+        $this->action = $action;
+        $this->map = $map;
+        $this->setMapAttributes();
+        $this->user=$user;
     }
 
-    public function createMap()
+    protected function setMapAttributes()
     {
-        $this->map = User::find(auth()->user()->id)->maps()->create();
+        if($this->action == 'create'){
+            $this->title = '';
+            $this->description = '';
+        } elseif($this->action == 'edit') {
+            $this->title = $this->map->title;
+            $this->description = $this->map->post->text;
+        } else{
+            abort(404,'Нет такой страницы');
+        }
     }
 
-    public function saveMap()
+    public function saveDraft()
     {
+        $this->saveMap();
+    }
+
+    public function publishMap()
+    {
+        $this->saveMap();
+        $this->map->update(['published' => true]);
+        return redirect()->route('user.maps', ['user' => auth()->user()->id]);
+    }
+
+    public function previewMap()
+    {
+        $this->saveMap();
+        return redirect()->route('user.map.show', ['user' => auth()->user()->id, 'mode' => 'preview', 'map' => $this->map]);
+    }
+
+    protected function saveMap()
+    {
+        abort_if($this->user->cant('update', $this->map), 403, 'Вы не можете редактировать эту карту!');
         $this->validate([
             'title' => 'required|min:5',
-            'map_data' => 'json',
+            'map_data' => 'json|min:8',
             'description' => 'string|nullable'
         ]);
         $this->map->update(['title' => $this->title, 'map_data' => $this->map_data]);
         $this->map->post()->update(['text' => $this->description]);
-        $this->emit('mapCreated', $this->map->id);
     }
 
     public function deleteMap()
     {
+        abort_if($this->user->cant('delete', $this->map), 403, 'Вы не имеете права удалять эту карту!');
         $this->map->delete();
-        $this->emit('cancelCreateMap');
+        return redirect()->route('user.maps', ['user' => auth()->user()->id]);
     }
 
     public function savePhoto()
@@ -77,6 +104,8 @@ class NewMap extends Component
 
     public function render()
     {
-        return view('livewire.create-new.new-map');
+        return view('livewire.create-new.new-map')
+            ->extends('layouts.app', ['user' => $this->user])
+            ->section('content');
     }
 }

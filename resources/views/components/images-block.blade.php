@@ -28,7 +28,6 @@
         </ul>
     </div>
 </div>
-
 <!-- <div class="modal-for-photo" id="modal-for-photo">
             <div class="modal-for-photo__col" data-cat="app">
                 <div class="photo" data-modal="#modal_project_1">

@@ -14,9 +14,11 @@ class MapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        return redirect()->route('map.index', [
+            'maps' => $user->maps()->orderBy('created_at', 'desc')
+        ]);
     }
 
     /**

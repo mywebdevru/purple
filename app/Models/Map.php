@@ -58,4 +58,20 @@ class Map extends Model
     {
         return $this->morphOne('App\Models\Post', 'postable');
     }
+
+    /**
+     * Get the Map's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Models\Comment', 'commentable');
+    }
+
+    /**
+     * Get the Map's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Models\Like', 'likeable');
+    }
 }

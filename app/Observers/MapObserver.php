@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Map;
 use App\Models\Post;
+use App\Models\Like;
 
 class MapObserver
 {
@@ -30,14 +31,19 @@ class MapObserver
     }
 
     /**
-     * Handle the map "deleted" event.
+     * Handle the map "deleting" event.
      *
      * @param  \App\Models\Map  $map
      * @return void
      */
     public function deleting(Map $map)
     {
-        Post::find($map->post->id)->delete();
+        Like::whereIn('likeable_id', $map->comments()->pluck('id'))
+            ->where('likeable_type', Comment::class)
+            ->delete();
+        $map->comments()->forceDelete();
+        $map->likes()->forceDelete();
+        Post::findOrFail($map->post->id)->delete();
     }
 
     /**

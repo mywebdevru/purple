@@ -4,9 +4,9 @@
         <livewire:create-new.new-image :key="time().'new_image'" />
         @foreach ($feed as $item)
             @if($item['feedable_type'] == 'App\Models\Post')
-                <livewire:feed.post :post="$item->feedable" :key="time().'post'.$item->feedable->id"/>
+                <livewire:feed.post :user="$user" :post="$item->feedable" :key="time().'post'.$item->feedable->id"/>
             @else
-                <livewire:feed.image :image="$item->feedable" :key="time().'image'.$item->feedable->id"/>
+                <livewire:feed.image :user="$user" :image="$item->feedable" :key="time().'image'.$item->feedable->id"/>
             @endif
         @endforeach
     </div>
