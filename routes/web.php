@@ -90,3 +90,4 @@ Route::group([
     Route::resource('friendship_request', 'FriendshipRequestController');
 });
 
+Route::post('/push','PushController');
