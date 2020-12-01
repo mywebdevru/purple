@@ -23,8 +23,8 @@
         <button type="button" class="btn btn-file btn-md-2 btn-success comment-form__button" id="preview-map" wire:loading.attr="disabled">Предпросмотр</button>
         <button type="button" class="btn btn-file btn-md-2 btn-danger comment-form__button" wire:click.prevent="deleteMap" wire:loading.attr="disabled">Удалить</button>
     </div>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     @push('scripts')
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script>
         const editor = $(`#description{{ $map->id }}`),
         config = {

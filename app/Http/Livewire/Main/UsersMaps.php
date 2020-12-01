@@ -40,14 +40,7 @@ class UsersMaps extends Component
 
     public function deleteMap(Map $map)
     {
-        DB::transaction(function () use($map) {
-            $comments = $map->comments();
-            Like::whereIn('likeable_id', $comments->pluck('id'))->where('likeable_type', Comment::class)->delete();
-            $comments->forceDelete();
-            $map->likes()->forceDelete();
-            $map->post();
-            $map->delete();
-        });
+        $map->delete();
         $this->setMaps();
     }
 
