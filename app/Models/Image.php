@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
  * @property-read int|null $likes_count
  * @property-read Model|\Eloquent $postable
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|Image whereDescription($value)
  */
 class Image extends Model
 {

@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\ImagePolicy;
+use App\Policies\MapPolicy;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Map;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Post::class => PostPolicy::class,
         User::class => UserPolicy::class,
         Image::class => ImagePolicy::class,
+        Map::class => MapPolicy::class,
     ];
 
     /**

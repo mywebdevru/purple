@@ -17,11 +17,10 @@ class CreateMapsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->text('map_data');
-            $table->boolean('published')->default(0);
+            $table->string('title')->default('Без названия');
+            $table->string('slug')->unique()->nullable();
+            $table->json('map_data')->nullable();
+            $table->boolean('published')->nullable();
             $table->timestamps();
         });
     }

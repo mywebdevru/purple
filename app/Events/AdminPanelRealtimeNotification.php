@@ -23,6 +23,6 @@ class AdminPanelRealtimeNotification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return ['admin-notifications'];
+        return new PrivateChannel('admin-notifications');
     }
 }

@@ -1,4 +1,4 @@
-<div class="ui-block" x-data="{'show_comments' : @entangle('commentsIsShown')}" x-bind:class="{'feed-hide' : $wire.deleted}">
+<div class="ui-block" x-data="{'show_comments' : @entangle('commentsIsShown'), show_more:  @entangle('showMore')}" x-bind:class="{'feed-hide' : $wire.deleted}">
     <!-- Пост -->
     <article  class="hentry post" data-id="{{ $post['id'] }}">
         <div class="post__author author vcard inline-items">
@@ -12,7 +12,7 @@
                 </div>
             </div>
             @can('update', $post)
-            <div class="more" x-data="{show_more:  @entangle('showMore')}" wire:loading.class="feed-load-scale-x" wire:target ="deletePost">
+            <div class="more"  wire:loading.class="feed-load-scale-x" wire:target ="deletePost">
                 <svg class="olymp-three-dots-icon">
                     <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-three-dots-icon') }}"></use>
                 </svg>
@@ -31,17 +31,16 @@
             @if (!$editPost)
                 {!! $text !!}
             @else
-            <form wire:submit.prevent="savePost" method="post">
                 <div class="form-group" wire:ignore>
                     <label for="post{{ $post->id }}">Ваш пост увидят и прочтут!</label>
-                <textarea id="post{{ $post->id }}" class="form-control" name="text">{!! $text !!}</textarea>
+                <div id="post{{ $post->id }}" class="form-control" name="text">121
+                    &lt;script&gt;alert('sdfsdgsfg')&lt;/script&gt;{!! $text !!}</div>
                 </div>
-                <button type="submit" class="btn btn-success" wire.loading.attr="disabled">
+                <button type="submit" wire:click.prevent="savePost" class="btn btn-success" wire.loading.attr="disabled">
                     Сохранить
                 </button>
-            </form>
                 <script>
-                    var post_id = {{ $post->id }}
+                    let post_id = {{ $post->id }}
                     const editor = $(`#post${post_id}`),
                         config = {
                             lang: 'ru-RU',
@@ -51,7 +50,7 @@
                             disableDragAndDrop: false,
                             toolbar: [
                                 // [groupName, [list of button]]
-                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['style', ['bold', 'italic', 'underline', 'strikethrough']],
                                 ['color', ['color']],
                                 ['para', ['ul', 'ol', 'paragraph']],
                                 ['insert', ['link', 'picture', 'video']],

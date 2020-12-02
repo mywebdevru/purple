@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Shared\SummernoteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Shared\SummernoteController;
+use App\Http\Livewire\Main;
+use App\Http\Livewire\Main\Map;
+use App\Http\Livewire\Main\UsersMaps;
+use App\Http\Livewire\CreateNew\NewMap;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +55,10 @@ Route::group([
     Route::get('{user}/edit/secure', 'ProfileController@edit')->name('secure');
 });
 
-Route::resource('user','User\ProfileController')->except(['index', 'store'])->middleware('auth');
-Route::resource('like','Like\LikeController')->except(['index',])->middleware('auth');
+Route::get('/user/{user}', [Main::class, '__invoke'])->name('user.show')->middleware('auth');
+Route::get('/user/{user}/maps', [UsersMaps::class, '__invoke'])->name('user.maps')->middleware('auth');
+Route::get('/user/{user}/{action}/map/{map}', [NewMap::class, '__invoke'])->name('user.map.edit')->middleware('auth');
+Route::get('/user/{user}/map/{map}/{mode}', [Map::class, '__invoke'])->name('user.map.show')->middleware('auth');
 
 Route::group([
     'namespace' => 'User',
@@ -59,27 +66,28 @@ Route::group([
     'middleware' => 'auth',
     'as' => 'user.'
 ], function () {
-    Route::get('{user}/edit/personal', 'PersonalInfoController@edit')->name('personal');
+    Route::get('{user}/edit/personal', 'PersonalInfoController@edit')->name('edit');
     Route::put('edit/personal/{user}', 'PersonalInfoController@update')->name('personal.update');
-    Route::get('{user}/edit/vehicles', 'VehicleController@edit')->name('vehicles');
-    Route::put('edit/vehicles/{vehicle}', 'VehicleController@update')->name('vehicles.update');
-    Route::post('edit/vehicles', 'VehicleController@store')->name('vehicles.store');
-    Route::delete('edit/vehicles/{vehicle}', 'VehicleController@destroy')->name('vehicles.destroy');
-    Route::get('{user}/edit/maps', 'MapController@edit')->name('maps');
-    Route::put('edit/maps/{map}', 'MapController@update')->name('maps.update');
-    Route::post('edit/maps', 'MapController@store')->name('maps.store');
-    Route::delete('edit/maps/{map}', 'MapController@destroy')->name('maps.destroy');
-    Route::get('{user}/edit/clubs', 'ClubController@edit')->name('clubs');
-    Route::put('edit/clubs/{club}', 'ClubController@update')->name('clubs.update');
-    Route::post('edit/clubs', 'ClubController@store')->name('clubs.store');
-    Route::delete('{user}/edit/clubs', 'ClubController@destroy')->name('clubs.destroy');
-    Route::get('{user}/edit/groups', 'GroupController@edit')->name('groups');
-    Route::put('edit/groups/{group}', 'GroupController@update')->name('groups.update');
-    Route::post('{user}/edit/groups', 'GroupController@store')->name('groups.store');
-    Route::delete('edit/groups/{group}', 'GroupController@destroy')->name('groups.destroy');
+    // Route::get('{user}/edit/vehicles', 'VehicleController@edit')->name('vehicles');
+    // Route::put('edit/vehicles/{vehicle}', 'VehicleController@update')->name('vehicles.update');
+    // Route::post('edit/vehicles', 'VehicleController@store')->name('vehicles.store');
+    // Route::delete('edit/vehicles/{vehicle}', 'VehicleController@destroy')->name('vehicles.destroy');
+    // Route::get('{user}/edit/maps', 'MapController@edit')->name('maps');
+    // Route::put('edit/maps/{map}', 'MapController@update')->name('maps.update');
+    // Route::post('edit/maps', 'MapController@store')->name('maps.store');
+    // Route::delete('edit/maps/{map}', 'MapController@destroy')->name('maps.destroy');
+    // Route::get('{user}/edit/clubs', 'ClubController@edit')->name('clubs');
+    // Route::put('edit/clubs/{club}', 'ClubController@update')->name('clubs.update');
+    // Route::post('edit/clubs', 'ClubController@store')->name('clubs.store');
+    // Route::delete('{user}/edit/clubs', 'ClubController@destroy')->name('clubs.destroy');
+    // Route::get('{user}/edit/groups', 'GroupController@edit')->name('groups');
+    // Route::put('edit/groups/{group}', 'GroupController@update')->name('groups.update');
+    // Route::post('{user}/edit/groups', 'GroupController@store')->name('groups.store');
+    // Route::delete('edit/groups/{group}', 'GroupController@destroy')->name('groups.destroy');
     Route::get('{user}/edit/friends', 'FriendsController@edit')->name('friends');
     Route::post('edit/friends', 'FriendsController@store')->name('friends.store');
     Route::delete('edit/friends/{friend}', 'FriendsController@destroy')->name('friends.destroy');
     Route::resource('friendship_request', 'FriendshipRequestController');
 });
 
+Route::post('/push','PushController');

@@ -33,10 +33,13 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Map whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Map whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\Post|null $post
  */
 class Map extends Model
 {
-    protected $fillable = ['user_id', 'title' , 'slug', 'description', 'map_data', 'published'];
+    protected $fillable = ['user_id', 'title' , 'slug', 'map_data', 'published'];
 
     //Mutators
     public function setSlugAttribute($value){
@@ -51,8 +54,24 @@ class Map extends Model
     /**
      * Get the Map's Images.
      */
-    public function images()
+    public function post()
     {
-        return $this->morphMany('App\Models\Image', 'imageable');
+        return $this->morphOne('App\Models\Post', 'postable');
+    }
+
+    /**
+     * Get the Map's Comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Models\Comment', 'commentable');
+    }
+
+    /**
+     * Get the Map's Likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Models\Like', 'likeable');
     }
 }

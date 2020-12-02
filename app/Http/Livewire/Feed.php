@@ -28,9 +28,9 @@ class Feed extends Component
     {
         $id=$this->user->id;
         if (!!auth()->user() && auth()->user()->id == $id) {
-            $groups = $this->user->subscribes()->where('subscrable_type', Group::class)->pluck('subscrable_id');
-            $users = $this->user->subscribes()->where('subscrable_type', User::class)->pluck('subscrable_id');
-            $clubs = $this->user->subscribes()->where('subscrable_type', Club::class)->pluck('subscrable_id');
+            $groups = $this->user->subscribesToGroups()->pluck('subscrable_id');
+            $users = $this->user->subscribesToUsers()->pluck('subscrable_id');
+            $clubs = $this->user->subscribesToClubs()->pluck('subscrable_id');
             $feeds = ModelFeed::where(function ($query) use ($users){
                 return $query->where('authorable_type', [User::class])->whereIn('authorable_id', $users);
                 })->orWhere(function ($query) use ($clubs){
@@ -39,7 +39,7 @@ class Feed extends Component
                         return $query->where('authorable_type', [Group::class])->whereIn('authorable_id', $groups);
                 })->orderBy('updated_at','DESC');
         } else {
-            $feeds = ModelFeed::where('authorable_type', [User::class])->where('authorable_id', $id)->orderBy('updated_at','DESC');
+            $feeds = $this->user->feeds()->orderBy('updated_at','DESC');
         }
         $feeds->with(['feedable.comments',
                     'feedable.likes.authorable'])

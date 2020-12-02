@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->id === auth()->user()->id;
     }
 
     /**
@@ -69,9 +69,15 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return mixed
      */
-    public function delete(User $user, Post $post)
+    public function delete(?User $user, Post $post)
     {
-        //
+        if(!$user){
+            return false;
+        }
+        if($user->id != auth()->user()->id){
+            return false;
+        }
+        return $user->id === $post->postable()->first()->id;
     }
 
     /**
@@ -95,6 +101,12 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
-        //
+        if(!$user){
+            return false;
+        }
+        if($user->id != auth()->user()->id){
+            return false;
+        }
+        return $user->id === $post->postable()->first()->id;
     }
 }

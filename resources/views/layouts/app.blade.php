@@ -9,7 +9,6 @@
 
     <title>{{ config('app.name', 'OffRoad Paradise') }}</title>
 
-
 	<!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
@@ -59,6 +58,45 @@
 
         input[type=file]:hover {
             cursor: pointer;
+        }
+
+        .map-title {
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .map-title input:focus {
+            border: 1px gray;
+        }
+
+        .map-list-item{
+            width: 100%
+        }
+
+        .map-list-item__basic{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: baseline;
+            padding:15px;
+        }
+
+        .map-list-item__basic .btn{
+            margin: 0;
+        }
+
+        .map-list-item__basic a{
+            font-size: 1.1rem;
+        }
+
+        .map-list-item__additional {
+            padding: 10px 10% 0;
+            border-top: 1px solid #e6ecf5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* .loading-img-wrapper div progress {
@@ -111,7 +149,9 @@
 @component('user.components.header.mobile.mobile_header')@endcomponent
 @auth
     <x-left-sidebar/>
-    <x-right-sidebar/>
+    <div id="right-sidebar">
+        <right-sidebar></right-sidebar>
+    </div>
 @endauth
 <div class="header-spacer"></div>
 
@@ -120,10 +160,13 @@
 <!-- Scripts -->
 <livewire:scripts />
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/x3mart.js') }}"></script>
 <script src="{{ asset('js/libs.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-{{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script> --}}
+@auth
+<script src="{{ asset('js/chat.js') }}"></script>
+<script src="{{ asset('js/enable-push.js') }}"></script>
+@endauth
+@stack('scripts')
 @yield('scripts')
 <script>
     function acceptFriendshipRequest(item)

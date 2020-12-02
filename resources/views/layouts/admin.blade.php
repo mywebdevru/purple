@@ -121,7 +121,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/admin.js') }}"></script>
 @yield('scripts')
 </body>
 </html>

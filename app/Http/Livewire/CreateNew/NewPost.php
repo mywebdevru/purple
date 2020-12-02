@@ -53,6 +53,7 @@ class NewPost extends Component
             $img->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
+            $this->post->images()->create(['image' => $this->link]);
             $img->save();
         }
         $this->emit('photoSaved', $this->link);

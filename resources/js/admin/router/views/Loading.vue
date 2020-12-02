@@ -1,19 +1,20 @@
 <script>
 import Layout from '../layouts/Main'
+import Spinner from "../../components/Spinner";
 
 export default {
     page: {
         title: 'Loading page...',
         meta: [{ name: 'description', content: 'Loading page...' }],
     },
-    components: { Layout },
+    components: {Spinner, Layout },
 }
 </script>
 
 <template>
     <Layout>
         <Transition appear>
-            <BaseIcon :class="$style.loadingIcon" name="sync" spin />
+            <Spinner />
         </Transition>
     </Layout>
 </template>

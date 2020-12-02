@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Feed;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
@@ -12,15 +13,10 @@ class Post extends Component
 {
     use WithFileUploads;
 
-    public $post;
-    public $text;
-    public $photo;
-    public $link;
+    public $post, $user, $text, $photo, $link, $showCommentsButton, $commentsCount;
     public $deleted = 0;
     public $commentsIsLoaded = 0;
     public $commentsIsShown = 0;
-    public $showCommentsButton;
-    public $commentsCount;
     public $editPost = 0;
     public $showMore = 1;
 
@@ -35,7 +31,9 @@ class Post extends Component
 
     public function deletePost()
     {
-        $this->deleted = $this->post->delete();
+        if($this->user->can('delete', $this->post)){
+            $this->deleted = $this->post->delete();
+        }
     }
 
     public function savePost()

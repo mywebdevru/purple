@@ -217,7 +217,11 @@
     display: block;
 }
 
-/*------------- Responsive mode styles --------------*/
+.modal-body-gallery {
+    padding: 0;
+    display: flex;
+}
+
 @media (max-width: 768px) {
     .photo-gallery.nav-tabs .nav-item {
         width: 50%;

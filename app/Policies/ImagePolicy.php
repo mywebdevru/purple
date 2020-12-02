@@ -41,7 +41,7 @@ class ImagePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->id === auth()->user()->id;
     }
 
     /**
@@ -56,10 +56,10 @@ class ImagePolicy
         if(!$user){
             return false;
         }
-        if ($user->can('edit image')) {
-            return true;
+        if($user->id != auth()->user()->id){
+            return false;
         }
-        return $user->id === $image->imageable_id && $image->imageable_type == 'App\Models\User';
+        return $user->id === $image->imageable()->first()->id;
     }
 
     /**
@@ -71,7 +71,13 @@ class ImagePolicy
      */
     public function delete(User $user, Image $image)
     {
-        //
+        if(!$user){
+            return false;
+        }
+        if($user->id != auth()->user()->id){
+            return false;
+        }
+        return $user->id === $image->imageable()->first()->id;
     }
 
     /**
@@ -95,6 +101,12 @@ class ImagePolicy
      */
     public function forceDelete(User $user, Image $image)
     {
-        //
+        if(!$user){
+            return false;
+        }
+        if($user->id != auth()->user()->id){
+            return false;
+        }
+        return $user->id === $image->imageable()->first()->id;
     }
 }

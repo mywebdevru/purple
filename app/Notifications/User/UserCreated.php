@@ -8,6 +8,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class UserCreated extends Notification
 {
@@ -33,7 +35,7 @@ class UserCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', WebPushChannel::class];
     }
 
     /**
@@ -55,7 +57,7 @@ class UserCreated extends Notification
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
             'type' => 'user_created',
@@ -63,7 +65,15 @@ class UserCreated extends Notification
             'subtitle' => $this->user->email,
             'image' => $this->user->avatar,
             'link' => url('/user/' . $this->user->id),
-            'data' => new UserResource($this->user),
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+            ->title('Зарегистрирован пользователь')
+            ->icon($this->user->avatar)
+            ->body('Пользователь: ' . $this->user->email)
+            ->action('Открыть профиль пользователя', url('/user/' . $this->user->id));
     }
 }

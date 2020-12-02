@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Feed;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Component
 {
@@ -13,11 +14,15 @@ class Image extends Component
     public $commentsIsShown = 0;
     public $showCommentsButton;
     public $commentsCount;
+    public $editDescription = false;
+    public $description;
+    public $showMore = true;
 
     public function mount()
     {
         $this->showCommentsButton = $this->getButton();
         $this->commentsCount = $this->getCommentsCount();
+        $this->description = $this->getDescription();
     }
 
     protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
@@ -33,6 +38,7 @@ class Image extends Component
                 $this->image->comments()->forceDelete();
                 $this->image->likes()->forceDelete();
                 $this->image->feed()->forceDelete();
+                Storage::delete($this->image->image);
                 $this->image->delete();
             });
             $this->deleted = true;
@@ -52,6 +58,11 @@ class Image extends Component
     {
        $this->commentsCount = $this->image->comments->count();
        return $this->commentsCount;
+    }
+
+    protected function getDescription()
+    {
+        return $this->image->description;
     }
 
     public function showNewComment()
@@ -76,6 +87,19 @@ class Image extends Component
         if (!$this->commentsIsLoaded){
             $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }
+    }
+
+    public function toggleEdit()
+    {
+        $this->editDescription = !$this->editDescription;
+    }
+
+    public function saveDescription()
+    {
+        $this->image->description = $this->description;
+        $this->image->save();
+        $this->toggleEdit();
+        $this->showMore = true;
     }
 
     public function render()

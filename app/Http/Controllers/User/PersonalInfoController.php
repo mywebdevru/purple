@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PersonalInfoController extends Controller
 {
@@ -58,7 +59,11 @@ class PersonalInfoController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.components.edit_profile.personal');
+        $this->authorize($user);
+        if(Str::contains(url()->current(), 'secure')){
+            return view('user.components.edit_profile.secure');
+        }
+        return view('user.components.edit_profile.personal',['profile'=> $user]);
     }
 
     /**
@@ -70,7 +75,13 @@ class PersonalInfoController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($user->cannot('update', auth()->user())){
+            abort(403, 'Вы не можете редактировать данные '.$user->full_name);
+        }
+        $data = $request->except('_token');
+        $save = $user->fill($data)->save();
+        abort_if(!$save, 500);
+        return redirect()->route('user.show', ['user' => $user]);
     }
 
     /**
