@@ -25,6 +25,7 @@ class Swagger extends Component
      */
     public function __construct($documentation, $secure, $urlToDocs, $operationsSorter, $configUrl, $validatorUrl)
     {
+        abort_if(!auth()->user()->hasRole(['admin', 'super-admin']), 403);
         $this->documentation = $documentation;
         $this->secure = $secure;
         $this->urlToDocs = $urlToDocs;
