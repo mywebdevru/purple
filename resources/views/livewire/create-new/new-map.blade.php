@@ -91,6 +91,8 @@
                 type: 'yandex#hybrid', //гибридный слой при открытии
             })
 
+            myMap.behaviors.disable('scrollZoom') //отключаем зум прокруткой
+
             //Объявление кнопок конструктора
             //Макет кнопки отображает data.content и меняется в зависимости от нажатия
             btnLayout = ymaps.templateLayoutFactory.createClass(
