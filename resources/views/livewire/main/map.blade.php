@@ -78,6 +78,7 @@
                 zoom: 12,
                 type: 'yandex#hybrid', //гибридный слой при открытии
             })
+            myMap.behaviors.disable('scrollZoom') //отключаем зум прокруткой
             MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass (
                 '<div class="baloon">' +
                     '<h3 class="baloon-title">$[properties.balloonHeader]</h3>' +
