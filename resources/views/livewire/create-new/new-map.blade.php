@@ -67,7 +67,8 @@
         editor.summernote(config);
         ymaps.ready(init);
         let currentId = 0
-        let myMap, btnLayout, btnOptions, placemarkBtn, lineBtn, polygonBtn, myPolyline, myPlacemark, myPolygon
+        let placemarkId = 0
+        let myMap, btnLayout, btnOptions, placemarkBtn, lineBtn, polygonBtn, myPolyline, myPlacemark, myPolygon, placemarkCollection
 
         function init() {
             let coord, obj
@@ -86,7 +87,7 @@
             }
             //Создание карты
             myMap = new ymaps.Map("map", {
-                center: coord,
+                center: coord, 
                 zoom: 12,
                 type: 'yandex#hybrid', //гибридный слой при открытии
             })
@@ -129,28 +130,48 @@
                 },
                 options: btnOptions
             })
-
+            
+            
             //Добавление кнопок конструктора на карту
             myMap.controls.add(placemarkBtn, { floatIndex: 2 });
             myMap.controls.add(lineBtn, { floatIndex: 1 });
             myMap.controls.add(polygonBtn, { floatIndex: 0 });
+            //Создание коллекции меток
+            placemarkCollection = new ymaps.GeoObjectCollection({data: {mapId: currentId++}}, {
+                preset: 'islands#blueIcon'
+            })
+
+            // myMap.geoObjects.add(placemarkCollection) //Добавление коллекции меток на карту
+
             if (typeof strJson !== 'undefined') {
-                mapEditor(myMap, obj)
+                mapEditor(myMap,obj)
             }
-            constructor(myMap, obj)
+            constructor(myMap)
+
+            //Включение подменю правой кнопкой мыши
+            placemarkCollection.events.add('contextmenu', function (e) {
+                placemarkDesc(e);
+            });
 
             //Сохранение данных геообъектов
-            function saveMap(){
-                object = [];
+            function saveMap() {
+                let object = []
                 for (let i = 0; i < currentId; i++) {
-                    console.log(myMap.geoObjects.get(i))
-                    object.push({
-                        data: myMap.geoObjects.get(i).properties._data,
-                        coord: myMap.geoObjects.get(i).geometry.getCoordinates()
-                    });
+                    if (myMap.geoObjects.get(i).properties._data.type == undefined) {
+                        for(let j = 0; j < placemarkId; j++) {
+                            object.push({
+                                data: placemarkCollection.get(j).properties._data,
+                                coord: placemarkCollection.get(j).geometry.getCoordinates()
+                            });
+                        }
+                    } else {
+                        object.push({
+                            data: myMap.geoObjects.get(i).properties._data,
+                            coord: myMap.geoObjects.get(i).geometry.getCoordinates()
+                        });
+                    }
                 }
                 let objectJson = JSON.stringify(object)
-                console.log(typeof(objectJson) )
                 @this.map_data = objectJson
             }
 
@@ -171,22 +192,25 @@
             });
         }
 
-        function mapEditor(myMap, obj){
+        function mapEditor(myMap,obj){
             let geoObj
             for (element in obj) {
                 switch(obj[element].data.type) {
                     case 'Placemark':
                         geoObj = new ymaps.Placemark(obj[element].coord, {
                             type: obj[element].data.type,
-                            id: currentId++
+                            mapId: placemarkId++,
+                            baseId: obj[element].data.baseId
                         }, {
                             hideIconOnBalloonOpen: false,
                             draggable: true
                         })
+                        placemarkCollection.add(geoObj)
+                        myMap.geoObjects.add(placemarkCollection); //установка метки на карту
                         break
                     case 'Polyline':
                         geoObj = new ymaps.Polyline(obj[element].coord, {
-                            id: currentId++,
+                            mapId: currentId++,
                             type: obj[element].data.type,
                         }, {
                             // Задаем опции геообъекта.
@@ -208,10 +232,12 @@
                                 return items;
                             }
                         })
+                        myMap.geoObjects.add(geoObj);
+                        geoObj.editor.startDrawing();
                         break
                     case 'Polygon':
                         geoObj = new ymaps.Polygon(obj[element].coord, {
-                            id: currentId++,
+                            mapId: currentId++,
                             type: obj[element].data.type,
                         }, {
                             // Курсор в режиме добавления новых вершин.
@@ -234,14 +260,14 @@
                                 return items;
                             }
                         })
+                        myMap.geoObjects.add(geoObj);
+                        geoObj.editor.startDrawing();
                         break
                 }
-                myMap.geoObjects.add(geoObj);
-                geoObj.editor.startDrawing();
             };
         }
 
-        function constructor(myMap, obj) {
+        function constructor(myMap) {
             let listener
             //Функция включения создания меток при нажтии на кнопку placemarkBtn
             placemarkBtn.events.add('select', function () {
@@ -256,7 +282,7 @@
             });
 
             placemarkBtn.events.add('deselect', function () {
-                //Отключение функций
+                //Отключение функций 
                 listener.removeAll()
             });
 
@@ -271,7 +297,7 @@
                     lineMap(myMap, coords)
                 })
             });
-
+            
             lineBtn.events.add('deselect', function () {
                 //Отключение построения ломаной
                 listener.removeAll()
@@ -288,7 +314,7 @@
                     polygonMap(myMap, coords)
                 })
             });
-
+            
             polygonBtn.events.add('deselect', function () {
                 //Отключение построения многоугольника
                 listener.removeAll()
@@ -298,7 +324,8 @@
 
         function markMap(myMap, coords) {
             myPlacemark = createPlacemark(coords); //функция описания метки с заданными координатами
-            myMap.geoObjects.add(myPlacemark); //установка метки на карту
+            placemarkCollection.add(myPlacemark)//добавление метки в коллекцию
+            myMap.geoObjects.add(placemarkCollection); //установка метки на карту
             //Смена значка метки при наведении
             myPlacemark.events.add('mouseenter', function (e) {
                 e.get('target').options.set('preset', 'islands#greenIcon');
@@ -310,7 +337,7 @@
 
         function createPlacemark(coords) {
             return new ymaps.Placemark(coords, {
-                id: currentId++,
+                mapId: placemarkId++,
                 type: 'Placemark'
             }, {
                 hideIconOnBalloonOpen: false,
@@ -325,7 +352,7 @@
         };
         function createPolyline(coords) {
             return new ymaps.Polyline([coords], {
-                id: currentId++,
+                mapId: currentId++,
                 type: 'Polyline'
             }, {
                 // Задаем опции геообъекта.
@@ -356,7 +383,7 @@
         };
         function createPolygon() {
             return new ymaps.Polygon([], {
-                id: currentId++,
+                mapId: currentId++,
                 type: 'Polygon'
             }, {
                 // Курсор в режиме добавления новых вершин.
@@ -373,13 +400,50 @@
                         title: "Удалить многоугольник",
                         onClick: function () {
                             myMap.geoObjects.remove(myPolygon);
-                            currentId--;
+                            currentId--;l
                         }
                     });
                     return items;
                 }
             });
         };
+
+        function placemarkDesc(event){
+            let menuContent,
+            placemark = event.get('target')
+            if ($('.placemark-menu').css('display') == 'flex') {
+                $('.placemark-menu').remove();
+            } else {
+                // HTML-содержимое контекстного меню.
+                menuContent =   '<div class="placemark-menu">' +
+                                        '<a class="close-menu" href="#">&times;</a>' +
+                                        '<button class="open-placemark-desc">Добавить информацию о метке</button>' +
+                                        '<button class="placemark-delete">Удалить метку</button>'+
+                                    '</div>'
+            }
+            // Размещаем контекстное меню на странице
+            $('body').append(menuContent)
+            // Задаем позицию меню.
+            $('.placemark-menu').css({
+                left: event.get('pagePixels')[0],
+                top: event.get('pagePixels')[1]
+            })
+            //Кнопка закрытия подменю
+            $(".close-menu").click(function () {
+                $('.placemark-menu').remove()
+            })
+            //удаление метки
+            $(".placemark-delete").click(function () {
+                placemarkCollection.remove(placemark);
+                $('.placemark-menu').remove();
+            });
+            //Открытие модального окна с описанием метки
+            $(".open-placemark-desc").click(function () {
+                let baseId = placemark.properties._data.baseId
+                let mapId = placemark.properties._data.mapId
+                console.log(`Открытие модалки с обработкой описания baseId = ${baseId} mapId = ${mapId}`)
+            });
+        }
     </script>
     @endpush
 </div>

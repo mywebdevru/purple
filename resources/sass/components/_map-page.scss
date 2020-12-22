@@ -18,7 +18,7 @@
     background-color: #e6e6e6;
     border: 2px dashed #333;
 }
-.menu{
+.placemark-menu{
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -56,6 +56,7 @@
     outline: none;
 }
 #baloon-save,
+.open-placemark-desc,
 .placemark-delete,
 #save-map{
     margin-top: 5px;
