@@ -16,7 +16,7 @@ class CreatePlaceMarksTable extends Migration
         Schema::create('place_marks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_id');
-            $table->integer('number');
+            $table->integer('number')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -14,6 +14,14 @@ class PlaceMark extends Model
 
     public function map()
     {
-        return $this->belongTo(Map::class, 'map_id');
+        return $this->belongTo('App\Models\Map', 'map_id');
+    }
+
+    /**
+     * Get the PlaceMark's Images.
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 }
