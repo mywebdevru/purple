@@ -62,8 +62,11 @@
 
         .map-title {
             padding: 0.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            color: #000000;
         }
 
         .map-title input:focus {
