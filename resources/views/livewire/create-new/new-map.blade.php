@@ -7,9 +7,9 @@
             <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
         </div>
         <div class="ui-block p-2 w-100">
-            <label class="pl-2" for="title">Обязательно добавьте название карты</label>
-            <input wire:model.defer="title" id="map_title" type="text" name="title" placeholder="Название карты" class="map-title">
-            <label class="pl-2" for="description{{ $map->id }}">Добавьте описание с фотографиями</label>
+            <label class="pl-2" for="title">Название карты</label>
+            <input wire:model.defer="title" id="map_title" type="text" name="title" placeholder="" class="map-title">
+            <label class="pl-2" for="description{{ $map->id }}">Описание путешествия</label>
             <div id="description{{ $map->id }}">{!! $description !!}</div>
         </div>
     </div>
@@ -87,7 +87,7 @@
             }
             //Создание карты
             myMap = new ymaps.Map("map", {
-                center: coord, 
+                center: coord,
                 zoom: 12,
                 type: 'yandex#hybrid', //гибридный слой при открытии
             })
@@ -130,8 +130,8 @@
                 },
                 options: btnOptions
             })
-            
-            
+
+
             //Добавление кнопок конструктора на карту
             myMap.controls.add(placemarkBtn, { floatIndex: 2 });
             myMap.controls.add(lineBtn, { floatIndex: 1 });
@@ -282,7 +282,7 @@
             });
 
             placemarkBtn.events.add('deselect', function () {
-                //Отключение функций 
+                //Отключение функций
                 listener.removeAll()
             });
 
@@ -297,7 +297,7 @@
                     lineMap(myMap, coords)
                 })
             });
-            
+
             lineBtn.events.add('deselect', function () {
                 //Отключение построения ломаной
                 listener.removeAll()
@@ -314,7 +314,7 @@
                     polygonMap(myMap, coords)
                 })
             });
-            
+
             polygonBtn.events.add('deselect', function () {
                 //Отключение построения многоугольника
                 listener.removeAll()
@@ -447,4 +447,10 @@
     </script>
     @endpush
 </div>
-
+@section('css')
+    <style>
+        .pl-2 {
+            color: #000;
+        }
+    </style>
+@endsection
