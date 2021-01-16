@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Log;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,17 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
+        if (app()->environment() != 'testing') {
+            Event::listen([
+                'eloquent.created: *',
+                'eloquent.saved: *',
+                'eloquent.updated: *',
+                'eloquent.deleted: *',
+            ], function($eventName, $object) {
+                $ids = implode(', ', array_map(fn($item) => $item->id, $object));
+                $userId = auth()->user() ? auth()->user()->id : 'guest';
+                Log::channel('eloquent')->info("Event: $eventName | Model id: $ids | User: $userId");
+            });
+        }
     }
 }
