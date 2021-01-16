@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Log;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,15 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen([
+            'eloquent.created: *',
+            'eloquent.saved: *',
+            'eloquent.updated: *',
+            'eloquent.deleted: *',
+        ], function($eventName, $object) {
+            $ids = implode(', ', array_map(fn($item) => $item->id, $object));
+            $userId = auth()->user()->id;
+            Log::channel('daily-entity')->info("Event: $eventName | Model id: $ids | User: $userId");
+        });
     }
 }
