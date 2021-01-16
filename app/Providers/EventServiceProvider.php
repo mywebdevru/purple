@@ -38,7 +38,7 @@ class EventServiceProvider extends ServiceProvider
         ], function($eventName, $object) {
             $ids = implode(', ', array_map(fn($item) => $item->id, $object));
             $userId = auth()->user() ? auth()->user()->id : 'guest';
-            Log::channel('daily-entity')->info("Event: $eventName | Model id: $ids | User: $userId");
+            Log::channel('eloquent')->info("Event: $eventName | Model id: $ids | User: $userId");
         });
     }
 }
