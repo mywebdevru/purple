@@ -7,6 +7,7 @@ use App\Http\Requests\Profile\SaveProfileRequest;
 use App\Http\Requests\ProfileUploadRequest;
 use App\Http\Resources\Profile\ProfileDataResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Storage;
 
 class ProfileController extends Controller
@@ -39,5 +40,10 @@ class ProfileController extends Controller
             return response('Профиль пользователя успешно сохранен', 201);
         }
         return response('Ошибка сервера. Пожалуйста, попробуйте сохранить профиль позже', 500);
+    }
+
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }
