@@ -93,5 +93,5 @@ jobs:
             npm run dev
             git stash
             git stash drop
-            php artisan storage:link
+            php artisan storage:link 2>/dev/null
             sudo php artisan optimize:clear
