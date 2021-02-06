@@ -79,19 +79,19 @@ jobs:
           script_stop: false
           script: |
             cd /var/www/html/purple/dev/purple/
-            sudo php artisan optimize:clear
-            sudo find ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
-            mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers storage/app/photos
+            sudo -uwww-data php artisan optimize:clear
+            sudo -uwww-datafind ./storage/app/* -type d \( -name admin -o -name img \) -prune -o -exec rm -rf {} \;
+            sudo -uwww-data mkdir storage/app/avatars storage/app/summernote storage/app/wallpapers storage/app/photos
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
             git pull origin dev
             composer install
             composer dump-autoload
-            php artisan migrate:fresh --seed
-            php artisan passport:install
+            sudo -uwww-data php artisan migrate:fresh --seed
+            sudo -uwww-data php artisan passport:install
             npm i
             npm run dev
             git stash
             git stash drop
-            php artisan storage:link
-            sudo php artisan optimize:clear
+            sudo -uwww-data php artisan storage:link
+            sudo -uwww-data php artisan optimize:clear
