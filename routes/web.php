@@ -20,9 +20,7 @@ use App\Http\Livewire\CreateNew\NewMap;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');*/
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Auth::routes();
 
