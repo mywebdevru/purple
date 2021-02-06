@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->get('/home', 'HomeController@index')->name('home');
 
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
