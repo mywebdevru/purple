@@ -90,7 +90,7 @@ jobs:
             sudo -uwww-data php artisan migrate:fresh --seed
             sudo -uwww-data php artisan passport:install
             npm i
-            npm run dev
+            npm run prod
             git stash
             git stash drop
             sudo -uwww-data php artisan storage:link
