@@ -29,9 +29,7 @@ Route::middleware('auth')->get('/home', 'HomeController@index')->name('home');
 Route::resource('group', 'Group\GroupController');
 Route::resource('club', 'Club\ClubController');
 
-Route::get('/admin/{any?}', function () {
-    return view('admin.admin.index');
-})->where('any', '^[\/\w\.-]*')->middleware(['auth', 'role:admin|super-admin']);
+Route::get('/admin/{any?}', 'HomeController@admin')->where('any', '^[\/\w\.-]*')->middleware(['auth', 'role:admin|super-admin']);
 
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
 Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
