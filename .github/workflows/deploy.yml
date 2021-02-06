@@ -85,7 +85,7 @@ jobs:
             sudo chown -R www-data:www-data ./storage/app
             sudo chmod -R g+w ./storage/app
             git pull origin dev
-            composer install
+            composer install --no-dev
             composer dump-autoload
             sudo -uwww-data php artisan migrate:fresh --seed
             sudo -uwww-data php artisan passport:install
@@ -94,4 +94,4 @@ jobs:
             git stash
             git stash drop
             sudo -uwww-data php artisan storage:link
-            sudo -uwww-data php artisan optimize:clear
+            sudo -uwww-data php artisan optimize
