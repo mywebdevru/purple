@@ -34,10 +34,6 @@ Route::get('/admin/{any?}', 'HomeController@admin')->where('any', '^[\/\w\.-]*')
 Route::post('summernote/upload', [SummernoteController::class, 'upload'])->name('summernote.upload');
 Route::post('summernote/delete', [SummernoteController::class, 'delete'])->name('summernote.delete');
 
-Route::get('edit-profile', function () {
-    return view('user/user_profile');
-});
-
 Route::group(['prefix'=>'maps', 'namespace'=>'Map'], function(){
     Route::resource('/map', 'MapController');
 });
