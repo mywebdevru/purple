@@ -38,7 +38,7 @@ class AdminsSeeder extends Seeder
             array_push($admins, $ruslan);
         }
 
-        /*$user = User::where('email', 'x3mart@purple.team')->first();
+        $user = User::where('email', 'x3mart@purple.team')->first();
 
         if(!$user) {
             $slava = User::create([
@@ -95,6 +95,6 @@ class AdminsSeeder extends Seeder
                 }
             }
             array_shift($admins);
-        }*/
+        }
     }
 }
