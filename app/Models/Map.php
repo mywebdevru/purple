@@ -52,7 +52,7 @@ class Map extends Model
     }
 
     /**
-     * Get the Map's Images.
+     * Get the Map's description.
      */
     public function post()
     {
@@ -74,4 +74,12 @@ class Map extends Model
     {
         return $this->morphMany('App\Models\Like', 'likeable');
     }
+    /**
+     * Get the Map's PlaceMarks.
+     */
+    public function placemarks()
+    {
+        return $this->hasMany('App\Models\Placemark', 'map_id');
+    }
+
 }

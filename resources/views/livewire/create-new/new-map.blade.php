@@ -6,7 +6,7 @@
         <div class="ui-block">
             <div class="mb-3 w-100" style="height: 500px;" id="map"></div>
         </div>
-        <div class="ui-block p-2 w-100">
+        <div class="p-2 ui-block w-100">
             <label class="pl-2" for="title">Название карты</label>
             <input wire:model.defer="title" id="map_title" type="text" name="title" placeholder="" class="map-title">
             <label class="pl-2" for="description{{ $map->id }}">Описание путешествия</label>
@@ -65,15 +65,14 @@
             }
         };
         editor.summernote(config);
+
         ymaps.ready(init);
         let currentId = 0
         let placemarkId = 0
         let myMap, btnLayout, btnOptions, placemarkBtn, lineBtn, polygonBtn, myPolyline, myPlacemark, myPolygon, placemarkCollection
-
         function init() {
             let coord, obj
             let strJson = '{!! $map->map_data !!}'
-
             //Получаем координаты для централизации карты (либо Москва, либо координаты первого эл-та маршрута)
             if (!!strJson) {
                 obj = JSON.parse(strJson)
@@ -91,9 +90,7 @@
                 zoom: 12,
                 type: 'yandex#hybrid', //гибридный слой при открытии
             })
-
             myMap.behaviors.disable('scrollZoom') //отключаем зум прокруткой
-
             //Объявление кнопок конструктора
             //Макет кнопки отображает data.content и меняется в зависимости от нажатия
             btnLayout = ymaps.templateLayoutFactory.createClass(
@@ -130,8 +127,6 @@
                 },
                 options: btnOptions
             })
-
-
             //Добавление кнопок конструктора на карту
             myMap.controls.add(placemarkBtn, { floatIndex: 2 });
             myMap.controls.add(lineBtn, { floatIndex: 1 });
@@ -140,19 +135,15 @@
             placemarkCollection = new ymaps.GeoObjectCollection({data: {mapId: currentId++}}, {
                 preset: 'islands#blueIcon'
             })
-
             // myMap.geoObjects.add(placemarkCollection) //Добавление коллекции меток на карту
-
             if (typeof strJson !== 'undefined') {
                 mapEditor(myMap,obj)
             }
             constructor(myMap)
-
             //Включение подменю правой кнопкой мыши
             placemarkCollection.events.add('contextmenu', function (e) {
                 placemarkDesc(e);
             });
-
             //Сохранение данных геообъектов
             function saveMap() {
                 let object = []
@@ -174,7 +165,6 @@
                 let objectJson = JSON.stringify(object)
                 @this.map_data = objectJson
             }
-
             $('#preview-map').click(function (e) {
                 e.preventDefault()
                 saveMap()
@@ -191,7 +181,6 @@
                 @this.saveDraft()
             });
         }
-
         function mapEditor(myMap,obj){
             let geoObj
             for (element in obj) {
@@ -266,7 +255,6 @@
                 }
             };
         }
-
         function constructor(myMap) {
             let listener
             //Функция включения создания меток при нажтии на кнопку placemarkBtn
@@ -280,12 +268,10 @@
                     markMap(myMap, coords)
                 });
             });
-
             placemarkBtn.events.add('deselect', function () {
                 //Отключение функций
                 listener.removeAll()
             });
-
             //Функция включения создания ломаных при нажтии на кнопку lineBtn
             lineBtn.events.add('select', function () {
                 //проверяем зажаты ли другие кнопки
@@ -297,12 +283,10 @@
                     lineMap(myMap, coords)
                 })
             });
-
             lineBtn.events.add('deselect', function () {
                 //Отключение построения ломаной
                 listener.removeAll()
             });
-
             //Функция включения создания многоугольников при нажтии на кнопку polygonBtn
             polygonBtn.events.add('select', function () {
                 //проверяем зажаты ли другие кнопки
@@ -314,14 +298,11 @@
                     polygonMap(myMap, coords)
                 })
             });
-
             polygonBtn.events.add('deselect', function () {
                 //Отключение построения многоугольника
                 listener.removeAll()
             });
         }
-
-
         function markMap(myMap, coords) {
             myPlacemark = createPlacemark(coords); //функция описания метки с заданными координатами
             placemarkCollection.add(myPlacemark)//добавление метки в коллекцию
@@ -334,7 +315,6 @@
                 e.get('target').options.unset('preset');
             });
         };
-
         function createPlacemark(coords) {
             return new ymaps.Placemark(coords, {
                 mapId: placemarkId++,
@@ -344,7 +324,6 @@
                 draggable: true
             });
         };
-
         function lineMap(myMap, coords) {
             myPolyline = createPolyline(coords); //функция описания ломаной с заданными координатами
             myMap.geoObjects.add(myPolyline);
@@ -375,7 +354,6 @@
                 }
             });
         };
-
         function polygonMap(myMap, coords) {
             myPolygon = createPolygon(); //функция описания многоугольника с заданными координатами
             myMap.geoObjects.add(myPolygon);
@@ -407,7 +385,6 @@
                 }
             });
         };
-
         function placemarkDesc(event){
             let menuContent,
             placemark = event.get('target')

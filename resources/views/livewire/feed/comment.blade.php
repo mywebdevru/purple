@@ -31,11 +31,11 @@
         @if (!$nowEdit)
             <p>{{ $comment['text'] }}</p>
         @else
-            <livewire:feed.write-comment :comment="$comment" :key="'edit_comment'.$comment->id"/>
+            <livewire:feed.write-comment :comment="$comment" :key="'edit_comment'.$comment->id.time()"/>
         @endif
     </div>
     <div class="inline-items">
-        <livewire:like :item="$comment" :key="'likes'.$comment->id" />
+        <livewire:like :item="$comment" :key="'likes'.$comment->id.time()" />
         {{-- <a href="#" class="reply">Ответить</a> --}}
     </div>
 </li>
