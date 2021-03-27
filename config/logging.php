@@ -105,6 +105,24 @@ return [
             'path' => storage_path('logs/eloquent/eloquent.log'),
             'level' => 'info',
         ],
+
+        'auth_stack' => [
+            'driver' => 'stack',
+            'channels' => ['auth_daily', 'auth_slack'],
+        ],
+        'auth_daily' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/auth/auth.log'),
+            'level' => 'info',
+            'days' => 30,
+        ],
+        'auth_slack' => [
+            'driver' => 'slack',
+            'url' => env('SLACK_LOG_HOOK'),
+            'username' => 'OFFROAD App',
+            'emoji' => ':bulb:',
+            'level' => 'info',
+        ],
     ],
 
 ];

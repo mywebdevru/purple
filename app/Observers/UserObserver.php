@@ -8,6 +8,7 @@ use App\Notifications\User\UserCreated;
 use App\Notifications\User\UserDeleted;
 use App\Notifications\User\UserUpdated;
 use Illuminate\Support\Facades\Notification;
+use Log;
 use Spatie\Permission\Models\Role;
 
 class UserObserver
@@ -26,6 +27,7 @@ class UserObserver
         if(Role::where('name', 'super-admin')->count()) {
             Notification::send(User::role('super-admin')->get(), new UserCreated($user));
         }
+        Log::channel('auth_stack')->info('Создан пользователь ' . $user->email);
         event(new AdminPanelRealtimeNotification('Создан пользователь ' . $user->email));
     }
 
