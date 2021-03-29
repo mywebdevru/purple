@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
     protected function redirectTo()
     {
-        return '/user/'.auth()->user()->id.'/edit';
+        return '/user/'.auth()->user()->id.'/edit/personal';
     }
 
     /**
