@@ -175,11 +175,11 @@
 						</div>
 					</div>
 					<div class="top-header-author">
-						<a href="{{ route('user.show', ['user' => auth()->user()]) }}" class="author-thumb revealator-zoomin">
+						<a href="{{ route('user.show', ['user' => $user]) }}" class="author-thumb revealator-zoomin">
 							<img src="{{ Str::startsWith($user->avatar, 'http') ? $user->avatar : asset($user->avatar)}}" class="author-image" alt="{{ $user->full_name }}">
 						</a>
 						<div class="author-content">
-							<a href="{{ route('user.show', ['user' => auth()->user()]) }}" class="h4 author-name">{{ $user->full_name }}</a>
+							<a href="{{ route('user.show', ['user' => $user]) }}" class="h4 author-name">{{ $user->full_name }}</a>
 							<div class="country">{{ $user->location }}</div>
 						</div>
 					</div>
