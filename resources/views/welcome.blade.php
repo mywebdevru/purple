@@ -74,7 +74,7 @@
     <footer>
         <div class="container block__count-trail">
             <div class="row">
-                
+
                     <div class="col-sm">
                         <a href="nav-link"><p>Home</p></a>
                         <a href="nav-link"><p>Travels</p></a>
@@ -100,11 +100,11 @@
                             </div>
                         </a>
                     </div>
-               
+
             </div>
         </div>
-    </footer>    
-    
+    </footer>
+
 @endsection
 
 @section('css')
@@ -117,7 +117,7 @@
             background-color: #212529;
         }
         .fixed-sidebar-right {
-            background-color: #212529;
+            /* background-color: #212529; */
         }
         .olympus-chat {
             background-color: #212529;
@@ -131,14 +131,14 @@
         .header-spacer {
             display: block;
             height: 70px;
-        }              
+        }
         </style>
     @endsection
 
     @section('scripts')
-    <script>       
+    <script>
         // let logo = '<div class="col-sm"><a href="#" class="logo"><div class="img-wrap"><img src="{{ asset("img/4x4_white_small.png") }}" alt="offroad"></div></a></div>';
         // let siteHeader = document.querySelector('.header');
         // siteHeader.insertAdjacentHTML('afterbegin', logo);
-    </script>    
+    </script>
     @endsection
