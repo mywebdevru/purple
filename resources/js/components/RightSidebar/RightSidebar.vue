@@ -315,7 +315,6 @@ export default {
     },
     methods: {
         startChat(userId) {
-            console.log(userId);
             this.chatClose();
             this.sidebarOpen = false;
             this.chatShow = true;
