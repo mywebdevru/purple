@@ -10,6 +10,20 @@ $(document).ready(function()
 //     $('[data-toggle="popover"]').popover()
 // });
 
+//Starts chat with non-friend user
+$('#start-chat-request').click( async (e) => {
+    e.preventDefault();
+    const alien = $('#start-chat-request').data('user');
+    try {
+        const response = await axios.post('/chat-start-request', {
+            alien
+        });
+    } catch (e) {
+        console.log(e.response);
+    }
+
+});
+
 $('#js-carousel').owlCarousel({
     loop: true,
     autoplay: true,

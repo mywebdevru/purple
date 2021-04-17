@@ -152,7 +152,7 @@
                                     </div>
                                 @endif
                             @endif
-                                <a href="#" class="btn btn-control bg-purple" onclick="alert('here')" id="bg-purple" title="Чат с пользователем">
+                                <a href="#" class="btn btn-control bg-purple" id="start-chat-request" data-user="{{ $user->id }}">
                                     <svg class="olymp-chat---messages-icon"><use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-chat---messages-icon') }}"></use></svg>
                                 </a>
                             @can('update', $user)
