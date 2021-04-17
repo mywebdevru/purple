@@ -17,7 +17,7 @@ function initSW() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js')
             .then(() => {
-                console.log('serviceWorker installed!')
+                //console.log('serviceWorker installed!')
                 initPush();
             })
             .catch((err) => {
@@ -51,7 +51,6 @@ function initPush() {
 function subscribeUser() {
     navigator.serviceWorker.ready
         .then((registration) => {
-            console.log('here');
             const subscribeOptions = {
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(process.env.MIX_WEBPUSHER_PUBLIC_KEY)
@@ -60,7 +59,7 @@ function subscribeUser() {
             return registration.pushManager.subscribe(subscribeOptions);
         })
         .then((pushSubscription) => {
-            console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+            //console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
             storePushSubscription(pushSubscription);
         });
 }

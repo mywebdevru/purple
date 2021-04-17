@@ -381,6 +381,20 @@ export default {
                     e.message.data.attributes.user_message = false;
                     this.$store.commit("pushMessage", e.message);
                 }
+            })
+            .listen('ChatStartRequestEvent', async (e) => {
+                let chatOpened = false;
+                if (this.authUser.data.user_id !== e.user.id) {
+                    return;
+                }
+                if(document.hidden) {
+                    await this.$store.dispatch("fetchAuthUserFriends");
+                    return;
+                }
+                if (this.chatId !== e.alien.id) {
+                    this.startChat(e.alien.id);
+                    chatOpened = true
+                }
             });
     },
 }
