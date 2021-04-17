@@ -83,3 +83,4 @@ Route::group([
 });
 
 Route::post('/push','PushController');
+Route::post('/chat-start-request', 'API\MessageController@startChat')->name('chat-start-request');
