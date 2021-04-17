@@ -16,15 +16,17 @@ class ChatStartRequestEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public User $user;
+    public User $alien;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $alien)
     {
-        $this->user = $user;
+        $this->user = auth()->user();
+        $this->alien = $alien;
     }
 
     /**

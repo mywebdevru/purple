@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\ChatStartRequestEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageResource;
 use App\Http\Resources\MessageResourceCollection;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -40,6 +42,12 @@ class MessageController extends Controller
         return new MessageResource($message);
     }
 
+    public function startChat(Request $request): void
+    {
+        $alien = User::find($request->input('alien'));
+        event(new ChatStartRequestEvent($alien));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -48,7 +56,7 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
