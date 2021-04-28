@@ -135,6 +135,7 @@
             placemarkCollection = new ymaps.GeoObjectCollection({data: {mapId: currentId++}}, {
                 preset: 'islands#blueIcon'
             })
+            myMap.geoObjects.add(placemarkCollection);
             // myMap.geoObjects.add(placemarkCollection) //Добавление коллекции меток на карту
             if (typeof strJson !== 'undefined') {
                 mapEditor(myMap,obj)
@@ -147,15 +148,20 @@
             //Сохранение данных геообъектов
             function saveMap() {
                 let object = []
-                for (let i = 0; i < currentId; i++) {
-                    if (myMap.geoObjects.get(i).properties._data.type == undefined) {
-                        for(let j = 0; j < placemarkId; j++) {
+                if (placemarkId > 0) {
+                    for(let j = 0; j < placemarkId; j++) {
+                        if (placemarkCollection.get(j) == undefined) { 
+                            j++
+                        } else {
                             object.push({
                                 data: placemarkCollection.get(j).properties._data,
                                 coord: placemarkCollection.get(j).geometry.getCoordinates()
                             });
                         }
-                    } else {
+                    }
+                }
+                for (let i = 0; i < currentId; i++) {
+                    if (myMap.geoObjects.get(i) != placemarkCollection) {
                         object.push({
                             data: myMap.geoObjects.get(i).properties._data,
                             coord: myMap.geoObjects.get(i).geometry.getCoordinates()
