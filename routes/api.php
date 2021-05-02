@@ -44,5 +44,5 @@ Route::group([
     Route::get('/auth-user-friends', 'AuthUserFriendsController')->name('auth-user-friends');
     Route::get('/mark-chat-is-read', 'MarkChatIsReadController')->name('mark-chat-is-read');
     Route::apiResource('messages', 'MessageController');
-    Route::get('/chat/list', 'MessageController@getChatList')->name('chat.list');
+    Route::get('/chat/list', 'MessageController@chatList')->name('chat.list');
 });
