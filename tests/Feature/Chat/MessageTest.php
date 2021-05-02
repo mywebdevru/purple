@@ -333,6 +333,6 @@ test('a_user_can_fetch_chat_list', function () {
     /* @var TestCase $this */
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $response = $this->get(route('api.chat.list'));
-    dd($response->decodeResponseJson());
+    $response->assertOk();
 
 });

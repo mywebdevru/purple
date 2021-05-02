@@ -50,7 +50,7 @@ class MessageController extends Controller
 
     public function chatList()
     {
-        dd(auth()->user());
+        return response()->json([]);
     }
 
     /**
