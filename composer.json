@@ -29,7 +29,8 @@
         "spatie/laravel-blade-javascript": "^2.5",
         "spatie/laravel-permission": "^3.13",
         "thomaswelton/laravel-gravatar": "~1.0",
-        "phpseclib/phpseclib": "2.0.31"
+        "phpseclib/phpseclib": "2.0.31",
+        "composer/composer": "2.0.13"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
