@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardDataController;
 use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\ProfileController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', [ProfileController::class, 'user']);
+Route::middleware('auth:api')->get('/user', 'API\ProfileController@user');
 
 Route::group([
     'namespace' => 'Admin',
@@ -46,4 +44,5 @@ Route::group([
     Route::get('/auth-user-friends', 'AuthUserFriendsController')->name('auth-user-friends');
     Route::get('/mark-chat-is-read', 'MarkChatIsReadController')->name('mark-chat-is-read');
     Route::apiResource('messages', 'MessageController');
+    Route::get('/chat/list', 'MessageController@getChatList')->name('chat.list');
 });

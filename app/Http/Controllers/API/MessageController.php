@@ -48,6 +48,11 @@ class MessageController extends Controller
         event(new ChatStartRequestEvent($alien));
     }
 
+    public function chatList()
+    {
+        dd(auth()->user());
+    }
+
     /**
      * Display the specified resource.
      *
