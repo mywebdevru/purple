@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="fixed-sidebar right" :class="[{'open' : sidebarOpen}]">
-        <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="authUserFriends.data" />
+        <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="chats.data" />
 
         <div class="fixed-sidebar-right sidebar--large" id="sidebar-right-1">
 
@@ -346,6 +346,7 @@ export default {
                 console.log('Unable to fetch posts, ' + error.response);
             }
             this.message = null;
+            await this.$store.dispatch("fetchChats");
         }
     },
     computed: {
@@ -355,11 +356,14 @@ export default {
             messages: "messages",
             messagesStatus: "messagesStatus",
             chatId: "chatId",
+            chats: "chats",
+            chatsStatus: "chatsStatus"
         }),
     },
     mounted() {
         this.$store.dispatch("fetchAuthUser");
         this.$store.dispatch("fetchAuthUserFriends");
+        this.$store.dispatch("fetchChats");
         Pusher.logToConsole = false;
         Echo.private('chat-message')
             .listen('MessageSentEvent', async (e) => {
@@ -369,11 +373,11 @@ export default {
                 }
                 if(document.hidden) {
                     await this.$store.dispatch("fetchAuthUserFriends");
+                    await this.$store.dispatch("fetchChats");
                     return;
                 }
                 if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
                     this.startChat(e.message.data.attributes.sent_by.data.user_id);
-                    chatOpened = true
                 }
                 if (!chatOpened && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
                     e.message.data.attributes.user_message = false;
@@ -387,11 +391,12 @@ export default {
                 }
                 if(document.hidden) {
                     await this.$store.dispatch("fetchAuthUserFriends");
+                    await this.$store.dispatch("fetchChats");
                     return;
                 }
                 if (this.chatId !== e.alien.id) {
                     this.startChat(e.alien.id);
-                    chatOpened = true
+                    chatOpened = true;
                 }
             });
     },

@@ -17,6 +17,9 @@ const getters = {
     },
     chats: state => {
         return state.chats;
+    },
+    chatsStatus: state => {
+        return state.chatsStatus;
     }
 };
 const actions = {
