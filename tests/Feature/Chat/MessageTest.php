@@ -332,7 +332,15 @@ test('a_user_can_mark_unread_messages_as_read', function () {
 test('a_user_can_fetch_chat_list', function () {
     /* @var TestCase $this */
     $this->actingAs($user = factory(User::class)->create(), 'api');
+    $user->messages()->saveMany(factory(Message::class, 10)->make(['created_at' => $this->faker->dateTimeThisYear]));
+    $userId = $user->id;
+    User::each(function (User $user) use ($userId) {
+        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => $userId, 'created_at' => $this->faker->dateTimeThisYear]));
+        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => User::all()->random(1)->first()->id, 'created_at' => $this->faker->dateTimeThisMonth]));
+    });
+    Message::all()->random(10)->each(function (Message $message) {
+        $message->update(['read_at' => now()]);
+    });
     $response = $this->get(route('api.chat.list'));
     $response->assertOk();
-
 });

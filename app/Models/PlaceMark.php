@@ -5,6 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * App\Models\PlaceMark
+ *
+ * @property int $id
+ * @property int $map_id
+ * @property int|null $number
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereMapId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PlaceMark whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class PlaceMark extends Model
 {
     protected $fillable = [
