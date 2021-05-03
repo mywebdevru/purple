@@ -300,7 +300,6 @@
 import {mapGetters} from "vuex";
 import SmallSidebar from "./SmallSidebar";
 import Chat from "./Chat";
-import toastr from "toastr";
 
 export default {
     name: "RightSidebar",

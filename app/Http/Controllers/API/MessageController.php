@@ -6,9 +6,12 @@ use App\Events\ChatStartRequestEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageResource;
 use App\Http\Resources\MessageResourceCollection;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceCollection;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Arr;
 
 class MessageController extends Controller
@@ -63,13 +66,17 @@ class MessageController extends Controller
             ->groupBy('user_id')->map(function ($item, $key) {
                 return ['user_id' => $key, 'message_at' => $item[0]->created_at->format('Y-m-d H:i')];
             });
-        $users = collect();
-        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($users) {
-            if (!$users->has($item['user_id'])) {
-                $users->push($item['user_id']);
+        $userIds = collect();
+        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($userIds) {
+            if (!$userIds->contains($item['user_id'])) {
+                $userIds->push($item['user_id']);
             }
         });
-        return response()->json($users);
+        $users = collect();
+        $userIds->each(function ($item) use ($users) {
+            $users->push(User::find($item));
+        });
+        return new UserResourceCollection($users);
     }
 
 
