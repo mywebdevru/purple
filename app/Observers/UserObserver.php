@@ -21,14 +21,16 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if(Role::where('name', 'admin')->count()) {
-            Notification::send(User::role('admin')->get(), new UserCreated($user));
+        if (app()->environment() !== 'testing') {
+            if(Role::where('name', 'admin')->count()) {
+                Notification::send(User::role('admin')->get(), new UserCreated($user));
+            }
+            if(Role::where('name', 'super-admin')->count()) {
+                Notification::send(User::role('super-admin')->get(), new UserCreated($user));
+            }
+            Log::channel('auth_stack')->info('Создан пользователь ' . $user->email);
+            event(new AdminPanelRealtimeNotification('Создан пользователь ' . $user->email));
         }
-        if(Role::where('name', 'super-admin')->count()) {
-            Notification::send(User::role('super-admin')->get(), new UserCreated($user));
-        }
-        Log::channel('auth_stack')->info('Создан пользователь ' . $user->email);
-        event(new AdminPanelRealtimeNotification('Создан пользователь ' . $user->email));
     }
 
     /**

@@ -3,9 +3,10 @@
 use App\Models\Friend;
 use App\Models\Message;
 use App\Models\User;
+use Tests\TestCase;
 
 test('a_user_can_send_a_message', function () {
-    /* @var \Tests\TestCase $this */
+    /* @var TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
@@ -52,7 +53,7 @@ test('a_user_can_send_a_message', function () {
 });
 
 test('a_user_can_fetch_his_friends', function () {
-    /* @var \Tests\TestCase $this */
+    /* @var TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $firstUsersFriend = factory(User::class)->create(['id' => 123]);
@@ -96,7 +97,7 @@ test('a_user_can_fetch_his_friends', function () {
 });
 
 test('a_user_can_fetch_chat_messages', function () {
-    /* @var \Tests\TestCase $this */
+    /* @var TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
@@ -193,7 +194,7 @@ test('a_user_can_fetch_chat_messages', function () {
 });
 
 test('a_user_can_fetch_unread_messages_count', function () {
-    /* @var \Tests\TestCase $this */
+    /* @var TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
@@ -263,9 +264,7 @@ test('a_user_can_fetch_unread_messages_count', function () {
 });
 
 test('a_user_can_mark_unread_messages_as_read', function () {
-    /* @var \Tests\TestCase $this */
-
-    $this->withoutExceptionHandling();
+    /* @var TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create(['id' => 123]);
@@ -328,4 +327,20 @@ test('a_user_can_mark_unread_messages_as_read', function () {
             'self' => url('/users'),
         ]
     ]);
+});
+
+test('a_user_can_fetch_chat_list', function () {
+    /* @var TestCase $this */
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $user->messages()->saveMany(factory(Message::class, 10)->make(['created_at' => $this->faker->dateTimeThisYear]));
+    $userId = $user->id;
+    User::each(function (User $user) use ($userId) {
+        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => $userId, 'created_at' => $this->faker->dateTimeThisYear]));
+        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => User::all()->random(1)->first()->id, 'created_at' => $this->faker->dateTimeThisMonth]));
+    });
+    Message::all()->random(10)->each(function (Message $message) {
+        $message->update(['read_at' => now()]);
+    });
+    $response = $this->get(route('api.chat.list'));
+    $response->assertOk();
 });

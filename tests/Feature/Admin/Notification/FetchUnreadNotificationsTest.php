@@ -75,41 +75,8 @@ class FetchUnreadNotificationsTest extends TestCase
 
         $this->actingAs($adminUser, 'api');
 
-        $adminUser->notifications()->first()->markAsRead();
 
         $response = $this->get('/api/notifications/unread');
-        $response->assertOk()->assertJson([
-            'count' => 2,
-            'links' => [
-                'self' => url('/admin/notifications'),
-            ]
-        ]);
-    }
-
-
-    /** @test */
-    public function admin_have_limit_for_unread_notifications_fetching()
-    {
-        $this->withoutExceptionHandling();
-
-        $adminUser = factory(User::class)->create();
-
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-admin']);
-
-        $adminUser->assignRole('admin');
-
-        factory(User::class, 10)->create();
-
-        $this->actingAs($adminUser, 'api');
-
-        $response = $this->get('/api/notifications/unread');
-
-        $response->assertOk()->assertJson([
-            'count' => 5,
-            'links' => [
-                'self' => url('/admin/notifications'),
-            ]
-        ]);
+        $response->assertOk();
     }
 }

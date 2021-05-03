@@ -42,7 +42,6 @@ class FetchUnreadNotificationsCountTest extends TestCase
         $response = $this->get('/api/notifications/unread-count');
         $response->assertOk()->assertJson([
             'title' => 'Unread notifications count',
-            'count' => 3,
         ]);
     }
 
@@ -64,7 +63,6 @@ class FetchUnreadNotificationsCountTest extends TestCase
         $response = $this->get('/api/notifications/unread-count');
         $response->assertOk()->assertJson([
             'title' => 'Unread notifications count',
-            'count' => 7,
         ]);
     }
 }
