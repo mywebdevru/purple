@@ -50,6 +50,7 @@ class MessageController extends Controller
 
     public function chatList()
     {
+        dd(Message::where('user_id', auth()->user()->id)->orWhere('recipient_id', auth()->user()->id)->get());
         return response()->json([]);
     }
 

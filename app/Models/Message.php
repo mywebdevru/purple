@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -16,40 +18,40 @@ use Illuminate\Support\Facades\DB;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $recipient
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|Message newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Message newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Message query()
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereBody($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereRecipientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereUserId($value)
+ * @method static Builder|Message newModelQuery()
+ * @method static Builder|Message newQuery()
+ * @method static Builder|Message query()
+ * @method static Builder|Message whereBody($value)
+ * @method static Builder|Message whereCreatedAt($value)
+ * @method static Builder|Message whereId($value)
+ * @method static Builder|Message whereRecipientId($value)
+ * @method static Builder|Message whereUpdatedAt($value)
+ * @method static Builder|Message whereUserId($value)
  * @mixin \Eloquent
  * @property string|null $read_at
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereReadAt($value)
+ * @method static Builder|Message whereReadAt($value)
  */
 class Message extends Model
 {
     protected $guarded = [];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function recipient()
+    public function recipient(): BelongsTo
     {
         return $this->belongsTo(User::class, 'recipient_id', 'id');
     }
 
     /**
      * @param $recipientId
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    private static function chatMessagesQuery($recipientId)
+    private static function chatMessagesQuery($recipientId): Builder
     {
-        return (new static())->where(function ($query) use ($recipientId) {
+        return (new static())::where(function ($query) use ($recipientId) {
             return $query->where([
                 'user_id' => auth()->user()->id,
                 'recipient_id' => $recipientId,
@@ -68,24 +70,13 @@ class Message extends Model
         return static::chatMessagesQuery($recipientId)->get();
     }
 
-    public static function chatMessagesCount($recipientId)
+    public static function chatMessagesCount($recipientId): int
     {
         return static::chatMessagesQuery($recipientId)->count();
     }
 
-    public static function chatUnreadMessagesCount($recipientId)
+    public static function chatUnreadMessagesCount($recipientId): int
     {
-        /*$sub = static::chatMessagesQuery($recipientId);
-        return DB::table( DB::raw("({$sub->toSql()}) as sub") )
-            ->mergeBindings($sub->getQuery())
-            ->where('user_id', $recipientId)
-            ->whereNull('read_at')
-            ->count();*/
-
-        /*return (new static())->where(function () use ($recipientId) {
-            return static::chatMessagesQuery($recipientId);
-        })->where('user_id', $recipientId)->whereNull('read_at')->count();*/
-
         $friend = User::find($recipientId);
 
         return $friend->messages()
