@@ -77,6 +77,27 @@
 
         <div class="modal-photo">
             <div class="modal-photo__preview">
+                <a href="#" class="btn btn-control btn-for-gallery">
+                    <svg class="olymp-like-post-icon liked-photo">
+                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-like-post-icon') }}"></use>
+                    </svg>
+                </a>
+                <a href="#" class="btn btn-control btn-for-gallery btn-for-gallery__top">
+                    <svg class="olymp-share-icon repost-photo">
+                        <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-share-icon') }}"></use>
+                    </svg>
+                </a>
+                <a href="#" class="btn btn-control btn-for-gallery btn-for-gallery__place">
+                    <span class="place-name">Йоркшир</span>
+
+                        <div class="coordinates">
+                            <svg class="olymp-add-a-place-icon coordinates-icon-for-gallery">
+                                <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-add-a-place-icon') }}"></use>
+                            </svg>
+                            <span>321321546.3123165466</span>
+                        </div>
+                </a>
+                <div class="date-photo-gallery">12/12/2021</div>
                 <div data-slider="slick">
                     <div>
                         <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt="">
@@ -92,20 +113,24 @@
             <div class="modal-photo__content">
 
                 <div class="modal-photo__header">
-                    <h3 class="modal-photo__title">Название</h3>
+                    <h3 class="modal-photo__title">Пользователь</h3>
                     <div class="modal-photo__info">
-                        Место <span class="modal-photo__info-divider">|</span> Дата
+                        Описание красивого путешествия Описание красивого путешествия Описание красивого путешествия Описание красивого путешествия Описание красивого путешествия Описание красивого путешествия
                     </div>
                 </div>
 
-                <div class="modal-photo__client">
+                <!-- <div class="modal-photo__client">
                     <div class="modal-photo__client-title">Пользователь:</div>
                     <div class="modal-photo__client-company">John Smith</div>
+                </div> -->
+                <p>Комментарии</p>
+                <div class="modal-photo__text" id="modal-photo__comments">
+                    <p></p>
                 </div>
 
-                <div class="modal-photo__text">
-                    <p>Комментарий</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dicta, recusandae debitis iusto quos voluptatum at. Dolorum a, velit rerum dicta aut sapiente, optio accusantium? Sunt sed praesentium est minima.</p>
+                <div class="enter-comment">
+                    <input class="enter-comment__block" id="text-comment" type="text">
+                    <button type="submit" class="enter-comment__submit" id="add-comment">SEND</button>
                 </div>
 
                 <div class="modal-photo__footer">
@@ -124,3 +149,17 @@
 
     </div><!-- /.modal__dialog -->
 </div><!-- /.modal -->
+
+<!-- <script>
+    let btnPhotoGallery = document.getElementsByClassName('btn-for-gallery');
+
+
+btnPhotoGallery[0].onclick = function() {
+
+    document.getElementsByClassName('liked-photo')[0].style.fill = 'rgb(253, 41, 41)'
+}
+
+btnPhotoGallery[1].onclick = function() {
+    document.getElementsByClassName('repost-photo')[0].style.fill = 'rgb(253, 41, 41)'
+}
+</script> -->

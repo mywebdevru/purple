@@ -33,7 +33,7 @@ function rotateMainYellow(value) {
     return value
     }
 rotateMainYellow(10);
-  
+
 function rotateOutherRed(value) {
     let wheelContentRed = document.querySelectorAll('.wheel__content__red');
     deg = 0;
@@ -108,3 +108,72 @@ $(document).ready(function(){
         $('.wheel__inner__yellow').remove();
     }
 });
+
+// Изменение цвета при нажатии на like и repost в фотогалереи
+// todo перенести код в приемлемое место т.к. здесь скрипт отвечающий за кнопки ПОСТ / ФОТО / КАРТА
+
+let btnPhotoGallery = document.getElementsByClassName('btn-for-gallery');
+
+
+btnPhotoGallery[0].onclick = function() {
+
+    document.getElementsByClassName('liked-photo')[0].style.fill = 'rgb(253, 41, 41)'
+}
+
+btnPhotoGallery[1].onclick = function() {
+    document.getElementsByClassName('repost-photo')[0].style.fill = 'rgb(253, 41, 41)'
+}
+
+
+// Добавление комментарий
+
+let comments = [];
+loadComments();
+
+document.getElementById('add-comment').onclick = function(){
+    event.preventDefault();
+    let commentElement = document.getElementById('text-comment');
+    let comment = {
+        body : commentElement.value,
+        time : Math.floor(Date.now()/1000)
+    }
+    commentElement.value = '';
+    comments.push(comment);
+    console.log(comment);
+    saveComments();
+    showComments();
+}
+
+function saveComments() {
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+function loadComments() {
+    if (localStorage.getItem('comments')) comment = JSON.parse(localStorage.getItem('comments'));
+    showComments();
+}
+
+function showComments() {
+    let commentField = document.getElementById('modal-photo__comments');
+    let out = '';
+
+    comments.forEach(function(item){
+        out += `<p class="comment-text-gallery-date">${timeConverter(item.time)}</p>`;
+        out += `<p class="comment-text-gallery">${item.body}</p>`;
+    })
+
+    commentField.innerHTML = out;
+}
+
+function timeConverter(UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+}
