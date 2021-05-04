@@ -160,12 +160,14 @@
     top:50%;
     left:50%;
     z-index:1;
-    transform:translate3d(-50%, -50%, 0)
+    transform:translate3d(-50%, -50%, 0);
+    height: 100%;
+    width: 100%;
 }
 
 .modal-photo__content {
     width:35%;
-    padding:3.4rem 6.6rem 1rem 1.73rem;
+    padding:0.4rem 2.6rem 1rem 1rem;
     position:relative
 }
 
@@ -175,17 +177,38 @@
 
 .modal-photo__title {
     margin-bottom:.2rem;
-    font-size:2.12rem;
+    font-size:1rem;
     color:#2b2a2c;
     font-weight:700;
     text-transform:uppercase
 }
 
 .modal-photo__info {
-    font-size:1.2rem;
+    font-size:0.8rem;
     color:#6a696b;
-    text-transform:uppercase
+
+    padding: 0px;
+    height: 50px;
+    overflow: hidden;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to bottom, #000, #000, rgba(0, 0, 0, 0));
+    // text-transform:uppercase
+    :hover {
+        height: unset;
+        background-image: none;
+        transition: 1s;
+    }
 }
+
+// .modal-photo__info:hover {
+//     height: unset;
+//     background-image: none;
+//     transition: 1s;
+//     overflow: unset;
+//     color: unset;
+// }
 
 .modal-photo__info-divider {
     margin:0 1rem
@@ -209,11 +232,13 @@
 }
 
 .modal-photo__text {
-    margin-bottom:8.66rem;
-    font-size:.8rem;
-    line-height:2;
-    color:#6a696b;
-    font-weight:300
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 2;
+    color: #6a696b;
+    font-weight: 300;
+    height: 300px;
+    overflow-y: scroll;
 }
 
 .modal-photo__footer {
@@ -433,3 +458,86 @@ button {}
 button:focus {
     outline: none;
 }
+
+/*дата добавления фотографии в галерею*/
+
+.date-photo-gallery {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #fff;
+    background-color: rgba(152, 152, 152, 0.3);
+    z-index: 1000;
+}
+
+.coordinates-content {
+    display: flex;
+}
+
+.coordinates-icon-for-gallery {
+    width: 20px;
+    height: 20px;
+    margin-top: 15px;
+    position: absolute;
+}
+
+.coordinates {
+
+    span {
+        font-size: 12px;
+        position: absolute;
+        top: 20px;
+    }
+    svg {
+        width: 15px !important;
+        height: 15px !important;
+        left: 0px;
+        top: 28px;
+    }
+}
+
+.enter-comment {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-bottom: 50px;
+    &__block {
+        width: 80%;
+        height: 50px;
+        border: 0.5px solid #6a696b;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    &__submit {
+        width: 20%;
+        height: 50px;
+        border: 0.5px solid #27f59b;
+        background-color: #56fcb4;
+        border-radius: 5px;
+    }
+}
+
+.comment-text-gallery-date {
+    font-size: 8px;
+    margin-bottom: -5px;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(245, 133, 138) rgb(238, 229, 213);
+  }
+
+  /* для Chrome/Edge/Safari */
+  *::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+  }
+  *::-webkit-scrollbar-track {
+    background: rgb(238, 229, 213);
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(245, 133, 138);
+    border-radius: 5px;
+    border: 3px solid rgb(238, 229, 213);
+  }
