@@ -55,6 +55,23 @@ class AdminsSeeder extends Seeder
             array_push($admins, $slava);
         }
 
+        $user = User::where('email', 'mrs_boom@icloud.com ')->first();
+
+        if(!$user) {
+            $olga = User::create([
+                'name' => 'Ольга',
+                'surname' => 'Морозова',
+                'email' => 'mrs_boom@icloud.com ',
+                'password' => '$2y$10$sOwyGzWBuj8ZjdrOeBM6qern4NdbDCuKUQdGJeZVQMfR3BXIsLG/m',
+                'creed' => 'Ля ля ля',
+                'avatar' => '',
+                'wallpaper' => 'https://picsum.photos/id/1049/1200/400',
+            ]);
+
+            $olga->assignRole('admin');
+            array_push($admins, $olga);
+        }
+
         $user = User::where('email', 'alex@purple.team')->first();
 
         if(!$user) {
