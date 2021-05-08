@@ -1,6 +1,6 @@
 <template>
 <div>
-    <vue-draggable-resizable :w="300" :h="200" @dragging="onDrag" @resizing="onResize" :parent="false">
+    <vue-draggable-resizable :w="300" :h="320" @dragging="onDrag" @resizing="onResize" :parent="false">
         <div class="modal-content">
         <div class="modal-header">
             <span class="icon-status online"></span>
@@ -84,6 +84,8 @@ import {mapGetters} from "vuex";
 import EmojiPicker from 'vue-emoji-picker';
 import VueDraggableResizable from 'vue-draggable-resizable';
 
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 export default {
@@ -161,8 +163,13 @@ export default {
     transition: unset
     box-shadow: unset
     border: unset
+    .modal-content
+        height: 100%
+        .modal-body
+            height: 100%
     .mCustomScrollbar
         overflow-y: scroll
+        max-height: calc(100% - 175px)
 .popup-chat .chat-message-field .friend-message .author-thumb
     float: right
 .popup-chat .chat-message-field .friend-message .chat-message-item
