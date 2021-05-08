@@ -285,8 +285,8 @@
 
     <!-- ... окончание правого сайдбара под мобилу -->
     <!-- Блок чата -->
-    <Chat class="ui-block popup-chat popup-chat-responsive"
-          :class="[{'popup-chat open-chat' : chatShow}]"
+    <Chat class="ui-block popup-chat popup-chat-responsive popup-chat open-chat"
+          v-if="chatShow"
           tabindex="-1"
           role="dialog"
           aria-labelledby="popup-chat-responsive"
