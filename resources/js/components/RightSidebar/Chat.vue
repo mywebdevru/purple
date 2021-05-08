@@ -1,6 +1,6 @@
 <template>
 <div>
-    <vue-draggable-resizable :w="300" :h="320" @dragging="onDrag" @resizing="onResize" :parent="false">
+    <vue-draggable-resizable :w="400" :h="320" @dragging="onDrag" @resizing="onResize" :parent="false" :x="chatPosition">
         <div class="modal-content">
         <div class="modal-header">
             <span class="icon-status online"></span>
@@ -99,7 +99,8 @@ export default {
             width: 0,
             height: 0,
             x: 0,
-            y: 0
+            y: 0,
+            chatPosition: 0,
         }
     },
     computed: {
@@ -139,6 +140,9 @@ export default {
     },
     updated() {
         this.scrollToMessage();
+    },
+    mounted() {
+        this.chatPosition = window.innerWidth - 400;
     },
     directives: {
         focus: {
@@ -229,4 +233,12 @@ export default {
 .emoji-picker .emojis span:hover
     background: #ececec
     cursor: pointer
+</style>
+<style lang="sass">
+.popup-chat
+    .vdr
+        border: none
+        .handle
+            border: none
+            background: transparent
 </style>
