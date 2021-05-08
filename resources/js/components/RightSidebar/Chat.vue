@@ -114,7 +114,8 @@ export default {
             const index = this.$refs.message.length - 1;
             const el = this.$refs.message[index];
             if (el) {
-                el.scrollIntoView({behavior: "smooth", block: "start"});
+                const container = this.$el.querySelector(".mCustomScrollbar");
+                container.scrollTo({top: container.scrollHeight, behavior: "smooth"})
             }
         },
         focus: function () {
