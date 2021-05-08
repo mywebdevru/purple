@@ -90,8 +90,8 @@ jobs:
             composer dump-autoload
             sudo -uwww-data php artisan migrate:fresh --seed
             sudo -uwww-data php artisan passport:install
-            npm i
-            npm run prod
+            yarn
+            yarn prod
             git stash
             git stash drop
             sudo -uwww-data php artisan storage:link
