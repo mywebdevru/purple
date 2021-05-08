@@ -1,6 +1,7 @@
 <template>
 <div>
-    <div class="modal-content">
+    <vue-draggable-resizable :w="400" :h="320" @dragging="onDrag" @resizing="onResize" :parent="false" :x="chatPosition">
+        <div class="modal-content">
         <div class="modal-header">
             <span class="icon-status online"></span>
             <h6 class="title" >Чат</h6>
@@ -73,12 +74,19 @@
             </form>
         </div>
     </div>
+    </vue-draggable-resizable>
 </div>
 </template>
 
 <script>
+import Vue from 'vue';
 import {mapGetters} from "vuex";
-import EmojiPicker from 'vue-emoji-picker'
+import EmojiPicker from 'vue-emoji-picker';
+import VueDraggableResizable from 'vue-draggable-resizable';
+
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
+Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 export default {
     name: "Chat",
@@ -88,6 +96,11 @@ export default {
     data() {
         return {
             search: '',
+            width: 0,
+            height: 0,
+            x: 0,
+            y: 0,
+            chatPosition: 0,
         }
     },
     computed: {
@@ -104,7 +117,8 @@ export default {
             const index = this.$refs.message.length - 1;
             const el = this.$refs.message[index];
             if (el) {
-                el.scrollIntoView({behavior: "smooth", block: "start"});
+                const container = this.$el.querySelector(".mCustomScrollbar");
+                container.scrollTo({top: container.scrollHeight, behavior: "smooth"})
             }
         },
         focus: function () {
@@ -113,9 +127,22 @@ export default {
         insert(emoji) {
             this.$parent.message += emoji
         },
+        onResize: function (x, y, width, height) {
+            this.x = x
+            this.y = y
+            this.width = width
+            this.height = height
+        },
+        onDrag: function (x, y) {
+            this.x = x
+            this.y = y
+        }
     },
     updated() {
         this.scrollToMessage();
+    },
+    mounted() {
+        this.chatPosition = window.innerWidth - 400;
     },
     directives: {
         focus: {
@@ -128,8 +155,25 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.popup-chat-responsive.open-chat .mCustomScrollbar
-    overflow-y: scroll
+.popup-chat-responsive.open-chat
+    max-width: unset
+    max-height: unset
+    width: 100vw
+    height: 100%
+    background: transparent
+    position: absolute
+    right: 0
+    top: 0
+    transition: unset
+    box-shadow: unset
+    border: unset
+    .modal-content
+        height: 100%
+        .modal-body
+            height: 100%
+    .mCustomScrollbar
+        overflow-y: scroll
+        max-height: calc(100% - 175px)
 .popup-chat .chat-message-field .friend-message .author-thumb
     float: right
 .popup-chat .chat-message-field .friend-message .chat-message-item
@@ -189,4 +233,12 @@ export default {
 .emoji-picker .emojis span:hover
     background: #ececec
     cursor: pointer
+</style>
+<style lang="sass">
+.popup-chat
+    .vdr
+        border: none
+        .handle
+            border: none
+            background: transparent
 </style>
