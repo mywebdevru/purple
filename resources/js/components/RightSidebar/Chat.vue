@@ -173,7 +173,8 @@ export default {
             height: 100%
     .mCustomScrollbar
         overflow-y: scroll
-        max-height: calc(100% - 175px)
+        max-height: unset
+        height: calc(100% - 175px)
 .popup-chat .chat-message-field .friend-message .author-thumb
     float: right
 .popup-chat .chat-message-field .friend-message .chat-message-item
