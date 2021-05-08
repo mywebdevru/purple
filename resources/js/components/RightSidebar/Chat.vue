@@ -1,6 +1,7 @@
 <template>
 <div>
-    <div class="modal-content">
+    <vue-draggable-resizable :w="300" :h="200" @dragging="onDrag" @resizing="onResize" :parent="false">
+        <div class="modal-content">
         <div class="modal-header">
             <span class="icon-status online"></span>
             <h6 class="title" >Чат</h6>
@@ -73,12 +74,17 @@
             </form>
         </div>
     </div>
+    </vue-draggable-resizable>
 </div>
 </template>
 
 <script>
+import Vue from 'vue';
 import {mapGetters} from "vuex";
-import EmojiPicker from 'vue-emoji-picker'
+import EmojiPicker from 'vue-emoji-picker';
+import VueDraggableResizable from 'vue-draggable-resizable';
+
+Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 export default {
     name: "Chat",
@@ -88,6 +94,10 @@ export default {
     data() {
         return {
             search: '',
+            width: 0,
+            height: 0,
+            x: 0,
+            y: 0
         }
     },
     computed: {
@@ -113,6 +123,16 @@ export default {
         insert(emoji) {
             this.$parent.message += emoji
         },
+        onResize: function (x, y, width, height) {
+            this.x = x
+            this.y = y
+            this.width = width
+            this.height = height
+        },
+        onDrag: function (x, y) {
+            this.x = x
+            this.y = y
+        }
     },
     updated() {
         this.scrollToMessage();
@@ -128,8 +148,20 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.popup-chat-responsive.open-chat .mCustomScrollbar
-    overflow-y: scroll
+.popup-chat-responsive.open-chat
+    max-width: unset
+    max-height: unset
+    width: 100vw
+    height: 100%
+    background: transparent
+    position: absolute
+    right: 0
+    top: 0
+    transition: unset
+    box-shadow: unset
+    border: unset
+    .mCustomScrollbar
+        overflow-y: scroll
 .popup-chat .chat-message-field .friend-message .author-thumb
     float: right
 .popup-chat .chat-message-field .friend-message .chat-message-item
