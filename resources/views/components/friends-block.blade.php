@@ -3,10 +3,10 @@
         <h6 class="title">Друзья ({{ $friendsCount() }})</h6>
     </div>
     <div class="ui-block-content">
-        <ul class="widget w-faved-page js-zoom-gallery">
+        <ul class="widget w-faved-page">
             @foreach ($friends as $friend)
                 <li>
-                    <a href="#">
+                    <a href="{{route('user.show', $friend->user->id)}}">
                         <img src="{{ $friend->user->avatar }}" alt="author">
                     </a>
                 </li>
@@ -14,7 +14,7 @@
             @endforeach
             @if ($friendsCount()-14 > 0)
                 <li class="all-users">
-                    <a href="#">+{{ $friendsCount()-14 }}</a>
+                    <a href="#">+{{ $friendsCount()-14 }}</a> {{-- TODO: Поставить ссылку на страницу со списком друзей --}}
                 </li>
             @endif
         </ul>
