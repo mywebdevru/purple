@@ -313,14 +313,15 @@ export default {
         }
     },
     methods: {
-        startChat(userId) {
+        async startChat(userId) {
             this.chatClose();
             this.sidebarOpen = false;
             this.chatShow = true;
             this.recipient = userId;
-            this.$store.dispatch("fetchChatMessages", this.recipient);
-            this.$store.dispatch("markChatIsRead",  this.recipient);
+            await this.$store.dispatch("fetchChatMessages", this.recipient);
+            await this.$store.dispatch("markChatIsRead",  this.recipient);
             this.$store.commit("setChatId", userId);
+            await this.$store.dispatch("fetchChats");
             this.$refs.chat.focus();
         },
         chatClose() {
@@ -342,11 +343,12 @@ export default {
             try {
                 const message = (await axios.post('/api/messages', { recipient_id: this.recipient, body: this.message })).data;
                 this.$store.commit("pushMessage", message);
+                await this.$store.dispatch("markChatIsRead", this.recipient);
+                await this.$store.dispatch("fetchChats");
             } catch (error) {
                 console.log('Unable to fetch posts, ' + error.response);
             }
             this.message = null;
-            await this.$store.dispatch("fetchChats");
         }
     },
     computed: {
@@ -357,7 +359,7 @@ export default {
             messagesStatus: "messagesStatus",
             chatId: "chatId",
             chats: "chats",
-            chatsStatus: "chatsStatus"
+            chatsStatus: "chatsStatus",
         }),
     },
     mounted() {
@@ -371,13 +373,12 @@ export default {
                 if (this.authUser.data.user_id !== e.message.data.attributes.sent_to.data.user_id) {
                     return;
                 }
-                if(document.hidden) {
-                    await this.$store.dispatch("fetchAuthUserFriends");
+                if (document.hidden || this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
                     await this.$store.dispatch("fetchChats");
                     return;
                 }
-                if (this.chatId !== e.message.data.attributes.sent_by.data.user_id) {
-                    this.startChat(e.message.data.attributes.sent_by.data.user_id);
+                if (document.hidden && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
+                    this.$store.commit("pushMessage", e.message);
                 }
                 if (!chatOpened && this.chatId === e.message.data.attributes.sent_by.data.user_id) {
                     e.message.data.attributes.user_message = false;
@@ -385,7 +386,6 @@ export default {
                 }
             })
             .listen('ChatStartRequestEvent', async (e) => {
-                let chatOpened = false;
                 if (this.authUser.data.user_id !== e.user.id) {
                     return;
                 }
@@ -395,8 +395,7 @@ export default {
                     return;
                 }
                 if (this.chatId !== e.alien.id) {
-                    this.startChat(e.alien.id);
-                    chatOpened = true;
+                    await this.startChat(e.alien.id);
                 }
             });
     },
