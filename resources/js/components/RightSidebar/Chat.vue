@@ -175,8 +175,11 @@ export default {
         overflow-y: scroll
         max-height: unset
         height: calc(100% - 175px)
-.popup-chat .chat-message-field .friend-message .author-thumb
+.popup-chat .chat-message-field li:not(.friend-message) .author-thumb
     float: right
+.popup-chat .chat-message-field li:not(.friend-message) .notification-event
+    float: right
+    margin-right: 1rem
 .popup-chat .chat-message-field .friend-message .chat-message-item
     background-color: #7c5ac2
     color: #fff
