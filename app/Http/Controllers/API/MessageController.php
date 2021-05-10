@@ -12,6 +12,7 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 
 class MessageController extends Controller
@@ -56,6 +57,18 @@ class MessageController extends Controller
         event(new ChatStartRequestEvent($alien));
     }
 
+    public function kickChat (Request $request): ?Response
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        if ($chatId = $request->input('chat')) {
+            $user->chats()->detach($chatId);
+            return response()->noContent();
+        }
+        abort(404, 'Чат не найден');
+        return null;
+    }
+
     public function chatList()
     {
         $sent = Message::where('user_id', auth()->user()->id)
@@ -90,7 +103,7 @@ class MessageController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -102,7 +115,7 @@ class MessageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -113,7 +126,7 @@ class MessageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

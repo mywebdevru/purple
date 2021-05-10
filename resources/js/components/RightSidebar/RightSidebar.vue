@@ -8,7 +8,7 @@
     <!-- ... окончание правого сайдбара -->
 
     <!--  Компонент нефункционален. Просто спрятал лапшу html   -->
-<!--    <MobileSidebar />-->
+    <MobileSidebar />
     <!-- ... окончание правого сайдбара под мобилу -->
     <!-- Блок чата -->
     <Chat class="ui-block popup-chat popup-chat-responsive popup-chat open-chat"
