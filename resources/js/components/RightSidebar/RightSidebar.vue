@@ -60,7 +60,7 @@ export default {
             this.$store.commit("setChatId", null);
         },
         async kickChatHandler(chatId) {
-            console.log('kick', chatId);
+            await this.$store.dispatch("kickChat", chatId);
         },
         sidebarToggle() {
             this.chatClose();
