@@ -12,7 +12,7 @@
             <!--                    loop-->
             <li v-for="(friend, index) in friends" :key="index" class="inline-items js-chat-open">
                 <div class="author-thumb">
-                    <img alt="author" :src="friend.data.attributes.avatar" class="avatar">
+                    <img alt="author" :src="friend.data.attributes.avatar" class="avatar" @click="$parent.startChat(friend.data.user_id)">
                     <span class="icon-status online"></span>
                 </div>
 
@@ -20,7 +20,8 @@
                     <a :href="friend.links.self" class="h6 author-name">{{ friend.data.attributes.full_name }}</a>
                     <span class="status">ONLINE</span>
                 </div>
-                <div class="more"><svg class="olymp-three-dots-icon"><use href="/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <!-- Если нужно будет активировать менюшку, заменить классы на more диву ниже-->
+                <div class="float-right mt-1"><svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
 
                     <ul class="more-icons">
                         <li @click="$parent.startChat(friend.data.user_id)">
