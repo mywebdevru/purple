@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChatsActivitiesTable extends Migration
+class CreateActiveChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class CreateChatsActivitiesTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('chats_activities', function (Blueprint $table) {
-            $table->id();
-
+        Schema::create('active_chats', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->comment('id пользователя');
             $table->unsignedBigInteger('chat_id')->comment('id чата');
-            $table->timestamp('active_from')->comment('Чат активен с даты');
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('chat_id')->references('id')->on('users');
             $table->index(['user_id', 'chat_id']);
-
-            $table->timestamps();
         });
     }
 
@@ -35,8 +30,7 @@ class CreateChatsActivitiesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('chats_activities', function (Blueprint $table) {
-            $table->dropIndex(['user_id', 'chat_id']);
+        Schema::table('active_chats', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['chat_id']);
         });

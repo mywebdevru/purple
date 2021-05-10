@@ -48,7 +48,11 @@ class MessageController extends Controller
 
     public function startChat(Request $request): void
     {
+        /** @var User $user */
+        $user = auth()->user();
         $alien = User::find($request->input('alien'));
+        $user->chats()->syncWithoutDetaching($alien);
+        $alien->chats()->syncWithoutDetaching($user);
         event(new ChatStartRequestEvent($alien));
     }
 
