@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -296,5 +297,10 @@ class User extends Authenticatable
     public function unreadChatMessages()
     {
         return $this->hasMany(Message::class)->where(['recipient_id' => auth()->user()->id, 'read_at' => null]);
+    }
+
+    public function chats(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'active_chats', 'user_id', 'chat_id');
     }
 }

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const state = {
     messages: null,
     messagesStatus: null,
@@ -51,6 +53,18 @@ const actions = {
             commit("setChatsStatus", "success");
         } catch (error) {
             commit("setChatsStatus", "error");
+        }
+    },
+    async kickChat({commit}, chatId) {
+        const initState = {...state.chats};
+        const chats = [...state.chats.data];
+        const filteredChats = chats.filter(item => item.data.user_id !== chatId);
+        commit("setChats", {...state.chats, data: filteredChats});
+        try {
+            await axios.delete(`/api/chat/kick?chat=${chatId}`);
+        } catch (e) {
+            commit("setChats", initState);
+            console.log(e.response);
         }
     }
 };
