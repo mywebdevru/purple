@@ -59,6 +59,9 @@ export default {
             this.$store.commit("setMessages", null);
             this.$store.commit("setChatId", null);
         },
+        async kickChatHandler(chatId) {
+            console.log('kick', chatId);
+        },
         sidebarToggle() {
             this.chatClose();
             this.sidebarOpen = !this.sidebarOpen;

@@ -21,7 +21,7 @@
                     <span class="status">ONLINE</span>
                 </div>
                 <!-- Если нужно будет активировать менюшку, заменить классы на more диву ниже-->
-                <div class="float-right mt-1"><svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+                <div @click="$parent.kickChatHandler(friend.data.user_id)" class="float-right mt-1"><svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
 
                     <ul class="more-icons">
                         <li @click="$parent.startChat(friend.data.user_id)">
