@@ -19,7 +19,7 @@ class CreateActiveChatsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('chat_id')->references('id')->on('users');
-            $table->index(['user_id', 'chat_id']);
+            $table->unique(['user_id', 'chat_id']);
         });
     }
 
@@ -31,6 +31,7 @@ class CreateActiveChatsTable extends Migration
     public function down(): void
     {
         Schema::table('active_chats', function (Blueprint $table) {
+            $table->dropUnique(['user_id', 'chat_id']);
             $table->dropForeign(['user_id']);
             $table->dropForeign(['chat_id']);
         });

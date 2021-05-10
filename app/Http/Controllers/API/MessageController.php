@@ -71,8 +71,9 @@ class MessageController extends Controller
                 return ['user_id' => $key, 'message_at' => $item[0]->created_at->format('Y-m-d H:i')];
             });
         $userIds = collect();
-        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($userIds) {
-            if (!$userIds->contains($item['user_id'])) {
+        $activeChats = auth()->user()->chats->pluck('id');
+        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($activeChats, $userIds) {
+            if (!$userIds->contains($item['user_id']) && $activeChats->contains($item['user_id'])) {
                 $userIds->push($item['user_id']);
             }
         });
