@@ -6,6 +6,7 @@ const state = {
     chatId: null,
     chats: [],
     chatsStatus: null,
+    showFriends: true,
 };
 const getters = {
     messages: state => {
@@ -22,6 +23,9 @@ const getters = {
     },
     chatsStatus: state => {
         return state.chatsStatus;
+    },
+    showFriends: state => {
+        return state.showFriends;
     }
 };
 const actions = {
@@ -86,6 +90,10 @@ const mutations = {
     },
     setChatsStatus(state, status) {
         state.chatsStatus = status;
+    },
+    toggleShowFriends(state) {
+        console.log(state.showFriends);
+        state.showFriends = !state.showFriends;
     }
 };
 

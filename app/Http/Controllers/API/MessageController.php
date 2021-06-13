@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -44,16 +45,15 @@ class MessageController extends Controller
         ]);
 
         $message = request()->user()->messages()->create($data);
+        $this->setChatActive(User::find($data['recipient_id']));
+
         return new MessageResource($message);
     }
 
     public function startChat(Request $request): void
     {
-        /** @var User $user */
-        $user = auth()->user();
         $alien = User::find($request->input('alien'));
-        $user->chats()->syncWithoutDetaching($alien);
-        $alien->chats()->syncWithoutDetaching($user);
+        $this->setChatActive($alien);
         event(new ChatStartRequestEvent($alien));
     }
 
@@ -132,4 +132,11 @@ class MessageController extends Controller
     {
         //
     }
+
+    private function setChatActive (User $recipient): void
+    {
+        Auth::user()->chats()->syncWithoutDetaching($recipient);
+        $recipient->chats()->syncWithoutDetaching(Auth::user());
+    }
+
 }

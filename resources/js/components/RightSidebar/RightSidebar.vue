@@ -2,7 +2,7 @@
 <div>
     <div class="fixed-sidebar right" :class="[{'open' : sidebarOpen}]">
         <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="chats.data" />
-        <BigSidebar class="fixed-sidebar-right sidebar--small" :friends="chats.data" />
+        <BigSidebar class="fixed-sidebar-right sidebar--small" :friends="showFriends ? authUserFriends.data : chats.data" />
     </div>
 
     <!-- ... окончание правого сайдбара -->
@@ -90,6 +90,7 @@ export default {
             chatId: "chatId",
             chats: "chats",
             chatsStatus: "chatsStatus",
+            showFriends: "showFriends"
         }),
     },
     mounted() {

@@ -4,7 +4,7 @@
     <div class="mCustomScrollbar" data-mcs-theme="dark">
 
         <div class="ui-block-title ui-block-title-small">
-            <a href="#" class="title">Друзья</a>
+            <a href="#" class="title" @click.prevent="() => $store.commit('toggleShowFriends')">{{ showFriends ? 'Чаты' : 'Друзья'}}</a>
             <a href="#">Настройки</a>
         </div>
 
@@ -21,7 +21,7 @@
                     <span class="status">ONLINE</span>
                 </div>
                 <!-- Если нужно будет активировать менюшку, заменить классы на more диву ниже-->
-                <div @click="$parent.kickChatHandler(friend.data.user_id)" class="float-right mt-1"><svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+                <div v-if="!showFriends" @click="$parent.kickChatHandler(friend.data.user_id)" class="float-right mt-1"><svg class="olymp-close-icon"><use href="/svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
 
                     <ul class="more-icons">
                         <li @click="$parent.startChat(friend.data.user_id)">
@@ -67,13 +67,23 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex';
 export default {
     name: "BigSidebar",
     props: {
         friends: {
             type: Array,
             required: false,
+        },
+        chats: {
+            type: Array,
+            required: false,
         }
+    },
+    computed: {
+        ...mapGetters({
+            showFriends: "showFriends"
+        }),
     },
 }
 </script>
