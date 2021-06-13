@@ -44,6 +44,11 @@ class MessageController extends Controller
         ]);
 
         $message = request()->user()->messages()->create($data);
+        $user = auth()->user();
+        $alien = User::find($data['recipient_id']);
+        $user->chats()->syncWithoutDetaching($alien);
+        $alien->chats()->syncWithoutDetaching($user);
+
         return new MessageResource($message);
     }
 
