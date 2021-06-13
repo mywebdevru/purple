@@ -4,7 +4,7 @@
     <div class="mCustomScrollbar" data-mcs-theme="dark">
 
         <div class="ui-block-title ui-block-title-small">
-            <a href="#" class="title">Друзья</a>
+            <a href="#" class="title" @click.prevent="() => $store.commit('toggleShowFriends')">Друзья</a>
             <a href="#">Настройки</a>
         </div>
 
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
     name: "BigSidebar",
     props: {
@@ -78,6 +79,12 @@ export default {
             type: Array,
             required: false,
         }
+    },
+    methods: {
+        userToggleHandler: () => this.toggleUsers(),
+        ...mapMutations({
+            toggleUsers: 'toggleShowFriends'
+        }),
     },
 }
 </script>
