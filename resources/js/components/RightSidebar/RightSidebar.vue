@@ -2,7 +2,7 @@
 <div>
     <div class="fixed-sidebar right" :class="[{'open' : sidebarOpen}]">
         <SmallSidebar class="fixed-sidebar-right sidebar--small" :friends="chats.data" />
-        <BigSidebar class="fixed-sidebar-right sidebar--small" :friends="chats.data" />
+        <BigSidebar class="fixed-sidebar-right sidebar--small" :friends="authUserFriends.data" :chats="chats.data" />
     </div>
 
     <!-- ... окончание правого сайдбара -->

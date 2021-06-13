@@ -73,6 +73,10 @@ export default {
         friends: {
             type: Array,
             required: false,
+        },
+        chats: {
+            type: Array,
+            required: false,
         }
     },
 }
