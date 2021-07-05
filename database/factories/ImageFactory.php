@@ -13,5 +13,10 @@ $factory->define(Image::class, function (Faker $faker) {
         'imageable_type' => Arr::random(['App\Models\User', 'App\Models\Club', 'App\Models\Group']),
         'created_at' => $time,
         'updated_at' => $time,
+        'position' => json_encode([
+            "verbose"=>"Москва",
+            "longitude"=>"55.80198552387842",
+            "latitude"=>"37.57167877197265"
+        ], JSON_UNESCAPED_UNICODE)
     ];
 });
