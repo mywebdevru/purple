@@ -20,6 +20,7 @@ class CreateImagesTable extends Migration
             $table->string('imageable_type');
             $table->string('image');
             $table->text('description')->nullable();
+            $table->json('position')->nullable();
         });
     }
 
