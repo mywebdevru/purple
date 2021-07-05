@@ -68,13 +68,13 @@
             @endif
         </div>
         <div class="post-additional-info inline-items">
-            <livewire:like :item="$image" :key="'likes'.$image->id" />
+            <livewire:like :item="$image"  :key="'likes'.$image->id" />
             <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items" wire:click.prevent="toggleComments">
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span>{{ count($image->comments) }}</span>
+                    <span>{{ $image->comments_count }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -106,7 +106,7 @@
             </a>
 
         </div>
-        @if (!!$commentsCount)
+        @if (!!$image->comments_count)
             <div class="more-comments-wrapper">
                 {!! $showCommentsButton !!}
             </div>

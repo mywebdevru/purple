@@ -43,6 +43,8 @@ class Comment extends Model
         'commentable_id', 'commetable_type', 'authorable_id', 'authorable_type', 'text'
     ];
 
+    protected $withCount = ['likes'];
+
     public function commentable()
     {
         return $this->morphTo();

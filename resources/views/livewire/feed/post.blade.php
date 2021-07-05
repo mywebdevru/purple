@@ -90,7 +90,7 @@
                     <svg class="olymp-speech-balloon-icon">
                         <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-speech-balloon-icon') }}"></use>
                     </svg>
-                    <span>{{ $commentsCount }}</span>
+                    <span>{{ $post->comments_count }}</span>
                 </a>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-share-icon">
@@ -128,7 +128,7 @@
             </a>
 
         </div>
-        @if (!!$commentsCount)
+        @if (!!$post->comments_count)
             <div class="more-comments-wrapper">
                 {!! $showCommentsButton !!}
             </div>

@@ -3,7 +3,7 @@
         <svg class="olymp-heart-icon">
             <use xlink:href="{{ asset('svg-icons/sprites/icons.svg#olymp-heart-icon') }}"></use>
         </svg>
-    <span>{{ count($likes) }}</span>
+    <span>{{ $likes_count }}</span>
     </a>
     <ul class="friends-harmonic">
         @foreach ($likes->slice(-2) as $like)
@@ -18,9 +18,9 @@
         @foreach ($likes->slice(-2) as $like)
             <a href="{{ route('user.show', ['user' => $like->authorable['id']]) }}">{{ $like->authorable['name'] }}</a>
         @endforeach
-        @if (count($likes) > 2)
+        @if ( $likes_count > 2)
             и еще
-            <br>{{ count($likes) - 2 }} человк(а)
+            <br>{{ $likes_count - 2 }} человк(а)
         @endif
     </div>
 </div>
