@@ -44,6 +44,8 @@ class Image extends Model
         'imageable_id', 'imageable_type', 'image', 'description', 'position',
     ];
 
+    protected $withCount = ['comments','likes'];
+
     public function imageable()
     {
         return $this->morphTo();

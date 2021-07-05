@@ -21,11 +21,10 @@ class Image extends Component
     public function mount()
     {
         $this->showCommentsButton = $this->getButton();
-        $this->commentsCount = $this->getCommentsCount();
         $this->description = $this->getDescription();
     }
 
-    protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
+    protected $listeners = ['commentDeleted' => 'freshComments', 'commentAdded' => 'showNewComment'];
 
 
     public function deleteImage()
@@ -54,10 +53,9 @@ class Image extends Component
         }
     }
 
-    public function getCommentsCount()
+    public function freshComments()
     {
-       $this->commentsCount = $this->image->comments->count();
-       return $this->commentsCount;
+        $this->image->load('comments.likes.authorable', 'comments.authorable')->loadCount('comments');
     }
 
     protected function getDescription()
@@ -81,9 +79,8 @@ class Image extends Component
 
     protected function showComments()
     {
-        $this->image->load('comments.likes.authorable', 'comments.authorable');
+        $this->freshComments();
         $this->showCommentsButton = $this->getButton();
-        $this->commentsCount = $this->getCommentsCount();
         if (!$this->commentsIsLoaded){
             $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }

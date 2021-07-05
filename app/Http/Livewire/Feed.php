@@ -41,14 +41,15 @@ class Feed extends Component
         } else {
             $feeds = $this->user->feeds()->orderBy('updated_at','DESC');
         }
-        $feeds->with(['feedable.comments',
-                    'feedable.likes.authorable'])
-                    ->with(['feedable' => function (MorphTo $morphTo) {
+        $feeds->with(['feedable.likes.authorable', 'feedable.comments.authorable', 'feedable.comments.likes.authorable'])
+                ->with(['feedable' => function (MorphTo $morphTo) {
                     $morphTo->morphWith([
-                        Image::class => ['imageable'],
-                        Post::class => ['postable'],
+                        Image::class => ['imageable', ],
+                        Post::class => ['postable', ],
                     ]);
                 }]);
+
+        // dd($feeds->first());
         return $feeds->get();
     }
 

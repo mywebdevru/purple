@@ -23,11 +23,11 @@ class Post extends Component
     public function mount()
     {
         $this->showCommentsButton = $this->getButton();
-        $this->commentsCount = $this->getCommentsCount();
+        $this->commentsCount = $this->post->comments_count;
         $this->text = $this->getText();
     }
 
-    protected $listeners = ['commentDeleted' => 'getCommentsCount', 'commentAdded' => 'showNewComment'];
+    protected $listeners = ['commentDeleted' => 'freshComments', 'commentAdded' => 'showNewComment'];
 
     public function deletePost()
     {
@@ -53,10 +53,9 @@ class Post extends Component
         }
     }
 
-    public function getCommentsCount()
+    public function freshComments()
     {
-       $this->commentsCount = $this->post->comments->count();
-       return $this->commentsCount;
+        $this->post->load('comments.likes.authorable', 'comments.authorable')->loadCount('comments');
     }
 
     protected function getText()
@@ -101,9 +100,8 @@ class Post extends Component
 
     protected function showComments()
     {
-        $this->post->load('comments.likes.authorable', 'comments.authorable');
+        $this->freshComments();
         $this->showCommentsButton = $this->getButton();
-        $this->commentsCount = $this->getCommentsCount();
         if (!$this->commentsIsLoaded){
             $this->commentsIsLoaded = !$this->commentsIsLoaded;
         }

@@ -49,6 +49,8 @@ class Post extends Model
         'text'
     ];
 
+    protected $withCount = ['comments','likes'];
+
     /**
      * All of the relationships to be touched.
      *
