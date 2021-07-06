@@ -35,8 +35,8 @@ jobs:
 #          PORT: ${{ job.services.mysql.ports[3306] }}
 #        run: mysql -h 127.0.0.1 --port "$PORT" -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS purple;'
 
-      - name: Run npm
-        run: npm i && npm run dev
+      - name: Run yarn
+        run: yarn && yarn dev
 
       - name: Cache composer dependencies
         uses: actions/cache@v1

@@ -45,4 +45,5 @@ Route::group([
     Route::get('/mark-chat-is-read', 'MarkChatIsReadController')->name('mark-chat-is-read');
     Route::apiResource('messages', 'MessageController');
     Route::get('/chat/list', 'MessageController@chatList')->name('chat.list');
+    Route::delete('/chat/kick', 'MessageController@kickChat')->name('chat.kick');
 });

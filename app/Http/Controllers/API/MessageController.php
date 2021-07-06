@@ -12,7 +12,9 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -43,13 +45,28 @@ class MessageController extends Controller
         ]);
 
         $message = request()->user()->messages()->create($data);
+        $this->setChatActive(User::find($data['recipient_id']));
+
         return new MessageResource($message);
     }
 
     public function startChat(Request $request): void
     {
         $alien = User::find($request->input('alien'));
+        $this->setChatActive($alien);
         event(new ChatStartRequestEvent($alien));
+    }
+
+    public function kickChat (Request $request): ?Response
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        if ($chatId = $request->input('chat')) {
+            $user->chats()->detach($chatId);
+            return response()->noContent();
+        }
+        abort(404, 'Чат не найден');
+        return null;
     }
 
     public function chatList()
@@ -67,8 +84,9 @@ class MessageController extends Controller
                 return ['user_id' => $key, 'message_at' => $item[0]->created_at->format('Y-m-d H:i')];
             });
         $userIds = collect();
-        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($userIds) {
-            if (!$userIds->contains($item['user_id'])) {
+        $activeChats = auth()->user()->chats->pluck('id');
+        $sent->concat($received)->sortByDesc('message_at')->each(function ($item) use ($activeChats, $userIds) {
+            if (!$userIds->contains($item['user_id']) && $activeChats->contains($item['user_id'])) {
                 $userIds->push($item['user_id']);
             }
         });
@@ -85,7 +103,7 @@ class MessageController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -97,7 +115,7 @@ class MessageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -108,10 +126,17 @@ class MessageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
         //
     }
+
+    private function setChatActive (User $recipient): void
+    {
+        Auth::user()->chats()->syncWithoutDetaching($recipient);
+        $recipient->chats()->syncWithoutDetaching(Auth::user());
+    }
+
 }

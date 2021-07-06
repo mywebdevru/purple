@@ -1,9 +1,12 @@
+import axios from "axios";
+
 const state = {
     messages: null,
     messagesStatus: null,
     chatId: null,
     chats: [],
     chatsStatus: null,
+    showFriends: true,
 };
 const getters = {
     messages: state => {
@@ -20,6 +23,9 @@ const getters = {
     },
     chatsStatus: state => {
         return state.chatsStatus;
+    },
+    showFriends: state => {
+        return state.showFriends;
     }
 };
 const actions = {
@@ -52,6 +58,18 @@ const actions = {
         } catch (error) {
             commit("setChatsStatus", "error");
         }
+    },
+    async kickChat({commit}, chatId) {
+        const initState = {...state.chats};
+        const chats = [...state.chats.data];
+        const filteredChats = chats.filter(item => item.data.user_id !== chatId);
+        commit("setChats", {...state.chats, data: filteredChats});
+        try {
+            await axios.delete(`/api/chat/kick?chat=${chatId}`);
+        } catch (e) {
+            commit("setChats", initState);
+            console.log(e.response);
+        }
     }
 };
 const mutations = {
@@ -72,6 +90,10 @@ const mutations = {
     },
     setChatsStatus(state, status) {
         state.chatsStatus = status;
+    },
+    toggleShowFriends(state) {
+        console.log(state.showFriends);
+        state.showFriends = !state.showFriends;
     }
 };
 
