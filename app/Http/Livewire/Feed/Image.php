@@ -55,7 +55,7 @@ class Image extends Component
 
     public function freshComments()
     {
-        $this->image->load('comments.likes.authorable', 'comments.authorable')->loadCount('comments');
+        $this->image->load('comments.likes.authorable', 'comments.authorable');
     }
 
     protected function getDescription()
