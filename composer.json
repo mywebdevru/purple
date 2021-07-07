@@ -12,6 +12,7 @@
         "ext-curl": "*",
         "barryvdh/laravel-ide-helper": "^2.7",
         "beyondcode/laravel-websockets": "^1.8",
+        "composer/composer": "2.0.13",
         "darkaonline/l5-swagger": "^8.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -21,16 +22,17 @@
         "laravel-notification-channels/webpush": "^5.0",
         "laravel/framework": "^7.0",
         "laravel/passport": "^9.3",
+        "laravel/scout": "^8.6.1",
         "laravel/telescope": "^3.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "livewire/livewire": "^2.2",
+        "phpseclib/phpseclib": "2.0.31",
         "pusher/pusher-php-server": "~3.0",
         "spatie/laravel-blade-javascript": "^2.5",
         "spatie/laravel-permission": "^3.13",
-        "thomaswelton/laravel-gravatar": "~1.0",
-        "phpseclib/phpseclib": "2.0.31",
-        "composer/composer": "2.0.13"
+        "teamtnt/laravel-scout-tntsearch-driver": "^11.5",
+        "thomaswelton/laravel-gravatar": "~1.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
