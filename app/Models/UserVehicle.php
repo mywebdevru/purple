@@ -47,6 +47,7 @@ class UserVehicle extends Model
         'full_vehicle_name',
     ];
 
+    protected $touches = ['user'];
 
     /**
      * Get the user who have this vehicle.
