@@ -31,7 +31,7 @@
         </div>
     </a>
 	<div class="header-content-wrapper">
-		<livewire:header.serarch :key="time().'search'" />
+		<livewire:header.search :key="time().'search'" />
         @auth
             <x-header.control-block/>
         @else
