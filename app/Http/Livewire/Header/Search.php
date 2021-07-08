@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Header;
 use App\Models\User;
 use Livewire\Component;
 
-class Serarch extends Component
+class Search extends Component
 {
     public $query, $result;
 
