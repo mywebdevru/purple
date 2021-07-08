@@ -55,7 +55,7 @@ class Post extends Component
 
     public function freshComments()
     {
-        $this->post->load('comments.likes.authorable', 'comments.authorable')->loadCount('comments');
+        $this->post->load('comments.likes.authorable', 'comments.authorable');
     }
 
     protected function getText()

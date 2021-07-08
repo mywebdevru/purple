@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use NotificationChannels\WebPush\HasPushSubscriptions;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Models\User
@@ -106,7 +107,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasApiTokens, HasPushSubscriptions;
+    use Notifiable, HasRoles, HasApiTokens, HasPushSubscriptions, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -140,6 +141,21 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['birth_date'];
+
+    public function toSearchableArray()
+    {
+        $array = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'country' => $this->country,
+            'city' => $this->city,
+            'vehicles_brand' => $this->usersVehicles()->get(['brand'])->implode('brand', ' '),
+            'vehicles_model' => $this->usersVehicles()->get(['model'])->implode('model', ' '),
+            'vehicles_type' => $this->usersVehicles()->get(['type'])->implode('type', ' '),
+        ];
+        return $array;
+    }
 
      /**
      * Get the vehicles of user.

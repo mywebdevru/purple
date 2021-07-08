@@ -1,0 +1,44 @@
+.view-all-users-button {
+    padding: 18px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    display: block;
+    border-radius: 0 0 5px 5px;
+}
+.users-list {
+    transition: all 0.3s ease;
+    z-index: 50;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 0 34px 0 rgb(63 66 87 / 10%);
+    border-right: 1px solid #e6ecf5;
+    border-left: 1px solid #e6ecf5;
+    margin-bottom: 0;
+    max-height: 500px;
+    overflow-Y: scroll;
+}
+.user-rel {
+    padding: 15px;
+    border-bottom: 1px solid #e6ecf5;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+
+        :hover {
+            background-color: #fafbfd;
+            cursor: pointer;
+        }
+
+        > * {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+}
+
+.user-avatar-thumb {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
