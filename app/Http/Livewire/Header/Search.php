@@ -19,6 +19,6 @@ class Serarch extends Component
     public function render()
     {
         $this->search();
-        return view('livewire.header.serarch');
+        return view('livewire.header.search');
     }
 }
