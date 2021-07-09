@@ -1,5 +1,5 @@
 <div x-data="{}">
-    <form class="search-bar w-search" @click.away="$wire.set('query','')">
+    <form class="search-bar w-search" @click.away="$wire.set('query','')" wire:submit.prevent>
         <div class="form-group with-button is-empty">
             <input wire:model="query" class="form-control js-user-search" placeholder="Поиск друзей, людей . . . " type="text">
             {{-- <button>
