@@ -14,5 +14,6 @@ class UsersVehiclesSeeder extends Seeder
     public function run()
     {
         factory(UserVehicle::class, User::all()->count()*2)->create();
+        User::all()->searchable();
     }
 }
