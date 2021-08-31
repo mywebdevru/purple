@@ -99,16 +99,26 @@
                 </a>
                 <div class="date-photo-gallery">12/12/2021</div>
                 <div data-slider="slick">
-                    <div>
-                        <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt="">
+                    <div class="slider-photo">
+                        <!-- <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt=""> -->
+                        @foreach ($images as $item)
+
+                                            <img class="modal-photo__photo" src="{{ $imgSrc($item->image) }}" alt="photo" id="img">
+
+
+                        @endforeach
                     </div>
-                    <div>
+
+                    <!-- <div>
                         <img class="modal-photo__photo" src="https://look.com.ua/pic/201311/1280x720/look.com.ua-83727.jpg" alt="">
                     </div>
                     <div>
                         <img class="modal-photo__photo" src="https://look.com.ua/pic/201209/1280x960/look.com.ua-41023.jpg" alt="">
-                    </div>
+                    </div> -->
                 </div>
+                <ul class="slider-photo-small">
+
+                </ul>
             </div>
             <div class="modal-photo__content">
 
@@ -134,11 +144,11 @@
                 </div>
 
                 <div class="modal-photo__footer">
-                    <button class="modal-photo__btn slickPrev" type="button">
+                    <button class="modal-photo__btn slickPrev" type="button" data-target="left">
                         <img class="modal-arrow" src="{{ asset('img/back.svg') }}" height="11" alt="">
                         ПРЕД
                     </button>
-                    <button class="modal-photo__btn slickNext" type="button">
+                    <button class="modal-photo__btn slickNext" type="button" data-target="right">
                         СЛЕД
                         <img class="modal-arrow" src="{{ asset('img/next.svg') }}" height="11" alt="">
                     </button>
@@ -150,16 +160,90 @@
     </div><!-- /.modal__dialog -->
 </div><!-- /.modal -->
 
-<!-- <script>
-    let btnPhotoGallery = document.getElementsByClassName('btn-for-gallery');
+<script>
+    // как вариант слайдера
+    // let offset = 0;
+    // const sliderPhoto = document.querySelector('.slider-photo');
+
+    // document.querySelector('.slickNext').addEventListener('click', function(){
+    //     offset = offset + 780;
+    //     if (offset > 3120) {
+    //         offset = 0;
+    //     }
+    //     sliderPhoto.style.left = -offset + 'px';
+    // });
+
+    // document.querySelector('.slickPrev').addEventListener('click', function(){
+    //     offset = offset - 780;
+    //     if (offset < 0) {
+    //         offset = 3120;
+    //     }
+    //     sliderPhoto.style.left = offset + 'px';
+    // });
+
+    // рабочий вариант
+
+    var blockPhotoSmall = document.querySelector('.slider-photo-small');
+    var blockPhotoImg = document.querySelectorAll('.modal-photo__photo');
+    blockPhotoImg[0].setAttribute('class', 'modal-photo__photo modal-photo__photo_active');
+    var blockPhotoBtn = document.querySelectorAll('.modal-photo__btn');
+    var currentImg = 0;
+    function target(e) {
+        e.preventDefault();
+        deactiveClass(currentImg);
+        if(this.dataset.target == 'left') {
+            currentImg--;
+            if(currentImg < 0)
+                currentImg = blockPhotoImg.length - 1;
+        } else {
+            currentImg++;
+            if (currentImg >= blockPhotoImg.length)
+                currentImg = 0;
+        }
+        activeClass(currentImg);
+    }
 
 
-btnPhotoGallery[0].onclick = function() {
+    Array.prototype.forEach.call(blockPhotoBtn, function(elem){
+        elem.addEventListener('click', target);
+    });
 
-    document.getElementsByClassName('liked-photo')[0].style.fill = 'rgb(253, 41, 41)'
-}
+    Array.prototype.forEach.call(blockPhotoImg, function(elem, index){
+        var newElem = document.createElement('li');
+        var newImg = document.createElement('img');
 
-btnPhotoGallery[1].onclick = function() {
-    document.getElementsByClassName('repost-photo')[0].style.fill = 'rgb(253, 41, 41)'
-}
-</script> -->
+        newImg.setAttribute('src', elem.getAttribute('src'));
+        if(index === 0) {
+            newElem.setAttribute('class', 'slider-photo-small-li slider-photo-small-li_active');
+
+        } else {
+            newElem.setAttribute('class', 'slider-photo-small-li');
+
+        }
+        newElem.dataset.index = index;
+        newElem.appendChild(newImg);
+
+        blockPhotoSmall.appendChild(newElem);
+    });
+
+
+    function activeClass(currentIndex) {
+        blockPhotoSmallLi[currentIndex].className = 'slider-photo-small-li slider-photo-small-li_active';
+        blockPhotoImg[currentIndex].className = 'modal-photo__photo modal-photo__photo_active';
+    }
+
+
+    function deactiveClass(currentIndex) {
+        blockPhotoSmallLi[currentIndex].className = 'slider-photo-small-li';
+        blockPhotoImg[currentIndex].className = 'modal-photo__photo';
+    }
+
+    var blockPhotoSmallLi = document.querySelectorAll('.slider-photo-small-li');
+    Array.prototype.forEach.call(blockPhotoSmallLi, function(elem){
+        elem.addEventListener('mouseenter', function(){
+            deactiveClass(currentImg);
+            currentImg = parseInt(this.dataset.index);
+            activeClass(currentImg);
+        });
+    });
+</script>
