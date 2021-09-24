@@ -88,7 +88,6 @@ jobs:
             git pull origin dev
             composer install --no-dev
             composer dump-autoload
-            sudo -uwww-data php artisan scout:flush "App\Models\User"
             sudo -uwww-data php artisan migrate:fresh --seed
             sudo -uwww-data php artisan passport:install
             yarn
@@ -98,3 +97,5 @@ jobs:
             sudo -uwww-data php artisan storage:link
             sudo -uwww-data php artisan optimize
             sudo -uwww-data php artisan up
+            sudo -uwww-data php artisan scout:flush "App\Models\User"
+            sudo -uwww-data php artisan scout:import "App\Models\User"
