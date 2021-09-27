@@ -2,7 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use App\Models\Subscrable;
+use App\Models\Post;
+use App\Models\Image;
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Feed;
 
 /**
  * App\Models\Group
@@ -43,6 +53,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Group extends Model
 {
+    use HasFactory;
      /**
      * The attributes that are mass assignable.
      *
@@ -60,54 +71,55 @@ class Group extends Model
     /**
      * Get the users who have subscribe to this Group.
      */
-    public function users()
+    public function users(): MorphToMany
     {
-        return $this->morphToMany('App\Models\User', 'subscrable');
+        return $this->morphToMany(User::class, 'subscrable');
     }
 
-    public function subscribers()
+    public function subscribers(): MorphMany
     {
-        return $this->morphMany('App\Models\Subscrable', 'subscrable');
+        return $this->morphMany(Subscrable::class, 'subscrable');
     }
 
     /**
      * Get the Group's's Post.
      */
-    public function posts()
+    public function posts(): MorphMany
     {
-        return $this->morphMany('App\Models\Post', 'postable');
+        return $this->morphMany(Post::class, 'postable');
     }
 
     /**
      * Get the Group's's Images.
      */
-    public function image()
+    public function image(): MorphMany
     {
-        return $this->morphMany('App\Models\Image', 'postable');
+        return $this->morphMany(Image::class, 'postable');
     }
 
     /**
      * Get the Group's Comments.
      */
-    public function comments()
+    public function comments(): MorphMany
     {
-        return $this->morphMany('App\Models\Comment', 'authorable');
+        return $this->morphMany(Comment::class, 'authorable');
     }
 
     /**
      * Get the Group's Likes.
      */
-    public function likes()
+    public function likes(): MorphMany
     {
-        return $this->morphMany('App\Models\Like', 'authorable');
+        return $this->morphMany(Like::class, 'authorable');
     }
 
-    public function feeds()
+    public function feeds(): MorphMany
     {
-        return $this->morphMany('App\Models\Feed', 'authorable');
+        return $this->morphMany(Feed::class, 'authorable');
     }
 
-    public function getFullNameAttribute() {
+    public function getFullNameAttribute(): string
+    {
         return "Сообщество $this->name";
     }
 }
