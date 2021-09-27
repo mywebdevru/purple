@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Friend;
 use Illuminate\Database\Seeder;
 use App\Models\User;

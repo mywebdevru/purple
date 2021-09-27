@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Database\Seeder;

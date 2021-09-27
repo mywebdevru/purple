@@ -1,11 +1,13 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Comment;
-use App\Models\Image;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class ImageSeeder extends Seeder
+class PostsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,13 +16,13 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
-        factory(Image::class, 300)->create()->each(function (Image $image){
+        factory(Post::class, 300)->create()->each(function (Post $post){
             $comments = factory(Comment::class, rand(1, 10))->make();
             $comments->each(function ($comment) {
                 $comment->authorable_id = rand(1, User::count());
                 $comment->authorable_type = 'App\Models\User';
             });
-            $image->comments()->saveMany($comments);
+            $post->comments()->saveMany($comments);
         });
     }
 }
