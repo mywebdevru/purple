@@ -13,14 +13,15 @@ class PostsSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws \Exception
      */
-    public function run()
+    public function run(): void
     {
-        factory(Post::class, 300)->create()->each(function (Post $post){
-            $comments = factory(Comment::class, rand(1, 10))->make();
+        Post::factory()->count(300)->create()->each(function (Post $post){
+            $comments = Comment::factory(random_int(1, 10))->make();
             $comments->each(function ($comment) {
-                $comment->authorable_id = rand(1, User::count());
-                $comment->authorable_type = 'App\Models\User';
+                $comment->authorable_id = random_int(1, User::count());
+                $comment->authorable_type = User::class;
             });
             $post->comments()->saveMany($comments);
         });
