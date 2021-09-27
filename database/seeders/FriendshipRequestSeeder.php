@@ -13,8 +13,8 @@ class FriendshipRequestSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(FriendshipRequest::class, User::all()->count()*2)->create();
+        FriendshipRequest::factory()->count(User::count()*2)->create();
     }
 }

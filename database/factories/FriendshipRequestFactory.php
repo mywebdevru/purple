@@ -1,14 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\FriendshipRequest;
 use App\Models\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 
-$factory->define(FriendshipRequest::class, function (Faker $faker) {
-    return [
-        'user_id' => $faker->numberBetween(1, User::all()->count()),
-        'friend_id' => $faker->numberBetween(1, User::all()->count()),
-    ];
-});
+class FriendshipRequestFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = FriendshipRequest::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     * @throws \Exception
+     */
+    #[ArrayShape(['user_id' => "int", 'friend_id' => "int"])]
+    public function definition(): array
+    {
+        $count = User::count();
+        return [
+            'user_id' => $this->faker->numberBetween(1, $count),
+            'friend_id' => $this->faker->numberBetween(1, $count),
+        ];
+    }
+}

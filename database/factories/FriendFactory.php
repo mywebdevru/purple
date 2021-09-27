@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Club;
 use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use Illuminate\Support\Arr;
 
 class FriendFactory extends Factory
 {
@@ -24,7 +22,6 @@ class FriendFactory extends Factory
      * @return array
      * @throws \Exception
      */
-
     #[ArrayShape(['user_id' => "int", 'friend_id' => "int"])]
     public function definition(): array
     {
