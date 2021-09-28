@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Club;
 
@@ -10,8 +12,8 @@ class ClubsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(Club::class, 20)->create();
+        Club::factory()->count(20)->create();
     }
 }

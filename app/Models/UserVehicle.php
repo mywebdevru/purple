@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\UserVehicle
@@ -32,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserVehicle extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
      /**
@@ -52,12 +57,13 @@ class UserVehicle extends Model
     /**
      * Get the user who have this vehicle.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
-    public function getFullVehicleNameAttribute() {
+    public function getFullVehicleNameAttribute(): string
+    {
         return "{$this->brand} {$this->model} {$this->vehicle_bd} года";
     }
 }

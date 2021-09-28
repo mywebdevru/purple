@@ -2,7 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use App\Models\Feed;
+use App\Models\Comment;
+use App\Models\Like;
 
 /**
  * App\Models\Image
@@ -35,6 +42,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Image extends Model
 {
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -46,29 +54,29 @@ class Image extends Model
 
     protected $withCount = ['comments','likes'];
 
-    public function imageable()
+    public function imageable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function feed()
+    public function feed(): MorphOne
     {
-        return $this->morphOne('App\Models\Feed', 'feedable');
+        return $this->morphOne(Feed::class, 'feedable');
     }
 
     /**
      * Get the Image's Comments.
      */
-    public function comments()
+    public function comments(): MorphMany
     {
-        return $this->morphMany('App\Models\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**
      * Get the Image's Likes.
      */
-    public function likes()
+    public function likes(): MorphMany
     {
-        return $this->morphMany('App\Models\Like', 'likeable');
+        return $this->morphMany(Like::class, 'likeable');
     }
 }

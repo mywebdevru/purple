@@ -21,7 +21,7 @@ class FetchUnreadNotificationsTest extends TestCase
     /** @test */
     public function users_cant_fetch_unread_notifications()
     {
-        $this->actingAs(factory(User::class)->create(), 'api');
+        $this->actingAs(User::factory()->create(), 'api');
         $response = $this->get('/api/notifications/unread');
         $response->assertForbidden();
     }
@@ -30,7 +30,7 @@ class FetchUnreadNotificationsTest extends TestCase
     public function admins_can_fetch_unread_notifications()
     {
 
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -47,7 +47,7 @@ class FetchUnreadNotificationsTest extends TestCase
     public function super_admins_can_fetch_unread_notifications()
     {
 
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -64,14 +64,14 @@ class FetchUnreadNotificationsTest extends TestCase
     public function admin_get_only_unread_notifications()
     {
 
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
 
         $adminUser->assignRole('admin');
 
-        factory(User::class, 3)->create();
+        User::factory()->create();
 
         $this->actingAs($adminUser, 'api');
 

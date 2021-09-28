@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use App\Models\User;
 
 /**
  * App\Models\FriendshipRequest
@@ -10,10 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $user_id
  * @property int $friend_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $friend
- * @property-read \App\Models\User $user
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read User $friend
+ * @property-read User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FriendshipRequest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FriendshipRequest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FriendshipRequest query()
@@ -26,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FriendshipRequest extends Model
 {
+    use HasFactory;
      /**
      * The attributes that are mass assignable.
      *
@@ -39,13 +44,13 @@ class FriendshipRequest extends Model
     /**
      * Get the user who have this vehicle.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
-    public function friend()
+    public function friend(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'friend_id');
+        return $this->belongsTo(User::class, 'friend_id');
     }
 }

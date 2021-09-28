@@ -19,8 +19,8 @@ class ProfilePageTest extends TestCase
 
     public function testAdminCanViewProfiles()
     {
-        $adminUser = factory(User::class)->create();
-        factory(User::class, 2)->create();
+        $adminUser = User::factory()->create();
+        User::factory()->count(2)->create();
 
         Role::create(['name' => 'admin']);
 
@@ -35,8 +35,8 @@ class ProfilePageTest extends TestCase
 
     public function testUserCanViewProfiles()
     {
-        $user = factory(User::class)->create();
-        factory(User::class)->create();
+        $user = User::factory()->create();
+        User::factory()->create();
 
         $this->actingAs($user);
 
@@ -51,7 +51,7 @@ class ProfilePageTest extends TestCase
 
     public function testUserCanViewOwnProfile()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user);
 

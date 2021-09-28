@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -10,8 +12,9 @@ class AdminsSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws \Throwable
      */
-    public function run()
+    public function run(): void
     {
         User::unsetEventDispatcher();
 
@@ -35,7 +38,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $ruslan->assignRole('super-admin');
-            array_push($admins, $ruslan);
+            $admins[] = $ruslan;
         }
 
         $user = User::where('email', 'x3mart@purple.team')->first();
@@ -52,7 +55,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $slava->assignRole('admin');
-            array_push($admins, $slava);
+            $admins[] = $slava;
         }
 
         $user = User::where('email', 'mrs_boom@icloud.com ')->first();
@@ -69,7 +72,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $olga->assignRole('admin');
-            array_push($admins, $olga);
+            $admins[] = $olga;
         }
 
         $user = User::where('email', 'alex@purple.team')->first();
@@ -86,7 +89,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $alex->assignRole('admin');
-            array_push($admins, $alex);
+            $admins[] = $alex;
         }
         $user = User::where('email', 'evgeniy@purple.team')->first();
 
@@ -102,7 +105,7 @@ class AdminsSeeder extends Seeder
             ]);
 
             $evgen->assignRole('admin');
-            array_push($admins, $evgen);
+            $admins[] = $evgen;
         }
 
         foreach ($admins as $user) {

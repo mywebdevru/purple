@@ -20,8 +20,8 @@ class AccessToProfileEditTest extends TestCase
 
     public function testAdminCanViewProfilesEditPages()
     {
-        $adminUser = factory(User::class)->create();
-        factory(User::class, 10)->create();
+        $adminUser = User::factory()->create();
+        User::factory()->count(10)->create();
 
         Role::create(['name' => 'admin']);
 
@@ -38,7 +38,7 @@ class AccessToProfileEditTest extends TestCase
 
     public function testUserCanViewOwnProfileEdit()
     {
-        $this->actingAs($user = factory(User::class)->create());
+        $this->actingAs($user = User::factory()->create());
 
         $response = $this->get(route('user.edit', $user->id));
 
@@ -47,8 +47,8 @@ class AccessToProfileEditTest extends TestCase
 
     public function testUserCantViewOthersUsersProfileEdit()
     {
-        $this->actingAs($user = factory(User::class)->create());
-        $user2 = factory(User::class)->create();
+        $this->actingAs($user = User::factory()->create());
+        $user2 = User::factory()->create();
 
         $response = $this->get(route('user.edit', $user2->id));
 

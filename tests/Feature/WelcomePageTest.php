@@ -20,7 +20,7 @@ class WelcomePageTest extends TestCase
 
     public function testAdminCanViewWelcomePage()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
 
@@ -33,7 +33,7 @@ class WelcomePageTest extends TestCase
 
     public function testUserCanViewProfiles()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user);
 

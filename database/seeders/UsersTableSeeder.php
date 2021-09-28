@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Events\Dispatcher;
@@ -12,10 +14,10 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         User::unsetEventDispatcher();
-        factory(User::class, 50)->create()->each(function (User $user, $index) {
+        User::factory()->count(50)->create()->each(function (User $user, $index) {
             $num = $index + 1;
             $user->avatar = "/admin/users/avatars/avatar-$num.jpg";
             $user->save();

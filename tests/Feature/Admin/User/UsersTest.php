@@ -11,7 +11,7 @@ test('guests_cant_fetch_users', function () {
 test('users_cant_fetch_users', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->actingAs(factory(User::class)->create(), 'api');
+    $this->actingAs(User::factory()->create(), 'api');
     $response = $this->get('/api/users');
     $response->assertForbidden();
 });
@@ -19,7 +19,7 @@ test('users_cant_fetch_users', function () {
 test('admin_can_fetch_users', function () {
     /* @var \Tests\TestCase $this */
 
-    $adminUser = factory(User::class)->create();
+    $adminUser = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
@@ -35,7 +35,7 @@ test('admin_can_fetch_users', function () {
 test('super_admin_can_fetch_users', function () {
     /* @var \Tests\TestCase $this */
 
-    $superAdminUser = factory(User::class)->create();
+    $superAdminUser = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
@@ -51,8 +51,8 @@ test('super_admin_can_fetch_users', function () {
 it('get_proper_users_json', function () {
     /* @var \Tests\TestCase $this */
 
-    $superAdminUser = factory(User::class)->create();
-    $user = factory(User::class)->create();
+    $superAdminUser = User::factory()->create();
+    $user = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);

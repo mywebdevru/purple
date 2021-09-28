@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
@@ -11,7 +13,7 @@ class FeedSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach(Post::all() as $item) {
             $item->feed()

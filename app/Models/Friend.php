@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 /**
  * App\Models\Friend
@@ -26,6 +28,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Friend extends Model
 {
+    use HasFactory;
+
     public $timestamps = true;
 
      /**
@@ -41,11 +45,14 @@ class Friend extends Model
     /**
      * Get the user who have this fiend.
      */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\User', 'friend_id');
+        return $this->belongsTo(User::class, 'friend_id');
     }
 
+    /**
+     * @throws \Throwable
+     */
     public static function makeFriends(User $user, User $anotherUser) : void
     {
         DB::transaction(function () use ($user, $anotherUser) {

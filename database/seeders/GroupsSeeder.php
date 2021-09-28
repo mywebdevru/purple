@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Group;
 use Illuminate\Database\Seeder;
 
@@ -10,8 +12,8 @@ class GroupsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(Group::class, 20)->create();
+        Group::factory()->count(20)->create();
     }
 }

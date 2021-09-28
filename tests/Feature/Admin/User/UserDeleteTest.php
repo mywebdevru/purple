@@ -13,7 +13,7 @@ test('guests_cant_delete_user', function () {
 test('users_cant_delete_user', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->actingAs(factory(User::class)->create(), 'api');
+    $this->actingAs(User::factory()->create(), 'api');
     $response = $this->delete('/api/users/delete', []);
     $response->assertForbidden();
 });
@@ -21,9 +21,9 @@ test('users_cant_delete_user', function () {
 test('admins_can_delete_user', function () {
     /* @var \Tests\TestCase $this */
 
-    $adminUser = factory(User::class)->create();
-    $superAdminUser = factory(User::class)->create();
-    $user1 = factory(User::class)->create();
+    $adminUser = User::factory()->create();
+    $superAdminUser = User::factory()->create();
+    $user1 = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
@@ -45,8 +45,8 @@ test('admins_can_delete_user', function () {
 test('user_can_be_deleted', function () {
     /* @var \Tests\TestCase $this */
 
-    $adminUser = factory(User::class)->create();
-    $user = factory(User::class)->create();
+    $adminUser = User::factory()->create();
+    $user = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
@@ -65,9 +65,9 @@ test('user_can_be_deleted', function () {
 test('only_super_admin_can_delete_admin', function () {
     /* @var \Tests\TestCase $this */
 
-    $adminUser1 = factory(User::class)->create();
-    $adminUser2 = factory(User::class)->create();
-    $superAdminUser = factory(User::class)->create();
+    $adminUser1 = User::factory()->create();
+    $adminUser2 = User::factory()->create();
+    $superAdminUser = User::factory()->create();
 
     Role::create(['name' => 'admin']);
     Role::create(['name' => 'super-admin']);
