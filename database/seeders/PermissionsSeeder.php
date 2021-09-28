@@ -13,7 +13,7 @@ class PermissionsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Permission::create(['name' => 'edit posts']);
 

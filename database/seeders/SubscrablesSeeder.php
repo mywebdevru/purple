@@ -13,11 +13,11 @@ class SubscrablesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach(User::all() as $user){
             $user->subscribesToUsers()->attach($user);
         }
-        factory(Subscrable::class, User::all()->count()*3)->create();
+        Subscrable::factory()->count(User::count()*3)->create();
     }
 }

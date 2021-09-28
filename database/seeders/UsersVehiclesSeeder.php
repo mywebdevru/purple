@@ -13,9 +13,9 @@ class UsersVehiclesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(UserVehicle::class, User::all()->count()*2)->create();
+        UserVehicle::factory()->count(User::count()*2)->create();
         User::all()->searchable();
     }
 }

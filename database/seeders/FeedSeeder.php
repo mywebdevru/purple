@@ -13,7 +13,7 @@ class FeedSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach(Post::all() as $item) {
             $item->feed()
