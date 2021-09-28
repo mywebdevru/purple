@@ -23,7 +23,7 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function users_cant_fetch_members_data()
     {
-        $this->actingAs(factory(User::class)->create(), 'api');
+        $this->actingAs(User::factory()->create(), 'api');
         $response = $this->get('/api/members-count');
         $response->assertForbidden();
     }
@@ -31,7 +31,7 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function admins_can_fetch_members_data()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -48,7 +48,7 @@ class MemberBoxApiTest extends TestCase
     public function super_admins_can_fetch_members_data()
     {
 
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -64,14 +64,14 @@ class MemberBoxApiTest extends TestCase
     /** @test */
     public function members_count_response_json_test()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
         Role::create(['name' => 'admin']);
         $adminUser->assignRole('admin');
 
         $this->actingAs($adminUser, 'api');
-        factory(User::class, 10)->create();
-        factory(Club::class, 10)->create();
-        factory(Group::class, 10)->create();
+        User::factory()->count(10)->create();
+        Club::factory()->count(10)->create();
+        Group::factory()->count(10)->create();
 
         $response = $this->get('/api/members-count');
         $response->assertOk()->assertJson([

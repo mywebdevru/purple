@@ -8,8 +8,8 @@ use Tests\TestCase;
 test('a_user_can_send_a_message', function () {
     /* @var TestCase $this */
 
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $anotherUser = factory(User::class)->create(['id' => 123]);
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $anotherUser = User::factory()->create(['id' => 123]);
 
     $response = $this->post('/api/messages', [
         'recipient_id' => $anotherUser->id,
@@ -55,9 +55,9 @@ test('a_user_can_send_a_message', function () {
 test('a_user_can_fetch_his_friends', function () {
     /* @var TestCase $this */
 
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $firstUsersFriend = factory(User::class)->create(['id' => 123]);
-    $secondUsersFriend = factory(User::class)->create(['id' => 234]);
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $firstUsersFriend = User::factory()->create(['id' => 123]);
+    $secondUsersFriend = User::factory()->create(['id' => 234]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $firstUsersFriend->id]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $secondUsersFriend->id]);
     $response = $this->get('/api/auth-user-friends');
@@ -99,8 +99,8 @@ test('a_user_can_fetch_his_friends', function () {
 test('a_user_can_fetch_chat_messages', function () {
     /* @var TestCase $this */
 
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $anotherUser = factory(User::class)->create(['id' => 123]);
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $anotherUser = User::factory()->create(['id' => 123]);
 
     $message1 = Message::create([
         'user_id' => $user->id,
@@ -196,8 +196,8 @@ test('a_user_can_fetch_chat_messages', function () {
 test('a_user_can_fetch_unread_messages_count', function () {
     /* @var TestCase $this */
 
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $anotherUser = factory(User::class)->create(['id' => 123]);
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $anotherUser = User::factory()->create(['id' => 123]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
 
     $message = Message::create([
@@ -266,8 +266,8 @@ test('a_user_can_fetch_unread_messages_count', function () {
 test('a_user_can_mark_unread_messages_as_read', function () {
     /* @var TestCase $this */
 
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $anotherUser = factory(User::class)->create(['id' => 123]);
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $anotherUser = User::factory()->create(['id' => 123]);
     Friend::create(['user_id' => $user->id, 'friend_id' => $anotherUser->id]);
 
     Message::create([
@@ -331,12 +331,12 @@ test('a_user_can_mark_unread_messages_as_read', function () {
 
 test('a_user_can_fetch_chat_list', function () {
     /* @var TestCase $this */
-    $this->actingAs($user = factory(User::class)->create(), 'api');
-    $user->messages()->saveMany(factory(Message::class, 10)->make(['created_at' => $this->faker->dateTimeThisYear]));
+    $this->actingAs($user = User::factory()->create(), 'api');
+    $user->messages()->saveMany(Message::factory()->count(10)->make(['created_at' => $this->faker->dateTimeThisYear]));
     $userId = $user->id;
     User::each(function (User $user) use ($userId) {
-        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => $userId, 'created_at' => $this->faker->dateTimeThisYear]));
-        $user->messages()->saveMany(factory(Message::class, 2)->make(['recipient_id' => User::all()->random(1)->first()->id, 'created_at' => $this->faker->dateTimeThisMonth]));
+        $user->messages()->saveMany(Message::factory()->count(2)->make(['recipient_id' => $userId, 'created_at' => $this->faker->dateTimeThisYear]));
+        $user->messages()->saveMany(Message::factory()->count(2)->make(['recipient_id' => User::all()->random(1)->first()->id, 'created_at' => $this->faker->dateTimeThisMonth]));
     });
     Message::all()->random(10)->each(function (Message $message) {
         $message->update(['read_at' => now()]);

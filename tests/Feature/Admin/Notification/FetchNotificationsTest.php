@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\DatabaseNotification;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
 
 class FetchNotificationsTest extends TestCase
@@ -18,7 +19,7 @@ class FetchNotificationsTest extends TestCase
         parent::setUp();
 
         // now re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
+        $this->app->make(PermissionRegistrar::class)->registerPermissions();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -34,7 +35,7 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function users_cant_fetch_notifications()
     {
-        $this->actingAs(factory(User::class)->create(), 'api');
+        $this->actingAs(User::factory()->create(), 'api');
         $response = $this->get('/api/notifications');
         $response->assertForbidden();
     }
@@ -43,7 +44,7 @@ class FetchNotificationsTest extends TestCase
     public function admins_can_fetch_notifications()
     {
 
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         $adminUser->assignRole('admin');
 
@@ -57,7 +58,7 @@ class FetchNotificationsTest extends TestCase
     public function super_admins_can_fetch_notifications()
     {
 
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         $superAdminUser->assignRole('super-admin');
 
@@ -70,11 +71,11 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function admin_can_get_user_created_notifications()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         $adminUser->assignRole('admin');
 
-        factory(User::class)->create();
+        User::factory()->create();
 
         $this->actingAs($adminUser, 'api');
 
@@ -90,11 +91,11 @@ class FetchNotificationsTest extends TestCase
     /** @test */
     public function admin_can_get_user_created_and_updated_notifications()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         $adminUser->assignRole('admin');
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($adminUser, 'api');
 

@@ -21,7 +21,7 @@ class UserBoxApiTest extends TestCase
     /** @test */
     public function users_cant_fetch_users_data()
     {
-        $this->actingAs(factory(User::class)->create(), 'api');
+        $this->actingAs(User::factory()->create(), 'api');
         $response = $this->get('/api/users-count');
         $response->assertForbidden();
     }
@@ -29,7 +29,7 @@ class UserBoxApiTest extends TestCase
     /** @test */
     public function admins_can_fetch_users_data()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -46,7 +46,7 @@ class UserBoxApiTest extends TestCase
     public function super_admins_can_fetch_users_data()
     {
 
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
@@ -62,9 +62,9 @@ class UserBoxApiTest extends TestCase
     /** @test */
     public function users_count_response_json_test()
     {
-        $adminUser = factory(User::class)->create();
-        $superAdminUser = factory(User::class)->create();
-        factory(User::class, 10)->create();
+        $adminUser = User::factory()->create();
+        $superAdminUser = User::factory()->create();
+        User::factory()->count(10)->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);

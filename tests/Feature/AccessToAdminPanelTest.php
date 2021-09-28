@@ -19,7 +19,7 @@ class AccessToAdminPanelTest extends TestCase
 
     public function testUsersCannotAccessToAdminPanel()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user);
 
@@ -30,7 +30,7 @@ class AccessToAdminPanelTest extends TestCase
 
     public function testAdminCanAccessToAdminPanel()
     {
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
 
@@ -45,7 +45,7 @@ class AccessToAdminPanelTest extends TestCase
 
     public function testSuperAdminCanAccessToAdminPanel()
     {
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         Role::create(['name' => 'super-admin']);
 

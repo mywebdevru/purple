@@ -14,13 +14,12 @@ class SummernoteImageUploadTest extends TestCase
 
     public function SummernoteUploadFile()
     {
-        $this->withoutExceptionHandling();
         $response = $this->call('post', route('summernote.upload'),
             [
                 'files' => [
                     UploadedFile::fake()->image('test.jpg'),
                 ],
-                'post' => factory(Post::class)->create()->id,
+                'post' => Post::factory()->create()->id,
             ],
             [
                 'Content-Type' => 'multipart/form-data',

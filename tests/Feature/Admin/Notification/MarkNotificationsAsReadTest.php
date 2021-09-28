@@ -21,7 +21,7 @@ class MarkNotificationsAsReadTest extends TestCase
     /** @test */
     public function users_cant_mark_all_notifications()
     {
-        $this->actingAs(factory(User::class)->create(), 'api');
+        $this->actingAs(User::factory()->create(), 'api');
         $response = $this->get('/api/notifications/all-read');
         $response->assertForbidden();
     }
@@ -30,14 +30,14 @@ class MarkNotificationsAsReadTest extends TestCase
     public function admins_can_mark_all_notifications()
     {
 
-        $adminUser = factory(User::class)->create();
+        $adminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
 
         $adminUser->assignRole('admin');
 
-        factory(User::class, 3)->create();
+        User::factory()->count(3)->create();
 
         $this->actingAs($adminUser, 'api');
 
@@ -52,7 +52,7 @@ class MarkNotificationsAsReadTest extends TestCase
     public function super_admins_can_fetch_unread_notifications()
     {
 
-        $superAdminUser = factory(User::class)->create();
+        $superAdminUser = User::factory()->create();
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'super-admin']);
