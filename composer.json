@@ -11,6 +11,7 @@
         "php": "^8.0",
         "ext-curl": "*",
         "ext-pdo_sqlite": "*",
+        "ext-dom": "*",
         "barryvdh/laravel-ide-helper": "^2.7",
         "beyondcode/laravel-websockets": "^1.8",
         "composer/composer": "2.0.13",
