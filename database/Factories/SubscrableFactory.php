@@ -1,17 +1,38 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Model;
 use App\Models\Subscrable;
 use App\Models\User;
+use App\Models\Club;
+use App\Models\Group;
 use Illuminate\Support\Arr;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 
-$factory->define(Subscrable::class, function (Faker $faker) {
-    return [
-        'user_id' => $faker->numberBetween(1, User::all()->count()),
-        'subscrable_id' => rand(1, 20),
-        'subscrable_type' => Arr::random(['App\Models\Club', 'App\Models\Group', 'App\Models\User'])
-    ];
-});
+class SubscrableFactory extends Factory
+{
+
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Subscrable::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     * @throws \Exception
+     */
+    #[ArrayShape(['user_id' => "int", 'subscrable_id' => "int", 'subscrable_type' => "array|mixed"])]
+    public function definition(): array
+    {
+        return [
+            'user_id' => $this->faker->numberBetween(1, User::count()),
+            'subscrable_id' => random_int(1, 20),
+            'subscrable_type' => Arr::random([Club::class, Group::class, User::class])
+        ];
+    }
+}
